@@ -45,7 +45,7 @@ With that said, the User Reports mapping also has useful relationships to other 
 | GL Types  Description      | AD Internet GL Types                                         |                                                              |
 | Position  Description      | Internet Orders (newer Elan Releases) -><br />AD Internet Positions |                                                              |
 | Ad Types  Description      | Internet Orders (newer Elan Releases) -><br />AD Internet AD Types |                                                              |
-| Rep  Indicator             |                                                              | Used in Line Net Amt Calculation see [User Reports Revenue Fields]((https://analytix-docs.netlify.app/docs/informer/informer-mappings.html#user-reports-revenue-fields)) |
+| Rep  Indicator             |                                                              | Used in Line Net Amt Calculation see [User Reports Revenue Fields](#user-reports-revenue-fields) |
 | Advertiser  Client Type    | Advertiser                                                   |                                                              |
 | Advertiser  Client Type ID | Advertiser                                                   |                                                              |
 | IN Size                    |                                                              |                                                              |
