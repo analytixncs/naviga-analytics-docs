@@ -4,45 +4,43 @@ title: Informer JavaScript Use
 sidebar_label: Informer JavaScript Use
 ---
 
+There are two primary ways that you can use JavaScript in Informer to enhance your data. Both of these ways come in the form of **Flow Steps**.
 
+You can add **Flow Steps** to either a _Ad Hoc Report_ or a _Dataset_. They will act the same, however all examples in this document will be on _Datasets_.
 
-There are two primary ways that you can use JavaScript in Informer to enhance your data.  Both of these ways come in the form of **Flow Steps**.
+The two Flow Steps that you use JavaScript in are **Calculated Fields** and **Power Scripts**.
 
-You can add **Flow Steps** to either a *Ad Hoc Report* or a *Dataset*.  They will act the same, however all examples in this document will be on *Datasets*.
+> NOTE: If a Calculated Field is acting irrationally, copy the script text, remove the flow step and recreate it. This is after you have concluded that the issue is not in the logic of your script.
 
-The two Flow Steps that you use JavaScript in are **Calculated Fields** and **Power Scripts**.  
+A **Calculated Field** will allow you to use JavaScript to define a single field. This can use existing fields in the logic as well.
 
-> NOTE: If a Calculated Field is acting irrationally, copy the script text, remove the flow step and recreate it.  This is after you have concluded that the issue is not in the logic of your script.
+A **Powerscript** is different from a Calculated Field in that it will allow you to create multiple fields with a single script.
 
-A **Calculated Field** will allow you to use JavaScript to define a single field.  This can use existing fields in the logic as well.
-
-A **Powerscript** is different from a Calculated Field in that it will allow you to create multiple fields with a single script.  
-
-> **Recommendation:** If you have more that 3 or  4 calculated fields, I would recommend just putting them into a Powerscript.  This makes maintenance of the code much easier.  Also make sure to comment your Powerscript and/or Calculated fields well.
+> **Recommendation:** If you have more that 3 or 4 calculated fields, I would recommend just putting them into a Powerscript. This makes maintenance of the code much easier. Also make sure to comment your Powerscript and/or Calculated fields well.
 
 ## Calculated Fields
 
 To add a Calculated Field to a Dataset, you will first need to Edit the Dataset that you want to add the field to.
 
-Once in the Edit screen click on the plus sign by the **Flow Steps**.  You will be presented with a menu where you will choose **Add Field/Calculated Field**. 
+Once in the Edit screen click on the plus sign by the **Flow Steps**. You will be presented with a menu where you will choose **Add Field/Calculated Field**.
 
-![image-20200219102437594](../assets/CalcField_001.png)
+![image-20200219102437594](./images/CalcField_001.png)
 
 You will be presented with the Calculate Field window below:
 
-![image-20200219102751668](../assets/CalcField_002.png)
+![image-20200219102751668](./images/CalcField_002.png)
 
-1. **Label** - This will be the new field name that your calculated field will create.  The Alias will be created for you automatically.
+1. **Label** - This will be the new field name that your calculated field will create. The Alias will be created for you automatically.
 2. **Code Window** - This is where you will put your JavaScript code for the new field
-3. **Helper Buttons** - These buttons are just helpers.  The only one you really need is the first one.  This is the *inputs* buttons.  It will allow you to choose the existing fields in your dataset to use in your calculation of the new field.
+3. **Helper Buttons** - These buttons are just helpers. The only one you really need is the first one. This is the _inputs_ buttons. It will allow you to choose the existing fields in your dataset to use in your calculation of the new field.
 
 :::danger
 
-It is important to understand how Informer uses the JavaScript in your calculated field.  
+It is important to understand how Informer uses the JavaScript in your calculated field.
 
-::: 
+:::
 
-Understand that the **Dataset** is like a query in that it will return a number of rows.  Each of those rows will have the same fields (obviously, each row will have different values for the fields).
+Understand that the **Dataset** is like a query in that it will return a number of rows. Each of those rows will have the same fields (obviously, each row will have different values for the fields).
 
 Informer will take each row of fields from the dataset and pass it to the **Calculated Field** code.
 
@@ -52,17 +50,17 @@ So now that we know that each row of data is passed to the **Calculated Field Fl
 
 That means we can use field values to make decisions on what to output as our new calculated field.
 
-Before we get into examples, there is one other concept to understand.  The actual field value of the calculated field will be the whatever is returned by the last expression in the code.  
+Before we get into examples, there is one other concept to understand. The actual field value of the calculated field will be the whatever is returned by the last expression in the code.
 
 For example, if you put the following in the Code Window:
 
 ```javascript
-'one'
-'two'
-'this is what the field will be'
+"one";
+"two";
+"this is what the field will be";
 ```
 
-The last string *'this is what the field will be'* is what will be returned for the field value.
+The last string _'this is what the field will be'_ is what will be returned for the field value.
 
 ## Calculated Field Examples
 
@@ -70,7 +68,7 @@ While the following examples are contrived, each of them will try to show some o
 
 ### Calculated Fields with Multi-value Fields
 
-When working with a field that is Multi-Valued within a Calculated field, you will get an JavaScript array to work with.  
+When working with a field that is Multi-Valued within a Calculated field, you will get an JavaScript array to work with.
 
 For example, if you have the following data:
 
@@ -80,7 +78,7 @@ For example, if you have the following data:
 | 2       | Cust_02  | 50           |
 | 3       | Cust_03  |              |
 
-When you access the *Order Amounts* field in your calculated field you will get the following for each row:
+When you access the _Order Amounts_ field in your calculated field you will get the following for each row:
 
 | Order # | Value in Calc Field for OrderAmounts |
 | ------- | ------------------------------------ |
@@ -95,7 +93,7 @@ Let's say that you want to take the above data and get a total for each multi-va
 You could use this code:
 
 ```javascript
-orderAmounts.reduce((sum, val) => sum += val, 0)
+orderAmounts.reduce((sum, val) => (sum += val), 0);
 ```
 
 You may want to read up on the [Array's reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) function.
@@ -104,137 +102,136 @@ The main takeaway here is that multi-valued fields are represented as JavaScript
 
 ### Field Concatenation using + and Template Literals
 
-This first example is simply going to concatenate two fields together into a new field.  However, we are going to do it two ways.  The first, easiest way will show you how JavaScript concatenation works.  The second way is going to use [Template Literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) a powerful new way to create and concatenate strings in JavaScript.
+This first example is simply going to concatenate two fields together into a new field. However, we are going to do it two ways. The first, easiest way will show you how JavaScript concatenation works. The second way is going to use [Template Literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) a powerful new way to create and concatenate strings in JavaScript.
 
-In this example, we will concatenate the Brand Id and Brand Name with a hyphen separating them.  The new field will be called "Full Brand"
+In this example, we will concatenate the Brand Id and Brand Name with a hyphen separating them. The new field will be called "Full Brand"
 
 **Easy String Concatenation**
 
-To start with, you will need the field names.  It is best to use the Input button to the right of the code window.  When you press it, it will show you a list of fields from you dataset.  Here we will choose *Brand Id*.
+To start with, you will need the field names. It is best to use the Input button to the right of the code window. When you press it, it will show you a list of fields from you dataset. Here we will choose _Brand Id_.
 
-![image-20200219105723150](../assets/CalcField_Example_01_01.png)
+![image-20200219105723150](./images/CalcField_Example_01_01.png)
 
-This will insert the field name into our code window.  Be aware that the field name shown in the code may be different that what is shown in the input button's drop down.  This is because sometimes fields have Aliases put on them to make them more human readable.  This is yet another reason to ALWAYS use the input button to get your field names.
+This will insert the field name into our code window. Be aware that the field name shown in the code may be different that what is shown in the input button's drop down. This is because sometimes fields have Aliases put on them to make them more human readable. This is yet another reason to ALWAYS use the input button to get your field names.
 
-To concatenate items in JavaScript, simply use the + operator.  This is what would appear in the Code Window.
+To concatenate items in JavaScript, simply use the + operator. This is what would appear in the Code Window.
 
 ```javascript
-brandcode + '-' + brandname 
+brandcode + "-" + brandname;
 ```
 
-You may be wondering what happens if one of the values you are concatenating is a number.  This is important.  JavaScript will coerce the types when needed.  For example, if you had two numbers `1 + 2` this will actually add the numbers together and return `3`. However, if you have a mixture of string and numbers  concatenated by a + operator, then the numbers will be coerced to string and thus be concatenated.
+You may be wondering what happens if one of the values you are concatenating is a number. This is important. JavaScript will coerce the types when needed. For example, if you had two numbers `1 + 2` this will actually add the numbers together and return `3`. However, if you have a mixture of string and numbers concatenated by a + operator, then the numbers will be coerced to string and thus be concatenated.
 
 **Template Literal Concatenation**
 
-[Template Literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) are very cool!  First, if the above explanation about coerced values confused you, then take heart, because with Template Literals, you do not have to worry about this.
+[Template Literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) are very cool! First, if the above explanation about coerced values confused you, then take heart, because with Template Literals, you do not have to worry about this.
 
 Here is the same example as above, but with template literals.
 
 ```javascript
-`${brandcode} - ${brandname}`
+`${brandcode} - ${brandname}`;
 ```
 
 Lets go over the syntax.
 
-A template literal is enclosed in back ticks.  Not a single quote, but a back tick, usually located on the same key as the tilde (~).
+A template literal is enclosed in back ticks. Not a single quote, but a back tick, usually located on the same key as the tilde (~).
 
-Next, if you need to include a field value, you will use a dollar sign followed by curly braces with the field value inside of the curly braces.  This just tells the template literal to evaluate what is inside those curly braces.  In our example, that means returning the value that is in the field.
+Next, if you need to include a field value, you will use a dollar sign followed by curly braces with the field value inside of the curly braces. This just tells the template literal to evaluate what is inside those curly braces. In our example, that means returning the value that is in the field.
 
 Here is what it looks like in Informer:
 
-![image-20200219112035272](../assets/CalcField_Example_01_02.png)
+![image-20200219112035272](./images/CalcField_Example_01_02.png)
 
 ### SQL Case When in JavaScript
 
 A common thing to do in SQL when you want to modify your output based on the value of a field is to use a CASE ... WHEN statement.
 
-In JavaScript, this can be accomplished with [**if...then...else**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) statements or a [**switch**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement.  
+In JavaScript, this can be accomplished with [**if...then...else**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) statements or a [**switch**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement.
 
-Both accomplish the same thing, however if you have many cases you want to check for, then the **switch** statement can sometimes be more readable.  
+Both accomplish the same thing, however if you have many cases you want to check for, then the **switch** statement can sometimes be more readable.
 
 ### Wildcard Searching
 
-Sometimes the field you are creating will be based on if another field is like some value.  Usually we would call this a wildcard search and use an asterisks (*) to denote the "wildcard".  
+Sometimes the field you are creating will be based on if another field is like some value. Usually we would call this a wildcard search and use an asterisks (\*) to denote the "wildcard".
 
-In JavaScript you will instead use [String Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) to search within strings.  The easiest to use in the [includes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) function.  Other useful functions are [startsWith](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith) and [endsWith](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith).
+In JavaScript you will instead use [String Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) to search within strings. The easiest to use in the [includes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) function. Other useful functions are [startsWith](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith) and [endsWith](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith).
 
-Each of these functions (*includes, startsWith* and *endsWith*) return a Boolean (true or false).  You can then use this return value to decide what to do.
+Each of these functions (_includes, startsWith_ and _endsWith_) return a Boolean (true or false). You can then use this return value to decide what to do.
 
 **includes Example**
 
-This example will use the includes string function to see if the Brand Name has any spaces in it.  If it does, then we will return the brandname with the spaces removed, otherwise just return the brandname.
+This example will use the includes string function to see if the Brand Name has any spaces in it. If it does, then we will return the brandname with the spaces removed, otherwise just return the brandname.
 
 ```javascript
-if (brandname.includes(' ')) {
-  'Includes Spaces'
+if (brandname.includes(" ")) {
+  ("Includes Spaces");
 } else {
-  'NO Spaces'
+  ("NO Spaces");
 }
 ```
 
-The **brandname** is a String field.  This is important, as the *includes* function only works on string fields.
+The **brandname** is a String field. This is important, as the _includes_ function only works on string fields.
 
-How can you tell what is a "string", when you click on the *inputs* button on the right of the *Code Window* you will see a drop down that displays the fields in your dataset.  Informer is nice to you and tells you exactly what data types the fields are.  You will see strings ("TEXT FIELDS"), Numbers and Dates.
+How can you tell what is a "string", when you click on the _inputs_ button on the right of the _Code Window_ you will see a drop down that displays the fields in your dataset. Informer is nice to you and tells you exactly what data types the fields are. You will see strings ("TEXT FIELDS"), Numbers and Dates.
 
-![img](../assets/CalcField_Example_02_01.png)
+![img](./images/CalcField_Example_02_01.png)
 
-I'm sure you asking, what if I have a field that is a number data type, but I want to search in it like a string?  For example, the Order No field above is a number, but maybe you want to search it with the *includes* function.  You can do this!
+I'm sure you asking, what if I have a field that is a number data type, but I want to search in it like a string? For example, the Order No field above is a number, but maybe you want to search it with the _includes_ function. You can do this!
 
 ```javascript
-if (orderno.toString().includes('1')) {
-  'Includes 1'
+if (orderno.toString().includes("1")) {
+  ("Includes 1");
 } else {
-  'Does not include 1'
+  ("Does not include 1");
 }
 ```
 
-You can use the *toString()* function to convert the number to a string so that you can use the *includes* function on it.
+You can use the _toString()_ function to convert the number to a string so that you can use the _includes_ function on it.
 
-The *startsWith* and *endsWith* work just the same as includes, except they look for the search string at either the start or the end of the field value.
+The _startsWith_ and _endsWith_ work just the same as includes, except they look for the search string at either the start or the end of the field value.
 
 ### Replacing Values in a String
 
-In this example, you will replace all occurrences of a space in a fields value.  To do this you will use the [replace](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) function that each string has access to.
+In this example, you will replace all occurrences of a space in a fields value. To do this you will use the [replace](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) function that each string has access to.
 
 ```javascript
-brandname.replace(/\s/g, '')
+brandname.replace(/\s/g, "");
 ```
 
 The replace function has two arguments, the first is what do I search for to replace and the second is the string to replace what I found of the first argument.
 
-The first argument can be either a string value or a regular expression.  
+The first argument can be either a string value or a regular expression.
 
-> If you use a String for the first argument, it will only replace the FIRST occurrence of the string pattern that is found.  This usually is not what you are looking for when using the replace function.  Therefore, you will probably want to use a regular expression.
+> If you use a String for the first argument, it will only replace the FIRST occurrence of the string pattern that is found. This usually is not what you are looking for when using the replace function. Therefore, you will probably want to use a regular expression.
 
-Regular expressions can be bit tricky.  There are books written on how to use and create them. If you want to explore regular expression deeper, just search google and you will find a lot.
+Regular expressions can be bit tricky. There are books written on how to use and create them. If you want to explore regular expression deeper, just search google and you will find a lot.
 
 I will give you two patterns that should answer most of your replace needs.
 
-> The regex expression is found inside the `/.../` forward slashes.  The characters after the final forward slash will be can either `g` or `i` or both.  `g` means global.  So search the whole string and find all matches.  The `i` means ignore case when doing your search.
+> The regex expression is found inside the `/.../` forward slashes. The characters after the final forward slash will be can either `g` or `i` or both. `g` means global. So search the whole string and find all matches. The `i` means ignore case when doing your search.
 
-1. **Replace Spaces** - `/\s/g`  the stuff inside the forward slashes will be the regular expression. Here the \s is stating the we want to match any whitespace (spaces, tabs, new line characters and carriage returns).
+1. **Replace Spaces** - `/\s/g` the stuff inside the forward slashes will be the regular expression. Here the \s is stating the we want to match any whitespace (spaces, tabs, new line characters and carriage returns).
    If you want to replace whitespace only where there are more than a certain number, you can modify your regex like this:
-    `/\s{3}/g` 
-   Now it will only replace if it finds 3 whitespace characters in a succession. 
-2. **Replace Words** - `brandname.replace(/ABC/gi, 'CBA')` Notice the the regex expression is just the text you want to look for with NO quotes.  I have also add the `gi` switches so that it searches and replaces all occurrences and ignores case while doing it.
+   `/\s{3}/g`
+   Now it will only replace if it finds 3 whitespace characters in a succession.
+2. **Replace Words** - `brandname.replace(/ABC/gi, 'CBA')` Notice the the regex expression is just the text you want to look for with NO quotes. I have also add the `gi` switches so that it searches and replaces all occurrences and ignores case while doing it.
 
 ### Extract Month or Year or Day from Date field
 
-If you have a date field and what to extract a portion of it (Day, Month, Year), the easiest way to do that is using the [*moment*](https://momentjs.com/) library that is available in Informer.
+If you have a date field and what to extract a portion of it (Day, Month, Year), the easiest way to do that is using the [_moment_](https://momentjs.com/) library that is available in Informer.
 
 Here is an example:
 
 ```javascript
 // Extract Month from issuedate date field
 // Note MM = 01, MMM = 'Nov', 'Dec', etc, MMMM = 'November', etc.
-moment(issuedate).format('MM')
+moment(issuedate).format("MM");
 
 //Extract Year from issuedate date field
-moment(issuedate).format('YYYY')
-
+moment(issuedate).format("YYYY");
 ```
 
-Here is a list of common arguments that can be passed to the format function.  Note, you can combine these in any way.  
+Here is a list of common arguments that can be passed to the format function. Note, you can combine these in any way.
 
 For example: **'YYYY-MM-DD'** would produce **'2020-01-01'**
 
@@ -265,14 +262,12 @@ To extract the **Quarter** number from a date, you will need to just use a diffe
 
 ```javascript
 //Extract Quarter number from issuedate date field
-moment(issuedate).quarter() // returns a number from 1 to 4
+moment(issuedate).quarter(); // returns a number from 1 to 4
 ```
-
-
 
 ### Mimicking the IN keyword
 
-In JavaScript there is not an "IN" keyword like there is in SQL.  However, the technique shown below will help you mimic this feature.
+In JavaScript there is not an "IN" keyword like there is in SQL. However, the technique shown below will help you mimic this feature.
 
 You use the "IN" keyword when you have a question like:
 
@@ -285,61 +280,59 @@ To do this in an Informer Calculated Field, you will create an Array that holds 
 #### Match Full
 
 ```javascript
-var matchCodes = ['Luxottica USA', 'Audi UK', 'Google']
+var matchCodes = ["Luxottica USA", "Audi UK", "Google"];
 
 if (matchCodes.includes(advname)) {
-    'Full Match'
+  ("Full Match");
 } else {
-    'Criteria Not Met'
+  ("Criteria Not Met");
 }
 ```
 
-You have seen the **includes** function used on a string field.  Here we are using it on an Array looking to see if any of the values stored in `matchCodes` matches the `advname` field value.  If it does, `true` will be returned.
+You have seen the **includes** function used on a string field. Here we are using it on an Array looking to see if any of the values stored in `matchCodes` matches the `advname` field value. If it does, `true` will be returned.
 
-> NOTE: When you use the **includes** function on a *string* you get the effect of a Wild Card search.  Meaning that if any part of the string matches your search it returns true.
+> NOTE: When you use the **includes** function on a _string_ you get the effect of a Wild Card search. Meaning that if any part of the string matches your search it returns true.
 >
-> However, when using the **includes** function on an *array*, it will search for items in the array that are an exact match to what you are searching for.  To do wild card searches on arrays, see the [Wild Match Array Values](#wild-match-array-values)
+> However, when using the **includes** function on an _array_, it will search for items in the array that are an exact match to what you are searching for. To do wild card searches on arrays, see the [Wild Match Array Values](#wild-match-array-values)
 
-However, this will look for full matches, not partial.  To enable "wildcard" searches against a list of values, you need to change the above up a little bit.
+However, this will look for full matches, not partial. To enable "wildcard" searches against a list of values, you need to change the above up a little bit.
 
 #### Wild Match Array Values
 
 ```javascript
-var wildMatchCodes = ['Luxottica USA', 'Audi UK', 'Google', 'AMC']
+var wildMatchCodes = ["Luxottica USA", "Audi UK", "Google", "AMC"];
 
-if (wildMatchCodes.some(wildValue => advname.includes(wildValue))) {
-    'Wild Match'
+if (wildMatchCodes.some((wildValue) => advname.includes(wildValue))) {
+  ("Wild Match");
 } else {
-    'Criteria Not Met'
+  ("Criteria Not Met");
 }
 ```
 
-In the above example, we used the [some](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some) Array function, which accepts a function as an argument.  What the some function does, is send each value in the array, one at a time, through the passed function `wildValue => advname.includes(wildValue)`
+In the above example, we used the [some](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some) Array function, which accepts a function as an argument. What the some function does, is send each value in the array, one at a time, through the passed function `wildValue => advname.includes(wildValue)`
 
-That function will run once for every item in the **wildMatchCodes** array.  We will then use the **includes** string function to see if the **advname** field value *includes* the wildValue.  [See Wildcard Searching](#wildcard-searching) for details on using the includes with string values.
+That function will run once for every item in the **wildMatchCodes** array. We will then use the **includes** string function to see if the **advname** field value _includes_ the wildValue. [See Wildcard Searching](#wildcard-searching) for details on using the includes with string values.
 
 > To change any of these to be NOT IN, simply add the JavaScript not operator- ! to the return value.
-
-
 
 ### Lookup Table Style Find/Replace
 
 If you have field that you want to do a number of lookups on and replace the found values with a new value, you can use the standard `if/else` syntax.
 
-However, if you have many conversions that you want to do, the `if/else` syntax gets difficult to maintain.  Here is an easier and cleaner method of implementing this.
+However, if you have many conversions that you want to do, the `if/else` syntax gets difficult to maintain. Here is an easier and cleaner method of implementing this.
 
-The simple example we will use is converting a field that hold a country code (countryID) and convert it to the full country name (countryName).  If no conversion is found, then we will just use the value in the countryID field.
+The simple example we will use is converting a field that hold a country code (countryID) and convert it to the full country name (countryName). If no conversion is found, then we will just use the value in the countryID field.
 
 ```javascript
 countryObj = {
-    USA: 'UnitedStates',
-    GRB: 'Great Britain',
-}
- 
-!countryObj[countryID] ? countryID : countryObj[countryID]
+  USA: "UnitedStates",
+  GRB: "Great Britain",
+};
+
+!countryObj[countryID] ? countryID : countryObj[countryID];
 ```
 
-Step one is to create our conversion object.  In the above code, it is called `countryObj`.  This is a standard JavaScript object with the key (USA, GRB) being our lookup field and the values assigned to the keys will be the returned information when a key is matched.
+Step one is to create our conversion object. In the above code, it is called `countryObj`. This is a standard JavaScript object with the key (USA, GRB) being our lookup field and the values assigned to the keys will be the returned information when a key is matched.
 
 The next line of code is a [ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) and is used to handle the fact that we want any lookups that fail to return the `countryID`.
 
@@ -347,28 +340,26 @@ If your requirements were such that if a match wasn't found on the lookup you wa
 
 ```javascript
 countryObj = {
-    USA: 'UnitedStates',
-    GRB: 'Great Britain',
-}
- 
-countryObj[countryID] || 'My DEFAULT'
+  USA: "UnitedStates",
+  GRB: "Great Britain",
+};
+
+countryObj[countryID] || "My DEFAULT";
 ```
-
-
 
 ### Building a Complex Example
 
-You can combine all of the above techniques to get the final result that you need.  In this example we will be working with the `campaignCode` and `billNameId` fields.
+You can combine all of the above techniques to get the final result that you need. In this example we will be working with the `campaignCode` and `billNameId` fields.
 
 When building complex scenarios it is very important that before you start to code anything, you have a clear written plan of what your scenario is.
 
-I find it is best to work backwards.  So start with what will the final values be in your field.  Then define what criteria must be met for each of the values to become the selected value.
+I find it is best to work backwards. So start with what will the final values be in your field. Then define what criteria must be met for each of the values to become the selected value.
 
 This process is best understood with an example, so let's get started.
 
 #### Define The Final Field
 
-First, we need to name our final field.  It will be called **FinalOrderType**. 
+First, we need to name our final field. It will be called **FinalOrderType**.
 
 **Define our final Values**
 
@@ -388,10 +379,10 @@ I find it makes it easier to understand if we define these criteria in a table l
 
 The requirements for **Corporate** becoming the final value are:
 
-| Field        | Operation           | Detail                                                       |
-| ------------ | ------------------- | ------------------------------------------------------------ |
-| campaignCode | Starts With         | '3' OR 'P'                                                   |
-| campaignCode | Must Not Match      | '3C11CUDO','3C11CDOP','3C11CDOS',<br />'P1203CUD','P1207CUD','P1BETOP','P1BEAWW',<br />'P1303BLK','3C17WWG2', 'PIAGENT' |
+| Field        | Operation           | Detail                                                                                                                    |
+| ------------ | ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| campaignCode | Starts With         | '3' OR 'P'                                                                                                                |
+| campaignCode | Must Not Match      | '3C11CUDO','3C11CDOP','3C11CDOS',<br />'P1203CUD','P1207CUD','P1BETOP','P1BEAWW',<br />'P1303BLK','3C17WWG2', 'PIAGENT'   |
 | campaignCode | Must Not Start With | 'PHW','PWW','HW1','HWK','PM1','PK5','PMB',<br />'PMR','PF5','PMS','PFB','HRI','PRI','PKM','PM6','PM7',<br /> 'PI', 'PWWW' |
 
 The requirements for **Private** becoming the final value are much simpler, but we still keep our table format:
@@ -402,13 +393,13 @@ The requirements for **Private** becoming the final value are much simpler, but 
 
 The requirements for **Unknown** becoming the final value is the easiest and doesn’t require a table.
 
-| Requirement                                                  |
-| ------------------------------------------------------------ |
+| Requirement                                                                           |
+| ------------------------------------------------------------------------------------- |
 | **Unknown** is the default value if no other conditions are met for the other values. |
 
 #### Build your Code
 
-Now we can start coding.  Since the criteria for the first value (Corporate) is complex, we will code each of the requirements and store the result in a variable.  These variables can then be combined later.
+Now we can start coding. Since the criteria for the first value (Corporate) is complex, we will code each of the requirements and store the result in a variable. These variables can then be combined later.
 
 We will start with the **first criteria** requirement.
 
@@ -418,7 +409,8 @@ We will start with the **first criteria** requirement.
 
 ```javascript
 // Returns true for any row where the campaignCode starts with 3 or P
-var criteria_startWith = campaignCode.startsWith('3') || campaignCode.toLowerCase().startsWith('p') 
+var criteria_startWith =
+  campaignCode.startsWith("3") || campaignCode.toLowerCase().startsWith("p");
 ```
 
 We have created a variable **criteria_startWith** that holds the result value of either **true** or **false**.
@@ -427,34 +419,65 @@ It will hold true if the current row's campaignCode value starts with either a '
 
 The **next requirement**:
 
-| Field        | Operation      | Detail                                                       |
-| ------------ | -------------- | ------------------------------------------------------------ |
+| Field        | Operation      | Detail                                                                                                                  |
+| ------------ | -------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | campaignCode | Must Not Match | '3C11CUDO','3C11CDOP','3C11CDOS',<br />'P1203CUD','P1207CUD','P1BETOP','P1BEAWW',<br />'P1303BLK','3C17WWG2', 'PIAGENT' |
 
 ```javascript
-var campCodeMatchList = ['3C11CUDO','3C11CDOP','3C11CDOS','P1203CUD','P1207CUD','P1BETOP','P1BEAWW','P1303BLK','3C17WWG2', 'PIAGENT']
+var campCodeMatchList = [
+  "3C11CUDO",
+  "3C11CDOP",
+  "3C11CDOS",
+  "P1203CUD",
+  "P1207CUD",
+  "P1BETOP",
+  "P1BEAWW",
+  "P1303BLK",
+  "3C17WWG2",
+  "PIAGENT",
+];
 // Returns true for any row where campaignCode is NOT IN the campCodeMatchList
-var criteria_CCNotIn = !campCodeMatchList.includes(campaignCode)
-
+var criteria_CCNotIn = !campCodeMatchList.includes(campaignCode);
 ```
 
-To check this criteria, we must first create an array with all of the values that the campaignCode must NOT match.  Then we use the [Match Full](#match-full) technique to see if the current campaignCode matches and values in the array.  But, since this is a must NOT match criteria, we throw the not operator (!) in front of the expression: `!campCodeMatchList.includes(campaignCode)`
+To check this criteria, we must first create an array with all of the values that the campaignCode must NOT match. Then we use the [Match Full](#match-full) technique to see if the current campaignCode matches and values in the array. But, since this is a must NOT match criteria, we throw the not operator (!) in front of the expression: `!campCodeMatchList.includes(campaignCode)`
 
 The **last requirement:**
 
-| Field        | Operation           | Detail                                                       |
-| ------------ | ------------------- | ------------------------------------------------------------ |
+| Field        | Operation           | Detail                                                                                                                    |
+| ------------ | ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | campaignCode | Must Not Start With | 'PHW','PWW','HW1','HWK','PM1','PK5','PMB',<br />'PMR','PF5','PMS','PFB','HRI','PRI','PKM','PM6','PM7',<br /> 'PI', 'PWWW' |
 
 ```javascript
 // Returns true for any row where the campaignCode does NOT start with a value from the campCodeNOTStartsWithList.
-var campCodeNOTStartsWithList = ['PHW','PWW','HW1','HWK','PM1','PK5','PMB','PMR','PF5','PMS','PFB','HRI','PRI','PKM','PM6','PM7', 'PI', 'PWWW'] 
-var criteria_CCNotStartsWith = !campCodeNOTStartsWithList.some(swValue => campaignCode.startsWith(swValue))
+var campCodeNOTStartsWithList = [
+  "PHW",
+  "PWW",
+  "HW1",
+  "HWK",
+  "PM1",
+  "PK5",
+  "PMB",
+  "PMR",
+  "PF5",
+  "PMS",
+  "PFB",
+  "HRI",
+  "PRI",
+  "PKM",
+  "PM6",
+  "PM7",
+  "PI",
+  "PWWW",
+];
+var criteria_CCNotStartsWith = !campCodeNOTStartsWithList.some((swValue) =>
+  campaignCode.startsWith(swValue)
+);
 ```
 
-To check this criteria, we must first create an array with all of the values that the campaignCode must NOT START with.   Then we use the [Wild Match Array Values](#Wild-Match-Array-Values) technique to campaignCode's that start with the values in our array.  Lastly, since this is a NOT condition, we apply the JavaScript not (!) operator to the result.
+To check this criteria, we must first create an array with all of the values that the campaignCode must NOT START with. Then we use the [Wild Match Array Values](#Wild-Match-Array-Values) technique to campaignCode's that start with the values in our array. Lastly, since this is a NOT condition, we apply the JavaScript not (!) operator to the result.
 
-Now we have three variables that will each tell us if the campaignCode for the given row complies with one of the conditions set forth in our table.  Since all conditions must be true for the campaignCode to "pass", we will combine these variable in an if statement.
+Now we have three variables that will each tell us if the campaignCode for the given row complies with one of the conditions set forth in our table. Since all conditions must be true for the campaignCode to "pass", we will combine these variable in an if statement.
 
 ```javascript
 if (criteria_startWith && criteria_CCNotIn && campCodeNOTStartsWithList) {
@@ -462,23 +485,23 @@ if (criteria_startWith && criteria_CCNotIn && campCodeNOTStartsWithList) {
 } else ...
 ```
 
-We are using the JavaScript **&&** operator to find out if all of these variables are true.  It is equivalent to saying 
+We are using the JavaScript **&&** operator to find out if all of these variables are true. It is equivalent to saying
 
-*If criteria_startWith is true and criteria_CCNotIn is true and campCodeNOTStartsWithList then ...*
+_If criteria_startWith is true and criteria_CCNotIn is true and campCodeNOTStartsWithList then ..._
 
-We can test for the **second requirement** by taking on another if statement to the else and the final else will handle everything that doesn't match the first two requirements.  
+We can test for the **second requirement** by taking on another if statement to the else and the final else will handle everything that doesn't match the first two requirements.
 
 **Final If Statement**
 
 ```javascript
 if (criteria_startWith && criteria_CCNotIn && campCodeNOTStartsWithList) {
-    'Corporate'
-} else 
-  // This if would check the billing status, but I don't know where that field is  
-  if (billNameId > 3) {
-    'Freen'
+  ("Corporate");
+}
+// This if would check the billing status, but I don't know where that field is
+else if (billNameId > 3) {
+  ("Freen");
 } else {
-    'Grace Status'
+  ("Grace Status");
 }
 ```
 
@@ -486,118 +509,151 @@ if (criteria_startWith && criteria_CCNotIn && campCodeNOTStartsWithList) {
 
 ```javascript
 // Returns true for any row where the campaignCode starts with 3 or P
-var criteria_startWith = campaignCode.startsWith('3') || campaignCode.toLowerCase().startsWith('p') 
+var criteria_startWith =
+  campaignCode.startsWith("3") || campaignCode.toLowerCase().startsWith("p");
 
-var campCodeMatchList = ['3C11CUDO','3C11CDOP','3C11CDOS','P1203CUD','P1207CUD','P1BETOP','P1BEAWW','P1303BLK','3C17WWG2', 'PIAGENT']
+var campCodeMatchList = [
+  "3C11CUDO",
+  "3C11CDOP",
+  "3C11CDOS",
+  "P1203CUD",
+  "P1207CUD",
+  "P1BETOP",
+  "P1BEAWW",
+  "P1303BLK",
+  "3C17WWG2",
+  "PIAGENT",
+];
 // Returns true for any row where campaignCode is NOT IN the campCodeMatchList
-var criteria_CCNotIn = !campCodeMatchList.includes(campaignCode)
+var criteria_CCNotIn = !campCodeMatchList.includes(campaignCode);
 
 // Returns true for any row where the campaignCode does NOT start with a value from the campCodeNOTStartsWithList.
-var campCodeNOTStartsWithList = ['PHW','PWW','HW1','HWK','PM1','PK5','PMB','PMR','PF5','PMS','PFB','HRI','PRI','PKM','PM6','PM7', 'PI', 'PWWW'] 
-var criteria_CCNotStartsWith = !campCodeNOTStartsWithList.some(swValue => campaignCode.startsWith(swValue))
+var campCodeNOTStartsWithList = [
+  "PHW",
+  "PWW",
+  "HW1",
+  "HWK",
+  "PM1",
+  "PK5",
+  "PMB",
+  "PMR",
+  "PF5",
+  "PMS",
+  "PFB",
+  "HRI",
+  "PRI",
+  "PKM",
+  "PM6",
+  "PM7",
+  "PI",
+  "PWWW",
+];
+var criteria_CCNotStartsWith = !campCodeNOTStartsWithList.some((swValue) =>
+  campaignCode.startsWith(swValue)
+);
 
 //------Billing Status check ---//
 
 if (criteria_startWith && criteria_CCNotIn && campCodeNOTStartsWithList) {
-    'Corporate'
-} else 
-  // This if would check the billing status, but I don't know where that field is  
-  if (billNameId > 3) {
-    'Freen'
+  ("Corporate");
+}
+// This if would check the billing status, but I don't know where that field is
+else if (billNameId > 3) {
+  ("Freen");
 } else {
-    'Grace Status'
+  ("Grace Status");
 }
 ```
 
 ## Powerscripts
 
-Power Scripts are advanced scripts (JavaScript) that gives you complete control over the data.  A Power Script is JavaScript with a sandboxed script context
+Power Scripts are advanced scripts (JavaScript) that gives you complete control over the data. A Power Script is JavaScript with a sandboxed script context
 
 Here are the predefined keywords you can use in your Power Script. [Informer Docs](https://informer5.zendesk.com/hc/en-us/articles/115005113823)
 
-| Keyword | Type            | Desc                                                         |
-| ------- | --------------- | ------------------------------------------------------------ |
-| $record | object          | The current row. You may modify this row.                    |
-| $index  | number          | The current row number (row 1 = index 0)                     |
-| $omit() | function        | When called, removes the current row                         |
-| $fields | object          | Field metadata                                               |
-| $field  | function        | Function to describe a field: $field('location').label('Loc') |
-| $inputs | object          | User Inputs                                                  |
-| $local  | object          | Variable that is not cleared from on record to the next      |
-| _       | object/function | Lodash v3 library. [lodash](https://lodash.com)              |
+| Keyword | Type            | Desc                                                               |
+| ------- | --------------- | ------------------------------------------------------------------ |
+| $record | object          | The current row. You may modify this row.                          |
+| $index  | number          | The current row number (row 1 = index 0)                           |
+| $omit() | function        | When called, removes the current row                               |
+| $fields | object          | Field metadata                                                     |
+| $field  | function        | Function to describe a field: $field('location').label('Loc')      |
+| $inputs | object          | User Inputs                                                        |
+| $local  | object          | Variable that is not cleared from on record to the next            |
+| \_      | object/function | Lodash v3 library. [lodash](https://lodash.com)                    |
 | moment  | function        | moment date manipulation library. [momentjs](https://momentjs.com) |
 
-To declare a variable use the `var` keyword.  However, within the Powerscripts it seems you do not have to "declare" variables that you will be using. 
+To declare a variable use the `var` keyword. However, within the Powerscripts it seems you do not have to "declare" variables that you will be using.
 
 ```javascript
-var gtp = $inputs['greaterThanPrice'] || 0;
-if($record.baseCost >= gtp) {
-    $record.isGreaterThan = true
+var gtp = $inputs["greaterThanPrice"] || 0;
+if ($record.baseCost >= gtp) {
+  $record.isGreaterThan = true;
 } else {
-    $record.isGreaterThan = false
+  $record.isGreaterThan = false;
 }
 ```
 
-Do not `return` anything from the Power Script.  Simply change the value of what you want.
+Do not `return` anything from the Power Script. Simply change the value of what you want.
 
 You can create multiple fields in a single Power Script.
 
 ### Using $inputs
 
-Many times on your Datasets, you will create *inputs*.  These are values that your end user will be prompted to enter upon the reloading of the Dataset.  
+Many times on your Datasets, you will create _inputs_. These are values that your end user will be prompted to enter upon the reloading of the Dataset.
 
-Usually these *inputs* are used in your criteria, however, there may be times when you want to use the value either in a calculation of another field or to simply display as a new field in the result set.  
+Usually these _inputs_ are used in your criteria, however, there may be times when you want to use the value either in a calculation of another field or to simply display as a new field in the result set.
 
-You will be able to access these *inputs* in Calculated Fields and Powerscripts using the **$inputs** object.
+You will be able to access these _inputs_ in Calculated Fields and Powerscripts using the **$inputs** object.
 
 To access an input value, use the following syntax:
 
 ```javascript
-$record.nameOfInput = $inputs['nameOfInput']
+$record.nameOfInput = $inputs["nameOfInput"];
 ```
-
-
 
 ### Using $local
 
-The $local keyword is very powerful in that it persists throughout the load process.  First thing to understand is that it is an Object.  Which means, you can declare multiple local persistent variables using the $local keyword:
+The $local keyword is very powerful in that it persists throughout the load process. First thing to understand is that it is an Object. Which means, you can declare multiple local persistent variables using the $local keyword:
 
 ```javascript
 $local.count = 0;
 $local.otherVariable = "x";
 ```
 
-However, if you were to declare the $local variables as above, they would be reset every time.  To declare these types of variables, you must first check if they exists, if they do, continue, if they don't, then create them:
+However, if you were to declare the $local variables as above, they would be reset every time. To declare these types of variables, you must first check if they exists, if they do, continue, if they don't, then create them:
 
 ```javascript
-if(!$local.count) { // if this var doesn't exist then
-  $local.count = 0 // initialize it
+if (!$local.count) {
+  // if this var doesn't exist then
+  $local.count = 0; // initialize it
 }
 // Another method that does the same thing
-$local.count = ($local.count) ? $local.count : 0
+$local.count = $local.count ? $local.count : 0;
 
 // Last way to do the same thing
-$local.count = ($local.hasOwnProperty('count')) ? $local.count : 0
+$local.count = $local.hasOwnProperty("count") ? $local.count : 0;
 
 // Wait, one other way!
-// This way is good if you have multiple items you need to initialize on the $local 
+// This way is good if you have multiple items you need to initialize on the $local
 ```
 
 If you wanted to create a row count variable, you would pick one of the above methods to perform the initialization and then increment the count and store in a `$record` variable.
 
 ```javascript
-if(!$local.count) { // if this var doesn't exist then
-  $local.count = 0 // initialize it
+if (!$local.count) {
+  // if this var doesn't exist then
+  $local.count = 0; // initialize it
 }
 //This will create a rowCount record for every row
-//the ++ at the end of the $local.count will increment AFTER it assigns 
+//the ++ at the end of the $local.count will increment AFTER it assigns
 //whatever is in $local.count.  This just means your first row will be 0.
-$record.rowCount = $local.count++
+$record.rowCount = $local.count++;
 ```
 
 ### Numbers and Other Gotchas
 
-You must be aware of the data type of the fields you are using and if there are any *Null* values in the fields you are using.
+You must be aware of the data type of the fields you are using and if there are any _Null_ values in the fields you are using.
 
 For Example, if you wanted to get a running total by Customer (AdvName) and the field you were using to get this running total (priceActAmt) had null values in it, you would need to take that into account in your script.
 
@@ -606,7 +662,7 @@ For Example, if you wanted to get a running total by Customer (AdvName) and the 
 Use the keyword **delete** followed by the column you want removed.
 
 ```javascript
-delete $record.columnToDelete
+delete $record.columnToDelete;
 ```
 
 ### Using $fields Metadata
@@ -628,26 +684,29 @@ Here is the shape of the object:
         label: '' // Viewable label
         position: // Position in output grid (int)
         name: // This is the name as it is referred to in Calculated fields or Powerscripts
-    }, 
+    },
     ...
 }
 ```
 
-There are some other metadata available, but it isn't very useful.  If you want to query this data yourself, here is code that will let you view all of the properties on a field in the $field object.
+There are some other metadata available, but it isn't very useful. If you want to query this data yourself, here is code that will let you view all of the properties on a field in the $field object.
 
 ```javascript
 // Inspect $fields object for a single field
-$record.fieldInspect = Object.keys($fields.issueDate).map(key => [key, $fields.issueDate[key]])
+$record.fieldInspect = Object.keys($fields.issueDate).map((key) => [
+  key,
+  $fields.issueDate[key],
+]);
 ```
 
-I have found this useful for changing a datatype of a field.  Informer will makes its best guess at the data type of a field.  Sometimes, you don't want its best guess.  For example, if you have created a Year field from a Date field, Informer will try and make that a number, which is a pain to format.  You can turn this into a string field as follows:
+I have found this useful for changing a datatype of a field. Informer will makes its best guess at the data type of a field. Sometimes, you don't want its best guess. For example, if you have created a Year field from a Date field, Informer will try and make that a number, which is a pain to format. You can turn this into a string field as follows:
 
 ```javascript
-// Get the year of the issue date 
-$record.issueYear = moment($record.issuedate).format('YYYY')
+// Get the year of the issue date
+$record.issueYear = moment($record.issuedate).format("YYYY");
 // Create a join column from issueYear and RepId to use to join to the goals spreadsheet
-$record.joinField = `${$record.issueYear}-${$record.repcode}`
-$fields.issueYear.dataType = 'string'
+$record.joinField = `${$record.issueYear}-${$record.repcode}`;
+$fields.issueYear.dataType = "string";
 ```
 
 ### $query Object
@@ -660,7 +719,7 @@ I haven't found a use for this, but here is the shape of the $query object:
 	_events: object
 	_eventsCount: number
 	_maxListeners: undefined
-	limit: number: 
+	limit: number:
 	errorHandlers: object
 	throughHandlers: object
 	postHandlers: object
@@ -684,8 +743,6 @@ I haven't found a use for this, but here is the shape of the $query object:
 }
 ```
 
-
-
 ## Powerscript Examples
 
 ### Getting Total By Advertiser and % of Total By Advertiser
@@ -698,51 +755,51 @@ It is important to understand that the `$local` object will persist between runn
 
 The goal is to get a field that sums the revenue for an advertiser and then uses that to calculate the percentage of total for every row.
 
->  This is vastly different from the **Percent of Total** flow step as this is based on the Grand Total versus totals by advertiser.
+> This is vastly different from the **Percent of Total** flow step as this is based on the Grand Total versus totals by advertiser.
 
 To do this we need three flow steps.
 
-1. **Power Script Flow Step** - used to calculate the Total Revenue for each Advertiser.  This information will have to be stored in the `$local` object so that it is persisted.
+1. **Power Script Flow Step** - used to calculate the Total Revenue for each Advertiser. This information will have to be stored in the `$local` object so that it is persisted.
 2. **Flush** - Starts a new pass of the data with our `$local` object intact.
-3. **Power Script Flow Step** - used to calculate the % of Total Revenue per Advertiser and create the fields 
+3. **Power Script Flow Step** - used to calculate the % of Total Revenue per Advertiser and create the fields
    - **$record.percentOfTotalByAdv** - This is the field we want, the % of Total Revenue by Advertiser.
-   - **$record.TotalByAdv** - This is the subtotal for each advertiser.  We really don't need to expose this as a record, but it is useful for testing.
+   - **$record.TotalByAdv** - This is the subtotal for each advertiser. We really don't need to expose this as a record, but it is useful for testing.
 
 Here is what the Flow steps look like:
 
-![image-20200213150630405](../assets/informer_tips_date-powerscript-001.png)
+![image-20200213150630405](./images/informer_tips_date-powerscript-001.png)
 
 **Power Script - Aggregate Rev By Advertiser**
 
 ```javascript
 // The usual initialization code
 if (!$local[$record.advCode]) {
-	$local[$record.advCode] = 0    
+  $local[$record.advCode] = 0;
 }
 // Add current records amount to the running total
-$local[$record.advCode] = $local[$record.advCode] + $record.orderNetAmt 
+$local[$record.advCode] = $local[$record.advCode] + $record.orderNetAmt;
 ```
 
-The unique thing that is happening in the **Aggregate Rev By Advertiser** Power Script, is that we are create a different object property on the `$local` object for each advCode (advertiser).  This allows us to keep a different total for each Advertiser.
+The unique thing that is happening in the **Aggregate Rev By Advertiser** Power Script, is that we are create a different object property on the `$local` object for each advCode (advertiser). This allows us to keep a different total for each Advertiser.
 
 Next we just run the **Flush** Flow step.
 
 **Power Script - Percent Of Adv Total**
 
 ```javascript
-$record.percentOfTotalByAdv = ($record.orderNetAmt / $local[$record.advCode])
-$record.TotalByAdv = $local[$record.advCode]
+$record.percentOfTotalByAdv = $record.orderNetAmt / $local[$record.advCode];
+$record.TotalByAdv = $local[$record.advCode];
 ```
 
-This above code is simply creating the two new fields that we want.  
+This above code is simply creating the two new fields that we want.
 
 ### Dealing with Duplicate Fields in Normalized data (Aggregation)
 
-I will start by saying this code is not recommended for large datasets.  It slows down the load considerably.  However, it is always worth a try to see if will help.
+I will start by saying this code is not recommended for large datasets. It slows down the load considerably. However, it is always worth a try to see if will help.
 
 The scenario that calls for this is a dataset that is loading a group of fields that includes some **multivalued** fields and that also runs a **Normalize** flow step on these multivalued fields.
 
-This results in "duplication" of the data in non-multivalued fields.  Makes sense and works fine, unless you have a numeric NON multivalued field that you want to aggregate on.  This results in an over aggregation of this field.
+This results in "duplication" of the data in non-multivalued fields. Makes sense and works fine, unless you have a numeric NON multivalued field that you want to aggregate on. This results in an over aggregation of this field.
 
 For example, if we had a dataset that contained the following:
 
@@ -768,7 +825,7 @@ If you try to aggregate on the Order Total field you will get the incorrect amou
 
 > NOTE: This is as intended and is to be expected.
 
-Since this is how Informer works, we will need to get around this another way.  This is can be accomplished via a Powerscript.
+Since this is how Informer works, we will need to get around this another way. This is can be accomplished via a Powerscript.
 
 What we are trying to do is to get the dataset to look like this:
 
@@ -781,9 +838,9 @@ What we are trying to do is to get the dataset to look like this:
 | C        | 0           | C002              | 300               |
 | C        | 0           | C003              | 100               |
 
-To do this, we will need to do two things.  First, you must add a counter to your Dataset and name it **preCounter**
+To do this, we will need to do two things. First, you must add a counter to your Dataset and name it **preCounter**
 
-![image-20200427153828821](../assets/informer-javascript_powerscript_001)
+![image-20200427153828821](./images/informer-javascript_powerscript_001)
 
 The counter creation will be the first Flow step.
 
@@ -798,48 +855,46 @@ Past the following code in the Powerscript.
 ```javascript
 // Initialize "prevCounter" in the local object if undefined
 if (!$local["prevCounter"]) {
-    $local["prevCounter"] = 1
+  $local["prevCounter"] = 1;
 }
 // Check to see if our stored counter variable is the same as the current one
 // If it is, then this is a "Duplicate" and we should zero out any numeric
 // variables that we want to aggregate
 if ($record.preCounter === $local["prevCounter"]) {
-    // These will be all the fields that you do not want to be duplicated.
-	// These fields will be numeric fields
-    $record.fieldToFix = 0
-    // any other fields to fix
+  // These will be all the fields that you do not want to be duplicated.
+  // These fields will be numeric fields
+  $record.fieldToFix = 0;
+  // any other fields to fix
 }
 // update our local copy of the counter to the current one.
-$local["prevCounter"] = $record.preCounter
+$local["prevCounter"] = $record.preCounter;
 ```
-
-
 
 ### Normalize Doesn't Propagate all Values
 
-Sometimes when you normalize and you have *one-to-many* fields that are associated with *multi-valued* fields, those *one-to-many* only one iteration of the *one-to-many* fields will be populated.
+Sometimes when you normalize and you have _one-to-many_ fields that are associated with _multi-valued_ fields, those _one-to-many_ only one iteration of the _one-to-many_ fields will be populated.
 
-Here is an example of what you see even after applying the *Normalize* flow step:
+Here is an example of what you see even after applying the _Normalize_ flow step:
 
-| ID   | One-To-Many | Multi-Valued |
-| ---- | ----------- | ------------ |
-| 1    | MM33001     | 15           |
-| 2    |             | 12           |
-| 3    | MM55221     | 10           |
-| 4    |             | 40           |
-| 5    |             | 20           |
+| ID  | One-To-Many | Multi-Valued |
+| --- | ----------- | ------------ |
+| 1   | MM33001     | 15           |
+| 2   |             | 12           |
+| 3   | MM55221     | 10           |
+| 4   |             | 40           |
+| 5   |             | 20           |
 
 But what you really want is this:
 
-| ID   | One-To-Many | Multi-Valued |
-| ---- | ----------- | ------------ |
-| 1    | MM33001     | 15           |
-| 2    | MM33001     | 12           |
-| 3    | MM55221     | 10           |
-| 4    | MM55221     | 40           |
-| 5    | MM55221     | 20           |
+| ID  | One-To-Many | Multi-Valued |
+| --- | ----------- | ------------ |
+| 1   | MM33001     | 15           |
+| 2   | MM33001     | 12           |
+| 3   | MM55221     | 10           |
+| 4   | MM55221     | 40           |
+| 5   | MM55221     | 20           |
 
-To achieve this, you need to use Powerscript.  
+To achieve this, you need to use Powerscript.
 
 After the Normalize flow step, add this Powerscript:
 
@@ -847,13 +902,13 @@ After the Normalize flow step, add this Powerscript:
 
 ```javascript
 if ($record.One-To-Many) {
-	$local.prevOne-To-Many = $record.One-To-Many     
-} 
+	$local.prevOne-To-Many = $record.One-To-Many
+}
 
 $record.One-To-Many = $local.prevOne-To-Many || ''
 ```
 
-The first "if" statement is checking to see if we have a value in the **One-To_Many** field.  The expectation is that we will have a value before we encounter any of the "empty" columns. 
+The first "if" statement is checking to see if we have a value in the **One-To_Many** field. The expectation is that we will have a value before we encounter any of the "empty" columns.
 
 We then store this value and when we encounter the next rows **One-To-Many** field, if it is empty we, will populate it with the value that we had previously stored.
 
@@ -861,7 +916,7 @@ The final line is using the `|| ''` as a precaution so that if there are any row
 
 ### Easy Calculations on Values
 
-Many times you will want to create a calculation between two values from your dataset.  For example, you have a **Net Revenue** and **Net Invoice**, but you also what a **Variance** column (**Net Revenue - Net Invoice**). 
+Many times you will want to create a calculation between two values from your dataset. For example, you have a **Net Revenue** and **Net Invoice**, but you also what a **Variance** column (**Net Revenue - Net Invoice**).
 
 Simply create a PowerScript:
 
@@ -873,29 +928,29 @@ $record.variance = $record.netRevenue - $record.netInvoice;
 
 As of Informer 5.3.2, you can not create an expression using fields that you aggregated.
 
-For example, you have created a pivot table with **Year** and **Rep** as Rows and then have Total aggregations on **Net Revenue** and **Net Invoice**, but you also what a **Variance** column (**Net Revenue - Net Invoice**).  There is currently not a way to do this via their standard tools.
+For example, you have created a pivot table with **Year** and **Rep** as Rows and then have Total aggregations on **Net Revenue** and **Net Invoice**, but you also what a **Variance** column (**Net Revenue - Net Invoice**). There is currently not a way to do this via their standard tools.
 
 > **NOTE:** This is a manual example of what can also be done using the [calculateAggregates Saved Function](informer-saved-functions#-calculateaggregates---usage).
-> **ALSO NOTE:** This example does NOT need to use any type of aggregate functions, but is an easy example to understand the concept of what is happening.  See [Easy Calculations on Value](#easy-calculations-on-values)
+> **ALSO NOTE:** This example does NOT need to use any type of aggregate functions, but is an easy example to understand the concept of what is happening. See [Easy Calculations on Value](#easy-calculations-on-values)
 
 To accomplish this, you will need to calculate the aggregates at each level that you need them and create a new field for the Variance, or whatever other type of calculation that you need to do with the aggregated values.
 
-Before you can start, you need to determine what your aggregation levels are going to be.  In the above example, we have chosen, **Year and Rep**.
+Before you can start, you need to determine what your aggregation levels are going to be. In the above example, we have chosen, **Year and Rep**.
 
-We are going to create a *groupKey* for each of these levels and use that key to aggregate the totals in the **$local** object that Powerscript provides.
+We are going to create a _groupKey_ for each of these levels and use that key to aggregate the totals in the **$local** object that Powerscript provides.
 
 This is the first Powerscript that will be needed:
 
-> NOTE: There is a helper function called **returnNumber** which will accept anything and return a valid number.  If you don't pass a valid number, it returns 0.
+> NOTE: There is a helper function called **returnNumber** which will accept anything and return a valid number. If you don't pass a valid number, it returns 0.
 
 ```javascript
-// Get the year of the issue date 
-vIssueYear = moment($record.issuedate).format('YYYY')
+// Get the year of the issue date
+vIssueYear = moment($record.issuedate).format("YYYY");
 
 // Create a column for issueYear
-$record.issueYear = vIssueYear
+$record.issueYear = vIssueYear;
 // Make sure the datatype for issueYear is a String
-$fields.issueYear.dataType = 'string'
+$fields.issueYear.dataType = "string";
 
 //*****************************************************
 // Start the aggregation process
@@ -908,57 +963,65 @@ $fields.issueYear.dataType = 'string'
    issueYear + RepId (groupKey2)
 */
 // Define the groupKey to be used across aggregates
-groupKey1 = `${vIssueYear}`
-groupKey2 = `${vIssueYear}-${$record.salesrep_id_assoc_id}` 
+groupKey1 = `${vIssueYear}`;
+groupKey2 = `${vIssueYear}-${$record.salesrep_id_assoc_id}`;
 
 // Initialize each group key
-$local[groupKey1] = $local[groupKey1] ? $local[groupKey1] :  {sumNet: 0, sumInvoice: 0, Group1Set: false}
-$local[groupKey2] = $local[groupKey2] ? $local[groupKey2] :  {sumNet: 0, sumInvoice: 0, Group2Set: false}
+$local[groupKey1] = $local[groupKey1]
+  ? $local[groupKey1]
+  : { sumNet: 0, sumInvoice: 0, Group1Set: false };
+$local[groupKey2] = $local[groupKey2]
+  ? $local[groupKey2]
+  : { sumNet: 0, sumInvoice: 0, Group2Set: false };
 
 // Add current records amount to the running total for each group key
 // GROUPKEY1
-$local[groupKey1].sumNet = $local[groupKey1].sumNet + $record.orderNetAmt 
-$local[groupKey1].sumInvoice = $local[groupKey1].sumInvoice + returnNumber($record.invoiceID_assoc_invamount)
+$local[groupKey1].sumNet = $local[groupKey1].sumNet + $record.orderNetAmt;
+$local[groupKey1].sumInvoice =
+  $local[groupKey1].sumInvoice +
+  returnNumber($record.invoiceID_assoc_invamount);
 
 // GROUPKEY2
-$local[groupKey2].sumNet = $local[groupKey2].sumNet + $record.orderNetAmt 
-$local[groupKey2].sumInvoice = $local[groupKey2].sumInvoice + returnNumber($record.invoiceID_assoc_invamount)
+$local[groupKey2].sumNet = $local[groupKey2].sumNet + $record.orderNetAmt;
+$local[groupKey2].sumInvoice =
+  $local[groupKey2].sumInvoice +
+  returnNumber($record.invoiceID_assoc_invamount);
 
 //------------------------------------------------------------------------------------
-//- FUNCTIONS 
+//- FUNCTIONS
 //------------------------------------------------------------------------------------
 //* takes a value in and returns a number (parsed as float)
 function returnNumber(numberIn) {
-    let parsedNumber = parseFloat(numberIn)
-	if (isNaN(parsedNumber)) {
-        return 0
-	} 
-    return parsedNumber
+  let parsedNumber = parseFloat(numberIn);
+  if (isNaN(parsedNumber)) {
+    return 0;
+  }
+  return parsedNumber;
 }
 ```
 
-Now we have objects on the $local object that have totals for each level.  The object shape will look like this:
+Now we have objects on the $local object that have totals for each level. The object shape will look like this:
 
 ```javascript
 $local = {
   [groupKey1]: {
     sumInvoice: float,
     sumNet: float,
-    Group1Set: float
+    Group1Set: float,
   },
-    [groupKey2]: {
+  [groupKey2]: {
     sumInvoice: float,
     sumNet: float,
-    Group2Set: float
+    Group2Set: float,
   },
-}
+};
 ```
 
 **Step 2**
 
 After we have aggregated to the levels that we need, you will need to run a Flush Flow step:
 
-![image-20200731124814556](..\assets\informer-javasript-calcaggr-001.png)
+![image-20200731124814556](.\images\informer-javasript-calcaggr-001.png)
 
 **Step 3**
 
@@ -973,43 +1036,44 @@ Also this will create a field for each group key named
 groupKey1, groupKey2, groupKey3
 */
 
-// Get the year of the issue date 
-vIssueYear = $record.issueYear
+// Get the year of the issue date
+vIssueYear = $record.issueYear;
 
 // Define the groupKey to be used across aggregates - Must be the same as those defined in the first Powerscript
-groupKey1 = `${vIssueYear}`
-groupKey2 = `${vIssueYear}-${$record.salesrep_id_assoc_id}`
+groupKey1 = `${vIssueYear}`;
+groupKey2 = `${vIssueYear}-${$record.salesrep_id_assoc_id}`;
 
 // GROUPKEY1
 // This If statement allows us to only return the total once.
 // By doing this, we can use the Total Aggregation function which keeps things more consistent
 if (!$local[groupKey1].Group1Set) {
-		//Create a field for the GroupKey and each of the Totals for the groupKey
-    $record.groupKey1 = groupKey1
-    $record.RepNetByYear_Total = $local[groupKey1].sumNet
-    $record.RepInvTotalForYear_Total = $local[groupKey1].sumInvoice
-    $record.NetInv_VarianceByYear_Total = ($local[groupKey1].sumNet - $local[groupKey1].sumInvoice)    
-    $local[groupKey1].Group1Set = true
+  //Create a field for the GroupKey and each of the Totals for the groupKey
+  $record.groupKey1 = groupKey1;
+  $record.RepNetByYear_Total = $local[groupKey1].sumNet;
+  $record.RepInvTotalForYear_Total = $local[groupKey1].sumInvoice;
+  $record.NetInv_VarianceByYear_Total =
+    $local[groupKey1].sumNet - $local[groupKey1].sumInvoice;
+  $local[groupKey1].Group1Set = true;
 }
-
 
 // GROUPKEY2
 // Same as for GroupKey1, but using groupKey2
 if (!$local[groupKey2].Group2Set) {
-    $record.groupKey2 = groupKey2
-    $record.RepNetByYearRep_Total = $local[groupKey2].sumNet
-    $record.RepInvTotalForRepYear_Total = $local[groupKey2].sumInvoice
-    $record.NetInv_VarianceByYearRep_Total = ($local[groupKey2].sumNet - $local[groupKey2].sumInvoice)  
-    $local[groupKey2].Group2Set = true
+  $record.groupKey2 = groupKey2;
+  $record.RepNetByYearRep_Total = $local[groupKey2].sumNet;
+  $record.RepInvTotalForRepYear_Total = $local[groupKey2].sumInvoice;
+  $record.NetInv_VarianceByYearRep_Total =
+    $local[groupKey2].sumNet - $local[groupKey2].sumInvoice;
+  $local[groupKey2].Group2Set = true;
 }
 
-$fields.RepNetByYear_Total.dataType = 'number'
-$fields.RepInvTotalForYear_Total.dataType = 'number'
-$fields.NetInv_VarianceByYear_Total.dataType = 'number'
+$fields.RepNetByYear_Total.dataType = "number";
+$fields.RepInvTotalForYear_Total.dataType = "number";
+$fields.NetInv_VarianceByYear_Total.dataType = "number";
 
-$fields.RepNetByYearRep_Total.dataType = 'number'
-$fields.RepInvTotalForRepYear_Total.dataType = 'number'
-$fields.NetInv_VarianceByYearRep_Total.dataType = 'number'
+$fields.RepNetByYearRep_Total.dataType = "number";
+$fields.RepInvTotalForRepYear_Total.dataType = "number";
+$fields.NetInv_VarianceByYearRep_Total.dataType = "number";
 ```
 
 | Issue Year | Rep Id | Net Revenue | Invoice Revenue |
@@ -1024,26 +1088,26 @@ $fields.NetInv_VarianceByYearRep_Total.dataType = 'number'
 
 Year over Year views of your data can be created using a Pivot table with a Year field as a Column.
 
-![image-20210423142428927](..\assets\informer-Javascript-YOY-001.png)
+![image-20210423142428927](.\images\informer-Javascript-YOY-001.png)
 
 However, if you wanted to actually calculate a difference column for Current and Previous year, you will find that you cannot do this in the Informer Pivot table currently.
 
 To make this possible, we need to write some Flow steps to create fields that will hold each year's values and then another script to do the calculations. Our end goal will be to create a chart that looks like this:
 
-![image-20210423142809485](..\assets\informer_javascript-YOY-002.png)
+![image-20210423142809485](.\images\informer_javascript-YOY-002.png)
 
 **Fields You Need To Have**
 
-- **DateField** - You will replace this field in the PowerScripts with the data field that you want the YOY data from.  This could be an Issue Date, Date Entered, or any date that you want to see your data by. 
+- **DateField** - You will replace this field in the PowerScripts with the data field that you want the YOY data from. This could be an Issue Date, Date Entered, or any date that you want to see your data by.
 - **FieldName** - Since we will be creating new fields in the format of '2020-FIeldName', '2021-FieldName', you need to replace this value with an appropriate name that describes the data being stored.
-- **AggregatationValue** - This is the field that you holds the value that you are examining.  This may be the Rep Revenue, Invoice Revenue, etc.
+- **AggregatationValue** - This is the field that you holds the value that you are examining. This may be the Rep Revenue, Invoice Revenue, etc.
 - **CurrentYear/PreviousYear** - These could be based on todays date (in the sample PowerScripts they are), but you can use any Year values that you would like for these (I would rename them if you do.)
 
->  **NOTE:** If you need your aggregation to be at multiple levels and the calculation is not a percentage that relies on the hierarchy, you can get by with a single aggregation.  For example, if you just wanted the difference between years for Advertiser by Rep, Advertiser (by itself) and Rep(by itself), you would only need a single groupKey of 'Advertiser-Rep', but if you were calculating percentages that you wanted to view at each level, you would need to create a groupKey for each of the three levels.
+> **NOTE:** If you need your aggregation to be at multiple levels and the calculation is not a percentage that relies on the hierarchy, you can get by with a single aggregation. For example, if you just wanted the difference between years for Advertiser by Rep, Advertiser (by itself) and Rep(by itself), you would only need a single groupKey of 'Advertiser-Rep', but if you were calculating percentages that you wanted to view at each level, you would need to create a groupKey for each of the three levels.
 
 **PowerScript #1 - Create Year Fields**
 
-This script will create a separate field for each year from the date field you use for `$record.DateField`.  The field name will be the year plus whatever you replace `-FieldName_1` with.  For example, if you want the `NetRevenue` to be broken into each Issue year you would make the following replacements:
+This script will create a separate field for each year from the date field you use for `$record.DateField`. The field name will be the year plus whatever you replace `-FieldName_1` with. For example, if you want the `NetRevenue` to be broken into each Issue year you would make the following replacements:
 
 - `$record.DateField` **changed to** `$record.IssueDate`
 - `${transactionYearToCompare}-FieldName_1` changed to `${transactionYearToCompare}-NeRevenue`
@@ -1054,38 +1118,38 @@ The result being fields in the format of `2020-NetRevenue`, `2021-NetRevenue`, e
 ```javascript
 // Extract Year from transaction date
 // this will become part of the identifying field name
-transactionYearToCompare = moment($record.DateField).format('YYYY')
+transactionYearToCompare = moment($record.DateField).format("YYYY");
 
 // this will be used as the fieldname
 // example: '2020-FieldName_1', '2021-FieldName_1', etc
-$record.FieldName_1 = `${transactionYearToCompare}-FieldName_1`
+$record.FieldName_1 = `${transactionYearToCompare}-FieldName_1`;
 
 // Store the value in your new field things like $record.repNetCost, etc
-$record[$record.FieldName_1] = $record.AggregatationValue
+$record[$record.FieldName_1] = $record.AggregatationValue;
 ```
 
 **PowerScript #2 - Calculate Aggregates**
 
 Review the [Calculate Aggregates Function Docs](informer-saved-functions#calculateaggregates---usage) for details on how this function works in more detail.
 
-In this script you will be aggregating your YOY values.  You will need to define WHICH years you want to perform calculations on and create a specific aggregation object within the **groupAggr** array for that year.  In the below example, I am using the `moment()` library to get the current year and the previous year.
+In this script you will be aggregating your YOY values. You will need to define WHICH years you want to perform calculations on and create a specific aggregation object within the **groupAggr** array for that year. In the below example, I am using the `moment()` library to get the current year and the previous year.
 
-Then in the groupAggr array, I'm creating an object for the Current Year (sumCurrNet) and Previous Year (summPrevNet).  The `value` key must match the field name that you used in script #1, but substituting the `transactionYearToCompare` with your `currentYear` & `previousYear` variables.
+Then in the groupAggr array, I'm creating an object for the Current Year (sumCurrNet) and Previous Year (summPrevNet). The `value` key must match the field name that you used in script #1, but substituting the `transactionYearToCompare` with your `currentYear` & `previousYear` variables.
 
 ```javascript
 // Year Variables - Year buckets you want to create
-currentYear = moment().format('YYYY')
-previousYear = moment().subtract(1, 'years').format('YYYY')
+currentYear = moment().format("YYYY");
+previousYear = moment().subtract(1, "years").format("YYYY");
 
 // Create the grouping levels that you will need in your aggregations
-$record.groupKey1 = `${$record.advName}-${$record.repName}`
+$record.groupKey1 = `${$record.advName}-${$record.repName}`;
 
 // Levels that you want to see your calculation over
 groupKeys = [
   {
     name: "Advertiser-Rep",
     groupKey: $record.groupKey1,
-  }
+  },
 ];
 
 groupAggr = [
@@ -1098,10 +1162,10 @@ groupAggr = [
     name: "sumPrevNet",
     initValue: 0,
     value: naviga.returnANumber($record[`${previousYear}-FieldName_1`]),
-  },    
+  },
 ];
 // Call the calculateAggregtes saved function
-naviga.calculateAggregates({$local, groupKeys, groupAggr})
+naviga.calculateAggregates({ $local, groupKeys, groupAggr });
 ```
 
 **Perform a Flush Flow Step**
@@ -1113,18 +1177,17 @@ This last script is where you will actually perform the calculations for the fie
 ```javascript
 // GROUP KEY 1
 if (!$local[$record.groupKey1].GroupSet) {
-  $record.CurrPreviousDifference = $local[$record.groupKey1].sumCurrNet - $local[$record.groupKey1].sumPrevNet;
+  $record.CurrPreviousDifference =
+    $local[$record.groupKey1].sumCurrNet - $local[$record.groupKey1].sumPrevNet;
   $local[$record.groupKey1].GroupSet = true; //Setting to true means we will not excute this code again during the load.
 }
 ```
-
-
 
 ### Remove Duplicate Values in Aggregation
 
 This is similar to the [Proper Aggregations in Normalized data](#proper-aggregations-in-normalized-data), except that in this case we are not normalizing and thus will not need a counter, but will instead use another field to use as our indicator that a field value should not be propogated.
 
-The example will be from the User Reports mapping and the Order Net Amt field.  This field holds the total net value for a campaign Id, however, it is duplicated across all lines.  You will see data as below:
+The example will be from the User Reports mapping and the Order Net Amt field. This field holds the total net value for a campaign Id, however, it is duplicated across all lines. You will see data as below:
 
 | Campaign Id | Order Net Revenue |
 | ----------- | ----------------- |
@@ -1148,19 +1211,20 @@ To do this, you will need to add a Powerscript flow step AND very importantly, y
 
 First to make sure the data is in the correct order, you will need to add an **Order By** step when building your dataset:
 
-![image-20210215123153997](..\assets\informer_javascript-powerscript-dedup001.png)
+![image-20210215123153997](.\images\informer_javascript-powerscript-dedup001.png)
 
 Then you will need to add a Powerscript Flow step to update the Order Net Amt.
 
 ```javascript
 // Initialize $local.currCampId
-$local.currCampId = $local.currCampId === undefined ? 0 : $local.currCampId
+$local.currCampId = $local.currCampId === undefined ? 0 : $local.currCampId;
 
 // New OrderNetAmount field will be 0 if we have already populated for a previous row for this campaignId
-$record.OrderNetAmount = $local.currCampId === $record.campaignId ? 0 : $record.orderNetCost
+$record.OrderNetAmount =
+  $local.currCampId === $record.campaignId ? 0 : $record.orderNetCost;
 
 // Update the local campaign Id with the current campaign Id
-$local.currCampId = $record.campaignId
+$local.currCampId = $record.campaignId;
 ```
 
 The above Powerscript creates a new field, so I usually will choose to remove the field that the above is Powerscript is "Deduping".
@@ -1179,33 +1243,33 @@ I will try to show you the most common uses of **momentjs** within Informer, how
 ```javascript
 // Extract pieces from a date
 // $record.issuedate is a Date type
-year = moment($record.issuedate).format('YYYY') // Year
-month = moment($record.issuedate).format('MM') // month number with preceeding zero if needed
-day = moment($record.issuedate).format('DD') // day number with preceeding zero if needed
+year = moment($record.issuedate).format("YYYY"); // Year
+month = moment($record.issuedate).format("MM"); // month number with preceeding zero if needed
+day = moment($record.issuedate).format("DD"); // day number with preceeding zero if needed
 
 // If the field is a string, but you know the format of the date, you can do the following:
-momentDateField = moment($record.dateString, 'MM/DD/YYYY')
+momentDateField = moment($record.dateString, "MM/DD/YYYY");
 ```
 
 ### Date Math
 
 There are many times when you will want to be able to take a date and add or subtract **days**, **months** or **years** from it.
 
-Useful resources: 
+Useful resources:
 
 - [Manipulating Dates](https://momentjs.com/docs/#/manipulating/)
 - [Date vs Time Math](https://momentjs.com/guides/#/lib-concepts/date-time-math/)
 
 **Common Date Math**
 
-The two primary functions to are `.add()` and `.subtract()`.  You pass to them a number of how much you want to add or subtract and then identify the number as day, months, years, etc.
+The two primary functions to are `.add()` and `.subtract()`. You pass to them a number of how much you want to add or subtract and then identify the number as day, months, years, etc.
 
 ```javascript
-lastYear = moment().subtract(1, 'years').format('YYYY') // returns 4 digit year based on today's date.
-nextMonth = moment().add(1, 'months').format('MM') // Return 2 digit month for month following today's date.
+lastYear = moment().subtract(1, "years").format("YYYY"); // returns 4 digit year based on today's date.
+nextMonth = moment().add(1, "months").format("MM"); // Return 2 digit month for month following today's date.
 
-//Chaining 
-chainExample = moment().add(1, 'months').subtract(7, 'days')
+//Chaining
+chainExample = moment().add(1, "months").subtract(7, "days");
 ```
 
 Here are the Keys and their shorthands that you can use in the above functions.
@@ -1226,35 +1290,35 @@ Here are the Keys and their shorthands that you can use in the above functions.
 
 Moment.js makes it easy to get the time difference between two dates. [Moment Diff Docs](https://momentjs.com/docs/#/displaying/difference/)
 
-Moment.js has the **diff** function that allows you to get Years, Months, Days, etc differences between two dates.  When using the diff function, it helps to think of it as "minus".  So you if you want the difference between two dates, it would be `endDate minus startDate` or `endDate.diff(startDate, 'months')`
+Moment.js has the **diff** function that allows you to get Years, Months, Days, etc differences between two dates. When using the diff function, it helps to think of it as "minus". So you if you want the difference between two dates, it would be `endDate minus startDate` or `endDate.diff(startDate, 'months')`
 
 Here are some common options.
 
 ```javascript
-startDate = '01/01/2020'
-endDate = '05/19/2020'
+startDate = "01/01/2020";
+endDate = "05/19/2020";
 // Before we do anything, we need to covert the dates to Moment objects:
-startDate = moment(startDate)
-endDate = moment(endDate)
+startDate = moment(startDate);
+endDate = moment(endDate);
 
 //Get the months between these dates (think of it like endDate - startDate in months)
-$record.sampleMonthsBetween = endDate.diff(startDate, 'months')
-// result = 4.00 
+$record.sampleMonthsBetween = endDate.diff(startDate, "months");
+// result = 4.00
 // you can see this will round the result down, in essence doing a floor on the result
 // If you want a decimal result, pass true as a final parameter
-$record.sampleMonthsBetween = endDate.diff(startDate, 'months', true)
+$record.sampleMonthsBetween = endDate.diff(startDate, "months", true);
 // result = 4.58
 
 // Years between will return zero until a full year between
-$record.sampleMonthsBetween = endDate.diff(startDate, 'years')
+$record.sampleMonthsBetween = endDate.diff(startDate, "years");
 // return decimal value
-$record.sampleMonthsBetween = endDate.diff(startDate, 'years', true) 
+$record.sampleMonthsBetween = endDate.diff(startDate, "years", true);
 
 // Days between
-$record.sampleMonthsBetween = endDate.diff(startDate, 'days')
+$record.sampleMonthsBetween = endDate.diff(startDate, "days");
 ```
 
-## Miscellaneous 
+## Miscellaneous
 
 ### Base 64 Decode.
 
@@ -1263,9 +1327,12 @@ The only way to do this in Informer 5 is to use a calculated column or Powerscri
 **Option 1**
 
 ```javascript
-let decode = new java.lang.String(java.util.Base64.getDecoder().decode('valueHere'),'utf-8');
+let decode = new java.lang.String(
+  java.util.Base64.getDecoder().decode("valueHere"),
+  "utf-8"
+);
 
-return decode
+return decode;
 ```
 
 **Option 2**
@@ -1278,10 +1345,7 @@ try {
 } catch (err) {
     result = longCopyEncoded;
 }
- 
+
 result;
 
 ```
-
-
-

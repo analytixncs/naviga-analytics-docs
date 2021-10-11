@@ -1,16 +1,16 @@
 ---
 id: informer-templates
-title: Informer Templates 
+title: Informer Templates
 sidebar_label: Informer Templates
 ---
 
-A Template is customizable format for viewing and exporting data. Using HTML for the layout, you can create different formats for displaying your data, including mail merge letters, itemized invoices, calendars, and more. 
+A Template is customizable format for viewing and exporting data. Using HTML for the layout, you can create different formats for displaying your data, including mail merge letters, itemized invoices, calendars, and more.
 
-Informer uses a templating language called [Nunjucks](https://mozilla.github.io/nunjucks/) to inject data into placeholders in the completed HTML Template. 
+Informer uses a templating language called [Nunjucks](https://mozilla.github.io/nunjucks/) to inject data into placeholders in the completed HTML Template.
 
 Templates can be viewed as a webpage or exported to PDFs for easy sharing.
 
-> NOTE: In version 5.4 of Informer, Templates are still an **Experimental** feature.  Use at your own risk!
+> NOTE: In version 5.4 of Informer, Templates are still an **Experimental** feature. Use at your own risk!
 
 ## Parts of a Template
 
@@ -18,19 +18,19 @@ As with any HTML file, there are a number of other files that can play a role in
 
 Here is a view of these parts within the Informer Template Editor:
 
-![image-20210908130731972](..\assets\informer_templates_001.PNG)
+![image-20210908130731972](.\images\informer_templates_001.PNG)
 
-The core file is the `template.njk` file.  This contains the main HTML for the the template.
+The core file is the `template.njk` file. This contains the main HTML for the the template.
 
-The `helpers.js` file is always included from Entrinsik.  It allows you to create functions, etc to enhance your template.
+The `helpers.js` file is always included from Entrinsik. It allows you to create functions, etc to enhance your template.
 
-> NOTE: The functions in the helpers.js file can accept and return values, but cannot run `console.log` or `alert` functions.  
+> NOTE: The functions in the helpers.js file can accept and return values, but cannot run `console.log` or `alert` functions.
 
 **Assets**
 
-The **Assets** section contain any additional files that you want to include in your template file.  The `style.css` file is created and included by default.
+The **Assets** section contain any additional files that you want to include in your template file. The `style.css` file is created and included by default.
 
-The `testScript.js` is a sample that I created.  In contract to the helpers.js file, you CAN run `console.log` and `alert` functions from asset JS files.
+The `testScript.js` is a sample that I created. In contract to the helpers.js file, you CAN run `console.log` and `alert` functions from asset JS files.
 
 If you have a JavaScript file you want include in your template, you add the following line to your \<head\> section:
 
@@ -50,7 +50,7 @@ You can also include Powerscripts that will act on the data coming from the proc
 
 The context is a JSON formatted set of information seen on the lower right hand side of the Template Editor.
 
-Everything in the context is available to be shown in your template.  You access it using JavaScript Object Notation.
+Everything in the context is available to be shown in your template. You access it using JavaScript Object Notation.
 
 Here is the basic structure of the Context:
 
@@ -73,16 +73,14 @@ Here is the basic structure of the Context:
 }
 ```
 
-The `user`, `session`,  and `input` are standard items that are present in all templates.  The `mrmAdSalesreps` is a dataset that I added to the Processors sections.
+The `user`, `session`, and `input` are standard items that are present in all templates. The `mrmAdSalesreps` is a dataset that I added to the Processors sections.
 
-The **important** piece that you will be using in your templates is the `records` array.  It is just that, all the records returns by the query.
+The **important** piece that you will be using in your templates is the `records` array. It is just that, all the records returns by the query.
 
 In you template to access the first record you would:
 
 ```html
-<div>
-  {{ mrmAdSalesreps.records[0].repName }}
-</div>
+<div>{{ mrmAdSalesreps.records[0].repName }}</div>
 ```
 
 Since records is an Array, you would need to call out which record you wanted.
@@ -91,7 +89,7 @@ However, as you will see, using the Nunjucks syntax, you will be able to **loop*
 
 ## Template Syntax
 
-The Templating engine being used is  [Nunjucks](https://mozilla.github.io/nunjucks/) by Mozilla.  It is best to read their documentation for full information.  This guide will review the basics needed to get information formatted.
+The Templating engine being used is [Nunjucks](https://mozilla.github.io/nunjucks/) by Mozilla. It is best to read their documentation for full information. This guide will review the basics needed to get information formatted.
 
 **Sample Template**
 
@@ -162,11 +160,11 @@ Then when you pass your data to your function use the following syntax:
 **template.njk**
 
 ```html
-<html>    
+<html>
   <script>
-    createChart('{{ mrmAdSalesreps.records | stringifyData | safe }}')
+    createChart("{{ mrmAdSalesreps.records | stringifyData | safe }}");
   </script>
-</html>  
+</html>
 ```
 
 Lastly, within the function that you call with this data, you must parse the stringified data back into a JavaScript "Object".
@@ -182,23 +180,20 @@ function createChart(dataIn) {
 
 ### Option 2
 
-The other option is to stringify the data via a Powerscript and store in the context.  Then you can skip the `stringify` filter step.
+The other option is to stringify the data via a Powerscript and store in the context. Then you can skip the `stringify` filter step.
 
 This will create a new context entry called myRecords.
 
 ```javascript
-$ctx.myRecords = JSON.stringify($ctx.mrmAdSalesreps.records)
+$ctx.myRecords = JSON.stringify($ctx.mrmAdSalesreps.records);
 ```
 
 You will still need to run the `safe` filter and parse the data:
 
 ```html
-<html>    
+<html>
   <script>
     createChart(JSON.parse()'{{ myRecords | safe }}'))
   </script>
-</html>  
+</html>
 ```
-
-
-
