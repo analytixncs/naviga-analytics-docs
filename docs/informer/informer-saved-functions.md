@@ -773,10 +773,3 @@ if (!$local.currentYear) {
 
 You can now build your reports.  Just remember that if you ended up creating a calculation from the YOY fields, you will need to only use fields in your report that were used in your aggregation.
 
-Here is an example of a report by month, showing Year over Year data with a calculated difference field:
-
-![image-20201020152950134](..\assets\informer-saved-functions-yoy-001.png)
-
-However, if you do not need the calculated field, you will not be constrained by the fields you aggregated by.
-
-![image-20201020153313776](..\assets\informer-saved-functions-yoy-002.png)
