@@ -2,6 +2,7 @@
 id: informer-basics
 title: Informer Basics
 sidebar_label: Informer Basics
+slug: /
 ---
 
 ## Informer Support Links
@@ -494,6 +495,8 @@ You can choose to attach the data associated with the user email and/or include 
 
 When attaching a CSV or Excel file to an email or when sending to the File System or FTP, it is sometimes useful to be able to make the name unique based on the run.
 
+[Formatting Date with Moment](informer-javascript#using-the-momentjs-date-library)
+
 The option that you have in an Informer Job is to introduce date information into the file name. You will be able to do this when you add an attachment to a Job Action.
 
 ![image-20210811130332384](.\images\informer-basics-jobs-dynamicnames_001.png)
@@ -504,7 +507,7 @@ As noted in the screenshot above, you can use the following syntax to add a date
 
 The format string above `('YYYY-MM-DD')`, is a Moment JS formatting string. You can read more about it:
 
-[Formatting Date with Moment](.\informer-javascript#using-the-momentjs-date-library)
+[Formatting Date with Moment](informer-javascript#using-the-momentjs-date-library)
 
 [Official Moment JS Docs on Formatting](https://momentjs.com/docs/#/parsing/string-format/)
 
