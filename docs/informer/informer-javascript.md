@@ -20,7 +20,7 @@ A **Powerscript** is different from a Calculated Field in that it will allow you
 
 ## Calculated Fields
 
-To add a Calculated Field to a Dataset, you will first need to Edit the Dataset that you want to add the field to.
+To add a Calculated Field to a Dataset, you will first need to Edit the Dataset that you want to add the field to.#using-the-momentjs-date-library)
 
 Once in the Edit screen click on the plus sign by the **Flow Steps**. You will be presented with a menu where you will choose **Add Field/Calculated Field**.
 

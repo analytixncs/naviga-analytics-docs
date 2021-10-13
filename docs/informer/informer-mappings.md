@@ -61,9 +61,9 @@ There are two versions of this template, one with the Product Groups and one wit
 
 > Download the Dataset:
 >
-> **[[TEMPLATE]-CM Opportunities](../assets/downloads/informer/template-cm-opportunities.tgz)**
+> **[[TEMPLATE]-CM Opportunities](.\downloads\template-cm-opportunities.tgz)**
 >
-> **[[TEMPLATE]-CM Opportunities With Product Group](../assets/downloads/informer/template-cm-opportunities-with-productgroup.tgz)**
+> **[[TEMPLATE]-CM Opportunities With Product Group](.\downloads\template-cm-opportunities-with-productgroups.tgz)**
 
 There is quite a bit happening behind the scenes with this template dataset. Specifically, it is looking at the Start and End Dates of a row and then figuring out how many months the campaign is scheduled to run and creates a new row for each of those months.
 
@@ -363,7 +363,7 @@ The CM Opportunities mapping allows you to report on the opportunities that you 
 
 ### [NAVIGA]-CM Opportunities template dataset
 
-Here is a template Dataset to review and modify to your needs: [Naviga CM Opportunities Template Dataset](../assets/downloads/informer/naviga-cm-opportunities.tgz). To import this template dataset into your system, start at **step 4** in the documentation [Copying a Dataset To a Different Datasource](informer-basics/#copying-dataset-to-different-datasource)
+Here is a template Dataset to review and modify to your needs: [Naviga CM Opportunities Template Dataset](./downloads/naviga-cm-opportunities.tgz). To import this template dataset into your system, start at **step 4** in the documentation [Copying a Dataset To a Different Datasource](informer-basics/#copying-dataset-to-different-datasource)
 
 Please note that there are some additional Flow Steps that you should remove if you are not going to use their results:
 
