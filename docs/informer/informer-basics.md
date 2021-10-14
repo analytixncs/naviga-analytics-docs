@@ -2,7 +2,6 @@
 id: informer-basics
 title: Informer Basics
 sidebar_label: Informer Basics
-slug: /
 ---
 
 ## Informer Support Links
