@@ -5,7 +5,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (
   module.exports = {
-    title: "Naviga Analytics",
+    title: "Naviga Informer Documentation",
     tagline: "",
     url: "https://naviga-analytics-docs.netlify.com",
     baseUrl: "/",
