@@ -18,7 +18,7 @@ As with any HTML file, there are a number of other files that can play a role in
 
 Here is a view of these parts within the Informer Template Editor:
 
-![image-20210908130731972](.\images\informer_templates_001.PNG)
+![image-20210908130731972](images\informer_templates_001.PNG)
 
 The core file is the `template.njk` file. This contains the main HTML for the the template.
 

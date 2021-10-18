@@ -10,9 +10,9 @@ sidebar_label: Informer Basics
 
 - [Why Datasets vs AdHoc Report](https://informer5.zendesk.com/hc/en-us/articles/360001210986-Why-Use-Datasets-vs-Ad-Hoc-Queries-)
 
-- [Informer Mapping Document (csv)](<./downloads/Elan Mapping Documentation.csv>)
+- [Informer Mapping Document (csv)](<downloads/Elan Mapping Documentation.csv>)
 
-- [Informer Mapping Document (pdf)](<./downloads/Elan Mapping Documentation.pdf>)
+- [Informer Mapping Document (pdf)](<downloads/Elan Mapping Documentation.pdf>)
 
 ## Datasets vs Ad Hoc Reports
 
@@ -40,7 +40,7 @@ This is a change from Informer 4, so you will see that all of the base reports a
 
 Find the report you want to covert to a Dataset, open it and run it.
 
-![image-20200227150927583](./images/informer_tips_dataset_001.png)
+![image-20200227150927583](images/informer_tips_dataset_001.png)
 
 This is very important, as the report must have data in it for you to get the "Create Dataset" option.
 
@@ -48,13 +48,13 @@ This is very important, as the report must have data in it for you to get the "C
 
 Click on the vertical 3 dots in the right corner and choose "Create Dataset"
 
-![image-20200227151705836](./images/informer_tips_dataset_002.png)
+![image-20200227151705836](images/informer_tips_dataset_002.png)
 
 This will bring up a dialog where you can name your Dataset and give it a description.
 
 Once done with that you will be taken to the Dataset view of the report you converted.
 
-![image-20200227151858789](./images/informer_tips_dataset_003.png)
+![image-20200227151858789](images/informer_tips_dataset_003.png)
 
 ## Informer Tips
 
@@ -62,19 +62,19 @@ Once done with that you will be taken to the Dataset view of the report you conv
 
 To pull data for the current month from both this year and last year from a dataset, you can use the following **Criteria**
 
-![1573242474960](./images/informer_tips_002.png)
+![1573242474960](images/informer_tips_002.png)
 
 This is accomplished by creating a Group in the Criteria section of a query.
 
 Since you want to get data from both the current month and the current month from the previous year, make sure to mark the group as "Match one of"
 
-![img](./images/informer_tips_001.PNG)
+![img](images/informer_tips_001.PNG)
 
 Next, add criteria and choose the date field you want to filter on. The first criteria will be using the _inclusive between_ comparison. This will allow you to choose two values for the between to match on.
 
 To make this dynamic, so that you do not need to change the criteria every month, you can use informer _keywords_ to populate our between values. You can access a list of the keywords from within Informer as well:
 
-![1573243161315](./images/informer_tips_003.png)
+![1573243161315](images/informer_tips_003.png)
 
 You will populate the two values with **MONTH_BEGIN** and **MONTH_END**. This will instruct informer to look at today's date to determine what is the starting and ending of the month.
 
@@ -90,7 +90,7 @@ A calculated field won't limit your dataset, but you can use it to create a fiel
 
 This field doesn't make sense, but, create a Flow Step -> Calculated Field:
 
-![img](./images/informer_tips_005.png)
+![img](images/informer_tips_005.png)
 
 If you want to have a field that only contains priceActAmout for rows with a startDate of 2018, do this:
 
@@ -112,7 +112,7 @@ The following can be done when _editing_ a **Dataset** or **Report**.
 
 Just click on the ellipses near the Query title and choose **View code**
 
-![1573243670998](./images/informer_tips_004.png)
+![1573243670998](images/informer_tips_004.png)
 
 This will pop up a window called **Query code**. It won't look pretty, but you will be able to see how Informer has interpreted how you built your criteria.
 
@@ -175,37 +175,37 @@ The end goal is to link the spreadsheet to the dataset on **Agency Name**.
 To do this, you first must create a dataset from your external spreadsheet. You can accomplish this in a number of ways, here are two:
 
 1. Go to the **Datasets page** in Informer and drag and drop your Excel file
-   ![1574192288686](./images/informer_tips_006.png)
+   ![1574192288686](images/informer_tips_006.png)
 
    You will the dialog above, simply drop the file here.
 
-   ![1574192477192](./images/informer_tips_007.png)
+   ![1574192477192](images/informer_tips_007.png)
 
    Give the dataset a name and choose the sheet (this is an excel file) that the data is located on.
 
 2. **OR,** Click on the New Dataset button and choose upload a file:
 
-   ![1574192719800](./images/informer_tips_009.png)
+   ![1574192719800](images/informer_tips_009.png)
 
    Then choose a file and fill in the Dataset name and Sheet name where data is located.
 
-   ![1574192675476](./images/informer_tips_008.png)
+   ![1574192675476](images/informer_tips_008.png)
 
    Click Save.
 
 This will upload the data in the external file and create a new Dataset. You will see it in your list of Datasets:
 
-![1574192840659](./images/informer_tips_010.png)
+![1574192840659](images/informer_tips_010.png)
 
 **Link Data to Another Dataset**
 
 To get the Agency Alias into another Dataset, simply open the Dataset that you want to append the external data to and create a field using the Flow Step, _Add Field/Fields from another Dataset_
 
-![1574193038428](./images/informer_tips_011.png)
+![1574193038428](images/informer_tips_011.png)
 
 This Flow will have you select the dataset where the target field resides (AgencyAliasExternal Dataset) and then you must link these Datasets by choosing the fields from each dataset that will create the link. In our case, it is simply the Agency Name.
 
-![1574193254407](./images/informer_tips_012.png)
+![1574193254407](images/informer_tips_012.png)
 
 The other important setting is choosing the fields you would like to. Click and add the fields that you want. In this example, it is just the Agency Alias.
 
@@ -219,7 +219,7 @@ A workspace is a **Datasource** that holds mappings of any external data that yo
 
 First you need to create a Workspace to load your external data into. Go to the **Datasources** area in Informer, click on **NEW DATASOURCE** and then choose **Workspace**.
 
-![image-20210514150055770](.\images\informer-basics-workspaces-001.png)
+![image-20210514150055770](images\informer-basics-workspaces-001.png)
 
 Enter a name for the workspace. How about **External Data**. You can house multiple excel files or other external data source within a single datasource.
 
@@ -233,11 +233,11 @@ Once you create Workspace, you will have an **UPLOAD DATA** button in the middle
 
 Once you drop your file, it will load and analyze it. If you haven't followed the above rules, you may see this screen:
 
-![image-20210514150811294](.\images\informer-basics-workspaces-002.png)
+![image-20210514150811294](images\informer-basics-workspaces-002.png)
 
 If so, click on **Configure** and then on the magic wand next to the Field Name label. This will simply rename your header names into a form that Informer can use.
 
-![image-20210514151208392](.\images\informer-basics-workspaces-003.png)
+![image-20210514151208392](images\informer-basics-workspaces-003.png)
 
 Lastly, click **Import**. You now have a new mapping in a Datasource named **External Data** that can be used just like any other mapping.
 
@@ -253,11 +253,11 @@ I tested on a dataset that had multiple _array_ fields in it and when I normaliz
 
 **Without Normalize flow step:**
 
-![1576164558349](./images/informer_tips_013.png)
+![1576164558349](images/informer_tips_013.png)
 
 **With the Normalize flow step:**
 
-![1576165545982](./images/informer_tips_013-2.png)
+![1576165545982](images/informer_tips_013-2.png)
 
 > If your query contains a one to many join (think order to order details type query), Normalize will duplicate the "one" fields for each "many".
 >
@@ -287,7 +287,7 @@ Using Date keywords in your filters will allow you to get dynamic date filtering
 
 Here are the keywords:
 
-![1573243161315](./images/informer_tips_003.png)
+![1573243161315](images/informer_tips_003.png)
 
 **WEEK_BEGIN, WEEK_END** are keywords not listed in box above, but are available to use.
 
@@ -317,13 +317,13 @@ Using the modifiers we can accomplish this as follows:
 
 **To create a filter** using Date Keywords, select the Date keyword option, which will show in your filter options if you are on a field typed as Date.
 
-![1578944607855](./images/informer_tips_date-filters-001.png)
+![1578944607855](images/informer_tips_date-filters-001.png)
 
 This will present you with a side bar area where you can build your filter.
 
 When building your filter, another feature of Date keywords that you need to understand is how to tell your filter how to _filter_ on the date keyword you create. You have the following options:
 
-![1578944723488](./images/informer_tips_date-filters-002.png)
+![1578944723488](images/informer_tips_date-filters-002.png)
 
 > In the example below, assume the **_Date Keyword_** is **YEAR_BEGIN** and it will return a date of **01/01/2020** and the field being filtered is **StartDate**
 
@@ -355,13 +355,13 @@ If today's date is 5/5/2020, our filter should do the following
 
 **StartDate >=01/01/2019 and StartDate < 01/01/2021**
 
-![1578947893225](./images/informer_tips_date-filters-003.png)
+![1578947893225](images/informer_tips_date-filters-003.png)
 
 ### Date Relative to Now
 
 **Date Relative to Now** creates a filter that lets you look into the past or future in relation to today's date. The first field will be either 'Next' or 'Past'. The middle field is a positive integer that needs the final field to tell the filter if it will be days, weeks, months or years.
 
-![1578948578949](./images/informer_tips_date-filters-004.png)
+![1578948578949](images/informer_tips_date-filters-004.png)
 
 Keep in mind that when filtering for the Next/Past of anything, it doesn't take the current date to be part of the Next/Past selection.
 
@@ -385,11 +385,11 @@ Allows filtering by Years, Months, etc. If the filter needed is Nov and Dec of 2
 
 When you choose Distinct Values on a Date field, you will initially be presented with the years available in the date field to select. However, by clicking on the ellipses you will have the option to change the date period to something else.
 
-![1578949557137](./images/informer_tips_date-filters-005.png)
+![1578949557137](images/informer_tips_date-filters-005.png)
 
 In our example, filter by Nov and Dec of 2019 and 2020, you would need to add two Distinct value filters. The first for the years and the second for the months. It would like like this:
 
-![1578949720984](./images/informer_tips_date-filters-006.png)
+![1578949720984](images/informer_tips_date-filters-006.png)
 
 ## Filters - Reports
 
@@ -397,7 +397,7 @@ When you filter any type of report, there are two places where you can filter th
 
 The two places are at the top level of the report and the other is when you are inside and editing the report.
 
-![image-20200727134604915](.\images\informer_tips_filters-reports-001.png)
+![image-20200727134604915](images\informer_tips_filters-reports-001.png)
 
 When filtering at this level, it is only for your user. Only your user will see it.
 
@@ -405,11 +405,11 @@ If you want all users to see the filter, you will need to click on the **Edit** 
 
 Once you click on the Edit button, click on the vertical ellipsis by the Dataset name and choose **Custom Filter**
 
-![image-20200727135103551](.\images\informer_tips_filters-reports-002.png)
+![image-20200727135103551](images\informer_tips_filters-reports-002.png)
 
 After you have created your filter, you can click on the **Apply** button.
 
-![image-20200727135222389](.\images\informer_tips_filters-reports-003.png)
+![image-20200727135222389](images\informer_tips_filters-reports-003.png)
 
 This will "bake in" the filter to your report. The other option would be to Save the filter by clicking on the save icon. However, the user who created and saved the filter and other super users will be the only one who will be able to see and apply the filter.
 
@@ -443,7 +443,7 @@ It is very easy to make a copy of an existing Dataset. Simply click on the verti
 
 > This will NOT copy any Visuals or Filters that you have stored in the Dataset. To get Filters and/or Visuals copied into a new dataset, following the Bundle Copy method below.
 
-![image-20200518105542330](.\images\informer_tips_datasetcopy-001.png)
+![image-20200518105542330](images\informer_tips_datasetcopy-001.png)
 
 ### Bundle Copy a Dataset
 
@@ -458,7 +458,7 @@ Jobs are the Informer way to take some sort of action.
 
 You can pair the reloading with Actions like emailing, however, you don't have to. Each dataset in a Job has a check box "Refresh on job run" that will determine if the dataset will be refreshed before the other actions in the Job are run.
 
-![image-20200210093208408](./images/informer_tips_jobs-001.png)
+![image-20200210093208408](images/informer_tips_jobs-001.png)
 
 A job is made up of two parts, the **Data** and the **Actions**.
 
@@ -488,7 +488,7 @@ This is what I would call a loop and reduce, since it will not only use an email
 
 You can choose to attach the data associated with the user email and/or include the full set of data.
 
-![image-20200210094850978](./images/informer_tips_jobs-002.png)
+![image-20200210094850978](images/informer_tips_jobs-002.png)
 
 ### Creating Dynamic Export File Names
 
@@ -498,7 +498,7 @@ When attaching a CSV or Excel file to an email or when sending to the File Syste
 
 The option that you have in an Informer Job is to introduce date information into the file name. You will be able to do this when you add an attachment to a Job Action.
 
-![image-20210811130332384](.\images\informer-basics-jobs-dynamicnames_001.png)
+![image-20210811130332384](images\informer-basics-jobs-dynamicnames_001.png)
 
 As noted in the screenshot above, you can use the following syntax to add a date component to your file name:
 
@@ -542,19 +542,19 @@ This can be done directly on the Dataset or through a Dataview report. However, 
 
 From a Dataview report, create the desired Pivot table and then click on the horizontal ellipsis in the right hand corner and choose "Save pivot to visuals"
 
-![image-20200508113612663](./images/informer_tips_pivotjob-001.png)
+![image-20200508113612663](images/informer_tips_pivotjob-001.png)
 
 This will not save the pivot anywhere in the report, but instead will save it to the underlying Dataset that is driving the report.
 
 You can then view the saved visual by opening the Dataset and clicking on the "Visuals" icon:
 
-![image-20200508114425051](.\images\informer_tips_pivotjob-002.png)
+![image-20200508114425051](images\informer_tips_pivotjob-002.png)
 
 You can also create new visuals from this area also.
 
 Just click on the New Visual / Tables / Pivot:
 
-![image-20200508114539615](.\images\informer_tips_pivotjob-003.png)
+![image-20200508114539615](images\informer_tips_pivotjob-003.png)
 
 **Step 2**
 
@@ -562,11 +562,11 @@ Now that you have create a visual, you will need to "Generate external link" for
 
 From the Visuals page, select the visual you want to export by simply clicking once on the visual and then clicking on the horizontal ellipses in the bottom right and select "Generate external link"
 
-![image-20200508115351892](.\images\informer_tips_pivotjob-004.png)
+![image-20200508115351892](images\informer_tips_pivotjob-004.png)
 
 This will bring up the following dialog:
 
-![image-20200508115650990](.\images\informer_tips_pivotjob-005.png)
+![image-20200508115650990](images\informer_tips_pivotjob-005.png)
 
 Click on **Copy** and store this link in notepad for later use.
 
@@ -576,7 +576,7 @@ Get that link to whomever needs it. This can be done via a Job that runs everyti
 
 If you set up a job, it is as simple as putting the Dataset in a job and then setting up an email action to
 
-![image-20200508120536589](.\images\informer_tips_pivotjob-006.png)
+![image-20200508120536589](images\informer_tips_pivotjob-006.png)
 
 ### Exporting To File System-FTP
 
@@ -588,7 +588,7 @@ In the image below, you will see that you need to the directory where you want t
 
 `\\XXXprod01\repository\XXX`
 
-![img](.\images\informer-basics-FTP-001.png)
+![img](images\informer-basics-FTP-001.png)
 
 To access the FTP site where these files will be stored, you will need to use a program like Filezilla or other FTP software using the following details:
 
@@ -606,7 +606,7 @@ Data Access Tokens allow you to access your Dataset from a command line interfac
 
 You can create a Data Access Token by clicking on the Action menu in a Dataset and choosing "**Create a data access token**".
 
-![image-20210412104918038](.\images\informer_basics_DAT_001.PNG)
+![image-20210412104918038](images\informer_basics_DAT_001.PNG)
 
 You can also use the curl output to access the data via a browser or in a program that supports rest APIs.
 
@@ -675,7 +675,7 @@ Make a copy of the Dataset in question. This is very important, you must have a 
 
 Highlight the copied Dataset, click on the Actions menu and choose **Bundle and download**
 
-![image-20200831121453939](./images/informer_tips_dscopy-001.png)
+![image-20200831121453939](images/informer_tips_dscopy-001.png)
 
 **Step 3**
 
@@ -685,7 +685,7 @@ Highlight the copied Dataset, click on the Actions menu and choose **Bundle and 
 
 The **Bundle and download** step will have created a **_tgz_** file in your download directory. This is the file that you will need to drag and drop onto the Dataset window.
 
-![image-20200831122201761](.\images\informer_tips_dscopy-002.png)
+![image-20200831122201761](images\informer_tips_dscopy-002.png)
 
 Once you drop this file in the Dataset window, it will pop up with a dialog where you can set the options for the import.
 
@@ -699,7 +699,7 @@ And lastly, if you want this imported Dataset to point to a new datasource, then
 
 You want to also leave it as "Merge with existing datasource".
 
-![image-20200831122230323](.\images\informer_tips_dscopy-003.png)
+![image-20200831122230323](images\informer_tips_dscopy-003.png)
 
 Click on Save and then verify that the new Dataset has been created.
 
@@ -715,7 +715,7 @@ If you have two mappings that are not linked, but do have a field in common, you
 3. Click on the link icon (second icon from the top) at the very left panel.
 4. Click on "New Link" and choose how you want to link your mappings.
 
-![image-20200521130048559](.\images\informer_tips_dslink-001.png)
+![image-20200521130048559](images\informer_tips_dslink-001.png)
 
 5. At the datasource page, click on 'New Link' and Select **"U2"**
 
@@ -731,7 +731,7 @@ If you have two mappings that are not linked, but do have a field in common, you
 
 10. Click 'Save'
 
-![image-20200521130400969](.\images\informer_tips_dslink-002.png)
+![image-20200521130400969](images\informer_tips_dslink-002.png)
 
 ## Security in Informer
 
@@ -814,15 +814,15 @@ The way you specify which data is through a filter.
 
 First, you create the filters that will be used to limit the data when sharing. Here I have created two filters, one that limits data for each team that I am working with:
 
-![image-20210719140718010](.\images\informer_basics-security-001.png)
+![image-20210719140718010](images\informer_basics-security-001.png)
 
 Next, you will need to **Share** the dataset with the appropriate teams.
 
-![image-20210719140957124](.\images\informer_basics-security-002.png)
+![image-20210719140957124](images\informer_basics-security-002.png)
 
 The dialog that you see when you press **ADD USER OR TEAM** is where the magic happens.
 
-![image-20210719150142787](.\images\informer_basics-security-003.png)
+![image-20210719150142787](images\informer_basics-security-003.png)
 
 You can, and will, add multiple teams. They important part is that for each team, you select **Fitered access** and choose the filters that you want to be applied when any user of the team view the dataset OR a report that uses the dataset.
 
@@ -836,11 +836,11 @@ I am assuming this means setting some sort of filtering criteria for what will b
 
 If the Job's data is an **Ad Hoc Report** and it has query Inputs associated with it, when you create a Job with that report and click on run the Job editor window, you will be presented with the _Query Inputs_ dialog, where you can enter the inputs.
 
-![1586186067004](./images/informer_tips_v4-v5_001.png)
+![1586186067004](images/informer_tips_v4-v5_001.png)
 
 When you click on run, you will see the Inputs dialog:
 
-![1586186135921](./images/informer_tips_v4-v5_002.png)
+![1586186135921](images/informer_tips_v4-v5_002.png)
 
 Whatever you enter as inputs will be used on all subsequent runs of the Job.
 
@@ -854,4 +854,4 @@ Many times, your need to only set a select set of data to users can be accomplis
 
 The post filter is located here:
 
-![1586191934643](./images/informer_tips_v4-v5_003.png)
+![1586191934643](images/informer_tips_v4-v5_003.png)

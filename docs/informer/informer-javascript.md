@@ -24,11 +24,11 @@ To add a Calculated Field to a Dataset, you will first need to Edit the Dataset 
 
 Once in the Edit screen click on the plus sign by the **Flow Steps**. You will be presented with a menu where you will choose **Add Field/Calculated Field**.
 
-![image-20200219102437594](./images/CalcField_001.png)
+![image-20200219102437594](images/CalcField_001.png)
 
 You will be presented with the Calculate Field window below:
 
-![image-20200219102751668](./images/CalcField_002.png)
+![image-20200219102751668](images/CalcField_002.png)
 
 1. **Label** - This will be the new field name that your calculated field will create. The Alias will be created for you automatically.
 2. **Code Window** - This is where you will put your JavaScript code for the new field
@@ -110,7 +110,7 @@ In this example, we will concatenate the Brand Id and Brand Name with a hyphen s
 
 To start with, you will need the field names. It is best to use the Input button to the right of the code window. When you press it, it will show you a list of fields from you dataset. Here we will choose _Brand Id_.
 
-![image-20200219105723150](./images/CalcField_Example_01_01.png)
+![image-20200219105723150](images/CalcField_Example_01_01.png)
 
 This will insert the field name into our code window. Be aware that the field name shown in the code may be different that what is shown in the input button's drop down. This is because sometimes fields have Aliases put on them to make them more human readable. This is yet another reason to ALWAYS use the input button to get your field names.
 
@@ -140,7 +140,7 @@ Next, if you need to include a field value, you will use a dollar sign followed 
 
 Here is what it looks like in Informer:
 
-![image-20200219112035272](./images/CalcField_Example_01_02.png)
+![image-20200219112035272](images/CalcField_Example_01_02.png)
 
 ### SQL Case When in JavaScript
 
@@ -174,7 +174,7 @@ The **brandname** is a String field. This is important, as the _includes_ functi
 
 How can you tell what is a "string", when you click on the _inputs_ button on the right of the _Code Window_ you will see a drop down that displays the fields in your dataset. Informer is nice to you and tells you exactly what data types the fields are. You will see strings ("TEXT FIELDS"), Numbers and Dates.
 
-![img](./images/CalcField_Example_02_01.png)
+![img](images/CalcField_Example_02_01.png)
 
 I'm sure you asking, what if I have a field that is a number data type, but I want to search in it like a string? For example, the Order No field above is a number, but maybe you want to search it with the _includes_ function. You can do this!
 
@@ -208,7 +208,7 @@ Regular expressions can be bit tricky. There are books written on how to use and
 
 I will give you two patterns that should answer most of your replace needs.
 
-> The regex expression is found inside the `/.../` forward slashes. The characters after the final forward slash will be can either `g` or `i` or both. `g` means global. So search the whole string and find all matches. The `i` means ignore case when doing your search.
+> The regex expression is found inside the `/..` forward slashes. The characters after the final forward slash will be can either `g` or `i` or both. `g` means global. So search the whole string and find all matches. The `i` means ignore case when doing your search.
 
 1. **Replace Spaces** - `/\s/g` the stuff inside the forward slashes will be the regular expression. Here the \s is stating the we want to match any whitespace (spaces, tabs, new line characters and carriage returns).
    If you want to replace whitespace only where there are more than a certain number, you can modify your regex like this:
@@ -767,7 +767,7 @@ To do this we need three flow steps.
 
 Here is what the Flow steps look like:
 
-![image-20200213150630405](./images/informer_tips_date-powerscript-001.png)
+![image-20200213150630405](images/informer_tips_date-powerscript-001.png)
 
 **Power Script - Aggregate Rev By Advertiser**
 
@@ -840,7 +840,7 @@ What we are trying to do is to get the dataset to look like this:
 
 To do this, we will need to do two things. First, you must add a counter to your Dataset and name it **preCounter**
 
-![image-20200427153828821](./images/informer-javascript_powerscript_001)
+![image-20200427153828821](images/informer-javascript_powerscript_001)
 
 The counter creation will be the first Flow step.
 
@@ -1021,7 +1021,7 @@ $local = {
 
 After we have aggregated to the levels that we need, you will need to run a Flush Flow step:
 
-![image-20200731124814556](.\images\informer-javasript-calcaggr-001.png)
+![image-20200731124814556](images\informer-javasript-calcaggr-001.png)
 
 **Step 3**
 
@@ -1088,13 +1088,13 @@ $fields.NetInv_VarianceByYearRep_Total.dataType = "number";
 
 Year over Year views of your data can be created using a Pivot table with a Year field as a Column.
 
-![image-20210423142428927](.\images\informer-Javascript-YOY-001.png)
+![image-20210423142428927](images\informer-Javascript-YOY-001.png)
 
 However, if you wanted to actually calculate a difference column for Current and Previous year, you will find that you cannot do this in the Informer Pivot table currently.
 
 To make this possible, we need to write some Flow steps to create fields that will hold each year's values and then another script to do the calculations. Our end goal will be to create a chart that looks like this:
 
-![image-20210423142809485](.\images\informer_javascript-YOY-002.png)
+![image-20210423142809485](images\informer_javascript-YOY-002.png)
 
 **Fields You Need To Have**
 
@@ -1211,7 +1211,7 @@ To do this, you will need to add a Powerscript flow step AND very importantly, y
 
 First to make sure the data is in the correct order, you will need to add an **Order By** step when building your dataset:
 
-![image-20210215123153997](.\images\informer_javascript-powerscript-dedup001.png)
+![image-20210215123153997](images\informer_javascript-powerscript-dedup001.png)
 
 Then you will need to add a Powerscript Flow step to update the Order Net Amt.
 
