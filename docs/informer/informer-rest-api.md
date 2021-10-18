@@ -36,11 +36,11 @@ The `UUID` is the best for stability, as renaming the Dataset will not affect th
 
 The easiest way to get the correct text id for the dataset is to open the dataset in Informer and copy the id from the browser URL bar. Below, you would copy `admin:api-book-invoice-detail` as the id:
 
-![image-20210921085754114](.\images\api_docs_001.png)
+![image-20210921085754114](images\api_docs_001.png)
 
 To get the `UUID` you will simply go to the Datasets area where you get a list of all of your dataset and select the dataset you want the UUID for. It will be listed in the right sidebar and will be called "ID":
 
-![image-20210927144738568](.\images\api_docs_002.png)
+![image-20210927144738568](images\api_docs_002.png)
 
 #### Useful Parameters
 

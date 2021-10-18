@@ -15,7 +15,6 @@ If you are using Google Chrome to view this page I would suggest that you instal
   - [Edge Plugin](https://microsoftedge.microsoft.com/addons/detail/video-speed-control/mfoipakdadgplilpebhnebgafaoofblh)
 
 - **Global Speed**
-
   - [Chrome Plugin](https://chrome.google.com/webstore/detail/global-speed-youtube-netf/jpbjcnkcffbooppibceonlgknpkniiff)
   - [Firefox Plugin](https://addons.mozilla.org/firefox/addon/global-speed/)
   - [Edge Plugin](https://microsoftedge.microsoft.com/addons/detail/mjhlabbcmjflkpjknnicihkfnmbdfced)
@@ -60,7 +59,7 @@ An introduction to the Comparison Board report within Informer.
 
 In this video you will learn how to filter your reports, datasets and visuals using the filtering feature in Informer.
 
-Mentioned in the video is filtering using the Date Keywords. Get more information on this -> [Filters - Using the Dates](./informer-basics/#filters---using-the-dates)
+Mentioned in the video is filtering using the Date Keywords. Get more information on this -> [Filters - Using the Dates](informer-basics/#filters---using-the-dates)
 
 <div>
   <video width="800px" controls>

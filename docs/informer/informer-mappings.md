@@ -11,7 +11,7 @@ sidebar_label: Informer Mappings
 This dataset template uses the User Reports Mapping as its starting point.
 
 > Download the Dataset:
-> **[[TEMPLATE]-User Reports](.\downloads\template-user-reports.tgz)**
+> **[[TEMPLATE]-User Reports](downloads\template-user-reports.tgz)**
 
 The User Reports mapping is a table in the Naviga Database that brings together commonly used reporting items into a single table.
 
@@ -61,9 +61,9 @@ There are two versions of this template, one with the Product Groups and one wit
 
 > Download the Dataset:
 >
-> **[[TEMPLATE]-CM Opportunities](.\downloads\template-cm-opportunities.tgz)**
+> **[[TEMPLATE]-CM Opportunities](downloads\template-cm-opportunities.tgz)**
 >
-> **[[TEMPLATE]-CM Opportunities With Product Group](.\downloads\template-cm-opportunities-with-productgroups.tgz)**
+> **[[TEMPLATE]-CM Opportunities With Product Group](downloads\template-cm-opportunities-with-productgroups.tgz)**
 
 There is quite a bit happening behind the scenes with this template dataset. Specifically, it is looking at the Start and End Dates of a row and then figuring out how many months the campaign is scheduled to run and creates a new row for each of those months.
 
@@ -98,51 +98,51 @@ Remember, we started out with a single row, now we have two rows. All of the oth
 
 In the _Description_ column, if you see a #n value, you can use that to reference to the screenshots of the Naviga system to see what the source of the fields are.
 
-| Field Name                                            | Mapping - CM Opportunities                                     | Description                                                                                                                                                                         |
-| ----------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Opportunity Id                                        |                                                                | **#1**                                                                                                                                                                              |
-| Opportunity Type                                      |                                                                | **#2**                                                                                                                                                                              |
-| Group Name                                            | From Dataset (Flow step)<br />PubGroup-PublicationMapping-PROD | \*Only in Product Group Template                                                                                                                                                    |
-| Product ID                                            |                                                                |                                                                                                                                                                                     |
-| Product Name                                          | Digital Product                                                |                                                                                                                                                                                     |
-| Reporting Date                                        | Calculated\*                                                   | Opp Split Month (YYYY-MM) converted to a Date format (MM-01-YYYY)                                                                                                                   |
-| Opp Split Month                                       | Calculated\*                                                   |                                                                                                                                                                                     |
-| Opp Split Price                                       | Calculated\*                                                   | Amount of opportunity for **Opp Split Month** - NOTE: Opportunity % is used in this calculation.                                                                                    |
-| Opportunity Weighted Amount <br />By Month Year Total | Calculated\*                                                   | Opp Split Price aggregated by **Opportunity Id + Opp Split Month + Product ID**.<br />This field is just an example of aggregation via Flow steps.                                  |
-| Group Key1                                            | Calculated\*                                                   | Used in Opportunity Weighted Amount By Month Year Total field. Only useful for debugging if doing [flow step aggregation](./informer-javascript#calculations-on-aggregated-values). |
-| Stage Id                                              |                                                                | #8                                                                                                                                                                                  |
-| Opportunity Stage Description                         |                                                                | #8                                                                                                                                                                                  |
-| Advertiser Name                                       | Advertiser -> Client Name                                      | **#3**                                                                                                                                                                              |
-| Advertiser Id                                         |                                                                | **#3**                                                                                                                                                                              |
-| Brand Id                                              |                                                                | **#4**                                                                                                                                                                              |
-| Digital Start Date                                    |                                                                | **#**                                                                                                                                                                               |
-| Digital End Date                                      |                                                                | **#**                                                                                                                                                                               |
-| Error Issues                                          | Calculated\*                                                   | Checks for errors when calculating the Opp Split Month/Price fields. Helpful in debugging.                                                                                          |
-| Digital Rate                                          |                                                                |                                                                                                                                                                                     |
-| Digital Qty                                           |                                                                |                                                                                                                                                                                     |
-| Digital Price                                         |                                                                | Used in calculating **Opp Split Price**. <br />**NOTE:** You cannot use this field for aggregating in a report since the flow steps in this Dataset will be creating new rows.      |
-| Opportunity Stage Probability Pct                     | Opportunity Stage                                              | Probability percentage from the Opportunity Stage table.<br />**NOTE**- This is **NOT** the field used in calculating the **Opp Split Price** field.                                |
-| Publication Pub Group ID                              |                                                                |                                                                                                                                                                                     |
-| Start Date                                            |                                                                | **#5**                                                                                                                                                                              |
-| End Date                                              |                                                                | **#6**                                                                                                                                                                              |
-| Probability Pct                                       |                                                                | Field used in the calculating the **Opp Split Price**                                                                                                                               |
-| Mkt Campaign ID                                       |                                                                |                                                                                                                                                                                     |
-| Entered By User ID                                    |                                                                |                                                                                                                                                                                     |
-| Owner User Id                                         |                                                                | **#7**                                                                                                                                                                              |
-| Owner Email                                           |                                                                | **#7**                                                                                                                                                                              |
-| Owner Name                                            |                                                                | **#7**                                                                                                                                                                              |
-| Digital Line Desc                                     |                                                                |                                                                                                                                                                                     |
-| GL Types Description                                  | Digital Internet Orders -> GL Types                            |                                                                                                                                                                                     |
-| Digital Ratecard Line Detail Gl Type                  | Digital Ratecard Line Detail                                   |                                                                                                                                                                                     |
-| Gl Type Description                                   | Calculated\*                                                   | In the **Map GL Types** flow step, you can modify this calculation to map your _Digital Ratecard Line Detail Gl Type_ field to a new value.                                         |
-| Digital Format                                        | Digital Product                                                |                                                                                                                                                                                     |
-| Split Length                                          | Calculated\*                                                   | Debug field indicating how many months were created for for this row.                                                                                                               |
-| Digital Ratecard Line ID                              |                                                                |                                                                                                                                                                                     |
-| Digital Ratecard Line Desc                            | Digital Ratecard Line Detail                                   |                                                                                                                                                                                     |
-| Pub Sizes                                             |                                                                |                                                                                                                                                                                     |
-| Contact Type Codes Field                              | Calculated\*                                                   |                                                                                                                                                                                     |
+| Field Name                                            | Mapping - CM Opportunities                                   | Description                                                  |
+| ----------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Opportunity Id                                        |                                                              | **#1**                                                       |
+| Opportunity Type                                      |                                                              | **#2**                                                       |
+| Group Name                                            | From Dataset (Flow step)<br />PubGroup-PublicationMapping-PROD | \*Only in Product Group Template                             |
+| Product ID                                            |                                                              |                                                              |
+| Product Name                                          | Digital Product                                              |                                                              |
+| Reporting Date                                        | Calculated\*                                                 | Opp Split Month (YYYY-MM) converted to a Date format (MM-01-YYYY) |
+| Opp Split Month                                       | Calculated\*                                                 |                                                              |
+| Opp Split Price                                       | Calculated\*                                                 | Amount of opportunity for **Opp Split Month** - NOTE: Opportunity % is used in this calculation. |
+| Opportunity Weighted Amount <br />By Month Year Total | Calculated\*                                                 | Opp Split Price aggregated by **Opportunity Id + Opp Split Month + Product ID**.<br />This field is just an example of aggregation via Flow steps. |
+| Group Key1                                            | Calculated\*                                                 | Used in Opportunity Weighted Amount By Month Year Total field. Only useful for debugging if doing [flow step aggregation](informer-javascript#calculations-on-aggregated-values). |
+| Stage Id                                              |                                                              | #8                                                           |
+| Opportunity Stage Description                         |                                                              | #8                                                           |
+| Advertiser Name                                       | Advertiser -> Client Name                                    | **#3**                                                       |
+| Advertiser Id                                         |                                                              | **#3**                                                       |
+| Brand Id                                              |                                                              | **#4**                                                       |
+| Digital Start Date                                    |                                                              | **#**                                                        |
+| Digital End Date                                      |                                                              | **#**                                                        |
+| Error Issues                                          | Calculated\*                                                 | Checks for errors when calculating the Opp Split Month/Price fields. Helpful in debugging. |
+| Digital Rate                                          |                                                              |                                                              |
+| Digital Qty                                           |                                                              |                                                              |
+| Digital Price                                         |                                                              | Used in calculating **Opp Split Price**. <br />**NOTE:** You cannot use this field for aggregating in a report since the flow steps in this Dataset will be creating new rows. |
+| Opportunity Stage Probability Pct                     | Opportunity Stage                                            | Probability percentage from the Opportunity Stage table.<br />**NOTE**- This is **NOT** the field used in calculating the **Opp Split Price** field. |
+| Publication Pub Group ID                              |                                                              |                                                              |
+| Start Date                                            |                                                              | **#5**                                                       |
+| End Date                                              |                                                              | **#6**                                                       |
+| Probability Pct                                       |                                                              | Field used in the calculating the **Opp Split Price**        |
+| Mkt Campaign ID                                       |                                                              |                                                              |
+| Entered By User ID                                    |                                                              |                                                              |
+| Owner User Id                                         |                                                              | **#7**                                                       |
+| Owner Email                                           |                                                              | **#7**                                                       |
+| Owner Name                                            |                                                              | **#7**                                                       |
+| Digital Line Desc                                     |                                                              |                                                              |
+| GL Types Description                                  | Digital Internet Orders -> GL Types                          |                                                              |
+| Digital Ratecard Line Detail Gl Type                  | Digital Ratecard Line Detail                                 |                                                              |
+| Gl Type Description                                   | Calculated\*                                                 | In the **Map GL Types** flow step, you can modify this calculation to map your _Digital Ratecard Line Detail Gl Type_ field to a new value. |
+| Digital Format                                        | Digital Product                                              |                                                              |
+| Split Length                                          | Calculated\*                                                 | Debug field indicating how many months were created for for this row. |
+| Digital Ratecard Line ID                              |                                                              |                                                              |
+| Digital Ratecard Line Desc                            | Digital Ratecard Line Detail                                 |                                                              |
+| Pub Sizes                                             |                                                              |                                                              |
+| Contact Type Codes Field                              | Calculated\*                                                 |                                                              |
 
-![image-20210811133035929](.\images\informer-mapping-cmopportunities-005.png)
+![image-20210811133035929](images\informer-mapping-cmopportunities-005.png)
 
 ## User Reports Mappings
 
@@ -168,9 +168,9 @@ While there are over 80 "Amt" fields in the User Reports mapping. You most likel
 
 > NOTE: All of the fields described below will show NET revenue:
 >
-> ![image-20210825100739241](.\images\informer-mapping-userreports-revenue001.png)
+> ![image-20210825100739241](images\informer-mapping-userreports-revenue001.png)
 
-- **Order Net Amt** - This is the total net amount for the campaign. The problem with this field is that it will be duplicated for every line item in User Reports for an order. If you are going to do any aggregation on the field, you will need to add a flow step to remove the duplicates. [Remove Duplicates Code](./informer-javascript/#remove-duplicate-values-in-aggregation)
+- **Order Net Amt** - This is the total net amount for the campaign. The problem with this field is that it will be duplicated for every line item in User Reports for an order. If you are going to do any aggregation on the field, you will need to add a flow step to remove the duplicates. [Remove Duplicates Code](informer-javascript/#remove-duplicate-values-in-aggregation)
 
   > Be aware that to use the above field, you will need to Sort your Dataset using the **Order By** step when building the "query". This can slow the query down. I don't feel you really will ever or should ever use the Order Net Amt.
   > Instead, if you just need net amount for campaigns, use the Rep Split Net Amt field fix below.
@@ -202,7 +202,7 @@ The **Status** field is located in the **User Reports** mapping and you will wan
 
 The filter will look like this:
 
-![image-20210401095638103](.\images\informer-mapping-userreports-001.png)
+![image-20210401095638103](images\informer-mapping-userreports-001.png)
 
 ### User Report Other Fields
 
@@ -219,11 +219,11 @@ In the User Reports mapping you can use:
 
 These fields exist in the **AD Internet Classified** mapping but are NOT linked to anything. However, the individual fields _Category Tree_ and _Category_ exist on the **AD Internet Orders** mapping. You can pull these fields in from this mapping and in from the **User Reports** mapping you would get to it by going to the **Internet Order (newer Elan releases)**, which is just the **AD Internet Orders** mapping renamed for this link.
 
-![image-20210525153827370](.\images\informer-mapping-userreports-002.png)
+![image-20210525153827370](images\informer-mapping-userreports-002.png)
 
 The above two fields come from the following on the Line Item Detail:
 
-![image-20210525154031808](.\images\informer-mapping-userreports-003.png)
+![image-20210525154031808](images\informer-mapping-userreports-003.png)
 
 ### User Report Print vs Digital
 
@@ -246,7 +246,7 @@ $record.PrintOrDigital =
 
 To get the X/Y values you can use the following
 
-![image-20210602110334607](.\images\informer-mapping-userreports-linage01.png)
+![image-20210602110334607](images\informer-mapping-userreports-linage01.png)
 
 ---
 
@@ -272,15 +272,15 @@ When pulling data from the **AD Internet Orders** mapping, realize that Deleted 
 
 Here is a common set of Criteria for a report from the **AD Internet Orders** mapping:
 
-![image-20210511150211401](.\images\informer-mapping-adinternetorders-001.png)
+![image-20210511150211401](images\informer-mapping-adinternetorders-001.png)
 
 The first is the Status Code on the Campaign. It is found in the **AD Internet Campaigns** mapping and is called **Status Code**
 
-![image-20210511150424446](.\images\informer-mapping-adinternetorders-002.png)
+![image-20210511150424446](images\informer-mapping-adinternetorders-002.png)
 
 The second field, **Line Cancel Status ID**, makes sure that no Deleted Lines are included in your results. It is located on the **AD Internet Orders** mapping.
 
-![image-20210511150826980](.\images\informer-mapping-adinternetorders-003.png)
+![image-20210511150826980](images\informer-mapping-adinternetorders-003.png)
 
 ### Multivalued Fields
 
@@ -298,7 +298,7 @@ When you view a line in Naviga Ad, you see that a single line can extend across 
 
 This is what a Line in a Campaign looks like in Naviga Ad. Notice that it has further detail showing the billing amount for each month. The values above correspond to each of these value in Naviga Ad.
 
-![img](.\images\informer-mapping-adinternetorders-004.png)
+![img](images\informer-mapping-adinternetorders-004.png)
 
 The bit of difficulty is that these fields are stored in a Multivalued field. A weird concept if you are coming from a relational background, however, all it means, is that, in the example above, there will be three values stored in each of the MV fields mentioned.
 
@@ -306,7 +306,7 @@ A multivalued field in Informer usually is not in a format that is usable and th
 
 This is what a report pulling these multivalued fields would look like without Normalization:
 
-![image-20210511153122760](.\images\informer-mapping-adinternetorders-005.png)
+![image-20210511153122760](images\informer-mapping-adinternetorders-005.png)
 
 The problem with the above format is two fold, first it is hard to reason about, since we are used to seeing a full row of data. Secondly, you cannot filter on the MV fields.
 
@@ -314,7 +314,7 @@ Given this, the normal course of action when we have MV fields in our report is 
 
 After Normalizing, the above data will now look like this:
 
-![image-20210511161333417](.\images\informer-mapping-adinternetorders-006.png)
+![image-20210511161333417](images\informer-mapping-adinternetorders-006.png)
 
 ### Amount Fields
 
@@ -363,11 +363,11 @@ The CM Opportunities mapping allows you to report on the opportunities that you 
 
 ### [NAVIGA]-CM Opportunities template dataset
 
-Here is a template Dataset to review and modify to your needs: [Naviga CM Opportunities Template Dataset](./downloads/naviga-cm-opportunities.tgz). To import this template dataset into your system, start at **step 4** in the documentation [Copying a Dataset To a Different Datasource](informer-basics/#copying-dataset-to-different-datasource)
+Here is a template Dataset to review and modify to your needs: [Naviga CM Opportunities Template Dataset](downloads/naviga-cm-opportunities.tgz). To import this template dataset into your system, start at **step 4** in the documentation [Copying a Dataset To a Different Datasource](informer-basics/#copying-dataset-to-different-datasource)
 
 Please note that there are some additional Flow Steps that you should remove if you are not going to use their results:
 
-![img](.\images\informer-mapping-cmopportunities-templatereport-001.png)
+![img](images\informer-mapping-cmopportunities-templatereport-001.png)
 
 #### Template Usage Notes
 
@@ -475,4 +475,4 @@ As was noted above, a User ID can be associated with multiple Rep IDs.
 
 Within Naviga Ad you can find this association in the User Setup Area.
 
-![loginuservsreps_001](.\images\informer-mapping-cmopportunities-uservsrep-001.png)
+![loginuservsreps_001](images\informer-mapping-cmopportunities-uservsrep-001.png)
