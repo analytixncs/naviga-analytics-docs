@@ -40,7 +40,7 @@ This is a change from Informer 4, so you will see that all of the base reports a
 
 Find the report you want to covert to a Dataset, open it and run it.
 
-![image-20200227150927583](images/informer_tips_dataset_001.png)
+![image-20200227150927583](informer/images/informer_tips_dataset_001.png)
 
 This is very important, as the report must have data in it for you to get the "Create Dataset" option.
 
