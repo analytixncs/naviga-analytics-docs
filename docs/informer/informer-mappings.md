@@ -11,7 +11,7 @@ sidebar_label: Informer Mappings
 This dataset template uses the User Reports Mapping as its starting point.
 
 > Download the Dataset:
-> **[[TEMPLATE]-User Reports](downloads\template-user-reports.tgz)**
+> **<a  target="_blank"  href="/downloads/template-user-reports.tgz"> [TEMPLATE]-User Reports</a>**
 
 The User Reports mapping is a table in the Naviga Database that brings together commonly used reporting items into a single table.
 
@@ -61,9 +61,9 @@ There are two versions of this template, one with the Product Groups and one wit
 
 > Download the Dataset:
 >
-> **[[TEMPLATE]-CM Opportunities](downloads\template-cm-opportunities.tgz)**
+> **<a  target="_blank"  href="/downloads/template-cm-opportunities.tgz"> [TEMPLATE]-CM Opportunities</a>**
 >
-> **[[TEMPLATE]-CM Opportunities With Product Group](downloads\template-cm-opportunities-with-productgroups.tgz)**
+> **<a  target="_blank"  href="/downloads/template-cm-opportunities-with-productgroups.tgz"> [TEMPLATE]-CM Opportunities With Product Group</a>**
 
 There is quite a bit happening behind the scenes with this template dataset. Specifically, it is looking at the Start and End Dates of a row and then figuring out how many months the campaign is scheduled to run and creates a new row for each of those months.
 
