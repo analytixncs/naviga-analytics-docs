@@ -54,7 +54,7 @@ For all files OTHER than images, you will create folders in the `static` directo
 
 To access these files you will use the following syntax in your Markdown files:
 
-`<a  target="_blank"  href={require('./folder-name-in-static-dir/downloadtest.zip').default}>  Download this Zip</a>`
+`<a  target="_blank"  href="/folder-name-in-static-dir/downloadtest.zip">  Download this Zip</a>`
 
 I have found that if you try and create a download link using **Markdown** syntax, docusaurus will hash the file and copy it to the `assets `directory once built.
 
