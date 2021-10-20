@@ -7,12 +7,9 @@ sidebar_label: Informer Basics
 ## Informer Support Links
 
 - [Advanced Filters](https://informer5.zendesk.com/hc/en-us/articles/360047674151-Advanced-Filters)
-
 - [Why Datasets vs AdHoc Report](https://informer5.zendesk.com/hc/en-us/articles/360001210986-Why-Use-Datasets-vs-Ad-Hoc-Queries-)
-
-- [Informer Mapping Document (csv)](<downloads/Elan Mapping Documentation.csv>)
-
-- [Informer Mapping Document (pdf)](<downloads/Elan Mapping Documentation.pdf>)
+- <a  target="_blank"  href="/downloads/Elan Mapping Documentation.csv"> Informer Mapping Document (csv)</a>
+- <a  target="_blank"  href="/downloads/Elan Mapping Documentation.pdf"> Informer Mapping Document (pdf)</a>
 
 ## Datasets vs Ad Hoc Reports
 
@@ -40,7 +37,7 @@ This is a change from Informer 4, so you will see that all of the base reports a
 
 Find the report you want to covert to a Dataset, open it and run it.
 
-![image-20200227150927583](informer/images/informer_tips_dataset_001.png)
+![image-20200227150927583](images\informer_tips_dataset_001.png)
 
 This is very important, as the report must have data in it for you to get the "Create Dataset" option.
 
