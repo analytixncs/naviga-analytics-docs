@@ -362,9 +362,13 @@ If today's date is 5/5/2020, our filter should do the following
 
 Keep in mind that when filtering for the Next/Past of anything, it doesn't take the current date to be part of the Next/Past selection.
 
-> **Past WILL** include today's date in the filtered dates
->
-> **Next WILL NOT** include today's date in the filtered dates
+:::tip
+
+**Past WILL** include today's date in the filtered dates
+
+**Next WILL NOT** include today's date in the filtered dates
+
+:::
 
 **Some examples based on Today's Date of 1/13/2020**
 
@@ -422,7 +426,11 @@ If you save a filter on an Ad Hoc report, it will be saved for your user. I have
 
 If you need to be able to share filters, you will want to make sure your data is coming from a Dataset versus an Ad Hoc Report.
 
-> **Important**: The Reports AND the Datasets feeding the reports must BOTH be shared with the Team or Users who you want to be able to interact with it.
+:::danger Important
+
+The Reports AND the Datasets feeding the reports must BOTH be shared with the Team or Users who you want to be able to interact with it.
+
+:::
 
 Whenever a user (or the creator) of the report creates a filter in the report, it will be saved as a **private** filter on the underlying dataset. If you want other users to see the filter, you will need to open the Dataset and mark the filter as **public**.
 

@@ -6,9 +6,11 @@ This website is built using [Docusaurus 2](https://docusaurus.io/), a modern sta
 
 ## Assets in Docs
 
-From what I can see in my testing, anything you store in the **docs** directory can be accessed either by using markdown syntax or html.  This means that you can create an images directory to store your images in and a videos directory to store videos in.  For downloadable files you will want to use the Static method of storage.
+Anything you store in the **docs** directory can be accessed either by using markdown syntax or html.  This means that you can create an images directory to store your images in and a videos directory to store videos in.  For downloadable files you will want to use the Static method of storage.
 
-All files other than **Markdown** or **MDX** will be hashed and copied to the assets directory in the build folder.  The other file types (images, pdfs, etc) will be stored in files that Docusaurus deems appropriate.  We don't have to worry about where it stores the files as it will resolve that when building our HTML.
+All files other than **Markdown** or **MDX** will be **hashed** and copied to the assets directory in the build folder.  The other file types (images, pdfs, etc) will be stored in folders that Docusaurus deems appropriate.  For example, *mp4* files will be stored in a `media `directory, *tgz/zip* files will be stored in a `files` directory.  We don't have to worry about where it stores the files as it will resolve that when building our HTML.
+
+> When referencing items always using a forward slash "/" to separate directories.  If you deploy on Linux, "\\" will cause issues.
 
 **Markdown**
 
@@ -29,34 +31,74 @@ The below will create a link to the pdf file
 
 ### Images
 
-There is an `informer` directory in the `docs` folder.  You will create an images directory IN the informer directory:
+There is an `informer` directory in the `docs` folder. The `images`directory in the informer directory will contain images used in the docs:
 
 `docs/informer/images`
 
 To access these within your markdown files use following:
-`![api_docs_001](images\image-file.png)`
+`![api_docs_001](images/image-file.png)`
 
 ### Video Files
 
-You should copy your video files into the `docs/assets/` folder also.
+You should copy your video files into the `docs/informer/videos/` folder also.
 
 ```html
 <div>
   <video width="800px" controls>
-  <source src={require('./assets/video=file-name.mp4').default}/>
+  <source src={require('./videos/video=file-name.mp4').default}/>
 </video>
 </div>
 ```
 
 ### Static or Downloadable Files
 
-For all files OTHER than images, you will create folders in the `static` directory that is at the root of your Docusaurus project.
+For other files that you want to retain their filenames (i.e. not be hashed), usually these will be files that you want users to be able to download, you will want to store in the `static` directory that is at the root of your Docusaurus project.
+
+Currently, there is a `downloads` folder where all downloadable content is stored.
+
+`naviga-analytics-docs/static/downloads`
 
 To access these files you will use the following syntax in your Markdown files:
 
-`<a  target="_blank"  href="/folder-name-in-static-dir/downloadtest.zip">  Download this Zip</a>`
+`<a  target="_blank"  href="/folder-name-in-static-dir/downloadtest.zip">Download this Zip</a>`
 
 I have found that if you try and create a download link using **Markdown** syntax, docusaurus will hash the file and copy it to the `assets `directory once built.
 
 `[download tgz](./folder-name-in-static-dir/job-status.tgz)` ❌ Not recommended.
+
+## Admonitions Markdown Syntax
+
+[Docusaurus docs](https://docusaurus.io/docs/markdown-features/admonitions)
+
+Admonitions allow you to highlight important information.  Within Markdown and MDX files you have the following available:
+
+![image-20211021150905045](admonitions.png)
+
+The following syntax will give you the default titles as shown above:
+
+```markdown
+:::note
+
+Some **content** with _markdown_ `syntax`. Check [this `api`](#).
+
+:::
+```
+
+The available options are:
+
+- :::note
+- :::tip
+- :::info
+- :::caution
+- :::danger
+
+If you want to replace the default title with your own, simply follow the admonition type with your title:
+
+```markdown
+:::danger Important!
+Some **Important** content!
+:::
+```
+
+
 
