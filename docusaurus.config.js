@@ -1,27 +1,27 @@
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (
   module.exports = {
-    title: 'Naviga Informer Documentation',
-    tagline: '',
-    url: 'https://naviga-informer-docs.netlify.app',
-    baseUrl: '/',
-    onBrokenLinks: 'throw',
-    onBrokenMarkdownLinks: 'warn',
-    favicon: 'img/favicon.png',
-    organizationName: 'Naviga Inc', // Usually your GitHub org/user name.
-    projectName: 'naviga-analytics-docs', // Usually your repo name.
-
+    title: "Naviga Informer Documentation",
+    tagline: "",
+    url: "https://naviga-informer-docs.netlify.app",
+    baseUrl: "/",
+    onBrokenLinks: "throw",
+    onBrokenMarkdownLinks: "warn",
+    favicon: "img/favicon.png",
+    organizationName: "Naviga Inc", // Usually your GitHub org/user name.
+    projectName: "naviga-analytics-docs", // Usually your repo name.
+    plugins: [require.resolve("@cmfcmf/docusaurus-search-local")],
     presets: [
       [
-        '@docusaurus/preset-classic',
+        "@docusaurus/preset-classic",
         /** @type {import('@docusaurus/preset-classic').Options} */
         ({
           docs: {
-            sidebarPath: require.resolve('./sidebars.js'),
+            sidebarPath: require.resolve("./sidebars.js"),
             // routeBasePath: "informer",
             // Please change this to your repo.
             // editUrl:
@@ -34,7 +34,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             //   "https://github.com/facebook/docusaurus/edit/main/website/blog/",
           },
           theme: {
-            customCss: require.resolve('./src/css/custom.css'),
+            customCss: require.resolve("./src/css/custom.css"),
           },
         }),
       ],
@@ -44,17 +44,17 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
         navbar: {
-          title: 'Naviga Analytics',
+          title: "Naviga Analytics",
           logo: {
-            alt: 'Naviga',
-            src: 'img/favicon.png',
+            alt: "Naviga",
+            src: "img/favicon.png",
           },
           items: [
             {
-              type: 'doc',
-              docId: 'informer/informer-basics',
-              position: 'left',
-              label: 'Informer',
+              type: "doc",
+              docId: "informer/informer-basics",
+              position: "left",
+              label: "Informer",
             },
             // { to: "/blog", label: "Blog", position: "left" },
             // {
@@ -64,51 +64,51 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             // },
           ],
         },
-        algolia: {
-          apiKey: 'YOUR_API_KEY',
-          indexName: 'YOUR_INDEX_NAME',
+        // algolia: {
+        //   apiKey: 'YOUR_API_KEY',
+        //   indexName: 'YOUR_INDEX_NAME',
 
-          // Optional: see doc section below
-          contextualSearch: true,
+        //   // Optional: see doc section below
+        //   contextualSearch: true,
 
-          // Optional: see doc section below
-          appId: 'YOUR_APP_ID',
+        //   // Optional: see doc section below
+        //   appId: 'YOUR_APP_ID',
 
-          // Optional: Algolia search parameters
-          searchParameters: {},
+        //   // Optional: Algolia search parameters
+        //   searchParameters: {},
 
-          //... other Algolia params
-        },
+        //   //... other Algolia params
+        // },
         footer: {
-          style: 'dark',
+          style: "dark",
           links: [
             {
-              title: 'Naviga',
+              title: "Naviga",
               items: [
                 {
-                  label: 'Naviga Website',
-                  href: 'https://www.navigaglobal.com',
+                  label: "Naviga Website",
+                  href: "https://www.navigaglobal.com",
                 },
                 {
-                  label: 'Naviga Blog',
-                  href: 'http://navigaglobal.com/blog/',
+                  label: "Naviga Blog",
+                  href: "http://navigaglobal.com/blog/",
                 },
                 {
-                  label: 'Twitter',
-                  href: 'https://twitter.com/navigaglobal',
+                  label: "Twitter",
+                  href: "https://twitter.com/navigaglobal",
                 },
                 {
-                  label: 'LinkedIn',
-                  href: 'https://www.linkedin.com/company/navigaglobal',
+                  label: "LinkedIn",
+                  href: "https://www.linkedin.com/company/navigaglobal",
                 },
               ],
             },
             {
-              title: 'More',
+              title: "More",
               items: [
                 {
-                  label: 'Old Doc Site',
-                  to: 'https://analytix-docs.netlify.app/',
+                  label: "Old Doc Site",
+                  to: "https://analytix-docs.netlify.app/",
                 },
               ],
             },

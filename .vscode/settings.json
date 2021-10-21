@@ -12,14 +12,7 @@
     "titleBar.activeBackground": "#7d64ff",
     "titleBar.activeForeground": "#e7e7e7",
     "titleBar.inactiveBackground": "#7d64ff99",
-    "titleBar.inactiveForeground": "#e7e7e799",
-    "activityBar.activeBackground": "#a897ff",
-    "activityBar.activeBorder": "#ffe4df",
-    "activityBar.background": "#a897ff",
-    "activityBar.foreground": "#15202b",
-    "activityBar.inactiveForeground": "#15202b99",
-    "activityBarBadge.background": "#ffe4df",
-    "activityBarBadge.foreground": "#15202b"
+    "titleBar.inactiveForeground": "#e7e7e799"
   },
   "peacock.color": "7d64ff"
 }
