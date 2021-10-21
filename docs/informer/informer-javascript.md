@@ -1021,7 +1021,7 @@ $local = {
 
 After we have aggregated to the levels that we need, you will need to run a Flush Flow step:
 
-![image-20200731124814556](images\informer-javasript-calcaggr-001.png)
+![image-20200731124814556](images/informer-javasript-calcaggr-001.png)
 
 **Step 3**
 
@@ -1088,13 +1088,13 @@ $fields.NetInv_VarianceByYearRep_Total.dataType = "number";
 
 Year over Year views of your data can be created using a Pivot table with a Year field as a Column.
 
-![image-20210423142428927](images\informer-Javascript-YOY-001.png)
+![image-20210423142428927](images/informer-Javascript-YOY-001.png)
 
 However, if you wanted to actually calculate a difference column for Current and Previous year, you will find that you cannot do this in the Informer Pivot table currently.
 
 To make this possible, we need to write some Flow steps to create fields that will hold each year's values and then another script to do the calculations. Our end goal will be to create a chart that looks like this:
 
-![image-20210423142809485](images\informer_javascript-YOY-002.png)
+![image-20210423142809485](images/informer_javascript-YOY-002.png)
 
 **Fields You Need To Have**
 
@@ -1211,7 +1211,7 @@ To do this, you will need to add a Powerscript flow step AND very importantly, y
 
 First to make sure the data is in the correct order, you will need to add an **Order By** step when building your dataset:
 
-![image-20210215123153997](images\informer_javascript-powerscript-dedup001.png)
+![image-20210215123153997](images/informer_javascript-powerscript-dedup001.png)
 
 Then you will need to add a Powerscript Flow step to update the Order Net Amt.
 

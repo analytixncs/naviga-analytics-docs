@@ -142,7 +142,7 @@ In the _Description_ column, if you see a #n value, you can use that to referenc
 | Pub Sizes                                             |                                                              |                                                              |
 | Contact Type Codes Field                              | Calculated\*                                                 |                                                              |
 
-![image-20210811133035929](images\informer-mapping-cmopportunities-005.png)
+![image-20210811133035929](images/informer-mapping-cmopportunities-005.png)
 
 ## User Reports Mappings
 
@@ -168,7 +168,7 @@ While there are over 80 "Amt" fields in the User Reports mapping. You most likel
 
 > NOTE: All of the fields described below will show NET revenue:
 >
-> ![image-20210825100739241](images\informer-mapping-userreports-revenue001.png)
+> ![image-20210825100739241](images/informer-mapping-userreports-revenue001.png)
 
 - **Order Net Amt** - This is the total net amount for the campaign. The problem with this field is that it will be duplicated for every line item in User Reports for an order. If you are going to do any aggregation on the field, you will need to add a flow step to remove the duplicates. [Remove Duplicates Code](informer-javascript/#remove-duplicate-values-in-aggregation)
 
@@ -202,7 +202,7 @@ The **Status** field is located in the **User Reports** mapping and you will wan
 
 The filter will look like this:
 
-![image-20210401095638103](images\informer-mapping-userreports-001.png)
+![image-20210401095638103](images/informer-mapping-userreports-001.png)
 
 ### User Report Other Fields
 
@@ -219,11 +219,11 @@ In the User Reports mapping you can use:
 
 These fields exist in the **AD Internet Classified** mapping but are NOT linked to anything. However, the individual fields _Category Tree_ and _Category_ exist on the **AD Internet Orders** mapping. You can pull these fields in from this mapping and in from the **User Reports** mapping you would get to it by going to the **Internet Order (newer Elan releases)**, which is just the **AD Internet Orders** mapping renamed for this link.
 
-![image-20210525153827370](images\informer-mapping-userreports-002.png)
+![image-20210525153827370](images/informer-mapping-userreports-002.png)
 
 The above two fields come from the following on the Line Item Detail:
 
-![image-20210525154031808](images\informer-mapping-userreports-003.png)
+![image-20210525154031808](images/informer-mapping-userreports-003.png)
 
 ### User Report Print vs Digital
 
@@ -246,7 +246,7 @@ $record.PrintOrDigital =
 
 To get the X/Y values you can use the following
 
-![image-20210602110334607](images\informer-mapping-userreports-linage01.png)
+![image-20210602110334607](images/informer-mapping-userreports-linage01.png)
 
 ---
 
@@ -272,15 +272,15 @@ When pulling data from the **AD Internet Orders** mapping, realize that Deleted 
 
 Here is a common set of Criteria for a report from the **AD Internet Orders** mapping:
 
-![image-20210511150211401](images\informer-mapping-adinternetorders-001.png)
+![image-20210511150211401](images/informer-mapping-adinternetorders-001.png)
 
 The first is the Status Code on the Campaign. It is found in the **AD Internet Campaigns** mapping and is called **Status Code**
 
-![image-20210511150424446](images\informer-mapping-adinternetorders-002.png)
+![image-20210511150424446](images/informer-mapping-adinternetorders-002.png)
 
 The second field, **Line Cancel Status ID**, makes sure that no Deleted Lines are included in your results. It is located on the **AD Internet Orders** mapping.
 
-![image-20210511150826980](images\informer-mapping-adinternetorders-003.png)
+![image-20210511150826980](images/informer-mapping-adinternetorders-003.png)
 
 ### Multivalued Fields
 
@@ -298,7 +298,7 @@ When you view a line in Naviga Ad, you see that a single line can extend across 
 
 This is what a Line in a Campaign looks like in Naviga Ad. Notice that it has further detail showing the billing amount for each month. The values above correspond to each of these value in Naviga Ad.
 
-![img](images\informer-mapping-adinternetorders-004.png)
+![img](images/informer-mapping-adinternetorders-004.png)
 
 The bit of difficulty is that these fields are stored in a Multivalued field. A weird concept if you are coming from a relational background, however, all it means, is that, in the example above, there will be three values stored in each of the MV fields mentioned.
 
@@ -306,7 +306,7 @@ A multivalued field in Informer usually is not in a format that is usable and th
 
 This is what a report pulling these multivalued fields would look like without Normalization:
 
-![image-20210511153122760](images\informer-mapping-adinternetorders-005.png)
+![image-20210511153122760](images/informer-mapping-adinternetorders-005.png)
 
 The problem with the above format is two fold, first it is hard to reason about, since we are used to seeing a full row of data. Secondly, you cannot filter on the MV fields.
 
@@ -314,7 +314,7 @@ Given this, the normal course of action when we have MV fields in our report is 
 
 After Normalizing, the above data will now look like this:
 
-![image-20210511161333417](images\informer-mapping-adinternetorders-006.png)
+![image-20210511161333417](images/informer-mapping-adinternetorders-006.png)
 
 ### Amount Fields
 
@@ -367,7 +367,7 @@ Here is a template Dataset to review and modify to your needs: [Naviga CM Opport
 
 Please note that there are some additional Flow Steps that you should remove if you are not going to use their results:
 
-![img](images\informer-mapping-cmopportunities-templatereport-001.png)
+![img](images/informer-mapping-cmopportunities-templatereport-001.png)
 
 #### Template Usage Notes
 
@@ -475,4 +475,4 @@ As was noted above, a User ID can be associated with multiple Rep IDs.
 
 Within Naviga Ad you can find this association in the User Setup Area.
 
-![loginuservsreps_001](images\informer-mapping-cmopportunities-uservsrep-001.png)
+![loginuservsreps_001](images/informer-mapping-cmopportunities-uservsrep-001.png)
