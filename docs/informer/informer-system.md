@@ -18,18 +18,18 @@ Once downloaded, navigate to the **Datasource** page within Informer.
 
 Simply drag and drop the downloaded _tgz_ file onto this page:
 
-![image-20200501151233660](images\informer-system_metadata-001.png)
+![image-20200501151233660](images/informer-system_metadata-001.png)
 
 You will then be presented with a dialog where you can enter the new Datasource information.
 
-![image-20200501151711846](images\informer-system_metadata-002.png)
+![image-20200501151711846](images/informer-system_metadata-002.png)
 
 1. **Datasource Name** - Can be anything, but Informer5 makes sense.
 2. **Server and Port** - You will need to get this information from whoever setup the Informer instance. There is a **config.json** file that will be on the server with this information, usually found in `C:\Entrinsik\Informer5`
 3. **User and Password** - You will need to get this information from whoever setup the Informer instance.
 4. **Database** - You must use **Informer5**
 
-![img](images\informer-system_postgreDB.PNG)
+![img](images/informer-system_postgreDB.PNG)
 
 Then click **Save** and the Informer5 Datasource will be created along with all the mappings and nine sample Datasets.
 

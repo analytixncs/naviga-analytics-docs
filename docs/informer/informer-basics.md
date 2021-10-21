@@ -37,7 +37,7 @@ This is a change from Informer 4, so you will see that all of the base reports a
 
 Find the report you want to covert to a Dataset, open it and run it.
 
-![image-20200227150927583](images\informer_tips_dataset_001.png)
+![image-20200227150927583](images/informer_tips_dataset_001.png)
 
 This is very important, as the report must have data in it for you to get the "Create Dataset" option.
 
@@ -216,7 +216,7 @@ A workspace is a **Datasource** that holds mappings of any external data that yo
 
 First you need to create a Workspace to load your external data into. Go to the **Datasources** area in Informer, click on **NEW DATASOURCE** and then choose **Workspace**.
 
-![image-20210514150055770](images\informer-basics-workspaces-001.png)
+![image-20210514150055770](images/informer-basics-workspaces-001.png)
 
 Enter a name for the workspace. How about **External Data**. You can house multiple excel files or other external data source within a single datasource.
 
@@ -230,11 +230,11 @@ Once you create Workspace, you will have an **UPLOAD DATA** button in the middle
 
 Once you drop your file, it will load and analyze it. If you haven't followed the above rules, you may see this screen:
 
-![image-20210514150811294](images\informer-basics-workspaces-002.png)
+![image-20210514150811294](images/informer-basics-workspaces-002.png)
 
 If so, click on **Configure** and then on the magic wand next to the Field Name label. This will simply rename your header names into a form that Informer can use.
 
-![image-20210514151208392](images\informer-basics-workspaces-003.png)
+![image-20210514151208392](images/informer-basics-workspaces-003.png)
 
 Lastly, click **Import**. You now have a new mapping in a Datasource named **External Data** that can be used just like any other mapping.
 
@@ -394,7 +394,7 @@ When you filter any type of report, there are two places where you can filter th
 
 The two places are at the top level of the report and the other is when you are inside and editing the report.
 
-![image-20200727134604915](images\informer_tips_filters-reports-001.png)
+![image-20200727134604915](images/informer_tips_filters-reports-001.png)
 
 When filtering at this level, it is only for your user. Only your user will see it.
 
@@ -402,11 +402,11 @@ If you want all users to see the filter, you will need to click on the **Edit** 
 
 Once you click on the Edit button, click on the vertical ellipsis by the Dataset name and choose **Custom Filter**
 
-![image-20200727135103551](images\informer_tips_filters-reports-002.png)
+![image-20200727135103551](images/informer_tips_filters-reports-002.png)
 
 After you have created your filter, you can click on the **Apply** button.
 
-![image-20200727135222389](images\informer_tips_filters-reports-003.png)
+![image-20200727135222389](images/informer_tips_filters-reports-003.png)
 
 This will "bake in" the filter to your report. The other option would be to Save the filter by clicking on the save icon. However, the user who created and saved the filter and other super users will be the only one who will be able to see and apply the filter.
 
@@ -440,7 +440,7 @@ It is very easy to make a copy of an existing Dataset. Simply click on the verti
 
 > This will NOT copy any Visuals or Filters that you have stored in the Dataset. To get Filters and/or Visuals copied into a new dataset, following the Bundle Copy method below.
 
-![image-20200518105542330](images\informer_tips_datasetcopy-001.png)
+![image-20200518105542330](images/informer_tips_datasetcopy-001.png)
 
 ### Bundle Copy a Dataset
 
@@ -495,7 +495,7 @@ When attaching a CSV or Excel file to an email or when sending to the File Syste
 
 The option that you have in an Informer Job is to introduce date information into the file name. You will be able to do this when you add an attachment to a Job Action.
 
-![image-20210811130332384](images\informer-basics-jobs-dynamicnames_001.png)
+![image-20210811130332384](images/informer-basics-jobs-dynamicnames_001.png)
 
 As noted in the screenshot above, you can use the following syntax to add a date component to your file name:
 
@@ -545,13 +545,13 @@ This will not save the pivot anywhere in the report, but instead will save it to
 
 You can then view the saved visual by opening the Dataset and clicking on the "Visuals" icon:
 
-![image-20200508114425051](images\informer_tips_pivotjob-002.png)
+![image-20200508114425051](images/informer_tips_pivotjob-002.png)
 
 You can also create new visuals from this area also.
 
 Just click on the New Visual / Tables / Pivot:
 
-![image-20200508114539615](images\informer_tips_pivotjob-003.png)
+![image-20200508114539615](images/informer_tips_pivotjob-003.png)
 
 **Step 2**
 
@@ -559,11 +559,11 @@ Now that you have create a visual, you will need to "Generate external link" for
 
 From the Visuals page, select the visual you want to export by simply clicking once on the visual and then clicking on the horizontal ellipses in the bottom right and select "Generate external link"
 
-![image-20200508115351892](images\informer_tips_pivotjob-004.png)
+![image-20200508115351892](images/informer_tips_pivotjob-004.png)
 
 This will bring up the following dialog:
 
-![image-20200508115650990](images\informer_tips_pivotjob-005.png)
+![image-20200508115650990](images/informer_tips_pivotjob-005.png)
 
 Click on **Copy** and store this link in notepad for later use.
 
@@ -573,7 +573,7 @@ Get that link to whomever needs it. This can be done via a Job that runs everyti
 
 If you set up a job, it is as simple as putting the Dataset in a job and then setting up an email action to
 
-![image-20200508120536589](images\informer_tips_pivotjob-006.png)
+![image-20200508120536589](images/informer_tips_pivotjob-006.png)
 
 ### Exporting To File System-FTP
 
@@ -585,7 +585,7 @@ In the image below, you will see that you need to the directory where you want t
 
 `\\XXXprod01\repository\XXX`
 
-![img](images\informer-basics-FTP-001.png)
+![img](images/informer-basics-FTP-001.png)
 
 To access the FTP site where these files will be stored, you will need to use a program like Filezilla or other FTP software using the following details:
 
@@ -603,7 +603,7 @@ Data Access Tokens allow you to access your Dataset from a command line interfac
 
 You can create a Data Access Token by clicking on the Action menu in a Dataset and choosing "**Create a data access token**".
 
-![image-20210412104918038](images\informer_basics_DAT_001.PNG)
+![image-20210412104918038](images/informer_basics_DAT_001.PNG)
 
 You can also use the curl output to access the data via a browser or in a program that supports rest APIs.
 
@@ -682,7 +682,7 @@ Highlight the copied Dataset, click on the Actions menu and choose **Bundle and 
 
 The **Bundle and download** step will have created a **_tgz_** file in your download directory. This is the file that you will need to drag and drop onto the Dataset window.
 
-![image-20200831122201761](images\informer_tips_dscopy-002.png)
+![image-20200831122201761](images/informer_tips_dscopy-002.png)
 
 Once you drop this file in the Dataset window, it will pop up with a dialog where you can set the options for the import.
 
@@ -696,7 +696,7 @@ And lastly, if you want this imported Dataset to point to a new datasource, then
 
 You want to also leave it as "Merge with existing datasource".
 
-![image-20200831122230323](images\informer_tips_dscopy-003.png)
+![image-20200831122230323](images/informer_tips_dscopy-003.png)
 
 Click on Save and then verify that the new Dataset has been created.
 
@@ -712,7 +712,7 @@ If you have two mappings that are not linked, but do have a field in common, you
 3. Click on the link icon (second icon from the top) at the very left panel.
 4. Click on "New Link" and choose how you want to link your mappings.
 
-![image-20200521130048559](images\informer_tips_dslink-001.png)
+![image-20200521130048559](images/informer_tips_dslink-001.png)
 
 5. At the datasource page, click on 'New Link' and Select **"U2"**
 
@@ -728,7 +728,7 @@ If you have two mappings that are not linked, but do have a field in common, you
 
 10. Click 'Save'
 
-![image-20200521130400969](images\informer_tips_dslink-002.png)
+![image-20200521130400969](images/informer_tips_dslink-002.png)
 
 ## Security in Informer
 
@@ -811,15 +811,15 @@ The way you specify which data is through a filter.
 
 First, you create the filters that will be used to limit the data when sharing. Here I have created two filters, one that limits data for each team that I am working with:
 
-![image-20210719140718010](images\informer_basics-security-001.png)
+![image-20210719140718010](images/informer_basics-security-001.png)
 
 Next, you will need to **Share** the dataset with the appropriate teams.
 
-![image-20210719140957124](images\informer_basics-security-002.png)
+![image-20210719140957124](images/informer_basics-security-002.png)
 
 The dialog that you see when you press **ADD USER OR TEAM** is where the magic happens.
 
-![image-20210719150142787](images\informer_basics-security-003.png)
+![image-20210719150142787](images/informer_basics-security-003.png)
 
 You can, and will, add multiple teams. They important part is that for each team, you select **Fitered access** and choose the filters that you want to be applied when any user of the team view the dataset OR a report that uses the dataset.
 

@@ -27,9 +27,10 @@ A quick overview that shows how to access Informer from the Naviga system. Then 
 
 <div>
   <video width="800px" controls>
-  <source src={require('./videos/001-Informer-Introduction.mp4').default}/>
+  <source src={require('/videos/001-Informer-Introduction.mp4').default}/>
 </video>
 </div>
+
 
 
 ## Informer Reports Overview
@@ -40,9 +41,10 @@ An overview of the Reports area within Informer. After showing how to organize a
 
 <div>
   <video width="800px" controls>
-  <source src={require('./videos/002-Informer-ReportsArea-Overview.mp4').default}/>
+  <source src={require('/videos/002-Informer-ReportsArea-Overview.mp4').default}/>
 </video>
 </div>
+
 
 
 ## Informer Reports Comparison Boards
@@ -53,9 +55,10 @@ An introduction to the Comparison Board report within Informer.
 
 <div>
   <video width="800px" controls>
-  <source src={require('./videos/003-Informer-ReportsArea-ComparisonBoard.mp4').default}/>
+  <source src={require('/videos/003-Informer-ReportsArea-ComparisonBoard.mp4').default}/>
 </video>
 </div>
+
 
 
 ## Filtering Your Reports
@@ -66,7 +69,6 @@ Mentioned in the video is filtering using the Date Keywords. Get more informatio
 
 <div>
   <video width="800px" controls>
-  <source src={require('./videos/004-Informer-Filtering.mp4').default}/>
+  <source src={require('/videos/004-Informer-Filtering.mp4').default}/>
 </video>
 </div>
-
