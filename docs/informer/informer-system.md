@@ -10,7 +10,7 @@ sidebar_label: Informer System Stuff
 
 Download the following TGZ file to your hard drive:
 
-**[Informer5--5.1.2OrLater.tgz](./downloads/Informer5--5.1.2OrLater.tgz)**
+**<a target="_blank" href="/downloads/Informer5--5.1.2OrLater.tgz">Informer5--5.1.2OrLater.tgz</a>**
 
 This file has all the information needed to create the Datasource, mappings, and sample Datasets.
 
@@ -41,4 +41,4 @@ Create a new Folder called **Informer_System** and move these nine Datasets into
 
 There is not a Job Status sample Dataset, it is pretty easy to build your own, but here is a sample one.
 
-[Sample Job Status Dataset Bundle](./downloads/job-status.tgz)
+**<a target="_blank" href="/downloads/job-status.tgz">Sample Job Status Dataset Bundle</a>**
