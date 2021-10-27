@@ -485,6 +485,22 @@ You have five actions that you can perform in a job. They are:
 - **Send to file system** - This option will let you export to a Naviga designated FTP site. See [Exporting To The File System](#exporting-to-file-system-ftp)
 - **Export Saved List** - this will create list in a Datasource
 
+### Send an Encrypted Email Attachment
+
+The standard email Action allows you to attach your data output in a number of formats.   However, if you need to send out the attachment in an encrypted Zip file, you need to follow the steps below.
+
+From the "Send an Email" action, click on the attachments icon and choose **New zip file**
+
+![image-20211026095541683](images\informer_email_zip-001.png)
+
+From the Zip Attachment dialog, click on the + icon and choose the type of file to export in the zip file:
+
+![image-20211026095659649](images\informer_email_zip-002.png)
+
+In the Zip Attachment dialog, fill out the required information.
+
+![image-20211026095810891](images\informer_email_zip-003.png)
+
 ### Email Burst Job Action
 
 An email burst uses the data in the dataset to get the email addresses to send emails and data to.
