@@ -357,6 +357,19 @@ if ($record.a_d_internet_campaigns_assoc_campaignType === "F") {
 >
 > The above code assumes the base mapping is **AD Internet Orders**. If not, the field reference name may be different.
 
+### Metadata Fields
+
+The Metadata fields are found on the Category MetaData tab in the Naviga system:
+
+![image-20211102124100426](images\informer_mapping_metadata-001.png)
+
+To access these fields in Informer, you will need to pull in the following fields from the AD Internet Orders mapping:
+
+- **Classified Questions Desc (0)**
+- **Class Answers (269)** 
+
+The above fields are Multivalued and you will most likely want to Normalize them.
+
 ## CM Opportunities
 
 The CM Opportunities mapping allows you to report on the opportunities that you have in the system.
