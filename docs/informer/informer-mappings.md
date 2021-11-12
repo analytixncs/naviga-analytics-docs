@@ -361,7 +361,7 @@ if ($record.a_d_internet_campaigns_assoc_campaignType === "F") {
 
 The Metadata fields are found on the Category MetaData tab in the Naviga system:
 
-![image-20211102124100426](images\informer_mapping_metadata-001.png)
+![image-20211102124100426](images/informer_mapping_metadata-001.png)
 
 To access these fields in Informer, you will need to pull in the following fields from the AD Internet Orders mapping:
 
@@ -494,11 +494,11 @@ Within Naviga Ad you can find this association in the User Setup Area.
 
 You can set up Ratecard information in Product Setup:
 
-![product-setup](G:\MarkNCS2019\naviga-analytics-docs\docs\informer\images\informer-mappings-ratecards_001.png)
+![product-setup](images/informer-mappings-ratecards_001.png)
 
 Within **Product Setup**, when you go to **Pricing Rules/Ratecards** you will have access to your Ratecards:
 
-![Naviga Ratecard Setup](G:\MarkNCS2019\naviga-analytics-docs\docs\informer\images\informer-mappings-ratecards_002.png)
+![Naviga Ratecard Setup](images/informer-mappings-ratecards_002.png)
 
 The fields available on the above screen can be found in the following mappings within Informer:
 
@@ -509,7 +509,7 @@ The fields available on the above screen can be found in the following mappings 
 
 When creating a report where you are looking for the Ratecard setup information, it is best to use the **AD Internet Ratecards** mapping as your base mapping:
 
-![ratecard mapping](G:\MarkNCS2019\naviga-analytics-docs\docs\informer\images\informer-mappings-ratecards_003.png)
+![ratecard mapping](images/informer-mappings-ratecards_003.png)
 
 **AD Internet Ratecards** is joined to **AD Publications** by the field **WEB.SITE** which is actually the "Publication ID".  
 

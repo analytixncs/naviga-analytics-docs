@@ -491,7 +491,7 @@ The standard email Action allows you to attach your data output in a number of f
 
 From the "Send an Email" action, click on the attachments icon and choose **New zip file**
 
-![image-20211026095541683](images\informer_email_zip-001.png)
+![image-20211026095541683](images/informer_email_zip-001.png)
 
 From the Zip Attachment dialog, click on the + icon and choose the type of file to export in the zip file:
 
