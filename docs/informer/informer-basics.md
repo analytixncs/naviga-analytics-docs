@@ -495,11 +495,11 @@ From the "Send an Email" action, click on the attachments icon and choose **New 
 
 From the Zip Attachment dialog, click on the + icon and choose the type of file to export in the zip file:
 
-![image-20211026095659649](images\informer_email_zip-002.png)
+![image-20211026095659649](images/informer_email_zip-002.png)
 
 In the Zip Attachment dialog, fill out the required information.
 
-![image-20211026095810891](images\informer_email_zip-003.png)
+![image-20211026095810891](images/informer_email_zip-003.png)
 
 ### Email Burst Job Action
 
