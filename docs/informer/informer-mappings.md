@@ -489,3 +489,31 @@ As was noted above, a User ID can be associated with multiple Rep IDs.
 Within Naviga Ad you can find this association in the User Setup Area.
 
 ![loginuservsreps_001](images/informer-mapping-cmopportunities-uservsrep-001.png)
+
+## AD Internet Ratecards
+
+You can set up Ratecard information in Product Setup:
+
+![product-setup](G:\MarkNCS2019\naviga-analytics-docs\docs\informer\images\informer-mappings-ratecards_001.png)
+
+Within **Product Setup**, when you go to **Pricing Rules/Ratecards** you will have access to your Ratecards:
+
+![Naviga Ratecard Setup](G:\MarkNCS2019\naviga-analytics-docs\docs\informer\images\informer-mappings-ratecards_002.png)
+
+The fields available on the above screen can be found in the following mappings within Informer:
+
+- **AD Internet Ratecards** - This is considered the "header" records for rates.  It has links to the **AD Publications**, which is how the product is associated with a ratecard.
+- **AD Internet Ratecards Details** - This mapping 
+- **AD Publications**
+- **AD Internet Ratecard Adj** - This mapping holds information for any Price or Auto Adjustments (the two options in Naviga under "Ratecards")
+
+When creating a report where you are looking for the Ratecard setup information, it is best to use the **AD Internet Ratecards** mapping as your base mapping:
+
+![ratecard mapping](G:\MarkNCS2019\naviga-analytics-docs\docs\informer\images\informer-mappings-ratecards_003.png)
+
+**AD Internet Ratecards** is joined to **AD Publications** by the field **WEB.SITE** which is actually the "Publication ID".  
+
+Both **AD Internet Ratecards Details** and **AD Internet Ratecard Adjs** are linked to via the **LINES** multi valued field in **AD Internet Ratecards**.  
+
+
+
