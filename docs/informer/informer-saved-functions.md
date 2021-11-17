@@ -610,14 +610,14 @@ yoyConfig = {
 
 ```javascript
 yoyConfig = { $record, label: 'revenue', yoyDate: $record.issuedate, fieldValue: $record.orderNetAmt }
-naviga.TestYOY({ $record, label: 'revenue', yoyDate: $record.issuedate, fieldValue: $record.orderNetAmt })
+naviga.yoyCreateFields({ $record, label: 'revenue', yoyDate: $record.issuedate, fieldValue: $record.orderNetAmt })
 ```
 
 ### Output from yoyCreateFields
 
 The only thing that is returned from the yoyCreateFields function is a debug object.   You will only need to use it if you have any issues, it return `{ debugFieldName }`
 
-The main job the function performs, however, is to create new fields on the $record object.  It will create a field for every year in the passed **yoyDate** property on the config object.
+The main job the function performs, however, is to create **new fields** on the $record object.  It will create a field for every year in the passed **yoyDate** property on the config object AND it will create the field **yoyAggrFieldName**, which is very useful if you are doing aggregations.
 
 For example, if your config object passed to the yoyCreateFields function looked like this:
 
@@ -636,7 +636,12 @@ And the data in your dataset had dates from 01/01/2018 through 01/01/2021, the y
 - **$record.revenue2019** - Would contain amount from $record.orderNetAmt if issueDate in year 2019, otherwise 0.
 - **$record.revenue2020** - Would contain amount from $record.orderNetAmt if issueDate in year 2020, otherwise 0.
 - **$record.revenue2021** - Would contain amount from $record.orderNetAmt if issueDate in year 2021, otherwise 0.
-- **$record.yoyAggrFieldName** - Contains the field to use for Aggregations
+- **$record.yoyAggrFieldName** - Contains the field to use for Aggregations.  Based on the date of the transaction in questions, this field contain a field name that can be passed to our aggregation function.  The field will be in the format of `sum${label}${vYOYYear}`
+  For the above configuration, this field will contain one of the following in response to the Year value of the transactions:
+  - `sumrevenue2018`
+  - `sumrevenue2019`
+  - `sumrevenue2020`
+  - `sumrevenue2021`
 
 ### Performing Calculations on YOY Fields
 
