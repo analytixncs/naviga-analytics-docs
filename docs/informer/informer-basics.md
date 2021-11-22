@@ -262,11 +262,48 @@ I tested on a dataset that had multiple _array_ fields in it and when I normaliz
 
 ## Filters
 
-Filters can be found in many places within Informer. Their main purpose is to further limit the data that is loaded in a Dataset or Ad Hoc Report.
+Filters can be found in many places within Informer. Their main purpose is to further limit the data that has been loaded in a Dataset or Ad Hoc Query Report.
 
 Filters applied from different areas will work a little differently and it is important to understand how they differ.
 
-To start let's look at the different ways to use filters on a Dashboard Report.
+
+
+### Accessing the Filter
+
+When you filter a Report, Ad Hoc Query Report or Dataset, there will be multiple areas where you can access the filter options.
+
+Within a Dashboard, Comparison or Data View report, you can get to your filters:
+
+- **Editing the Report** - When in edit mode, you will be able to apply a filter individually for each visual within the report.  This is useful because these filters will be saved with the report and visuals allowing you to set the initial view/filter of the data for users.
+
+- **User level Visual filters** - Users can set their own (modify any filters the report writer set while in edit mode) for each visual. 
+  ![image-20211122132115819](images/informer_basics_filters_010.PNG)
+
+- **Top Level Of the Report** - Your end users can choose to apply a filter at the top level of a report.  The filter set at this level will apply to all visuals within the report and will be "ANDed" with any filters set on the individual visuals.
+
+  ![image-20200727134604915](images/informer_tips_filters-reports-001.png)
+
+
+
+
+
+#### Saving Report Filters
+
+**Ad Hoc Reports**
+
+If you save a filter on an Ad Hoc report, it will be saved for your user. I have found no way to share this with any other users.
+
+**Other Reports based on Datasets**
+
+If you need to be able to share filters, you will want to make sure your data is coming from a Dataset versus an Ad Hoc Report.
+
+:::danger Important
+
+The Reports AND the Datasets feeding the reports must BOTH be shared with the Team or Users who you want to be able to interact with it.
+
+:::
+
+Whenever a user (or the creator) of the report creates a filter in the report, it will be saved as a **private** filter on the underlying dataset. If you want other users to see the filter, you will need to open the Dataset and mark the filter as **public**.
 
 ### Variables / User Fields
 
@@ -276,7 +313,9 @@ Once a user field has been created, you can assign it to a user(s) and give it a
 
 **Filtering - Variables**. You can setup certain variables that are unique for each user. For example, _Department_ could be a variable that would be each users department so when they ran the filter it would automatically filter by their department.
 
-## Filters - Using the Dates
+
+
+## Filters - Using Dates
 
 ### Date Keywords
 
@@ -392,47 +431,7 @@ In our example, filter by Nov and Dec of 2019 and 2020, you would need to add tw
 
 ![1578949720984](images/informer_tips_date-filters-006.png)
 
-## Filters - Reports
 
-When you filter any type of report, there are two places where you can filter the report.
-
-The two places are at the top level of the report and the other is when you are inside and editing the report.
-
-![image-20200727134604915](images/informer_tips_filters-reports-001.png)
-
-When filtering at this level, it is only for your user. Only your user will see it.
-
-If you want all users to see the filter, you will need to click on the **Edit** button and set your filter in this area.
-
-Once you click on the Edit button, click on the vertical ellipsis by the Dataset name and choose **Custom Filter**
-
-![image-20200727135103551](images/informer_tips_filters-reports-002.png)
-
-After you have created your filter, you can click on the **Apply** button.
-
-![image-20200727135222389](images/informer_tips_filters-reports-003.png)
-
-This will "bake in" the filter to your report. The other option would be to Save the filter by clicking on the save icon. However, the user who created and saved the filter and other super users will be the only one who will be able to see and apply the filter.
-
-Saving the filter is useful if you have a complex filter that you want saved on your report. Sometimes, to create a complex filter, you need saved portions of it.
-
-### Saving Report Filters
-
-**Ad Hoc Reports**
-
-If you save a filter on an Ad Hoc report, it will be saved for your user. I have found no way to share this with any other users.
-
-**Other Reports based on Datasets**
-
-If you need to be able to share filters, you will want to make sure your data is coming from a Dataset versus an Ad Hoc Report.
-
-:::danger Important
-
-The Reports AND the Datasets feeding the reports must BOTH be shared with the Team or Users who you want to be able to interact with it.
-
-:::
-
-Whenever a user (or the creator) of the report creates a filter in the report, it will be saved as a **private** filter on the underlying dataset. If you want other users to see the filter, you will need to open the Dataset and mark the filter as **public**.
 
 ## Datasets
 
