@@ -617,7 +617,7 @@ naviga.yoyCreateFields({ $record, label: 'revenue', yoyDate: $record.issuedate, 
 
 The only thing that is returned from the yoyCreateFields function is a debug object.   You will only need to use it if you have any issues, it return `{ debugFieldName }`
 
-The main job the function performs, however, is to create **new fields** on the $record object.  It will create a field for every year in the passed **yoyDate** property on the config object AND it will create the field **yoyAggrFieldName**, which is very useful if you are doing aggregations.
+The main job the function performs, however, is to **create new fields** on the **$record object**.  It will create a field for every year in the passed **yoyDate** property on the config object AND it will create the field **yoyAggrFieldName**, which is very useful if you are doing aggregations.
 
 For example, if your config object passed to the yoyCreateFields function looked like this:
 
@@ -636,7 +636,7 @@ And the data in your dataset had dates from 01/01/2018 through 01/01/2021, the y
 - **$record.revenue2019** - Would contain amount from $record.orderNetAmt if issueDate in year 2019, otherwise 0.
 - **$record.revenue2020** - Would contain amount from $record.orderNetAmt if issueDate in year 2020, otherwise 0.
 - **$record.revenue2021** - Would contain amount from $record.orderNetAmt if issueDate in year 2021, otherwise 0.
-- **$record.yoyAggrFieldName** - Contains the field to use for Aggregations.  Based on the date of the transaction in questions, this field contain a field name that can be passed to our aggregation function.  The field will be in the format of `sum${label}${vYOYYear}`
+- **$record.yoyAggrFieldName** - Contains the field to use for Aggregations.  Based on the date of the transaction in question, this field contain a field name that can be passed to our aggregation function.  The field will be in the format of `sum${label}${vYOYYear}`
   For the above configuration, this field will contain one of the following in response to the Year value of the transactions:
   - `sumrevenue2018`
   - `sumrevenue2019`
@@ -653,7 +653,7 @@ To get started you will need to run the **naviga.calculateAggregations**.
 
 How will your report be aggregated and reported on.  Since we are performing calculations on fields that exist on different rows (because they are in different years), we need to know at what level to aggregate them. 
 
-You will want to choose the lowest level of aggregation and obviously, leave out Year.
+You will want to choose the lowest level of aggregation and obviously, **leave out Year**.
 
 You will usually always want the Month of year from the SAME date that you passed as your **yoyDate** field in the **yoyCreateField** function's configuration.
 
@@ -708,7 +708,7 @@ Now that we have our YOY Revenue fields aggregated, we can perform some calculat
 
 But first, you will need to know what you want the current year to be considered as.  You can do this in a number of ways.
 
-1. **JavaScript** - use JavaScript to look at the systems date and get the year from that.  This is useful for reports that you want scheduled and that you always want looking at the true current and previous year.
+1. **JavaScript** - use JavaScript to look at the systems date and get the current year from that.  This is useful for reports that you want scheduled and that you always want looking at the true current and previous year.
 2. **Input field** - have the user enter it via an Input field.  This is more versatile if a user is going to be running the report manually.
 3. **Hard Code** - Hard code into your scripts.
 
