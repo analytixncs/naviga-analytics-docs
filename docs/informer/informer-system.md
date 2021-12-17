@@ -6,6 +6,10 @@ sidebar_label: Informer System Stuff
 
 ## Setting up Informer Postgres Database as Datasource
 
+This Datasource will provide you with metadata about the Reports, Datasets and Jobs that you have created within Informer.  
+
+One common use for this data is to track Jobs and if they are successful.  You can setup a dataset (in a job) to run every day and send you an email when a job fails or hangs. [Here is a sample](#job-status-dataset)
+
 > NOTE: The information below is for **Informer 5.1.2 or greater only**
 
 Download the following TGZ file to your hard drive:
@@ -39,6 +43,17 @@ Create a new Folder called **Informer_System** and move these nine Datasets into
 
 ### Job Status Dataset
 
-There is not a Job Status sample Dataset, it is pretty easy to build your own, but here is a sample one.
+This a Job Status sample Dataset, it is pretty easy to build your own, but here is a sample one.
 
 **<a target="_blank" href="/downloads/job-status.tgz">Sample Job Status Dataset Bundle</a>**
+
+A few things to note about how the relationship between these tables.  The most useful relationship is between the Job and Job History mappings.
+
+![image-20211217105359091](/images/informer-system_jobs_001.PNG)
+
+There should be one row for every job in the **Job** mapping which then links to the **Job History** mapping, which will have one row for EVERY time the job was run, hence the name history.
+
+Since the Job History mapping has the data in it that we are looking for like the *success* flag, and we really only care about recent runs of the job, you will want to add criteria that filters your report by fields in the Job History mapping.  Things like the following:
+
+- Updated At - This was the last time that the job was Updated
+- Success
