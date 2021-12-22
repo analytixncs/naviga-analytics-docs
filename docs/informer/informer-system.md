@@ -51,9 +51,23 @@ A few things to note about how the relationship between these tables.  The most 
 
 ![image-20211217105359091](/images/informer-system_jobs_001.PNG)
 
-There should be one row for every job in the **Job** mapping which then links to the **Job History** mapping, which will have one row for EVERY time the job was run, hence the name history.
+There should be one row for every job in the **Job** mapping which then links to the **Job History** mapping, which will have one row for EVERY time the job was run, hence the name history.  Most of the fields in the **Job** mapping do not change over time.  For example, the **StartOn** field is NOT when a job starts running, but is the date when the job was originally configured.
+
+The **Job History** mapping gets a new row every time the Job runs, but it is updated at the "end" of the Job, whether it ends in success or failure.   This means that it is difficult to find jobs that are hung and never finish.  
+
+The best way to do this is to look at the **Job.LockedAt** field.  This field gets set to a date when the job starts running and indicates that it is locked, hence it shouldn't be changed (it is locked).  The changes are held until the job finishes and then applied to the Job.
 
 Since the Job History mapping has the data in it that we are looking for like the *success* flag, and we really only care about recent runs of the job, you will want to add criteria that filters your report by fields in the Job History mapping.  Things like the following:
 
 - Updated At - This was the last time that the job was Updated
-- Success
+- Success - Boolean - true or false. 
+
+>  NOTE: The above fields are updated when the job finishes running.
+
+Here is a sample criteria that might be used:
+
+![image-20211222103120134](./images/informer-system_jobs_002.PNG)
+
+This criteria will pull any job that has a history with an updated date of the current date minus two days.  This means that the job must have FINISHED in the last two days to be included.  From those results, we then look for jobs that EITHER were NOT successful OR still have a LockedAt date.  We are looking at the Locked At date because if it is not empty, then we can assume the Job is locked (or it is still running).
+
+> NOTE: If you have a Job that runs on a weekly basis, you may need to adjust the first criteria for the Updated Date.
