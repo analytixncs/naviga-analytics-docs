@@ -20,7 +20,66 @@ xxxbi.navigahub.com/api/datasets/OWNER:datasetname/data**?start=0&limit=50**
 
 You will find that the Routes fall into two basic categories, either **Datasets** or **Ad Hoc Query Reports**.
 
-The main difference is that when you request data from an Ad Hoc Query report, it must execute the query against the Naviga database and then return the data. The Dataset data is cached, so when you request data from it, you will be getting the last refreshed data. This makes **datasets the most performat** of the two options.
+The main difference is that when you request data from an Ad Hoc Query report, it must execute the query against the Naviga database and then return the data. The Dataset data is cached, so when you request data from it, you will be getting the last refreshed data. This makes **datasets the most performant** of the two options.
+
+> Informer has Swagger documentation on the Rest API available at **\<your server name\>/documentation**
+
+## Authenticating 
+
+All REST requests are authenticated and authorized by the Informer server. Informer supports three  authentication methods as outlined below:  
+
+1. **Session** – Uses a session cookie that is set after a successful login and carried with each REST request 
+2. **Token** – This is a query parameter attached to a request URL that allows the route access to the resource.  A token is created within Informer for each Dataset or Report that is being accessed via the REST API. 
+3. **Basic** – HTTP Basic authentication method where username and password are passed using the  HTTP Authentication Header.
+
+### Session Login
+
+Session login can be useful if you are building an web application.  You can have it set a cookie with an authentication token.
+
+To login, you will use the following **POST** route:
+
+**/api/login/local**
+
+The body of the post will be a JSON object:
+
+```json
+{
+    "username": "username",
+    "password": "123password"
+}
+```
+
+### Token Authentication
+
+From the Dataset or Report Action menu, choose to **Create a data access token**.
+
+![Token Creation](/images/api_docs_tokenauth_001.png)
+
+The **Edit Token** dialog will give you some options, but you will just want the "Token Only" option if you are building your own API calls.
+
+![Edit Token Dialog](./images/api_docs_token_001.png)
+
+Now, you can use the above token as a Query Parameter:
+
+`/api/datasets/{id}/data?token=eyJhb....djc`
+
+### Basic Authentication
+
+Basic Authentication takes the credentials constructed by first combining the username and the password with a colon (`aladdin:opensesame`), and then encodes the resulting string in [`base64`](https://developer.mozilla.org/en-US/docs/Glossary/Base64) (`YWxhZGRpbjpvcGVuc2VzYW1l`).
+
+This base64 version of the username and password can then be sent along with your API Request via the headers:
+
+```
+Authorization: Basic YWxhZGRpbjpvcGVuc2VzYW1l
+```
+
+The implementation of this type of auth will differ depending on the how you are sending your API Requests.
+
+If you are testing out Route via the Postman app, then most of it is built in for you as you can see below.  You will simply enter the username and password and Postman will take care of the rest.  If you observe the code snippet to the right, you will see the `Authorization` header with the base64 encoded username and password. 
+
+![Basic Auth Postman](./images/api_docs_basicAuth_001.png)
+
+
 
 ## Dataset Routes
 
@@ -28,7 +87,7 @@ The main difference is that when you request data from an Ad Hoc Query report, i
 
 The route that is used to get data from a dataset. Replace the **{id}** with the id of the Dataset.
 
-**/datasets/{id}/data**
+**/api/datasets/{id}/data**
 
 There are two options when getting the **{id}** for the dataset. You can either get a unique `UUID` or you can get the `user:name-of-dataset`.
 
@@ -50,7 +109,7 @@ You have some optional parameters that you can include via the query string, mos
 
 These options will allow you to tell the API what data you want to retrieve from the dataset. This is very useful if you need to limit the amount of data coming back.
 
-It also facilitates paging through the data. The `sort` parameter can be any field, but the most performat way to run it is by using the `_doc` field, which is an ElasticSearch field (you won't find it in your results).
+It also facilitates paging through the data. The `sort` parameter can be any field, but the most performat way to run it is by using the `_doc` field, which is an Elasticsearch field (you won't find it in your results).
 
 > NOTE: According to Entrinsik, if you don't need to sort by any specific field, then you should always include the sort by \_doc option:
 > `sort=_doc`
@@ -108,11 +167,11 @@ If you are using the `next` or `prev`, you can add the `&sort=_doc`.
 
 This is a great route if you don't need to page through the data and you just need all of the records.
 
-**/datasets/{id}/export/{exporter}**
+**/api/datasets/{id}/export/{exporter}**
 
 The most common exporter is `json`. If you want to see the other options, you can call this endpoint (GET):
 
-**/datasets/{id}/exporters**
+**/api/datasets/{id}/exporters**
 
 There are a few other parameters that are optional.
 
@@ -139,7 +198,7 @@ There are a few other parameters that are optional.
 
 To programatically refresh a data use the following Route:
 
-**/datasets/{id}/\_refresh**
+**/api/datasets/{id}/\_refresh**
 
 If you have Input values that you want to pass for the refresh, you can pass them in the body of the post as a JSON object:
 
@@ -299,7 +358,7 @@ You will have to play around with the returned JSON to find what you need, but o
 
 This route will return an integer with the count of rows in the dataset index.
 
-**/datasets/{id}/index/count**
+**/api/datasets/{id}/index/count**
 
 ## Report Routes
 
@@ -309,7 +368,7 @@ This route will run the report and return the data. Many reports have required o
 
 The base route is:
 
-**/queries/{id}/\_execute**
+**/api/queries/{id}/\_execute**
 
 ## Other Information
 
