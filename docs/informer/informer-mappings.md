@@ -296,7 +296,7 @@ When you view a line in Naviga Ad, you see that a single line can extend across 
 - Month Est Amt
 - Month Act Amt
 
-This is what a Line in a Campaign looks like in Naviga Ad. Notice that it has further detail showing the billing amount for each month. The values above correspond to each of these value in Naviga Ad.
+This is what a Line in a Campaign looks like in Naviga Ad. Notice that it has further detail showing the billing amount for each month (i.e. each issue). The values above correspond to each of these value in Naviga Ad.
 
 ![img](images/informer-mapping-adinternetorders-004.png)
 
@@ -323,6 +323,10 @@ There are a lot of Amount fields in the **AD Internet Orders** mapping. We will 
 **Line Price Amt**
 
 If you do not need to know the Line Item monthly breakout of revenue, then you can simply use the **Line Price Amt**. Just be aware that if you include any multivalued fields and normalize on them, the **Line Price Amt** field will be duplicated over those normalized items.
+
+Also, the be aware that the **Line Price Amt** is the **Price per Issue**.  That would mean that if a line had 3 issues at $100 for the Issue Price, the Line Price Amt would be $100, but you may instead be looking for $300, the price for each issue summed up.
+
+If that is what you are looking for, then you will want to take a look at the Month Actual/ Est Amt section below.
 
 ### Month Actual / Est Amt
 
