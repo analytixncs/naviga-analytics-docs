@@ -484,6 +484,40 @@ You have five actions that you can perform in a job. They are:
 - **Send to file system** - This option will let you export to a Naviga designated FTP site. See [Exporting To The File System](#exporting-to-file-system-ftp)
 - **Export Saved List** - this will create list in a Datasource
 
+### Job Scheduling
+
+The whole point of a Job is to allow you to schedule it to run a certain times without external input.
+
+To set the schedule, you will click the switch next to the Schedule to activate it:
+
+![image-20220112141615002](images/informer-basics-JOB-Schedules-001.png)
+
+Now, you have access to the **When** area.  For the most part, this area is self explanatory, however, there is one option that is a bit confusing.
+
+You will note, that if you need to do any complicated schedule, like *refresh every 15 minutes between 10am and 2pm Monday through Friday*, if not possible with the base options.
+
+It is possible with the **Custom** interval.
+
+![image-20220112142022025](images/informer-basics-JOB-Schedules-002.png)
+
+The custom interval is a CRON expression.  If you are unfamiliar with CRON expression, this site is very useful:
+
+[CronTab.guru](https://crontab.guru/#*/15_14-15_*_*_1-5)
+
+Here is the CRON Expression for *refresh every 15 minutes between 10am and 2pm Monday through Friday*
+
+``*/15 14-15 * * 1-5`
+
+Breaking this apart:
+
+- \*/15 - every 15 minutes
+- 10-14 - between 10am and 2pm
+- \* - every day of the month
+- \* - every month
+- 1-5 - only on Mon - Fri
+
+
+
 ### Send an Encrypted Email Attachment
 
 The standard email Action allows you to attach your data output in a number of formats.   However, if you need to send out the attachment in an encrypted Zip file, you need to follow the steps below.
