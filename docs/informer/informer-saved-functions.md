@@ -424,7 +424,7 @@ Along with the field, you can pass the delimiter that you want as well as a flag
 
 ---
 
-## returnANumber- Create Function
+## returnANumber - Create Function
 
 - **Function name:** returnANumber
 
@@ -450,7 +450,7 @@ if (isNaN(parsedNumber)) {
 return parsedNumber;
 ```
 
-## returnANumber- Usage
+## returnANumber - Usage
 
 This function will take any value and return a number.  This is useful if you are performing a calculation on a field which may contain null or blank values.
 
@@ -538,6 +538,53 @@ Along with the field, you can pass the delimiter that you want as well as a flag
 | 05/01/2021 | 03/01/2020 | -13    |
 
 ---
+
+## parseDateTimeStamp - Create Function
+
+- **Function name:** parseDateTimeStamp
+
+- **Namespace:** naviga
+
+- **Description:** Parse the passed date time stamp field. (Example field on AD Internet Orders, Date Time Stamp #160)
+
+- **Parameters:**
+
+  | Data Type | Variable name | Label           | Sample |
+  | --------- | ------------- | --------------- | ------ |
+  | number    | dateTimeStamp | Date Time Stamp |        |
+
+**Function Body**
+
+```javascript
+// First 5 digits of dateTimeStamp represent the number of days since 01/01/1967
+startDate = moment("01/01/1967")
+daysSince = dateTimeStamp.slice(0,5)
+// Convert to a moment date
+stampDate = startDate.add(daysSince, 'days').format('MM-DD-YYYY')
+
+// The last 8 digits represent the number of milliseconds since the start of the day
+timeComponent = parseInt(dateTimeStamp.slice(5))
+// Below are examples if you ever want to use the time component to format the milliseconds
+//tempTime = moment.duration(timeComponent);
+// y = tempTime.hours() + ":" + tempTime.minutes() +":" +  tempTime.seconds();
+
+// Return a Date that includes the Time Component
+return moment(stampDate).milliseconds(timeComponent)
+```
+
+## parseDateTimeStamp - Usage
+
+There are a few **Date Time Stamp** fields in Informer.  These fields are a 13 digit string of numbers that can be parsed (decoded) to a standard JavaScript Date and Time field, which is exactly what this saved function does.
+
+Simply pass in a Date Time Stamp field and you will get a JavaScript Date/Time field back. You can then use and manipulate this field as you would any other regular date field within Informer.
+
+Here is and example of what the Date Time Stamp field contains `1961650870982`.
+
+```javascript
+$record.SavedFunctionReturn = naviga.parseDateTimeStamp($record['dateTimeStamp'])
+```
+
+
 
 ## yoyCreateFields - Create Function
 
