@@ -24,7 +24,7 @@ The main difference is that when you request data from an Ad Hoc Query report, i
 
 > Informer has Swagger documentation on the Rest API available at **\<your server name\>/documentation**
 
-## Authenticating 
+## Authenticating
 
 All REST requests are authenticated and authorized by the Informer server. Informer supports three  authentication methods as outlined below:  
 
@@ -53,11 +53,11 @@ The body of the post will be a JSON object:
 
 From the Dataset or Report Action menu, choose to **Create a data access token**.
 
-![Token Creation](/images/api_docs_tokenauth_001.png)
+![Token Creation](images/api_docs_tokenauth_001.png)
 
 The **Edit Token** dialog will give you some options, but you will just want the "Token Only" option if you are building your own API calls.
 
-![Edit Token Dialog](./images/api_docs_token_001.png)
+![Edit Token Dialog](images/api_docs_token_001.png)
 
 Now, you can use the above token as a Query Parameter:
 
@@ -77,7 +77,7 @@ The implementation of this type of auth will differ depending on the how you are
 
 If you are testing out Route via the Postman app, then most of it is built in for you as you can see below.  You will simply enter the username and password and Postman will take care of the rest.  If you observe the code snippet to the right, you will see the `Authorization` header with the base64 encoded username and password. 
 
-![Basic Auth Postman](./images/api_docs_basicAuth_001.png)
+![Basic Auth Postman](images/api_docs_basicAuth_001.png)
 
 
 
