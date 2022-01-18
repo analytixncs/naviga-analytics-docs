@@ -361,6 +361,14 @@ if ($record.a_d_internet_campaigns_assoc_campaignType === "F") {
 >
 > The above code assumes the base mapping is **AD Internet Orders**. If not, the field reference name may be different.
 
+### Foreign Currency and Exchange Rates
+
+When an ad is placed using a foreign currency, you will need to be know which fields in Informer are showing you the 
+
+Exchange Rate Formula:
+
+`Local Currency Amount = Foreign Currency Amount / Exchange Rate`
+
 ### Metadata Fields
 
 The Metadata fields are found on the Category MetaData tab in the Naviga system:
