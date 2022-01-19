@@ -363,11 +363,72 @@ if ($record.a_d_internet_campaigns_assoc_campaignType === "F") {
 
 ### Foreign Currency and Exchange Rates
 
-When an ad is placed using a foreign currency, you will need to be know which fields in Informer are showing you the 
+When an ad is placed using a foreign currency, certain fields will show up in the foreign currency and some in the local currency.
 
-Exchange Rate Formula:
+The other important item to understand is that when the ad is placed, the exchange rate at that point in time is stored and used to calculate the currency values for the **AD Internet Orders** and **AD Internet Campaigns** mappings and they will not change.  However, once the campaign is invoiced, the system will reach out for the exchange rate at the time of invoicing.  That exchange rate is not stored, but instead a variance value is stored.  This is the difference between the initial foreign currency value and the "new" value given the exchange rate at the time of invoicing.  This "difference" field is in the **AR Invoices** mapping and is called **Exchange Revaluation Amount** (99)
 
-`Local Currency Amount = Foreign Currency Amount / Exchange Rate`
+> Exchange Rate Formula for Reference:
+>
+> `Local Currency Amount = Foreign Currency Amount / Exchange Rate`
+
+**AD Internet Campaigns mapping**
+
+The exchange rate is only stored in this mapping.  The field is called **Currency Exchange Rate** (226).  The Exchange rate is such that you can calculate the foreign currency amount using this formula `local currency amount * exchange rate`
+
+You can also find what the foreign currency is by adding the **Currency Code** (50) field.  
+
+There are many amount fields in the AD Internet Campaigns mapping and below is a list of common ones and what they will display if an ad has been booked in a foreign currency.  If a field you need is not in the list, make sure to verify if it is showing local or foreign currency before using it in your report.
+
+- **Gross Amount** - Local Currency
+- **Web Site Local Gross Amt** - Local Currency
+- **Current Salesrep Amounts** - Local Currency
+- **Local Revenue Amount** - Local Currency
+- **Local Web Site Amount** - Local Currency
+- **Price Actual Amount** - Foreign Currency
+- **Revenue Amount** - Foreign Currency
+- **Revenue Net Amount** - Foreign Currency
+- **Foreign Currency Cost** - Foreign Currency
+
+The most useful fields from the AD Internet Campaigns mapping are:
+
+- **Currency Code**
+- **Currency Exchange Rate**
+
+**AD Internet Orders mapping**
+
+In the AD Internet Orders mapping, there is no exchange rate field, however, most of the amount fields are expressed in the **foreign** currency, if the campaign was booked in a foreign currency.
+
+- **Month Actual Amt** - Foreign Currency
+- **Month Est Amt** - Foreign Currency
+- **Month Curr Rep Amt** - Foreign Currency
+
+**Convert Foreign Currency to Local**
+
+You may want to see all your revenue in your local currency.  To do this, you will need to add a flow step.  If you are using the template dataset for AD Internet Orders, you would replace the Powerscript that is defining the Net Amount:
+
+```javascript
+// We will use the following formula
+// ---- Local Currency Amount = Foreign Currency Amount / Exchange Rate
+// If there is an exchange rate, return it else return 1
+exchangeRate = $record['a_d_internet_campaigns_assoc_currRate'] ? $record['a_d_internet_campaigns_assoc_currRate'] : 1;
+
+// Calculated the Net Revenue Amount field taking into account the exchange rate if one exists.
+if ($record.a_d_internet_campaigns_assoc_campaignType === 'F') {
+    $record.NetAmount = $record.monthEstAmt / exchangeRate
+} else {
+    $record.NetAmount = ($record.monthActualAmt === 0 || !$record.monthActualAmt) ? $record.monthEstAmt / exchangeRate : $record.monthActualAmt / exchangeRate;    
+}
+```
+
+> Remember that the amounts in the AD Internet Orders and AD Internet Campaign mappings are based on the Exchange rate in the AD Internet Campaigns mapping and will not change.
+>
+> This means that when the campaign is invoiced, it may be invoiced at a different exchange rate. 
+
+**AR Invoice mapping**
+
+The last piece is the AR Invoice mapping.  It has a field called the **Exchange Revaluation Amount**, which is the difference **in LOCAL Currency** between the converted price at booking and the converted price at invoicing.
+
+
 
 ### Metadata Fields
 
