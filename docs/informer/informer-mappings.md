@@ -592,24 +592,24 @@ Both **AD Internet Ratecards Details** and **AD Internet Ratecard Adjs** are lin
 
 The AR Invoices mapping contains information about the AR invoices in the system.  It is helpful to understand how invoices are viewed in the Naviga system.
 
- 
+First, understand that there can be no more than a single Campaign per invoice, **however**, there can by many Invoices per campaign.
 
-WORK IN PROGRESS ******************************************************
+Also, **Performance Campaigns** and **Flexible Campaigns** invoice differently.
 
- 
+**Performance Campaigns**
 
-For Performance Campaigns one selects a date range to bill. So if a line item runs for 12 months, and I bill monthly, that one campaign line will result in 12 invoices. There is an option in the system to automatically create multiple lines, if that option is turned on then entering that 12 month item will actually result in 12 separate lines, closer to what the billing will do. If that option is turned off there is one line but possibly 12 issues/months/invoices.
+Each line in a campaign may run in multiple issues.  Each issue will have its own Invoice.  Here is an example showing an Line item with two issues.  Notice each issue has its own Invoice:
 
-For Performance Campaigns one can choose to bill by product or by product group. So if there are 5 lines on the campaign each for a different product, the invoice could either be for one line (or more if there are multiple lines for that product) or for the entire campaign. So not necessarily a one for one relationship but the line information does feed the invoice amount.
+![image-20220121101136980](images/informerMapping_invoice001.jpg)
 
- 
+In Informer, from the **AD Internet Orders** mapping,  the above Order Line looks like this:
 
-For Flexible Campaigns:
+![image-20220121102902960](images/informerMapping_invoices_002.jpg)
 
-The invoice is for a percentage of the total campaign, there is no direct relationship between the line item(s) and invoice each invoice is always a percentage of the sum amount of the entire campaign
+For **Performance** Campaigns one can choose to bill by **Product** or by **Product Group.** So if there are 5 lines on the campaign, each for a different product, the invoice could either be for one line (or more if there are multiple lines for that product) or for the entire campaign. So not necessarily a one for one relationship but the line information does feed the invoice amount.
 
- 
 
-In digital first there is no way to combine multiple campaigns on one invoice, but as you can see one campaign or even one line can result in multiple invoices.
 
-WORK IN PROGRESS ******************************************************
+**Flexible Campaigns**
+
+The invoice is for a percentage of the total campaign, there is no direct relationship between the line item(s) and invoice each invoice is always a percentage of the sum amount of the entire campaign.
