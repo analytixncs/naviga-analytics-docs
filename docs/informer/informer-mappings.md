@@ -588,5 +588,28 @@ When creating a report where you are looking for the Ratecard setup information,
 
 Both **AD Internet Ratecards Details** and **AD Internet Ratecard Adjs** are linked to via the **LINES** multi valued field in **AD Internet Ratecards**.  
 
+## AR Invoices
 
+The AR Invoices mapping contains information about the AR invoices in the system.  It is helpful to understand how invoices are viewed in the Naviga system.
 
+ 
+
+WORK IN PROGRESS ******************************************************
+
+ 
+
+For Performance Campaigns one selects a date range to bill. So if a line item runs for 12 months, and I bill monthly, that one campaign line will result in 12 invoices. There is an option in the system to automatically create multiple lines, if that option is turned on then entering that 12 month item will actually result in 12 separate lines, closer to what the billing will do. If that option is turned off there is one line but possibly 12 issues/months/invoices.
+
+For Performance Campaigns one can choose to bill by product or by product group. So if there are 5 lines on the campaign each for a different product, the invoice could either be for one line (or more if there are multiple lines for that product) or for the entire campaign. So not necessarily a one for one relationship but the line information does feed the invoice amount.
+
+ 
+
+For Flexible Campaigns:
+
+The invoice is for a percentage of the total campaign, there is no direct relationship between the line item(s) and invoice each invoice is always a percentage of the sum amount of the entire campaign
+
+ 
+
+In digital first there is no way to combine multiple campaigns on one invoice, but as you can see one campaign or even one line can result in multiple invoices.
+
+WORK IN PROGRESS ******************************************************
