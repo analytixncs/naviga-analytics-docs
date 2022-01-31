@@ -316,6 +316,16 @@ After Normalizing, the above data will now look like this:
 
 ![image-20210511161333417](images/informer-mapping-adinternetorders-006.png)
 
+### Print vs Digital
+
+To find if a campaign line is associated with a Print or Digital publication, you would use the **Print Pub Ind** field from the **AD Publications** mapping.
+
+If this field is **Y**, then the campaign is Print, if **N**, then the campaign is Digital.
+
+If you have created a report using the AD Internet Orders mapping, you would find the **Print Pub Ind** field in the **Web Site** association:
+
+![image-20220131123541539](images/informerMapping_adinternetorders-printdigital001.jpg)
+
 ### Amount Fields
 
 There are a lot of Amount fields in the **AD Internet Orders** mapping. We will focus on the Month Actual/Est Amt fields and the **Line Price Amt** fields in this document.
