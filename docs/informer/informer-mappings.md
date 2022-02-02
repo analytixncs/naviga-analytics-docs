@@ -340,9 +340,27 @@ If that is what you are looking for, then you will want to take a look at the Mo
 
 ### Month Actual / Est Amt
 
-The **Month Actual and Est Amt** multivalued fields have some special rules that need to be followed to get the correct information from a report written using them.
+The **Month Actual and Est Amt** multivalued fields, which means that you will most likely want to normalize them and they also have some special rules that need to be followed to get the correct information from a report written using them.
 
-These rules can only be applied via a PowerScript Flow step.
+First, you will want to normalize the **Month Actual Amt** and **Month Est Amt** fields.  If you look at a single line in Naviga, you will see that a single line id can have multiple "runs".  You can see below, that this Line ID of 11644 has three run days:
+
+![image-20220202140240363](images/informer_mapping_adinternetorders-amounts-001.png)
+
+In Informer, WITHOUT any normalization, you will see the following:
+
+![image-20220202141008838](images/informer_mapping_adinternetorders-amounts-002.png)
+
+What we need is to have those Month Actual Amt, Month Est Amt and Start and End date fields to each be on a row of their own.  To do this, we apply a **Normalization** Flow Step:
+
+![image-20220202140740990](images/informer_mapping_adinternetorders-amounts-003.png)
+
+This will give us the following:
+
+![image-20220202140916735](images/informer_mapping_adinternetorders-amounts-004.png)
+
+> If you want to add Reps to the mix, you have a couple of other steps, see the next section for reps.
+
+The other rules can only be applied via a PowerScript Flow step.
 
 Here are the rules:
 
@@ -370,6 +388,65 @@ if ($record.a_d_internet_campaigns_assoc_campaignType === "F") {
 > - **$record.monthActualAmt** - This is the Month Actual Amt from the **AD Internet Orders** mapping
 >
 > The above code assumes the base mapping is **AD Internet Orders**. If not, the field reference name may be different.
+
+### Adding Reps into the Mix
+
+Obviously, you will want to have reports with rep data.  
+
+To add Reps to your report, you will first have to choose, whether you want the Current Rep or the Original Rep.  These are the fields you would need:
+
+![image-20220202143905699](images/informer_mapping_adinternetorders-reps-001.png)
+
+You will want to grab the Rep Pct if you have any ads with multiple reps on them.
+
+For our example, we will be using the Current Rep ID and Current Rep Pct fields.
+
+Once, you select those, fields you may also want the Rep name, you can get this from the associated mapping called **Curr AD Salesrep**:
+
+![image-20220202144252870](images/informer_mapping_adinternetorders-reps-002.png)
+
+For our example, I will be selecting the **Salesrep Name** field from the **Curr AD Salesrep** mapping.
+
+You might think you are done, but not yet.  Notice that each of the Rep fields are *multivalued*, this is similar to what you saw with the Amount fields.  We had to normalize them.  Is most cases, where you have fields from the same mapping (amt fields and rep fields) that are multivalued, you can just include them all in a single normalize step.  
+
+**BUT Not here!** 
+
+The Rep fields are multivalued, but in reference to something different than the Amount fields.  The Amount fields will have a multiple values in relation to the run days of a line ID, but the Sales Rep fields will have multiple values based on whether multiple reps are assigned to the Line.
+
+Long story, short, you will need **TWO** normalization steps:
+
+- **FIRST** normalize the Amount Fields
+- **NEXT** normalize the Rep Fields 
+
+> If you have included any fields from the Associated rep mappings (Curr AD Salesrep or Orig AD Salesrep), they will **ALSO** need to be included in the normalization step.
+
+Here is what the normalization would look like:
+
+![image-20220202145651223](images/informer_mapping_adinternetorders-reps-003.png)
+
+And in our Flow steps, you will have two normalize steps:
+
+![image-20220202145749418](images/informer_mapping_adinternetorders-reps-004.png)
+
+Lastly, if you have Lines with multiple reps assigned to them, with different percentage allotments, then you will need to create a calculated field or Powerscript to calculate the reps amount:
+
+```javascript
+// Calculated the Net Revenue Amount field
+if ($record.a_d_internet_campaigns_assoc_campaignType === "F") {
+  $record.NetAmount = $record.monthEstAmt;
+} else {
+  $record.NetAmount =
+    $record.monthActualAmt === 0 || !$record.monthActualAmt
+      ? $record.monthEstAmt
+      : $record.monthActualAmt;
+}
+
+// Here is the rep alo
+
+$record.RepAmount = $record.NetAmount * ($record.currentRepPcts/100)
+```
+
+
 
 ### Foreign Currency and Exchange Rates
 
@@ -623,3 +700,32 @@ For **Performance** Campaigns one can choose to bill by **Product** or by **Prod
 **Flexible Campaigns**
 
 The invoice is for a percentage of the total campaign, there is no direct relationship between the line item(s) and invoice each invoice is always a percentage of the sum amount of the entire campaign.
+
+## GEN Clients
+
+Inftro
+
+### Delivery Methods
+
+Here are the mappings of the various delivery methods.  
+
+> **NOT AVAILABLE Currently:** Under A/R Setup - the Delivery Method under **Misc. Billing Details**  
+
+**A/R Setup - Statement Details Delivery Method**
+`GEN Clients.Stmt Delivery Method (259)`
+
+![img](images/informerMapping_gen_clients-001.jpg)
+
+**Advertising Setup for certain Clients**
+
+Delivery Method - `GEN Clients - Digital Inv Delivery (275)`
+
+![img](images/informerMapping_gen_clients-002.png)
+
+**Advertising for Other Clients**
+
+Digital Billing Delivery Method - `GEN Clients - Digital Inv Delivery (275)`
+
+Print Billing Delivery Method - `GEN Clients - Invoice Delivery Method (226)`
+
+![img](images/informerMapping_gen_clients-003.png)
