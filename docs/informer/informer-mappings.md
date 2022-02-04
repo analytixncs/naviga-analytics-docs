@@ -703,7 +703,49 @@ The invoice is for a percentage of the total campaign, there is no direct relati
 
 ## GEN Clients
 
-Inftro
+Intro
+
+### Statement Email Address
+
+The **GEN Company/Individual Names** mapping has a number IDs within that are self referencing.  One such ID is the the Employees ID.
+
+What that means is that the **GEN Company/Individual Names** mapping holds the information for any entity that represents an Individual or a company, that individual could be an employee are a Transient Ad booker.  It could also be a parent or child company!
+
+So this mapping does a lot.  In this section, I want to leverage that to be able to gain access to Contact Email addresses that are not available in the **GEN Company/Individual Names** mapping.
+
+For example, there is company "Big Company" in the **GEN Clients** mapping, in that mapping there is a field called *Stmt Email Contact ID* which is an ID to a "contact" that lives in the **GEN Company/Individual Names** mapping, but the **GEN Clients** JUST has the ID, not the actual email address and there is no defined relationship to be able to get the email address.
+
+We can still get at that email address information by using our understanding of **GEN Company/Individual Names**. 
+
+- We know that the *Stmt Email Contact ID* is pointing to a "row" in the **GEN Company/Individual Names** mapping.
+- We know that the *Stmt Email Contact ID* field is pointing to an **employee** of "Big Company"
+- We know that we can get a list of all of the employees, because of the following relationship:
+  ![img](images/informerMapping_gen_clients-stmtemail_001.png)
+- Notice that in the above relationships, **GEN Company/Individual Names** is self referencing from Client Name to Employees.
+
+What this relationship allows us, is to be able to get all of the employees for a particular company, "Big Company" in this case.  However, we only need the **Name Id** and **Email Addresses** fields from the **Employee** mapping.  Those along with the *Stmt Email Contact Id* (this field IS the Name Id) field from **GEN Clients**, we can create a powerscript to grab the email addresses.
+
+```javascript
+// Since we don't have a link to users from GEN Clients -> Client Name . stmtEmailContactId to 
+// the GEN Company/Individual Names mapping to get the actual email addresses, we use the below.
+
+// Create an object associating the employee ID with the employee email address
+// { [nameId]: "emailAddress", ... }
+// NOTE: this will pull ALL employees from the employee 
+employeeIdEmailObject = $record['new_name_assoc_employees_assoc_nameId'].reduce((final, el, index) => {
+  final = { ...final, [el]: $record['new_name_assoc_employees_assoc_emailAddresses'][index]}
+  return final
+}, {})
+
+
+// Since stmtEmailContactId is multivalued, loop through and grab all matching emails from the above
+// created eployeeIdEmailObject
+$record.StmtContactEmails = $record['stmtEmailContactId'].map(contactId => employeeIdEmailObject[contactId])
+```
+
+You will also want a flow step to **Remove** the Employee fields, as they were only used to help us get the information we needed.
+
+You will then be left with an array of *StmtContactEmails*.
 
 ### Delivery Methods
 
@@ -716,13 +758,17 @@ Here are the mappings of the various delivery methods.
 
 ![img](images/informerMapping_gen_clients-001.jpg)
 
-**Advertising Setup for certain Clients**
+**Advertising Setup for Digital First Naviga Users**
+
+> Digital First is the latest version of the Naviga software
 
 Delivery Method - `GEN Clients - Digital Inv Delivery (275)`
 
 ![img](images/informerMapping_gen_clients-002.png)
 
-**Advertising for Other Clients**
+**Advertising for Classic Naviga Users**
+
+> Classic is the term used for the legacy version the Naviga System
 
 Digital Billing Delivery Method - `GEN Clients - Digital Inv Delivery (275)`
 
