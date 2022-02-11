@@ -530,6 +530,61 @@ To access these fields in Informer, you will need to pull in the following field
 
 The above fields are Multivalued and you will most likely want to Normalize them.
 
+### GL Codes in AD Internet Orders
+
+In the most basic scenario, you can get the GL Code string from the AD Publications mapping grabbing the **IN Revenue GL ID**. 
+
+Each Product will have a default Revenue GL Id and this field will hold it.  In Informer this will look as follows:
+
+![image-20220211143928173](images/informer_mapping_adinternetorders-GL-001.png)
+
+However, most sites will have GL Overrides, which means that a line won't be associated with the default Revenue ID.
+
+This makes things a bit more tricky.  
+
+There is a **GL Type ID** field in the **AD Internet Orders** mapping.  This field will be the correct GL Type for the GL Code, meaning that if that line is "overridden", that GL Type ID field **will be** the overridden value.
+
+The tricky part is that we do not have a link to the AD Publication table on GL Type.  To overcome this, we can add some Powerscript code to help us.
+
+Here are the fields you will need in your dataset:
+
+AD Internet Orders -> GL Type ID (12)
+
+AD Publications (Web Site) -> GL Type ID (317)
+
+AD Publications (Web Site) -> GL Type Revenue ID (318)
+
+With the above three fields you will see something like this:
+
+![image-20220211144622274](images/informer_mapping_adinternetorders-GL-002.png)
+
+The first GL Type is from AD Internet Orders and is the "correct" GL Type.  The other fields are from AD Publications and show all GL Types associated with the given publication.
+
+Our Powerscript needs to match the GL Type ID from AD Internet Orders to the correct on from AD Publications and then get the correct GL Code (GL Type Revenue ID).
+
+Here is that code:
+
+```javascript
+// Loop through the all the GL Types on a product
+// and match it to the GL Type on the Order Line
+// Return the matching GL code for the GL Type
+$record['web_site_id_assoc_glTypes'].every((el, index) => {   
+	if ($record['glTypeId'] === el) {
+        $record.RealGLCode = $record['web_site_id_assoc_glTypeRevenue'][index]
+        $record.RealExternalGLCode = $record['changeCode'][index]
+        return false
+    }    
+    return true
+})
+```
+
+This code will return a "Real" GL Code and also is returning the External GL (Change Code) if that is something you need.
+
+Lastly, you will want to remove the Web Site GL Type ID and Web Site GL Type Revenue ID field from you report so that you don't get the multivalued fields showing.
+
+> Download a sample Dataset:
+> **<a  target="_blank"  href="/downloads/naviga-ad-internet-orders-with-gl.tgz"> [NAVIGA]-AD Internet Orders With GL</a>**
+
 ## CM Opportunities
 
 The CM Opportunities mapping allows you to report on the opportunities that you have in the system.
