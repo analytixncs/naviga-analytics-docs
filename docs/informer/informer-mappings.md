@@ -568,17 +568,23 @@ Here is that code:
 // Loop through the all the GL Types on a product
 // and match it to the GL Type on the Order Line
 // Return the matching GL code for the GL Type
-$record['web_site_id_assoc_glTypes'].every((el, index) => {   
-	if ($record['glTypeId'] === el) {
-        $record.RealGLCode = $record['web_site_id_assoc_glTypeRevenue'][index]
-        $record.RealExternalGLCode = $record['changeCode'][index]
-        return false
-    }    
-    return true
-})
+productGLTypes = $record['web_site_id_assoc_glTypes'];
+productGLRevCodes = $record['web_site_id_assoc_glTypeRevenue'];
+lineGLType = $record['glTypeId']
+
+for(let i = 0; productGLTypes.length>i; i++) {
+  let el = productGLTypes[i]
+  if (el === lineGLType) {
+    $record.RealGLCode = productGLRevCodes[i]
+    // Only needed if you "need" the external gl code (changeCode)
+    // $record.RealExternalGLCode = $record['changeCode'][i]
+  	break;
+  }
+} 
+
 ```
 
-This code will return a "Real" GL Code and also is returning the External GL (Change Code) if that is something you need.
+This code will return a "Real" GL Code and also is returning the External GL (Change Code) if that is something you need.  However, getting the External GL Code requires another dataset to connect the **GL Chart of Accounts** mapping to the AD Internet Orders mapping.  The sample dataset download includes this other Dataset.  You may remove it if you like.
 
 Lastly, you will want to remove the Web Site GL Type ID and Web Site GL Type Revenue ID field from you report so that you don't get the multivalued fields showing.
 
