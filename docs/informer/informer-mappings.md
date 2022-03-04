@@ -591,6 +591,22 @@ Lastly, you will want to remove the Web Site GL Type ID and Web Site GL Type Rev
 > Download a sample Dataset:
 > **<a  target="_blank"  href="/downloads/naviga-ad-internet-orders-with-gl.tgz"> [NAVIGA]-AD Internet Orders With GL</a>**
 
+### Adjustments On Lines
+
+If you need to get the Adjustment Amount and Descriptions for Campaign Lines, you will find this information on the **AD Internet Orders** mapping.
+
+![image-20220304144850387](images/informer_mapping_adinternetorders-adj-001.png)
+
+> NOTE: The Month Actual / Est Amt fields already have any adjustment amounts factored into them.
+
+Also note that the Adjustment amount fields are multivalued.  You need to be careful since these are similar to what we have when we add sales reps from AD Internet Orders.  These fields ARE multivalued, but at a different level than the Amount and Sales Rep fields.  You will need to normalize these in a separate normalize step.
+
+The Adjustments apply to all of a lines multivalued Amount and Date fields like Month Period and Mont Act Amount, etc.
+
+Here is a visual example:
+
+![image-20220304150858841](images/informer_mapping_adinternetorders-adj-002.png)
+
 ## CM Opportunities
 
 The CM Opportunities mapping allows you to report on the opportunities that you have in the system.
@@ -724,7 +740,7 @@ Within **Product Setup**, when you go to **Pricing Rules/Ratecards** you will ha
 The fields available on the above screen can be found in the following mappings within Informer:
 
 - **AD Internet Ratecards** - This is considered the "header" records for rates.  It has links to the **AD Publications**, which is how the product is associated with a ratecard.
-- **AD Internet Ratecards Details** - This mapping 
+- **AD Internet Ratecards Details** - This mapping hold the details or lines of the individual ratecards. 
 - **AD Publications**
 - **AD Internet Ratecard Adj** - This mapping holds information for any Price or Auto Adjustments (the two options in Naviga under "Ratecards")
 
