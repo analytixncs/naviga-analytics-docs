@@ -479,6 +479,61 @@ Along with the field, you can pass the delimiter that you want as well as a flag
 
 ---
 
+## getDaysBetween - Create Function
+
+- **Function name:** getDaysBetween
+
+- **Namespace:** naviga
+
+- **Description:** Returns the days between the passed Dates (start - end).  If start date is greater than end date, then result will be negative days.  If invalid or non date fields are passed, a zero will be returned.
+
+- **Parameters:**
+
+  | Data Type | Variable name | Label      | Sample |
+  | --------- | ------------- | ---------- | ------ |
+  | Date      | startDate     | Start Date |        |
+  | Date      | endDate       | End Date   |        |
+
+**Function Body**
+
+```javascript
+// Make sure both passed values are Javascript dates, if NOT, then return 0
+if (!(Object.prototype.toString.call(startDate) === "[object Date]") || !(Object.prototype.toString.call(endDate) === "[object Date]")) {
+	return 0
+}
+    
+start = moment(startDate)
+end = moment(endDate)
+//Difference in number of days
+return end.diff(start, 'days');
+```
+
+## getDaysBetween - Usage
+
+This function will accept two dates and return the number of days between them inclusively.
+
+If only a single parameter is passed or if any passed value is not a JavaScript date, then 0 will be returned.
+
+> Be aware that if you cannot pass a Moment converted date directly.  You will have to use the `momentDate.toDate()` function.  BUT, also be aware that if you pass a `undefined` to moment, it WILL create a date for you.  It will be the current date.
+
+**Function Syntax**
+
+```javascript
+naviga.getDaysBetween($record.startDate, $record.endDate)
+```
+
+
+
+**Sample Input and Output**
+
+| startDate  | EndDate    | Output |
+| ---------- | ---------- | ------ |
+| 01/01/2022 | 01/31/2022 | 30     |
+| 12/01/2020 | null       | 0      |
+| null       | null       | 0      |
+| null       | 12/15/2020 | 0      |
+| 01/31/2022 | 01/01/2022 | -30    |
+
 ## getMonthsBetween - Create Function
 
 - **Function name:** getMonthsBetween
@@ -516,16 +571,15 @@ This function will accept two dates and return the number of months between them
 
 If only a single month is passed or if any passed value is not a JavaScript date, then 1 will be returned.
 
-> Be aware that if you cannot pass a Moment converted date directly.  You will have to use the `momentDate.toDate()` function.  BUT, also be aware that if you pass a null to moment it WILL create a date for you.  It will be the beginning of the UNIX epoch (01/01/1969)
+> Be aware that if you cannot pass a Moment converted date directly.  You will have to use the `momentDate.toDate()` function.  BUT, also be aware that if you pass a `undefined` to moment, it WILL create a date for you.  It will be the current date.
 
 **Function Syntax**
 
 ```javascript
-// There are three parameters that can be passed, but the first is the only required parameter:
 naviga.getMonthsBetween($record.startDate, $record.endDate)
 ```
 
-Along with the field, you can pass the delimiter that you want as well as a flag to have the returned string only include unique values.
+
 
 **Sample Input and Output**
 
