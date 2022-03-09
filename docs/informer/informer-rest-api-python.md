@@ -74,7 +74,9 @@ df.head()
 
 ### Changing Header Names
 
-This is most easily done when creating the dataframe using the read_csv function:
+#### read_csv
+
+This is most easily done when creating the dataframe using the `read_csv` function:
 
 ```python
 ## convert the csv output, which is in the response objects "text" property
@@ -84,6 +86,25 @@ names = ["repName","period","RevenueDate","repNetCost","repPct","netCost","confi
 ## Ingest with pandas
 df = pd.read_csv(csvtoread, names=names)
 ```
+
+#### Existing Dataframe
+
+If you have already created a Dataframe, you can rename column headers selectively by calling the `dataframe.rename() `method and passing a dictionary of old and new name pairs. 
+
+> NOTE: if you don't include the `inplace=True` flag this command will return a new dataframe.
+>
+> Also, you do not have to send all the columns over, just the ones to be renamed.
+
+```python
+## df is a reference to a pandas dataframe
+df.rename(columns={"oldName": "newName", "nextOldName":"nextNewName"}, inplace=True)
+```
+
+### Computations / Descriptive Stats from a Dataframe
+
+[Pandas Docs on Computation API](https://pandas.pydata.org/docs/reference/frame.html#computations-descriptive-stats)
+
+If you run these on a dataframe, it will run on all columns and return you a pandas `series `data structure.
 
 
 
