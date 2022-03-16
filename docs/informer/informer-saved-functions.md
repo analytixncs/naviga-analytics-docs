@@ -611,7 +611,7 @@ naviga.getMonthsBetween($record.startDate, $record.endDate)
 
 ```javascript
 // First 5 digits of dateTimeStamp represent the number of days since 01/01/1967
-startDate = moment("01/01/1967")
+startDate = moment("12/31/1967")
 daysSince = dateTimeStamp.slice(0,5)
 // Convert to a moment date
 stampDate = startDate.add(daysSince, 'days').format('MM-DD-YYYY')
@@ -638,7 +638,7 @@ Here is and example of what the Date Time Stamp field contains `1961650870982`.
 $record.SavedFunctionReturn = naviga.parseDateTimeStamp($record['dateTimeStamp'])
 ```
 
-
+Make sure to set the new field that you saved the parsed date into  as a Date field in Informer.  If you don't, you may get an "unable to Index" error when running.
 
 ## yoyCreateFields - Create Function
 

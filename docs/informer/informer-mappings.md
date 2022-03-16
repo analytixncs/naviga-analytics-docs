@@ -852,3 +852,25 @@ Digital Billing Delivery Method - `GEN Clients - Digital Inv Delivery (275)`
 Print Billing Delivery Method - `GEN Clients - Invoice Delivery Method (226)`
 
 ![img](images/informerMapping_gen_clients-003.png)
+
+## Miscellaneous Information
+
+### Date Time Stamp fields
+
+You may encounter Text fields in information called "Date Time Stamp".  These will be a string of numbers that are not useful until interpreted.  This field is a Unidata Date/Time formatted field.  Below is how to *decode* it.
+
+**Unidata Date / Time Format:**
+
+The first 5 digits in the Unidata date number is the number of days since
+
+**12/31/1967**
+
+ The last 8 digits are the number of milliseconds into the day, so that is the time component.
+
+For example "**19736** *43200000*" would be interpreted as:
+
+**1/12/2022 12:00:00:000 PM**
+
+ **19736** = 1/12/2022 - 12/31/1967
+
+*43200000* = 12:00:00:000 PM
