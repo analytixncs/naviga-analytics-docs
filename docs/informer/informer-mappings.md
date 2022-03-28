@@ -441,9 +441,11 @@ if ($record.a_d_internet_campaigns_assoc_campaignType === "F") {
       : $record.monthActualAmt;
 }
 
-// Here is the rep alo
+// We need to calculate the Rep Amount.  This is because you may have more than one
+// rep on an order at different % values.
+// If there is NOT a rep id assigned, then just return the NetAmount
+$record.RepAmount =  $record['currentRepIds'] ? $record.NetAmount * ($record.currentRepPcts/100) : $record.NetAmount
 
-$record.RepAmount = $record.NetAmount * ($record.currentRepPcts/100)
 ```
 
 
