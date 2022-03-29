@@ -113,3 +113,14 @@ CASE DATAFILE = 'INF_MM.ORDHEADER'
 *
 ```
 
+## Taxes
+
+From Wayne
+
+> I believe we store the tax code on the order and calculate the tax amount, I don’t believe we actually store taxes until billing. 
+>
+> One would need to look at tax code and at the taxable yes/no flag in order to calculate taxes.
+>
+> Canada is particularly vexing as they have layered tax codes, all provinces apply the federal tax, and then on top of that they apply a state tax.
+>
+> There is a “cumulative” flag on the tax code setup that asks if the calculation of the second amount includes the amount applied on the first tax (so on a $100 order where first tax is $10 are we applying second tax to $100 or to $110)

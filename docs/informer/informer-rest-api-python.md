@@ -72,11 +72,24 @@ df.head()
 
 > NOTE: I found that when ingesting JSON data, pandas did not "see" the number data types and called everything an object.  Using the CSV option, pandas "saw" the numbers and called the float64 types.
 
+### Converting Datatypes
+
+> NOTE: Number Datatypes - pandas is picky about it's numbers and will have a hard time converting a number with a comma in it.  If your dataset has values like "5,500.00", this will most likely get read in as an object.  If you try to convert to a number, you will get an error.
+>
+> The best workaround is to make sure IN THE DATASET in Informer that all number fields are formatted to NOT have commas.  
+>
+> A Python workaround is to replace the "," in the dataframe series in question:
+> `df["Line Net Amount"] = df["Line Net Amount"].str.replace(",", "").astype(float)`
+
+Once you 
+
 ### Changing Header Names
+
+Here is an article on different options to [Rename Columns in a Dataframe](https://towardsdatascience.com/renaming-columns-in-a-pandas-dataframe-1d909360ddc6)
 
 #### read_csv
 
-This is most easily done when creating the dataframe using the `read_csv` function:
+This is most easily done when creating the dataframe using the `read_csv` function.  When doing this, I found that the dataframe made all types `object` and didn't infer number datatypes.
 
 ```python
 ## convert the csv output, which is in the response objects "text" property
@@ -112,11 +125,16 @@ If you run these on a dataframe, it will run on all columns and return you a pan
 
 [Pandas Docs on Dataframes](https://pandas.pydata.org/docs/reference/frame.html)
 
-**df.head()** - Shows you the first 5 rows of data
+- **df.head()** - Shows you the first 5 rows of data
+- **[df.info()](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html?highlight=info#pandas.DataFrame.info)** - This method prints information about a DataFrame including the index dtype and columns, non-null values and memory usage.
+- [**df.dtypes**](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.dtypes.html) - This returns a Series with the data type of each column
+- [**df.nlargest()/nsmallest()**](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.nlargest.html?highlight=nlargest#pandas.DataFrame.nlargest) - Returns a new dataframe with either the largest values or the smallest.  You NEED to pass two parameters, first the number to return (x largest) and then an `list` of columns.  The first column is the column to determine the x largest, the other columns will be sort order of returned data. You can also use this method on a Series - [nlargest on a panda Series](https://pandas.pydata.org/docs/reference/api/pandas.Series.nlargest.html?highlight=nlargest#pandas.Series.nlargest)
+- f
 
-**[df.info()](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html?highlight=info#pandas.DataFrame.info)** - This method prints information about a DataFrame including the index dtype and columns, non-null values and memory usage.
+**Series Useful Commands**
 
-[**df.dtypes**](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.dtypes.html) - This returns a Series with the data type of each colum
+- **value_counts()** - This is a distinct count of the values in the series.  Could be used to determine if a field or fields make a unique key
+  	`df[["Period","Line Net Amount"]].value_counts()`
 
 
 
