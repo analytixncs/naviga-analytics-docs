@@ -631,6 +631,18 @@ Here is a visual example:
 
 ![image-20220304150858841](images/informer_mapping_adinternetorders-adj-002.png)
 
+### Preprints
+
+The fields listed below are multivalued and are at the SAME grain (i.e. associated with) the Month amount fields mentioned [above](#month-actual-/-est-amt)
+
+- Month Zone IDs - There are the Zones
+- Month Zone Circ A/B/C/D - These will have the Amounts for each Zone
+- Month Est Qty - This will be the billed amount after billing.
+
+![img](images/informer_mapping_adinternetorders-pp-001.png)
+
+
+
 ## CM Opportunities
 
 The CM Opportunities mapping allows you to report on the opportunities that you have in the system.

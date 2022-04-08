@@ -87,9 +87,83 @@ Since records is an Array, you would need to call out which record you wanted.
 
 However, as you will see, using the Nunjucks syntax, you will be able to **loop** over the records, making it easier to access all of the records.
 
+## Powerscript Processor
+
+In the **Processors** section, you can also add one or more Powerscripts.  These Powerscripts do have access to **lodash** and **moment**, but you DO NOT have access to the **$local** or **$record** objects.  This is because the Processor Powerscript is run only ONCE before the Nunjucks template is rendered.
+
+> console.log does not work in the Powerscript.
+
+What you do have access to inside the Powerscript is the **$ctx** object, which gives you access to the whole **Context** object.
+
+You could loop over all of the returned records and modify them as you see fit.
+
+Here is an example of looping through the records and removing any record from period 2020-12:
+
+```javascript
+$ctx.infTemplateUserReportsRepRevByMonth.records = $ctx.infTemplateUserReportsRepRevByMonth.records.map(record => {
+    if (record.period !== '2020-12') {
+        return record;
+    }
+}).filter(el => el)
+```
+
+Another useful tool for the Powerscript area is to create **helper functions** and add them to the context object.
+
+For example, if you want to format a revenue field, you could create the following in your Powerscript:
+
+```javascript
+$ctx.intlFormatNum = (num) => {
+    
+    const formatConfig = {
+        style: "currency",
+        currency: "USD", 
+        minimumFractionDigits: 2,
+        currencyDisplay: "symbol",
+    };
+    const enNumberFormatter = new Intl.NumberFormat("en-EN", formatConfig);
+    return enNumberFormatter.format(num)
+}
+```
+
+The above will create a function on your Context object that you can access in your Nunjucks template.  Notice the `{{intlFormatNum(record.RepNetByDate_Total)}}`
+
+```html
+<div style="display: flex; justify-content: space-between">
+    <div>{{ record.repName}}</div>
+    <div>{{intlFormatNum(record.RepNetByDate_Total)}}</div>
+</div>
+```
+
+
+
 ## Template Syntax
 
 The Templating engine being used is [Nunjucks](https://mozilla.github.io/nunjucks/) by Mozilla. It is best to read their documentation for full information. This guide will review the basics needed to get information formatted.
+
+The first thing to understand is that the Nunjucks template has access to **everything** on the Context object.  The first item of interest on the Context object is the actual data from your Processors.  
+
+When you click on a Processor, you will get access to information panel.  The **Output variable** is the name of this processor on the Context object.
+
+![image-20220408101251798](images/informer_templates_processors_001.PNG)
+
+To access the records from the above Processor, you would use the following syntax:
+
+```html
+<body>
+  <!-- Access an informational field on the process object  -->
+  {{ infTemplateUserReportsRepRevByMonth.name }}
+  
+  <!-- Access a single record/field on the records array -->
+  {{ infTemplateUserReportsRepRevByMonth.records[0].repName }}
+  
+  <!-- Since records is an Array we can use a for loop and access each array entry -->
+  {% for record in infTemplateUserReportsRepRevByMonth.records %}
+  	<div>{{ record.repName}} </div>
+  {% endfor %}
+</body>
+```
+
+
 
 **Sample Template**
 
@@ -136,6 +210,10 @@ The Templating engine being used is [Nunjucks](https://mozilla.github.io/nunjuck
 
 </html>
 ```
+
+### Looping
+
+
 
 ## Inject Data into JavaScript Assets
 
