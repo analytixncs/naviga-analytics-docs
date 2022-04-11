@@ -814,6 +814,21 @@ For **Performance** Campaigns one can choose to bill by **Product** or by **Prod
 
 The invoice is for a percentage of the total campaign, there is no direct relationship between the line item(s) and invoice each invoice is always a percentage of the sum amount of the entire campaign.
 
+### Credits and Debits 
+
+This section describes how to find if an a transaction is an Invoice, Credit or Debit.  These Credit and Debits are not the T-Account style accounting CR and DR, but instead when we give a customer a Credit on their account for something or Debit their account.
+
+The field that you will use is on the **AR Invoices** mapping.
+
+- **Document Type <>** - This field has the following values:
+
+  - **I** - Invoice
+  - **C** - Credit
+  - **D** - Debit
+  - **W** - Writeoff
+
+  
+
 ## GEN Clients
 
 Intro

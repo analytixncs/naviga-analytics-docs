@@ -198,12 +198,12 @@ To access the records from the above Processor, you would use the following synt
             testFunction('{{rep.repName}}');
         </script>
         {% endfor %}
-        {% set samplenjkVariable=mrmAdSalesreps.records[0].repName %}
+        {% set sampleVariable=mrmAdSalesreps.records[0].repName %}
         {{ myFunction() }}
     </div>
     <script>
         testFunction();
-        console.log('{{ samplenjkVariable }}');
+        console.log('{{ sampleVariable }}');
     </script>
 
 </body>
@@ -211,7 +211,46 @@ To access the records from the above Processor, you would use the following synt
 </html>
 ```
 
-### Looping
+### Looping and Totaling
+
+THis i
+
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url('style.css')}} ">
+
+</head>
+<body>
+    <div>{{infTemplateUserReportsRepRevByMonth.name}}</div>
+   <!-- Loop through records in Dataset processor -->
+    {% for record in infTemplateUserReportsRepRevByMonth.records %}
+  
+		<!-- Use an if statement and nunjucks variable to determine if a new
+      period has started.  If so print out period header.
+      NOTE: the data must be sorted by period for this to work
+     -->
+	    {% if pastPeriod !== record.period %}
+  	  	{% set pastPeriod = record.period %}
+    		<h2 class="header">{{record.period}}</h2>
+	    {% endif %}
+  
+  		<div class="row">
+    	    <div>{{ record.repName}}</div>
+      	  <div>{{intlFormatNum(record.RepNetByDate_Total)}}</div>
+	    </div>
+    {% endfor %}
+
+</body>
+</html>
+```
+
+
 
 
 
