@@ -181,6 +181,13 @@ There are a few other parameters that are optional.
   /datasets/{id}/export/json?omit=productId&omit=productName
   ```
 
+  If you have multiples, you can also send an Array of Strings through via one omit parameters
+  ```bash
+  /datasets/{id}/export/json?omit=["webSiteId", "statusCode"]
+  ```
+
+  > NOTE: The field names are the field aliases in your Informer Dataset, not the field label
+
 - **include** - If you only want certain fields to be included in the result, add them here. Note that you should not use both omit and include, choose one and use it if needed.
 
 - **sort** - sort by fields indicated. As with `omit` and `include` if you need to sort by multiple fields, then add multiple sort paramters:
