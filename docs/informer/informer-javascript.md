@@ -1231,6 +1231,79 @@ The above Powerscript creates a new field, so I usually will choose to remove th
 
 Simply add a Remove Fields flow step to accomplish this.
 
+### New Business Flag
+
+Many times there is a need to declare a customer as a new customer after a defined length of inactivity.  That is where this code can help.
+
+The code below is based on the **AD Internet Campaigns** mapping and uses the campaigns Start and End dates to determine inactivity between campaigns.
+
+The fields needed from **AD Internet Campaigns** are:
+
+- **Advertiser ID <1>**
+- **Start Date <4>**
+- **End Date <5>**
+
+We MUST set the **Order By** in the Query to sort Ascending by Advertiser ID and Start Date.  This will group the records by advertiser and also order each advertisers campaign in order of when the campaigns started.
+
+The basic logic will be that as we go through the records, we will compare the previous record to the current record for an advertiser and calculate how much time has passed between the **End Date** of the previous record and the **Start Date** of the current record.  
+
+:::note
+
+The date calculations are based on the first of the month.  For example, if the end date is 01/15/2022, the code will use 01/01/2022 for the comparison.
+
+:::
+
+Many times you also want to know how long a customer has been identified as a "New" status.  For example, if a customer starts doing business with your company, you would want them to retain that new status for a certain amount of time.  This is referred to as the **Probationary Period** in the code.  It is defined in months.
+
+
+
+**Main Script**
+
+```javascript
+
+
+//!!!!---- FLUSH ------!!!!!!!!!!!!!!///
+```
+
+**FLUSH Flow Step**
+
+```javascript
+// Put a Flush Flow Step here
+```
+
+**Set the Last Record Flag**
+
+```javascript
+//!!!!--- Finalize Script - Set Last Record ---!!!!//
+advId = $record["advId"];
+$record.lastRecord = false;
+
+if (
+  $local[advId].lastRecord &&
+  $local[advId].SalesStatusWorking.counter === $record.counter
+) {
+  $record.lastRecord = $local[advId].lastRecord;
+  $record.finalSalesStatus = $local[advId].SalesStatusWorking.salesStatus;
+}
+```
+
+**FLUSH Flow Step**
+
+```javascript
+// Put a Flush Flow Step here
+```
+
+**Remove Non Final Status**
+
+```javascript
+// Uncomment to only show FINAL Sales Status
+if (!$record.isLastRecord) $omit()
+```
+
+
+
+
+
 ## Using the momentjs Date Library
 
 I will try to show you the most common uses of **momentjs** within Informer, however, you can get more information from the **momentjs** website.
