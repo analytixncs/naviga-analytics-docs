@@ -641,7 +641,17 @@ The fields listed below are multivalued and are at the SAME grain (i.e. associat
 
 ![img](images/informer_mapping_adinternetorders-pp-001.png)
 
+### Impressions
 
+The below image shows how the Estimated and Actual impressions map from Naviga to Informer.
+
+:::note
+
+Be aware that the **Month Actual Imps** and **Month Est Qty** are both multivalued fields, so you will most likely want to normalize them.
+
+:::
+
+![img](images/informer_mapping_impressions-001.png)
 
 ## CM Opportunities
 
