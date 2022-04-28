@@ -167,10 +167,22 @@ https://dev.navigahub.com/ew/devdigital/ad/campaign_revenue_summary?ID=9551
 
 Table displaying F20, F21, F22 (Revenue Allocation)
 
-![img](C:\Users\mark.mccoid\Documents\AnalytixDevelopment\naviga-analytics-docs\docs\informer\images\misc_002.gif)
+![img](images/misc_002.gif)
 
  
 
 Table displaying F26, F27, F28 (Billing Schedule)
 
-![img](C:\Users\mark.mccoid\Documents\AnalytixDevelopment\naviga-analytics-docs\docs\informer\images\misc_001.gif)
+![img](images/misc_001.gif)
+
+## Campaign Start/End Dates
+
+The campaign start and end dates are defining the absolute outside edges of the campaign.
+
+It defaults dates in to each line (speeding line entry), it prevents entry of a line starting/ending outside of the range (minimizing error) and it provides a way to report on expiring campaigns.
+
+Each line item could run for the entire length of the campaign, or any one line may run just for a portion of the campaign.
+
+I might purchase a digital line that runs for the entire start/end range but may choose to purchase only one print issue, so while my digital line start/end = campaign start/end my print line may not.
+
+I could also purchase multiple different sizes/positions and that would result in multiple lines each with their start end which may be less than the total length of campaign
