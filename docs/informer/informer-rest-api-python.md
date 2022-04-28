@@ -42,6 +42,16 @@ print (postResponse)
 
 ## Pandas
 
+To use **pandas**, you must import it into your workspace.  Usually you will want **numpy** too.
+
+```python
+import pandas as pd
+import numpy as np
+...
+```
+
+
+
 ### Ingesting Data (Loading a Dataframe)
 
 Getting the data into a pandas dataframe is a good start.
