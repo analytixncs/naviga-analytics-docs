@@ -1243,7 +1243,7 @@ The fields needed from **AD Internet Campaigns** are:
 - **Start Date <4>**
 - **End Date <5>**
 
-We MUST set the **Order By** in the Query to sort Ascending by Advertiser ID and Start Date.  This will group the records by advertiser and also order each advertisers campaign in order of when the campaigns started.
+We MUST set the **Order By** in the Query to sort Ascending by **Advertiser ID** AND **Start Date**.  This will group the records by advertiser and also order each advertisers campaign in order of when the campaigns started.
 
 The basic logic will be that as we go through the records, we will compare the previous record to the current record for an advertiser and calculate how much time has passed between the **End Date** of the previous record and the **Start Date** of the current record.  
 
@@ -1253,7 +1253,31 @@ The date calculations are based on the first of the month.  For example, if the 
 
 :::
 
-Many times you also want to know how long a customer has been identified as a "New" status.  For example, if a customer starts doing business with your company, you would want them to retain that new status for a certain amount of time.  This is referred to as the **Probationary Period** in the code.  It is defined in months.
+There are some constants that you will set in the first part of the script that will define how the application sets the New Business status.
+
+- **INACTIVE_MONTHS_LIMIT** - How many months of inactivity must a client have before being designated as "New" business
+- **PROBATION_MONTHS** - Many times you also want to know how long a customer has been identified as "New" business.  For example, if a customer starts doing business with your company, you would want them to retain that new status for a certain amount of time.  This is referred to as the **Probationary Period** in the code.  It is defined in months.
+- **NEW_STATUS_TEXT** - Text to use in the **ClientStatus** field  when the client is "New"
+- **EXISTING_STATUS_TEXT** - Text to use in the **ClientStatus** field when the client is not "New"
+
+Here is the code for the Constants.
+
+```javascript
+//=====================
+//-- Constants
+//-- This is the number of months of inactivty between current and last ad before we call the customer new
+INACTIVE_MONTHS_LIMIT = 12;
+//-- Number of months AFTER a customer is declared "new" that we keep there status as "New"
+PROBATION_MONTHS = 12;
+// Status Text
+NEW_STATUS_TEXT = 'New';
+EXISTING_STATUS_TEXT = 'Existing';
+//=====================
+```
+
+
+
+
 
 
 
