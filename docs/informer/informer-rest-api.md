@@ -163,15 +163,17 @@ The \_prev and \_next links take into account the initial **limit** value that y
 
 If you are using the `next` or `prev`, you can add the `&sort=_doc`.
 
-### GET - Export JSON
+### GET - Exporters JSON/CSV/ETC
 
 This is a great route if you don't need to page through the data and you just need all of the records.
 
 **/api/datasets/{id}/export/{exporter}**
 
-The most common exporter is `json`. If you want to see the other options, you can call this endpoint (GET):
+The most common exporters are `json` and `csv`. If you want to see the other options, you can call this endpoint (GET):
 
-**/api/datasets/{id}/exporters**
+**/api/datasets/exporters**
+
+**[List of Common Exporters](#common-exporters)**
 
 There are a few other parameters that are optional.
 
@@ -429,3 +431,136 @@ OR using a Match query:
 // You would send without formatting:
 {"match":{"campaignId":6736}}
 ```
+
+### Common Exporters
+
+These exporters should work with all datasets, however, you can use the following API request to verify for your specific Dataset.
+
+> **/api/datasets/exporters**
+
+```json
+[
+  {
+    "id": "csv",
+    "editor": "csvEdit",
+    "download": true,
+    "extension": "csv",
+    "contentType": "text/csv",
+    "canApplyFilter": true,
+    "canUseInJob": true,
+    "canToggleFormatting": true,
+    "applyFormatting": true
+  },
+  {
+    "id": "html",
+    "editor": "htmlEdit",
+    "contentType": "text/html",
+    "extension": "html",
+    "download": true,
+    "canApplyFilter": true,
+    "canUseInJob": true,
+    "canToggleFormatting": true,
+    "applyFormatting": true
+  },
+  {
+    "id": "x-ms-iqy",
+    "editor": "iqyEdit",
+    "contentType": "text/x-ms-iqy",
+    "extension": "iqy",
+    "canApplyFilter": false,
+    "canUseInJob": false,
+    "canToggleFormatting": false,
+    "applyFormatting": true,
+    "download": true
+  },
+  {
+    "id": "json",
+    "applyFormatting": false,
+    "editor": "jsonEdit",
+    "download": true,
+    "extension": "json",
+    "contentType": "application/json",
+    "canApplyFilter": true,
+    "canUseInJob": true,
+    "canToggleFormatting": true
+  },
+  {
+    "id": "xlsx",
+    "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "extension": "xlsx",
+    "editor": "xlsxEdit",
+    "canToggleFormatting": false,
+    "applyFormatting": true,
+    "download": true,
+    "canApplyFilter": true,
+    "canUseInJob": true
+  },
+  {
+    "id": "xml",
+    "editor": "xmlEdit",
+    "download": true,
+    "extension": "xml",
+    "contentType": "application/xml",
+    "canApplyFilter": true,
+    "canUseInJob": true,
+    "canToggleFormatting": true,
+    "applyFormatting": true
+  },
+  {
+    "id": "saved-list",
+    "editor": "savedListEdit",
+    "contentType": "text/u2",
+    "canToggleFormatting": false,
+    "download": false,
+    "extension": false,
+    "canApplyFilter": true,
+    "canUseInJob": true,
+    "applyFormatting": true
+  },
+  {
+    "id": "tabDelimited",
+    "contentType": "text/tab-separated-values",
+    "extension": "txt",
+    "editor": "tabDelimitedEdit",
+    "download": true,
+    "canApplyFilter": true,
+    "canUseInJob": true,
+    "canToggleFormatting": true,
+    "applyFormatting": true
+  },
+  {
+    "id": "customDelimited",
+    "contentType": "text/custom-delimited-values",
+    "extension": "txt",
+    "editor": "customDelimitedEdit",
+    "download": true,
+    "canApplyFilter": true,
+    "canUseInJob": true,
+    "canToggleFormatting": true,
+    "applyFormatting": true
+  },
+  {
+    "id": "fixedLength",
+    "contentType": "text/plain+fixed",
+    "extension": "txt",
+    "editor": "fixedLengthEdit",
+    "download": true,
+    "canApplyFilter": true,
+    "canUseInJob": true,
+    "canToggleFormatting": true,
+    "applyFormatting": true
+  },
+  {
+    "id": "pdf",
+    "contentType": "application/pdf",
+    "editor": "pdfEdit",
+    "extension": "pdf",
+    "download": true,
+    "canApplyFilter": true,
+    "canUseInJob": true,
+    "canToggleFormatting": true,
+    "applyFormatting": true
+  }
+]
+```
+
