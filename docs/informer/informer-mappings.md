@@ -470,7 +470,127 @@ $record.RepAmount =  $record['currentRepIds'] ? $record.NetAmount * ($record.cur
 
 ```
 
+#### Keeping Month Actual/Est Amounts with Rep Amounts
 
+Many times you will want to have a single dataset contain both the Rep amounts and the Month Amounts, however, as stated above, this can be problematic because multiple reps may be assigned to a Month line.
+
+When you normalize for reps, this duplicates the monthActualAmount and monthEstAmount fields, thus you cannot use them for aggregating in any of your reports.  Most of the time you would be OK using the Rep Amounts, unless your reps can total more than 100% of an Ad.  For example two reps, each "getting" 100% of an Ads revenue.
+
+The solution for this is to zero out the Month amounts when normalizing for Reps creates a new row.
+
+Here are the steps. *NOTE: this code is also calculating foreign currency amounts*
+
+Fields used in the below scripts:
+
+**AD Internet Orders**
+
+- MONTH.ACTUAL.AMT <76>
+- MONTH.EST.AMT <73>
+- CURRENT.REP.IDS <263>
+- CURRENT.REP.PCTS <264>
+
+**AD Internet Campaigns**
+
+- CAMPAIGN.TYPE <8>
+- CURR.RATE <226>
+
+**1 - Normalize Month Line fields**
+
+:::note Normalize Month Line fields
+
+This is the standard normalize that we do for Month fields (monthActualAmt, monthEstAmt, monthStartDate, etc)
+
+:::
+
+**2 - Powerscript: Calculate Line Amounts**
+
+```javascript
+// We will use the following formula
+// ---- Local Currency Amount = Foreign Currency Amount / Exchange Rate
+// If there is an exchange rate, return it else return 1
+exchangeRate = $record['a_d_internet_campaigns_assoc_currRate'] ? $record['a_d_internet_campaigns_assoc_currRate'] : 1;
+
+$record.actualLineLocalAmount = $record['monthActualAmt'] / exchangeRate
+$record.estLineLocalAmount = $record['monthEstAmt'] / exchangeRate
+$record.netLineLocalAmount = calcNetAmount($record['a_d_internet_campaigns_assoc_campaignType'], $record.actualLineLocalAmount, $record.estLineLocalAmount)
+
+$record.actualLineForeignAmount = $record['monthActualAmt'] 
+$record.estLineForeignAmount = $record['monthEstAmt'] 
+$record.netLineForeignAmount = calcNetAmount($record['a_d_internet_campaigns_assoc_campaignType'], $record.actualLineForeignAmount, $record.estLineForeignAmount)
+
+
+// Inline function to calculate net amount.
+function calcNetAmount (campaignType, monthActualAmt, monthEstAmt) {
+    return monthActualAmt
+    if (campaignType === "F") {
+      return monthEstAmt;
+    } else {
+      return
+        monthActualAmt === 0 || !monthActualAmt
+          ? monthEstAmt
+          : monthActualAmt;
+    }
+}
+```
+
+**3 - Normalize Reps**
+
+:::note Normalize Reps
+
+Normalize the Rep Fields AND the above created Line Amount fields. By normalizing the line amount fields, we ensuring that they ONLY show up on the FIRST row if there are multiple reps on the Line/Month row.
+
+**Normalize the following fields**
+
+- actualLineLocalAmount
+- estLineLocalAmount
+- netLineLocalAmount
+- actualLineForeignAmount
+- estLineForeignAmount
+- netLineForeignAmount
+- Current Rep ID
+- Current Rep Pct
+- Current Rep Name (if you added it)
+
+:::
+
+**4 - Powerscript: Calculate Rep Amounts**
+
+Now we will calculate the rep amounts using the rep percentage.  Since we have normalize and have not modified the month actual amount and month est amount fields, we will use them to calculated the rep percentage.
+
+```javascript
+// We will use the following formula
+// ---- Local Currency Amount = Foreign Currency Amount / Exchange Rate
+// If there is an exchange rate, return it else return 1
+exchangeRate = $record['a_d_internet_campaigns_assoc_currRate'] ? $record['a_d_internet_campaigns_assoc_currRate'] : 1;
+
+repNetForeignAmount = calcNetAmount($record['a_d_internet_campaigns_assoc_campaignType'], $record['monthActualAmt'], $record['monthEstAmt']) * ($record.currentRepPcts/100)
+repActualForeignAmount = $record.monthActualAmt * ($record.currentRepPcts/100)
+repEstForeignAmount = $record.monthEstAmt * ($record.currentRepPcts/100)
+
+$record.actualRepLocalAmount = repActualForeignAmount / exchangeRate
+$record.estRepLocalAmount = repEstForeignAmount / exchangeRate
+$record.netRepLocalAmount = repNetForeignAmount / exchangeRate
+
+$record.actualRepForeignAmount = repActualForeignAmount
+$record.estRepForeignAmount = repEstForeignAmount 
+$record.netRepForeignAmount = repNetForeignAmount
+
+function calcNetAmount (campaignType, monthActualAmt, monthEstAmt) {
+    return monthActualAmt
+    if (campaignType === "F") {
+      return monthEstAmt;
+    } else {
+      return
+        monthActualAmt === 0 || !monthActualAmt
+          ? monthEstAmt
+          : monthActualAmt;
+    }
+}
+```
+
+**5 - Remove Month Actual and Est amount fields**
+
+I would recommend removing the `monthActualAmt` and `monthEstAmt `fields as they will not be usable in any aggregations.
 
 ### Foreign Currency and Exchange Rates
 
