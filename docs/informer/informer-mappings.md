@@ -773,6 +773,22 @@ Be aware that the **Month Actual Imps** and **Month Est Qty** are both multivalu
 
 ![img](images/informer_mapping_impressions-001.png)
 
+### Digital Size - Columns - Inches
+
+![image-20220517184953502](images/informerMapping_aio_size_001.jpg)
+
+
+
+![image-20220517185041331](images/informerMapping_aio_size_002.jpg)
+
+
+
+![image-20220517185113482](images/informerMapping_aio_size_003.jpg)
+
+
+
+
+
 ## CM Opportunities
 
 The CM Opportunities mapping allows you to report on the opportunities that you have in the system.
@@ -1009,7 +1025,16 @@ You will then be left with an array of *StmtContactEmails*.
 
 Here are the mappings of the various delivery methods.  
 
-> **NOT AVAILABLE Currently:** Under A/R Setup - the Delivery Method under **Misc. Billing Details**  
+1. **A/R Setup - Misc. Billing Details Delivery Method**
+   `GEN Clients.Inv. Delivery Method CI (250)`
+
+2. **A/R Setup - Misc. Billing Details Email Contacts** - The field in GEN Clients is only the ID to the contact.  To get the actual email address you will need to pull from the `Client Invoice Email Contact ID` linked mapping off of GEN Clients.
+
+   `GEN Clients.CI Inv Email Contact ID (251)`
+
+![img](images/informerMapping_gen_clients-004.png)
+
+---
 
 **A/R Setup - Statement Details Delivery Method**
 `GEN Clients.Stmt Delivery Method (259)`
