@@ -966,7 +966,7 @@ This section describes how to find if an a transaction is an Invoice, Credit or 
 
 The field that you will use is on the **AR Invoices** mapping.
 
-- **Document Type <>** - This field has the following values:
+- **Document Type** - This field has the following values:
 
   - **I** - Invoice
   - **C** - Credit
