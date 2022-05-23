@@ -746,9 +746,65 @@ And the data in your dataset had dates from 01/01/2018 through 01/01/2021, the y
 
 ### Performing Calculations on YOY Fields
 
+Download a sample Informer Dataset - **<a  target="_blank"  href="/downloads/naviga-ad-internet-orders-yoy-simple_5-4-6.tgz">Ad Internet Orders YOY Simple</a>**
+
 Many times you will also want to perform calculations on your YOY fields.  This example will look at creating a current year versus previous year or `CurrentYear Revenue - PreviousYear Revenue`
 
-To get started you will need to run the **naviga.calculateAggregations**.  
+**Difference between Years**
+
+If you only need to get the difference between years, you will simply create a difference column that you can aggregate as you would any other field.
+
+You will need to determine which years you want the difference for.  
+
+:::note Remember
+
+If you used the `yoyCreateFields` saved function, you will have fields for each year in your dataset - **$record.revenue2021**, **$record.revenue2022**, etc.
+
+:::
+
+With the fields that the `yoyCreateFields` function created, you can programmatically choose the current and previous years based on either inputs or system data.  Here is an example using the system date.
+
+```javascript
+//================================================
+//- Create Revenue fields for each Year in the database
+//================================================
+yoyConfig = {
+  $record,
+  label: 'revenue',
+  // Replace this date with the date you want your YOY to be based on
+  yoyDate: $record['a_d_internet_campaigns_assoc_dateEntered'],
+  // Replace this amount field with the field you want your YOY amount to be based on
+  fieldValue: $record['monthActualAmt'],
+};
+//-Function to create the fields
+naviga.yoyCreateFields(yoyConfig)
+
+//================================================
+//- Create a difference field for Current vs Previous years based on todays date
+//================================================
+//-- create vars for the current and previous year based on today's date
+currentYear = moment().format("YYYY");
+previousYear = currentYear - 1;
+
+//-- Calculate the difference
+$record.calcCurrMinusPrev = naviga.returnANumber($record[`revenue${currentYear}`]) - naviga.returnANumber($record[`revenue${previousYear}`])
+```
+
+You can then create a pivot table using the fields created by the `yoyCreateFields` function and the field we created in the Powerscript `$recrd.calcCurrMinusPrev`.
+
+![image-20220523104532128](images/informer-saved-functions-yoy-pivot-001.png)
+
+**Final Pivot Visual**
+
+![image-20220523104638753](images/informer-saved-functions-yoy-pivot-002.png)
+
+#### Percentage Calculations
+
+Download a sample Dataset for Informer 5.4.6 or greater - **<a  target="_blank"  href="/downloads/naviga-ad-internet-orders-yoy-aggregates_5-4-6.tgz">Ad Internet Orders YOY Aggregates</a>**
+
+If you need percentage difference calculations, you will need to resort to performing aggregations in your Powerscript for the levels that you need the percentage calculations.
+
+To get started you will need to run the [**naviga.calculateAggregations**](#calculateaggregates---usage).  
 
 **Aggregation Levels** 
 
@@ -851,7 +907,8 @@ if (!$local[groupKey1].GroupSet) {
   $record.currentVsPreviousYearRevenue =
     naviga.returnANumber($local[groupKey1][sumRevenueCurrYearField]) - 
     naviga.returnANumber($local[groupKey1][sumRevenuePrevYearField]);
-
+  $record.currentVsPreviousPercentageGrowth = ((naviga.returnANumber($local[groupKey1][sumRevenueCurrYearField]) / 
+    naviga.returnANumber($local[groupKey1][sumRevenuePrevYearField])) - 1) * 100
   $local[groupKey1].GroupSet = 'true';
 }
 ```

@@ -186,3 +186,25 @@ Each line item could run for the entire length of the campaign, or any one line 
 I might purchase a digital line that runs for the entire start/end range but may choose to purchase only one print issue, so while my digital line start/end = campaign start/end my print line may not.
 
 I could also purchase multiple different sizes/positions and that would result in multiple lines each with their start end which may be less than the total length of campaign
+
+##  Brands
+
+Asked Greg for info on how brands work.  Emails below.
+
+**Email 1**
+
+We may need to add a new link. The brand key is the CLIENT.ID*BRAND.ID.
+
+You are correct the clients file stores a list of brands in CLIENTS<30> if the company was set up to use brands.  I believe we create an “XX” brand for “AD” type clients even if they aren’t using brands but if it is set up as an agency we do not create any brands so we need to create the missing link from Clients to Brands and cross my fingers because virtual field links in Informer are iffy but I think the last one we made actually worked but this one is a little more virtual. I would need to loop through CLIENTS<30> to create the link.
+
+**Email 2**
+
+I think I forgot to answer your question about how they are related but I’ll give you the thumbnail sketch. Each company might want to be broken down into subdivisions without having to enter separate companies. For example Ford might be the main company but wants to have separate campaigns for Explorer, Fusion, and Fiesta. The difficult decision is a company like Proctor and Gamble, would you set up the brand for a product type like “air fresheners” or go even more narrow down to the SKU level for every single product.
+
+For each Client record then we allow them to create unlimited number of brands which could also entail separate PIB codes, ad agencies and salereps all associated with that brand. Even if they decide they are NOT using brands we create a default XX brand just so that everything in order entry keeps working as far as they know.
+
+The Agencies do not have brands.
+
+ 
+
+Next I created an idescriptor that I got working that will link the GEN CLIENTS to AD BRANDS so if they want to create a report using the GEN Clients mapping they can link to the AD Brands and pull the description etc.
