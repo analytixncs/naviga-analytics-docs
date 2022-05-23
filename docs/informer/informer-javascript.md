@@ -1469,9 +1469,40 @@ You can also add a *Remove Fields* flow step to remove the following fields:
 - End Date 
 - Is Last Reocrd
 
-### Rolling Up Budgets To Higher Level
+### Rolling Up Budgets To Higher Level for Percentage Calculations
 
+When you load external data such as budget information, you will define it at a certain granularity.  This might be something like **Product by Year Month**.  
 
+Because the transaction data that you are most likely joining the budget data to is at a much lower level, when you join your budget file to your transactions, your budget amounts will get duplicated.  To combat this, you need to aggregate the budget information to the granularity of the budget data.
+
+You will use the [Calculate Aggregates](informer-saved-functions#calculateaggregates---usage) saved function to do this.
+
+Once this is done, you will have created a new Budget Field that can be aggregated in reports.  You most likely will also have created a difference field (Actual minus Budget).  For example, for our budget data brought in at the **Product by Year Month** granularity, we could create pivot tables that aggregated on Product, Product/Month, Product/Quarter, Product/Year, Quarter only or Year only without an issue.
+
+However, if you wanted to have a calculation such as a percentage that cannot be aggregated, you will have to take some extra steps is transforming the incoming data.  
+
+:::caution 
+
+If you were to create a Percentage Difference calculation at the **Product by Year Month** level in the post aggregation code, you would be able to use that field in Visuals that had the Product By Year Month dimensions, but nothing else.  For example, you can't add up all the percentage differences for a product's months and get the correct total percentage difference.
+
+See how the Sum of the %'s is wrong (503%), but the Calculation of the totals of the Net Amount and Budget (120%) is correct
+
+| Product   | Year Month | Net Amount | Budget         | % to Budget |
+| --------- | ---------- | ---------- | -------------- | ----------- |
+| Prod1     | 2022-01    | 100        | 120            | 120%        |
+| Prod1     | 2022-02    | 200        | 180            | 90%         |
+| Prod1     | 2022-03    | 100        | 160            | 160%        |
+| Prod1     | 2022-04    | 150        | 200            | 133%        |
+| **Total** |            | **550**    | **660**        | **120%**    |
+|           |            |            | **SUM of %'s** | **503%**    |
+
+:::
+
+:::info **Scenario**
+
+We MUST set the **Order By** in the Query to sort Ascending by **Advertiser ID** AND **Start Date**.  This will group the records by advertiser and also order each advertisers campaign in order of when the campaigns started.
+
+:::
 
 ## Using the momentjs Date Library
 
