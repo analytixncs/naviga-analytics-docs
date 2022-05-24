@@ -650,9 +650,9 @@ Make sure to set the new field that you saved the parsed date into  as a Date fi
 
 - **Parameters:** configObj
 
-  | Data Type | Variable name | Label     | Sample                                  |
-  | --------- | ------------- | --------- | --------------------------------------- |
-  | Any       | configObj     | configObj | { $record, yoyDate, label, fieldValue } |
+  | Data Type | Variable name | Label     | Sample                                                       |
+  | --------- | ------------- | --------- | ------------------------------------------------------------ |
+  | Any       | configObj     | configObj | { $record, yoyDate, label, fieldValue, calcYTD, ytdCompareToMonth } |
 
 **Function Body**
 
@@ -662,16 +662,30 @@ const $record = configObj.$record || {};
 const yoyDate = configObj.yoyDate || new Date();
 const label = configObj.label || '';
 const fieldValue = configObj.fieldValue || 0;
-
+const calcYTD = configObj.calcYTD || false;
+const ytdCompareToMonth = configObj.YTDCompareToMonth || parseInt(moment().format('M'))
+// ---
 const year = yoyDate.getFullYear();
 
 const fieldName = `${label}${year}`;
 $record[fieldName] = fieldValue;
 $record.yoyAggrFieldName = `sum${fieldName}`
 
+if (calcYTD) {
+    const ytdFieldName = `YTD_${label}${year}`;
+// Default to 0 so all rows have a number in them
+$record[ytdFieldName] = 0
+  // Pull the month to compare from the passed YOY Date.
+  compareTo_Month = parseInt(moment(yoyDate).format('MM'))
+  // if transactions month is less than our "key" month, return value as YTD Value.
+  if (compareTo_Month <= parseInt(ytdCompareToMonth)) {
+    $record[ytdFieldName] = fieldValue  
+  } 
+}
+
 // The return is optional.
 return {
-  debugFieldName: fieldName,
+  debugFieldName: fieldName
 };
 ```
 
@@ -694,6 +708,8 @@ To create a field for each year's revenue or any other yearly amount, simply run
 - **label** - pass a string that will define your YOY field names.  They be in the format of 'labelYYYY'
 - **yoyDate** - This must be a date field.  This field will determine which year the amounts go into.  For example, if you passed the CreateDate, then your revenue would be in Create Year buckets.  If you passed the IssueDate, then your revenue would be Issue Year buckets.
 - **fieldValue** - this is the value.  It could be revenue or copies.  I can be any number field.
+- **calcYTD** - *boolean* - **default = false** - If set to `true` YTD fields will be calculated.
+- **ytdCompareToMonth** - **default=current month** - If left empty, (not passed), then the current month, based on the system date, will be used as the YTD compare date.  This is most likely what you will want to do.  If you pass a month, you must pass an integer between 1 and 12.
 
 
 Here is a sample.
@@ -704,19 +720,20 @@ yoyConfig = {
   label: 'revenue',
   yoyDate: $record.issuedate,
   fieldValue: $record.orderNetAmt,
+  calcYTD: true
 };
 ```
 
 **yoyCreateFields**
 
 ```javascript
-yoyConfig = { $record, label: 'revenue', yoyDate: $record.issuedate, fieldValue: $record.orderNetAmt }
-naviga.yoyCreateFields({ $record, label: 'revenue', yoyDate: $record.issuedate, fieldValue: $record.orderNetAmt })
+yoyConfig = { $record, label: 'revenue', yoyDate: $record.issuedate, fieldValue: $record.orderNetAmt, calcYTD: true }
+naviga.yoyCreateFields(yoyConfig)
 ```
 
 ### Output from yoyCreateFields
 
-The only thing that is returned from the yoyCreateFields function is a debug object.   You will only need to use it if you have any issues, it return `{ debugFieldName }`
+The only thing that is returned from the yoyCreateFields function is a debug object.   You will only need to use it if you have any issues, it returns `{ debugFieldName }`
 
 The main job the function performs, however, is to **create new fields** on the **$record object**.  It will create a field for every year in the passed **yoyDate** property on the config object AND it will create the field **yoyAggrFieldName**, which is very useful if you are doing aggregations.
 
@@ -728,15 +745,18 @@ yoyConfig = {
   label: 'revenue',
   yoyDate: $record.issuedate,
   fieldValue: $record.orderNetAmt,
+  calcYTD: true
 };
 ```
 
 And the data in your dataset had dates from 01/01/2018 through 01/01/2021, the yoyCreateFields function would create the following fields:
 
-- **$record.revenue2018** - Would contain amount from $record.orderNetAmt if issueDate in year 2018, otherwise 0.
 - **$record.revenue2019** - Would contain amount from $record.orderNetAmt if issueDate in year 2019, otherwise 0.
 - **$record.revenue2020** - Would contain amount from $record.orderNetAmt if issueDate in year 2020, otherwise 0.
 - **$record.revenue2021** - Would contain amount from $record.orderNetAmt if issueDate in year 2021, otherwise 0.
+- **$record.YTD_revenue2019** - Would contain amount from $record.orderNetAmt if issueDate in year 2019 AND IssueDate's month is less than the Current Month based on the system date, otherwise 0.
+- **$record.YTD_revenue2020** - Would contain amount from $record.orderNetAmt if issueDate in year 2020 AND IssueDate's month is less than the Current Month based on the system date, otherwise 0.
+- **$record.YTD_revenue2021** - Would contain amount from $record.orderNetAmt if issueDate in year 2021 AND IssueDate's month is less than the Current Month based on the system date, otherwise 0.
 - **$record.yoyAggrFieldName** - Contains the field to use for Aggregations.  Based on the date of the transaction in question, this field contain a field name that can be passed to our aggregation function.  The field will be in the format of `sum${label}${vYOYYear}`
   For the above configuration, this field will contain one of the following in response to the Year value of the transactions:
   - `sumrevenue2018`
