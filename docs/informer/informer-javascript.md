@@ -669,6 +669,14 @@ delete $record.columnToDelete;
 
 The **$fields** object has a key for each field in your query and each of those has some metadata on it that you can view and/or change.
 
+:::caution Be Aware
+
+As of version **5.4.6**, the ONLY metadata that you can change on the $fields object is the **label**.  All other items are **read-only**.
+
+This may change in the future.
+
+:::
+
 Here is the shape of the object:
 
 ```javascript
@@ -697,16 +705,6 @@ $record.fieldInspect = Object.keys($fields.issueDate).map((key) => [
   key,
   $fields.issueDate[key],
 ]);
-```
-
-I have found this useful for changing a datatype of a field. Informer will makes its best guess at the data type of a field. Sometimes, you don't want its best guess. For example, if you have created a Year field from a Date field, Informer will try and make that a number, which is a pain to format. You can turn this into a string field as follows:
-
-```javascript
-// Get the year of the issue date
-$record.issueYear = moment($record.issuedate).format("YYYY");
-// Create a join column from issueYear and RepId to use to join to the goals spreadsheet
-$record.joinField = `${$record.issueYear}-${$record.repcode}`;
-$fields.issueYear.dataType = "string";
 ```
 
 ### $query Object
