@@ -1059,6 +1059,142 @@ Print Billing Delivery Method - `GEN Clients - Invoice Delivery Method (226)`
 
 ![img](images/informerMapping_gen_clients-003.png)
 
+## GEN User Control
+
+:::info
+
+The GEN User Control is a new mapping as of June 2022.  If you don't see the mapping in your Informer instance, please enter a Salesforce case asking for it to be added.
+
+:::
+
+GEN User Control is a mapping that contains some simple information about the users in your Naviga database. The following example Dataset will flatten the information in the GEN user control mapping into something usable.  
+
+**<a  target="_blank"  href="/downloads/naviga-gen-user-control.tgz">GEN User Control Dataset</a>**
+
+The GEN User Control mapping is a confusing mapping in the sense that there are multiple types of data in the mapping.  The User Groups exist separately from the Users and the User Parameter fields exist in separate rows from other user information.
+
+The sample dataset has two Powerscripts that recombine the data so that each User has their own row with all of their relevant data.
+
+### Building the GEN User Control Dataset
+
+To build the Dataset yourself, create a Dataset with all the fields from the GEN User Control mapping and add the following Flow steps.
+
+**Pre Flush Powerscript**
+
+```javascript
+//===============================================================================
+// The ID field contains the User Id but it is formatted differently depending if
+// it is the "main" record, it will start with a "~" or a Parameters record, in 
+// which case it will end with "*PARAMS".
+// There is also a special case where a row will actually contain a Group ID in the 
+// id Field and the Group Description in the lastName field.
+// All of these cases are accounted for in the code below.
+//===============================================================================
+//---- Create a cleansedUserID
+idField = $record['id_1']
+// Determine if row is params row or user row
+// If the id ends in *PARAMS it has certain other fields filled for the user
+$record.isParamsRow = idField.includes('*PARAMS')
+// If the id begins in "~" it has certain other fields filled for the user
+$record.isUserRow = idField.includes('~') 
+// This will help us determine if the row is a Group description row
+$record.isUserGroupIdEmpty = $record['userGroupId'] ? false : true
+
+// Clean based on type of field
+cleanedIdParams = idField.includes('*PARAMS') ? idField.substring(0, idField.length - 7 ) : undefined;
+cleanedIdTilde = idField.includes('~') ? idField.slice(1) : undefined;
+
+// Above cleaning will produce a cleansed user id that we can use to join in post flow step
+$record.cleansedUserId = cleanedIdTilde || cleanedIdParams || ''
+
+//-----------------------------------------------------------------
+// The steps below will save information to the $local object so that
+// we can recall them in the Post flush script and combine the user records
+// into a single row for each user
+//-----------------------------------------------------------------
+// Store user row fields on local object - these will be joined with the *PARAMS
+// rows in the Post flush script
+if ($record.isUserRow) {
+    $local[$record.cleansedUserId] = {
+        firstName: $record['firstName'],
+        lastName: $record['lastName'],
+        status: $record['usrStatus'],
+        groupId: $record['userGroupId']
+    }
+}
+
+// Check if this is a Group definition row, if so store the info on the local object
+// Use the idField (which is really the groupId) so that we can pull the description 
+// in the Post flush script.
+if (!$record.isParamsRow && $record.isUserGroupIdEmpty) {
+    // the idField in this case will the the Group ID
+	$local[idField] = {
+        groupDesc: $record['lastName']
+    }	
+}
+```
+
+**FLUSH Flow Step**
+
+```javascript
+// Put a Flush Flow Step here
+```
+
+**Post Flush Powerscript**
+
+```javascript
+// Status lookup object
+statusLookup = {
+    A: "Active", 
+    L: "Logged",
+    R: "Retired"
+}
+
+//------------------------------------------------------------------------
+// We are using the *PARAMS row as the base row and then adding on the 
+// information from the user rows that had ~ in their ID.
+// If this is not a *PARAMS row, then we will delete it from the output
+if ($record.isParamsRow && $local[$record.cleansedUserId]) {
+    $record.paramFirstName = $local[$record.cleansedUserId].firstName
+    $record.paramLastName = $local[$record.cleansedUserId].lastName
+    $record.paramUserStatusCode = $local[$record.cleansedUserId].status
+    $record.paramUserStatus = statusLookup[$local[$record.cleansedUserId].status] || $local[$record.cleansedUserId].status
+    $record.paramGroupId = $local[$record.cleansedUserId].groupId    
+    $record.groupDesc = $local[$local[$record.cleansedUserId].groupId].groupDesc
+} else {
+    $omit()
+}
+
+```
+
+**Remove Fields**
+
+You can also add a *Remove Fields* flow step to remove fields used in the calculations and unneeded fields:
+
+- First Name
+- Last Name
+- User Group Id
+- @ID
+- User Status
+- isParamsRow
+- isUserRow
+- isUserGroup
+
+**Rename Fields**
+
+This last Powerscript just cleans up some of the labels:
+
+```javascript
+// Change field labels (removing param)
+$fields.paramGroupId.label = "Group"
+$fields.paramFirstName.label = "First Name"
+$fields.paramLastName.label = "Last Name"
+$fields.paramUserStatus.label = "User Status"
+$fields.paramUserStatusCode.label = "User Status Code"
+```
+
+
+
 ## Miscellaneous Information
 
 ### Date Time Stamp fields
