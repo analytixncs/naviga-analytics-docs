@@ -956,3 +956,55 @@ if (!$local.currentYear) {
 
 You can now build your reports.  Just remember that if you ended up creating a calculation from the YOY fields, you will need to only use fields in your report that were used in your aggregation.
 
+## calculateNetAmount- Create Function
+
+- **Function name:** calculateNetAmount
+
+- **Namespace:** naviga
+
+- **Description:** Calculate the net amount based on the campaign type
+
+- **Parameters:**
+
+  | Data Type | Variable name  | Label          | Sample |
+  | --------- | -------------- | -------------- | ------ |
+  | string    | campaignType   | campaignType   |        |
+  | number    | monthActualAmt | monthActualAmt |        |
+  | number    | monthEstAmt    | monthEstAmt    |        |
+
+**Function Body**
+
+```javascript
+// Make sure both passed in values are a number
+monthEstAmt = returnANumber(monthEstAmt)
+monthActualAmt = returnANumber(monthActualAmt)
+
+if (campaignType === "F") {
+    return monthEstAmt;
+} else {
+    return monthActualAmt === 0 || !monthActualAmt
+        ? monthEstAmt
+        : monthActualAmt;
+}
+
+// Helper function
+function returnANumber(numberIn) {
+	numberIn = Object.prototype.toString.call(numberIn) === "[object Date]" ? 0 : numberIn;
+	const parsedNumber = Number(numberIn);
+	if (isNaN(parsedNumber)) {
+  		return 0;
+	}
+	return parsedNumber;
+}
+```
+
+
+
+## calculateNetAmount - Usage
+
+This is a very simple function that accepts a `campaign type`, the `Month Actual Amount` and `Month Est Amount` and returns a "net" amount based on the formula above.
+
+The function assumes that the data has been normalized and the the Amount fields are NOT multivalued.
+
+It is based on the information in the [Informer AD Internet Orders Mapping Docs](informer-mappings#month-actual--est-amt)
+

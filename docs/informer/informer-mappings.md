@@ -655,11 +655,92 @@ if ($record.a_d_internet_campaigns_assoc_campaignType === 'F') {
 >
 > This means that when the campaign is invoiced, it may be invoiced at a different exchange rate. 
 
-**AR Invoice mapping**
-
-The last piece is the AR Invoice mapping.  It has a field called the **Exchange Revaluation Amount**, which is the difference **in LOCAL Currency** between the converted price at booking and the converted price at invoicing.
 
 
+> **AR Invoice mapping**
+>
+> The last piece is the AR Invoice mapping.  It has a field called the **Exchange Revaluation Amount**, which is the difference **in LOCAL Currency** between the converted price at booking and the converted price at invoicing.
+
+#### Using Foreign Currency with Rep Amounts 
+
+You may also want to extend the foreign currency over to Rep Amounts.  Rep amounts are unique since there may be multiple reps per Month/Order line as each rep may get a different percentage of that Month/Order line.
+
+In the example below, we are going to convert the **Actual**, **Estimated** in addition to the calculated **Net** amount.
+
+The final revenue fields will be:
+
+**Regular Amount Fields**
+
+- **actualLineLocalAmount**
+- **estLineLocalAmount**
+- **netLineLocalAmount**
+- **actualLineForeignAmount**
+- **estLineForeignAmount**
+
+**Rep Amount Fields**
+
+- **actualRepLineLocalAmount**
+- **estRepLineLocalAmount**
+- **netRepLineLocalAmount**
+- **actualRepLineForeignAmount**
+- **estLineForeignAmount**
+- **netRepLineForeignAmount**
+
+**Normalize Flow Step**
+
+You must first normalize any of the "Month" fields.  this will include the monthActAmt and monthEstAmt.
+
+**Calculate Initial Line Amounts**
+
+```javascript
+// We will use the following formula
+// ---- Local Currency Amount = Foreign Currency Amount / Exchange Rate
+// If there is an exchange rate, return it else return 1
+exchangeRate = $record['a_d_internet_campaigns_assoc_currRate'] ? $record['a_d_internet_campaigns_assoc_currRate'] : 1;
+
+$record.actualLineLocalAmount = $record['monthActualAmt'] / exchangeRate
+$record.estLineLocalAmount = $record['monthEstAmt'] / exchangeRate
+$record.netLineLocalAmount = calcNetAmount($record['a_d_internet_campaigns_assoc_campaignType'], $record.actualLineLocalAmount, $record.estLineLocalAmount)
+
+$record.actualLineForeignAmount = $record['monthActualAmt'] 
+$record.estLineForeignAmount = $record['monthEstAmt'] 
+$record.netLineForeignAmount = calcNetAmount($record['a_d_internet_campaigns_assoc_campaignType'], $record.actualLineForeignAmount, $record.estLineForeignAmount)
+```
+
+**Normalize Flow Step**
+
+You must then normalize the Current Rep fields AND the Amount field created in the above Powerscript, but NOT the **monthActualAmt** or **monthEstAmt**.  This is very important.
+
+When we perform this normalize, we want the Amount fields we created in the above script, the `...LineLocal...` amount fields to NOT get added to each rep when we normalize those reps.  Instead, these fields will be able to be used to in any aggregation formula that doesn't deal with Reps.  This is important because, depending on a site's setup, aggregating rep revenue may overstate real revenue.
+
+However, we DO need the `monthActualAmt` and `monthEstAmt` fields to be "duplicated" to each rep, thus, they are NOT included in this flow step.  This way, we can use them in the next Powerscript to calculate Rep specific revenue.
+
+**Calculate Rep Amounts**
+
+```javascript
+// We will use the following formula
+// ---- Local Currency Amount = Foreign Currency Amount / Exchange Rate
+// If there is an exchange rate, return it else return 1
+exchangeRate = $record['a_d_internet_campaigns_assoc_currRate'] ? $record['a_d_internet_campaigns_assoc_currRate'] : 1;
+// - We are using  the monthActualAmt and monthEstAmt for our calcs.
+repNetForeignAmount = calcNetAmount($record['a_d_internet_campaigns_assoc_campaignType'], $record['monthActualAmt'], $record['monthEstAmt']) * ($record.currentRepPcts/100)
+repActualForeignAmount = $record.monthActualAmt * ($record.currentRepPcts/100)
+repEstForeignAmount = $record.monthEstAmt * ($record.currentRepPcts/100)
+
+$record.actualRepLineLocalAmount = repActualForeignAmount / exchangeRate
+$record.estRepLineLocalAmount = repEstForeignAmount / exchangeRate
+$record.netRepLineLocalAmount = repNetForeignAmount / exchangeRate
+
+$record.actualRepLineForeignAmount = repActualForeignAmount
+$record.estRepLineForeignAmount = repEstForeignAmount 
+$record.netRepLineForeignAmount = repNetForeignAmount
+```
+
+**Remove Fields**
+
+The last thing we need to do is remove the `monthActualAmt` and `monthEstAmt` fields since we have used them to calculate the field that we need.
+
+---
 
 ### Metadata Fields
 

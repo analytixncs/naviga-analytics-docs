@@ -208,3 +208,65 @@ The Agencies do not have brands.
  
 
 Next I created an idescriptor that I got working that will link the GEN CLIENTS to AD BRANDS so if they want to create a report using the GEN Clients mapping they can link to the AD Brands and pull the description etc.
+
+### Brands and Brand Reps
+
+For print there is the following relationship which has been around longer than I’ve been associated with MSG… which is my way of saying don’t blame me…lol…
+
+ 
+
+You could start with clients which stores a list of BRANDS on CLIENTS<30>
+
+![img](images/informer_misc_brandreps02.png)
+
+ 
+
+PRODCAMP is the brand record CLIENT.ID*BRAND.ID
+
+ 
+
+BRAND.PUBS is a middle tier CLIENT.ID*BRAND.ID*PUB.ID
+
+Stores the effective date and counter which is a bit redundant 
+
+ 
+
+ 
+
+![img](images/informer_misc_brandreps03.png)
+
+ 
+
+ 
+
+ 
+
+BRAND.PUBS.REPS is CLIENT.ID*PUB.ID*PUB.ID*[COUNTER]
+
+![img](images/informer_misc_brandreps04.png)
+
+ 
+
+So every time the rep is reassigned with a new effective date for the same brand/pub/rep the counter is incremented.
+
+ 
+
+![img](images/informer_misc_brandreps05.png)
+
+ 
+
+ 
+
+When you edit this line you will see all seven assignments:
+
+ 
+
+![img](images/informer_misc_brandreps06.png)
+
+ 
+
+For rep reporting I would recommend starting with Brand Pubs Reps and link from there:
+
+ 
+
+![img](images/informer_misc_brandreps07.PNG)
