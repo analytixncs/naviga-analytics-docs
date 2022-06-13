@@ -811,10 +811,19 @@ for(let i = 0; productGLTypes.length>i; i++) {
 
 This code will return a "Real" GL Code and also is returning the External GL (Change Code) if that is something you need.  However, getting the External GL Code requires another dataset to connect the **GL Chart of Accounts** mapping to the AD Internet Orders mapping.  The sample dataset download includes this other Dataset.  You may remove it if you like.
 
+:::caution
+
+The External GL requires a **separate** Dataset to return the External GL.  This means that if you import the below sample dataset and you want to include the External GL, you will need to also reload the dataset that is joined in the main dataset to get the external GL.  
+
+This dataset is name **[NAVIGA]-GL To External GL**
+
+:::
+
 Lastly, you will want to remove the Web Site GL Type ID and Web Site GL Type Revenue ID field from you report so that you don't get the multivalued fields showing.
 
 > Download a sample Dataset:
 > **<a  target="_blank"  href="/downloads/naviga-ad-internet-orders-with-gl.tgz"> [NAVIGA]-AD Internet Orders With GL</a>**
+> NOTE: This sample has some campaign criteria that you will want to clear or update.
 
 ### Adjustments On Lines
 
@@ -1139,6 +1148,36 @@ Digital Billing Delivery Method - `GEN Clients - Digital Inv Delivery (275)`
 Print Billing Delivery Method - `GEN Clients - Invoice Delivery Method (226)`
 
 ![img](images/informerMapping_gen_clients-003.png)
+
+### AD Brands
+
+Most of the time you will want to access Brand information in the context of a Client.  When writing a report that has a the **GEN Clients** mapping in it, you will see that one of the relationships is **AD Brands**.  
+
+:::info
+
+The relationship from **GEN Clients** to **AD Brands** is a `1-many` relationship, which means that any fields you pull from AD Brands will be "mulivalued"
+
+:::
+
+**Billing Overrides**
+
+**Billing Contact**
+
+The field **AD Brands** `DIGITALBILLING.CONTACT <141> `links to the **GEN Company/Individual Names** mapping, which is named "Digital Billing Contact" in the mapping relationship from **AD Brands**.  
+
+![img](images/informerMapping_gen_clients_adbrand_001.png)
+
+**Invoice Email Contacts**
+
+The Invoice Email Contacts for a given brand in the Billing Overrides section, is a multivalued field and links to the **GEN Company/Individual Names** mapping.
+
+The field **AD Brands** `INET.INV.CONTACTS <203>` contains the IDs of the contacts.  As of the Q2-2022 release of the Informer Mappings, there is not a link to the detail information for this field.
+
+![img](images/informerMapping_gen_clients_adbrand_002.png)
+
+If you need this information, you will need to create a manual link in your datasource.  This can be done within Informer by using the following information when adding a new link to the **AD Brands** links
+
+ ![image-20220610153606636](images/informerMapping_gen_clients_adbrand_003.png)
 
 ## GEN User Control
 
