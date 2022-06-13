@@ -1071,9 +1071,29 @@ Intro
 
 ### Statement Email Address
 
+In GEN Clients, there is a **Statement Email ID**, this ID is a link into the **GEN Company/Individual Names**, however it is not mapped in the Informer system as of June 2022.  You can add a manual link to remedy this.
+
+
+
+![image-20220613145404623](images/informerMapping_gen_clients_stmt_001.png)
+
+
+
+![image-20220613145236484](images/informerMapping_gen_clients_stmt_002.png)
+
+This will add a new relationship to the GEN Clients mapping:
+
+![img](images/informerMapping_gen_clients_stmt_003.png)
+
+:::danger
+
+The below information doesn't always work.  It will only work if the Statement Email Address "person" is an employee of the company.  This is left in the docs because it is a useful technique to use in other circumstances.
+
+:::
+
 The **GEN Company/Individual Names** mapping has a number IDs within that are self referencing.  One such ID is the the Employees ID.
 
-What that means is that the **GEN Company/Individual Names** mapping holds the information for any entity that represents an Individual or a company, that individual could be an employee are a Transient Ad booker.  It could also be a parent or child company!
+What that means is that the **GEN Company/Individual Names** mapping holds the information for any entity that represents an Individual or a company, that individual could be an employee or a Transient Ad booker.  It could also be a parent or child company!
 
 So this mapping does a lot.  In this section, I want to leverage that to be able to gain access to Contact Email addresses that are not available in the **GEN Company/Individual Names** mapping.
 
