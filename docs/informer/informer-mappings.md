@@ -1171,7 +1171,7 @@ Print Billing Delivery Method - `GEN Clients - Invoice Delivery Method (226)`
 
 ### AD Brands
 
-Most of the time you will want to access Brand information in the context of a Client.  When writing a report that has a the **GEN Clients** mapping in it, you will see that one of the relationships is **AD Brands**.  
+Most of the time you will want to access Brand information in the context of a Client.  When writing a report that has the **GEN Clients** mapping in it, you will see that one of the relationships is **AD Brands**.  
 
 :::info
 
@@ -1179,7 +1179,41 @@ The relationship from **GEN Clients** to **AD Brands** is a `1-many` relationshi
 
 :::
 
-**Billing Overrides**
+#### Rep Assignments
+
+**Sales Rep Overrides by Product Group**
+
+:::caution
+
+Note that the relationship between the Digital Web Group ID and the Digital Web Rep ID is multivalued.  You can have multiple Product Groups in this override area **AND EACH** Product Group can have up to four Reps assigned to it!  This is why you see the **MS** next to the DIGITAL.WEB.REP.IDS <147> field.  It is indicating that it is Multivalued/subvalued.  
+
+:::
+
+The following fields have the same granularity and are associated.
+
+- **DIGITAL.WEB.GROUPS <146>** - The Pub Group ID
+- **DIGITAL.WEB.REP.IDS <147>** - Rep IDs assigned to the Pub Group 
+- **DIGITAL.WEB.REP.PCTS <148>** - Rep %'s for each rep.
+
+Rep Detail information can be pulled from the **Digital Web Salesrep** associated mapping
+
+![img](images/informerMapping_gen_clients_repass_adbrand_001.png)
+
+If you need the Product Group detail information, you will need to either get that from a joined dataset OR you can manually create a link to the **AD Pub Groups** mapping.  Here are the details for a Manual Link:
+
+**From Mapping**: ODBC_PRODCAMP (this is the AD Brands mapping)
+
+**To Mapping**: ODBC_PUB_GROUPS
+
+**Link Name**: Can be whatever you want, but it should be descriptive and indicate that it was created by the site
+
+**AD Brands**: DIGITAL.WEB.GROUPS - this is the link field from AD Brands to AD Pub Groups.
+
+![image-20220616104628165](images/informerMapping_gen_clients_repass_adbrand_002.png)
+
+
+
+#### Billing Overrides
 
 **Billing Contact**
 
