@@ -1169,23 +1169,51 @@ Print Billing Delivery Method - `GEN Clients - Invoice Delivery Method (226)`
 
 ![img](images/informerMapping_gen_clients-003.png)
 
-### AD Brands
 
-Most of the time you will want to access Brand information in the context of a Client.  When writing a report that has the **GEN Clients** mapping in it, you will see that one of the relationships is **AD Brands**.  
+
+## AD Brands
+
+Most of the time you will want to access Brand information in the context of a Client.  When writing a report that has the **GEN Clients** mapping in it, you will see that one of the relationships is **AD Brands**, however, when you want to pull "setup" information about a Brand and its related Client, you will need to start from the AD Brands mapping.
 
 :::info
 
-The relationship from **GEN Clients** to **AD Brands** is a `1-many` relationship, which means that any fields you pull from AD Brands will be "mulivalued"
+If you are wanting Setup Information about Brands, you will want to have your base mapping be **AD Brands**
 
 :::
 
-#### Rep Assignments
+### Rep Assignments
+
+**Default Sales Reps Assignments for this Brand**
+
+The following fields from the AD Brands mapping are the default sales reps assignments for the selected brand.
+
+- **DIGITAL.REP.IDS <138>** - The Rep ID
+- **DIGITAL.REP.PCTS <139>** - The Rep's percentage
+
+To get the Sales Rep name and other details on the rep, go to the **Digital Salesrep** associated mapping.
+
+![img](images/informerMapping_repassignments_adbrand_011.png)
+
+---
 
 **Sales Rep Overrides by Product Group**
 
 :::caution
 
 Note that the relationship between the Digital Web Group ID and the Digital Web Rep ID is multivalued.  You can have multiple Product Groups in this override area **AND EACH** Product Group can have up to four Reps assigned to it!  This is why you see the **MS** next to the DIGITAL.WEB.REP.IDS <147> field.  It is indicating that it is Multivalued/subvalued.  
+
+Since you know that each Product Group can have only 4 reps, you could create a separate column for each using the code below in a Powerscript.
+
+```javascript
+if ($record['digitalWebRepIds']) {
+	$record['digitalWebRepIds'].forEach((el, index) => {
+	    $record[`GroupRep${index+1}`] = el
+        $record[`GroupRepPercent${index+1}`] = $record['digitalWebRepPcts'][index]
+	})
+}
+```
+
+>  Remember to add a Remove flow step to remove the **digitalWebRepIds** and **digitalWebRepIds** fields after you have converted them to columns.
 
 :::
 
@@ -1211,9 +1239,19 @@ If you need the Product Group detail information, you will need to either get th
 
 ![image-20220616104628165](images/informerMapping_gen_clients_repass_adbrand_002.png)
 
+---
 
+**Sales Rep Overrides by Product**
 
-#### Billing Overrides
+In the AD Brands mapping, you will only have access to the Product IDs, but **not** the reps associated with each product.  This is stored in another mapping that has not yet been added to Informer as of 07/2022.
+
+The Field is in the AD Brands mapping
+
+- **PRODUCT.IDS<185>** - The Pub Group ID
+
+![img](images/informerMapping_gen_adbrands_010.png)
+
+### Billing Overrides
 
 **Billing Contact**
 
