@@ -424,6 +424,94 @@ Along with the field, you can pass the delimiter that you want as well as a flag
 
 ---
 
+## multiValuedToColumns - Create Function
+
+- **Function name:** multiValuedToColumns 
+
+- **Namespace:** naviga
+
+- **Description:** Converts one or more passed multivalued field values to separate columns.
+
+- **Parameters:**
+
+  | Data Type | Variable name   | Label                | Sample                     |
+  | --------- | --------------- | -------------------- | -------------------------- |
+  | Any       | columnConfigObj | Column Config Object | { $record, newColumnsObj } |
+
+**Function Body**
+
+```javascript
+// type columnConfigObj = {
+//     newColumnsObject: newColumnsObject,
+//     $record // Informer's $record object
+// }
+// type newColumnsObject = {
+//   // columnName is the base name for the values assigned to that key 
+//   [columnName: string]: string[] | string
+// }   
+const newColumnsObject = columnConfigObj.newColumnsObject || {}
+const $record = columnConfigObj.$record
+// Pull the enteries out of the config object 
+const fieldArray = Object.entries(newColumnsObject)
+
+// Loop through each config object
+fieldArray.forEach(field => {
+// Get the new columnName
+  const columnName = field[0]
+  // get the column value
+  const columnValues = Array.isArray(field[1]) ? field[1] : [field[1]]
+  // Loop through the column values creating a new column for each value
+  columnValues.forEach((columnValue, index) => {
+    $record[`${columnName}${index+1}`] = columnValue
+  })
+})
+```
+
+## multiValuedToColumns - Usage
+
+This function takes a configuration object as input, which includes one or more multivalued fields that you want converted to columns.
+
+One use case would be for the areas in Naviga Ad where you have up to four sales reps that can be assigned.  This exists Brand Management.  You may want to express those reps as four fields, `Rep1, Rep2, Rep3, Rep4`, instead of multiple rows.
+
+To accomplish this, you will call the `multiValuedToColumns` saved function and pass it a configuration object.  The configuration objects passed is made up of two parts:
+
+`{ $record, newColumnsObject }`
+
+The `$record` is an Informer object, but you will need to build the `newColumnsObject`
+
+```javascript
+// multiValuedToColumns Configuration Object
+groupRepsColumnConfig = {
+  groupRepId: $record['digitalWebRepIds'],
+  groupRepPct: $record['digitalWebRepPcts']
+}
+```
+
+Be aware that you can pass multiple, multivalued fields to the function and it doesn't matter if they are at different "granularities" or "associations".
+
+:::danger
+
+Be careful passing mutlivalued fields that are open ended.  They could created a large number of columns.  It is best to use on multivalued fields where you know the limit of the values inside of it.
+
+:::
+
+After you have build the proper `newColumnsObject` , you call the function as follows:
+
+`naviga.multiValuedToColumns({ $record, newColumnsObject })`
+
+
+
+**Function Syntax**
+
+```javascript
+// NOTE: you are passing a single object as a parameter that contains the $record and newColumnsObject
+naviga.multiValuedToColumns({ $record, newColumnsObject })
+```
+
+
+
+---
+
 ## returnANumber - Create Function
 
 - **Function name:** returnANumber
