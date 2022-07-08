@@ -314,3 +314,45 @@ You will still need to run the `safe` filter and parse the data:
   </script>
 </html>
 ```
+
+## Styling Your Template
+
+When styling your template, you could use inline styles or CSS classes.  The preferred method is with CSS classes.
+
+Usually CSS Classes will come from another file with a `.css` extension that is linked to the main HTML file.
+
+With Informer Templates, you will do this by creating an **Asset** called `style.css`.  
+
+![image-20220708145514002](images/informer_templates_styling_001.PNG)
+
+You can write all of your classes in this file, BUT, you still need to link this file into your main `template.njk` file.
+
+We do this with the following `link` line in the html `head` section.
+
+```html
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url('style.css')}} ">
+</head>
+```
+
+### Tailwind CSS
+
+Another way to style your template is to use the [Tailwind CSS library](https://tailwindcss.com/).  
+
+To use this library, you will need to use their CDN and add it to your `head` section of the template file.
+
+```html
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url('style.css')}} ">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+```
+
+:::tip
+
+You can use both tailwind and a Style CSS document to style your template.
+
+:::
+
