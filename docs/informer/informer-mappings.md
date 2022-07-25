@@ -389,6 +389,12 @@ Here are the rules:
 - **Flexible Campaigns** - If the line is part of a flexible campaign, then you will **only** use the **Month Est Amt**
 - **Other Types of Campaigns** - If the line is not part of a flexible campaign, then we need to determine whether to use the Actual or Estimated amount field. You will simply choose the Estimated amount if the Actual amount field is zero or empty.
 
+:::danger
+
+The **monthEstAmt** and **MonthActualAmt** fields are inclusive of Agency Commission.  If you want to remove agency commission, you will need to include the **monthActualCommAmt <202>** field from the **AD Internet Orders** mapping.
+
+:::
+
 Here is a Powerscript excerpt that embodies the above rules and creates a single revenue field called **NetAmount**:
 
 ```javascript
@@ -1063,11 +1069,45 @@ The field that you will use is on the **AR Invoices** mapping.
   - **D** - Debit
   - **W** - Writeoff
 
-  
+
+### AR Invoices From AD Internet Orders / Campaigns
+
+Many times you will want to be able to access information from AR Invoices when the starting point for your Dataset is from AD Internet Orders or AD Internet Campaigns.
+
+You are able to do this, but you must be aware that the Invoice Ids are stored differently for Flexible and Performance campaigns.
+
+- Flexible (Campaign Type = "F") - AD Internet Campaigns INVOICE.ID <28> - This is a MV (Multi Valued) field, hence, there can be multiple invoices for every campaign.  
+- Performance (Campaign Type = "M") - AD Internet Orders MONTH.INVOICE.ID <80> - 
+
+
+
+#### Flexible Campaign Invoice Fields
+
+As stated above, Flexible campaigns store their Invoice Ids in the AD Internet Campaigns mapping in field **<28> INVOICE.ID**.  
+
+:::tip
+
+This is a MV (Multi Valued) field which means that there can be multiple invoices for every campaign.  
+
+:::
+
+These invoices are part of the Billing schedule.  This means that you the billing schedule fields in AD Internet Campaigns are also MV fields AND since the Invoice INVOICE.ID <28> and Billing Schedule fields are related one to one, you can think of them as being associated at the same level. 
+
+Some useful billing schedule fields **BILLING.AMOUNT <27>** and **BILLING.DATE <26>**.
+
+:::danger
+
+Sometimes users will want a report that displays Billing schedule amounts and Order Line amounts, but be aware that these are different types of data.  Even though the total of all Orders should match the total of the Billing Schedule amount, they do match line for line.  Thus having them on a single report tends to be problematic unless you really know what you want.
+
+:::
+
+#### Performance Campaign Invoice Fields
+
+
 
 ## GEN Clients
 
-Intro
+
 
 ### Statement Email Address
 
