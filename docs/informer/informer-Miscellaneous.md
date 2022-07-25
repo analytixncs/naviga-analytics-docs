@@ -270,3 +270,25 @@ For rep reporting I would recommend starting with Brand Pubs Reps and link from 
  
 
 ![img](images/informer_misc_brandreps07.PNG)
+
+## Est Amt vs Actual Amt
+
+So for print or flat fee digital ads the estimate and actual should always populate with the same number.
+
+For digital campaigns that are sold on a “cost per” basis the initial entry would populate the estimate field, the actuals would populate when you deliver. So for example I sell you 100,000 impressions. That is a promise up front, there is a chance I don’t actually deliver all of those and if you are a savvy advertiser you are actually monitoring what I delivered … so I have to charge you for the actual delivery amount and that goes in the actuals field.
+
+If your instance of Naviga is connected to Google Ad Manager then we update that actuals column every 30 minutes based on how many times the ad is actually viewed.
+
+ 
+
+On flexible campaigns we bill off estimates, sometimes that is what publishers want. On performance campaigns there is a default setting on the customer that can be overwritten on the campaign that asks if you are billing off estimates (more unusual), actuals, or what we call “third party” actuals. For that the number comes from a verification service that checks and says don’t care what the publisher or the advertiser say, this is the real number.
+
+- **Flexible Campaigns** -     If the line is part of a flexible campaign, then you will **only** use     the **Month Est Amt*****[Wayne Burrows]\***  **Naviga only uses the estimate on     flexible campaigns yes. It is possible that they still get actuals     back from GAM and those would populate the actuals field but we would bill     on estimate and recognize revenue on estimate. So WE only use estimate     in that case. Glacier has some reports that do look at the actuals     even on flexible but that would be unusual (SORRY! Short answer     would be YES … but wanted to be really precise just in case you do notice     values in that field)**
+
+**Other Types of Campaigns** - If the line is not part of a flexible campaign, then we need to determine whether to use the Actual or Estimated amount field. You will simply choose the Estimated amount if the Actual amount field is zero or empty.***[Wayne Burrows] I’d say safest is to look at the setting on the line. The problem with assuming to use estimate if actual is blank is if they are billing based on actuals a zero/null might be valid (the line is not serving) and you would want to know that, otherwise we could be assuring them that everything is serving fine when it is not.\***
+
+![img](images/informer_misc_act-est-amt001.png)
+
+Are all Print and Flat Fee digital ads Flexible campaigns? 
+
+***[Wayne Burrows]\*** Unfortunately not. So … separate setting … here is why you use flexible vs performance: Performance system assumes it will invoice as you perform (so if an ad ran in Jan/Feb/March we assume we will bill end of each of those 3months). Flexible: no system assumption on when to bill, user can enter any billing date they wish. So on my 3month order I could have one bill all up front, or one at the end, or 2 bills, anything customer wants. Flexible does only look at estimates ignores settings above, Performance depends on settings above. Invoices for flexible are a % of the whole so all orders are summed up and amount is not related at all to any line item detail. Performance you are billing each line for that month. Flexible creates all sorts of journal entries behind the scenes to defer and recognize the transactions, performance does not. So … now I bet it is clear as mud … and yes the customers should understand the difference … I’m guessing certain people in the organization do and they are perhaps not involved in writing the reports. I’m happy to talk with the customer if that would help.
