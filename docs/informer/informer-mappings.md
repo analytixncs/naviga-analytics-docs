@@ -881,9 +881,9 @@ Be aware that the **Month Actual Imps** and **Month Est Qty** are both multivalu
 
 ![image-20220517185113482](images/informerMapping_aio_size_003.jpg)
 
+### Invoices
 
-
-
+[See AR Invoice section](#ar-invoices-from-ad-internet-orders-and-campaigns)
 
 ## CM Opportunities
 
@@ -1069,8 +1069,7 @@ The field that you will use is on the **AR Invoices** mapping.
   - **D** - Debit
   - **W** - Writeoff
 
-
-### AR Invoices From AD Internet Orders / Campaigns
+### AR Invoices From AD Internet Orders and Campaigns
 
 Many times you will want to be able to access information from AR Invoices when the starting point for your Dataset is from AD Internet Orders or AD Internet Campaigns.
 
@@ -1085,23 +1084,61 @@ You are able to do this, but you must be aware that the Invoice Ids are stored d
 
 As stated above, Flexible campaigns store their Invoice Ids in the AD Internet Campaigns mapping in field **<28> INVOICE.ID**.  
 
+INVOICE.ID is a MV (Multi Valued) field which means that there can be multiple invoices for every campaign.  
+
+These invoices are part of the Billing schedule.  This means that the billing schedule fields in AD Internet Campaigns are also MV fields AND since the Invoice INVOICE.ID <28> and Billing Schedule fields are related one to one, you can think of them as being associated at the same level. 
+
+Some useful billing schedule fields **BILLING.AMOUNT <27>** and **BILLING.DATE <26>**.
+
+To get the Invoice Details, there is a relationship to the AR Invoice mapping as shown below.
+
 :::tip
 
-This is a MV (Multi Valued) field which means that there can be multiple invoices for every campaign.  
+If an Invoice has not *Posted To AR* yet,  you will see it in the AD Internet Campaigns Invoice ID field, but it will not yet exist in the AR Invoices mapping yet.
 
 :::
 
-These invoices are part of the Billing schedule.  This means that you the billing schedule fields in AD Internet Campaigns are also MV fields AND since the Invoice INVOICE.ID <28> and Billing Schedule fields are related one to one, you can think of them as being associated at the same level. 
+![image-20220727132003810](images/informer_mapping_ARInvoices_Flex_002.png)
 
-Some useful billing schedule fields **BILLING.AMOUNT <27>** and **BILLING.DATE <26>**.
+
 
 :::danger
 
 Sometimes users will want a report that displays Billing schedule amounts and Order Line amounts, but be aware that these are different types of data.  Even though the total of all Orders should match the total of the Billing Schedule amount, they do match line for line.  Thus having them on a single report tends to be problematic unless you really know what you want.
 
+Here is an example of Revenue Allocation by Period Recognized, fields show are in the **AD Internet Campaigns** mapping and are REVENUE.PERIOD<20>, REVENUE.AMOUNT<21>, REVENUE.NET.AMOUNT<22>:
+
+![img](images/informer_mapping_ARInvoices_Flex_003.png)
+
+VERSUS it's billing schedule.  Fields shown are in the **AD Internet Campaigns** mapping and are BILLING.DATE <26>, BILLING.AMOUNT <27>, INVOICE.ID <28>.
+
+![img](images/informer_mapping_ARInvoices_Flex_004.png)
+
+Note that the Billing information can and will exist before an Invoice is generated.
+
 :::
 
 #### Performance Campaign Invoice Fields
+
+Performance campaigns have Invoice IDs that are associated with Order lines, so their data is located in the **AD Internet Orders** mapping.
+
+- **AD Internet Orders** - **MONTH.INVOICE.ID <80>** - The invoice ID for the current Line/Month
+- **AD Internet Orders** - **MONTH.ACTUAL.AMT <76>** - The amount for the current Line/Month
+- **AD Internet Orders** - **MONTH.CREDIT.ID <81>** - The Credit ID for the current Line/Month
+
+> These are all multivalued field and are associated at the same level as the other fields that start with MONTH in the AD Internet Orders mapping.
+
+:::danger
+
+Be aware that the MONTH.INVOICE.ID is not one to one with the Line ID or the MONTH.ACTUAL.AMT
+
+![image-20220727140933544](images/informer_mapping_ARInvoices_Perf_001.png)
+
+:::
+
+You can get details for Invoices and Credits from the associated mapping **Month Invoice ID** and **Month Credit ID** respectively.
+
+![img](images/informer_mapping_ARInvoices_Perf_002_5.png)
 
 
 
