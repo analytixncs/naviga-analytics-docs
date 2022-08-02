@@ -1075,8 +1075,8 @@ Many times you will want to be able to access information from AR Invoices when 
 
 You are able to do this, but you must be aware that the Invoice Ids are stored differently for Flexible and Performance campaigns.
 
-- Flexible (Campaign Type = "F") - AD Internet Campaigns INVOICE.ID <28> - This is a MV (Multi Valued) field, hence, there can be multiple invoices for every campaign.  
-- Performance (Campaign Type = "M") - AD Internet Orders MONTH.INVOICE.ID <80> - 
+- [Flexible](#flexible-campaign-invoice-fields) (Campaign Type = "F") - AD Internet Campaigns INVOICE.ID <28> - This is a MV (Multi Valued) field, hence, there can be multiple invoices for every campaign.  The Invoices align with the Billing Schedule.
+- [Performance](#performance-campaign-invoice-fields) (Campaign Type = "M") - AD Internet Orders MONTH.INVOICE.ID <80> - In a performance campaign the invoices will align with the Order Lines.  There can be multiple line on a single invoice depending on your settings in Naviga Ad.
 
 
 
@@ -1086,15 +1086,15 @@ As stated above, Flexible campaigns store their Invoice Ids in the AD Internet C
 
 INVOICE.ID is a MV (Multi Valued) field which means that there can be multiple invoices for every campaign.  
 
-These invoices are part of the Billing schedule.  This means that the billing schedule fields in AD Internet Campaigns are also MV fields AND since the Invoice INVOICE.ID <28> and Billing Schedule fields are related one to one, you can think of them as being associated at the same level. 
+These invoices are part of the Billing schedule.  This means that the billing schedule fields in AD Internet Campaigns are also MV fields **AND** since the Invoice INVOICE.ID <28> and Billing Schedule fields are related one to one, you can think of them as being associated at the same level. 
 
 Some useful billing schedule fields **BILLING.AMOUNT <27>** and **BILLING.DATE <26>**.
 
-To get the Invoice Details, there is a relationship to the AR Invoice mapping as shown below.
+To get the Invoice Details, there is a relationship to the **AR Invoice** mapping as shown below.
 
 :::tip
 
-If an Invoice has not *Posted To AR* yet,  you will see it in the AD Internet Campaigns Invoice ID field, but it will not yet exist in the AR Invoices mapping yet.
+If an Invoice has not *Posted To AR* yet,  you will see it in the AD Internet Campaigns INVOICE.ID field, but it will not yet exist in the AR Invoices mapping.
 
 :::
 
@@ -1102,11 +1102,11 @@ If an Invoice has not *Posted To AR* yet,  you will see it in the AD Internet Ca
 
 
 
-:::danger
+:::caution
 
 Sometimes users will want a report that displays Billing schedule amounts and Order Line amounts, but be aware that these are different types of data.  Even though the total of all Orders should match the total of the Billing Schedule amount, they do match line for line.  Thus having them on a single report tends to be problematic unless you really know what you want.
 
-Here is an example of Revenue Allocation by Period Recognized, fields show are in the **AD Internet Campaigns** mapping and are REVENUE.PERIOD<20>, REVENUE.AMOUNT<21>, REVENUE.NET.AMOUNT<22>:
+Here is an example of Revenue Allocation by Period Recognized.  Fields shown are in the **AD Internet Campaigns** mapping and are REVENUE.PERIOD<20>, REVENUE.AMOUNT<21>, REVENUE.NET.AMOUNT<22>:
 
 ![img](images/informer_mapping_ARInvoices_Flex_003.png)
 
@@ -1128,7 +1128,7 @@ Performance campaigns have Invoice IDs that are associated with Order lines, so 
 
 > These are all multivalued field and are associated at the same level as the other fields that start with MONTH in the AD Internet Orders mapping.
 
-:::danger
+:::caution
 
 Be aware that the MONTH.INVOICE.ID is not one to one with the Line ID or the MONTH.ACTUAL.AMT
 
@@ -1481,6 +1481,44 @@ $fields.paramLastName.label = "Last Name"
 $fields.paramUserStatus.label = "User Status"
 $fields.paramUserStatusCode.label = "User Status Code"
 ```
+
+
+
+## UDF Field
+
+UDF stands for User Defined Fields.  These are fields that you get to define to hold whatever information you need.  This is great for flexibility, however, since every site will have different information, it can be a bit confusing finding the UDF you need.
+
+To start with, you will need to know what information your UDF is associated with.  
+
+### **Client AR UDF** 
+
+You can define the UDFs here - https://XXX.navigahub.com/ew/XXX/accounting/setup/ar_udf_codes?t=TEXT
+![image-20220728103247702](images/informer_mapping_UDF_Client02.png)
+
+Once you set up the UDF, you can set it in the Account Maintenance module:
+
+![img](images/informer_mapping_UDF_Client03.png)
+
+### **Opportunity UDF** 
+
+You can define the UDFs here -  https://XXX.navigahub.com/ew/XXX/crm/setup/crm_parameters_udf_codes?m=OPP&t=TEXT
+When you enter an opportunity, you will have the option to assign to any defined UDFs for Opportunities.
+
+###  **CRM UDF** 
+
+You can define the UDFs here -  https://XXX.navigahub.com/ew/XXX/crm/setup/crm_parameters_udf_codes?m=CRM&t=TEXT
+
+### **Campaign UDF** 
+
+You can define the UDFs here -  https://XXX.navigahub.com/ew/XXX/ad/setup/campaign_udf_codes?t=TEX
+
+### **Order Line UDF** 
+
+You can define the UDFs here -  https://XXX.navigahub.com/ew/XXX/ad/setup/digital_line_udf_codes?t=TEXT
+
+
+
+---
 
 
 
