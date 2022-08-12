@@ -10,15 +10,15 @@ sidebar_label: Informer Rest API
 
 `https://xxxbi.navigahub.com/api/`
 
-**Route**
+**Endpoint or Route**
 
-xxxbi.navigahub.com**/api/datasets/OWNER:datasetname/data**
+xxxbi.navigahub.com/api/**datasets/OWNER:datasetname/data**
 
-**Options**
+**Query Parameters**
 
 xxxbi.navigahub.com/api/datasets/OWNER:datasetname/data**?start=0&limit=50**
 
-You will find that the Routes fall into two basic categories, either **Datasets** or **Ad Hoc Query Reports**.
+You will find that the endpoinfall into two basic categories, either **Datasets** or **Ad Hoc Query Reports**.
 
 The main difference is that when you request data from an Ad Hoc Query report, it must execute the query against the Naviga database and then return the data. The Dataset data is cached, so when you request data from it, you will be getting the last refreshed data. This makes **datasets the most performant** of the two options.
 
