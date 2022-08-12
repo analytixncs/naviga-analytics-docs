@@ -1076,7 +1076,7 @@ Many times you will want to be able to access information from AR Invoices when 
 You are able to do this, but you must be aware that the Invoice Ids are stored differently for Flexible and Performance campaigns.
 
 - [Flexible](#flexible-campaign-invoice-fields) (Campaign Type = "F") - AD Internet Campaigns INVOICE.ID <28> - This is a MV (Multi Valued) field, hence, there can be multiple invoices for every campaign.  The Invoices align with the Billing Schedule.
-- [Performance](#performance-campaign-invoice-fields) (Campaign Type = "M") - AD Internet Orders MONTH.INVOICE.ID <80> - In a performance campaign the invoices will align with the Order Lines.  There can be multiple line on a single invoice depending on your settings in Naviga Ad.
+- [Performance](#performance-campaign-invoice-fields) (Campaign Type = "M") - AD Internet Orders MONTH.INVOICE.ID <80> - In a performance campaign the invoices will align with the Order Lines.  There can be multiple order line on a single invoice depending on your settings in Naviga Ad.
 
 
 
@@ -1140,9 +1140,90 @@ You can get details for Invoices and Credits from the associated mapping **Month
 
 ![img](images/informer_mapping_ARInvoices_Perf_002_5.png)
 
+:::tip
 
+Please note, that the Month Credit Id mapping will hold credit that only apply to Performance Campaigns and would be the full amount of the Order Line (at the time) of the Credit.  There are other types of Credits in the system, but they would not be found via this relationship.
+
+:::
 
 ## GEN Clients
+
+When you build a report for Clients, you most likely will use the **GEN Clients** mapping as your base mapping.  However, there will be a number of fields that you will get from the mapping related to **GEN Clients**.
+
+Every customer will have a record in the GEN Clients mapping, however the details of the client's name is stored in a link to the **GEN Company/Individual Names** mapping and is called "Client Names".
+
+If you need address information, you can get the from the links to the **GEN Company/Individual Addresses**.  The GEN Client mapping is related to this mapping in two different ways. 
+
+- **AD Preferred Address** - The default address for AD
+- **AR Preferred Address** - The default address for AR
+
+Most of the time the AD Preferred Address is best to use.
+
+### Indicator / Flag fields
+
+There are number of fields in the different mappings the end in `Ind`.  These are Indicator fields, which are considered Y/N or Boolean fields.
+
+:::danger
+
+Many of the Indicator fields can not only be Y or N, but sometimes they are empty.  There is no rule that can be applied to say that all empty indicator fields are Y or vice versa.  I will document some of the useful indicator fields in the next section.  If you run across an undocumented indicator field, contact support about it's default value when blank.
+
+:::
+
+#### Indicator fields
+
+| Field Name /Number   | Mapping                      | Value If Blank |
+| -------------------- | ---------------------------- | -------------- |
+| STATEMENT.IND <68>   | GEN Clients                  | Y              |
+| AGENCY<277>          | GEN Clients                  | N              |
+| CREDIT.STOP <45>     | GEN Clients                  | Y              |
+| ACTIVE.IND <162>     | GEN Clients                  | Y              |
+| AD.PRE.PAY.IND <310> | GEN Clients                  | N              |
+| DO.NOT.USE.IND <150> | GEN Company/Individual Names | N              |
+
+>NOTE: You can test if a field is blank using the following:
+>
+>```javascript
+>if (!$record.IndicatorFieldName) {
+>	//If we get here, the field is blank
+>}
+>```
+
+#### Field Locations in Naviga
+
+1. **On Credit Stop** - GEN Clients -> CREDIT.STOP <45> - When Blank assume "Y"
+2. **Generate Statements** -  GEN Clients -> STATEMENT.IND <68> - When Blank assume "Y"
+3. **Active** - GEN Clients -> ACTIVE<162> - When Blank assume "Y"
+
+https://xxx.navigahub.com/EW/XXX/general/setup/name_maint_ar
+
+![img](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_basics_gen_clients_indicators-001-5.png)
+
+
+
+1. **Is this an Agency** - GEN Clients -> AGENCY.IND <277> - When Blank assume "N"
+1. **Pre-Payment Required** - GEN Clients -> AD.PRE.PAY.IND <310> - When Blank assume "N"
+
+https://xxx.navigahub.com/EW/XXX/general/setup/name_maint_ad
+
+![image-20220812085829314](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_basics_gen_clients_indicators-002.png)
+
+
+
+
+
+1. Do Not Use - GEN Clients -> DO.NOT.USE.IND <150> - When Blank assume "N"
+
+https://xxx.navigahub.com/EW/XXX/general/setup/name_maint_general
+
+![image-20220811151730308](images/informer_basics_gen_clients_indicators-003.png)
+
+
+
+
+
+
+
+---
 
 
 
@@ -1484,41 +1565,84 @@ $fields.paramUserStatusCode.label = "User Status Code"
 
 
 
-## UDF Field
+## UDF Fields
 
-UDF stands for User Defined Fields.  These are fields that you get to define to hold whatever information you need.  This is great for flexibility, however, since every site will have different information, it can be a bit confusing finding the UDF you need.
+UDF stands for **User Defined Fields**.  These are fields that you get to define to hold whatever information you need.  This is great for flexibility, however, since every site will have different information, it can be a bit confusing finding the UDF you need.
 
-To start with, you will need to know what information your UDF is associated with.  
+To start with, you will need to know what information your UDF is associated with in Naviga.  It can be [Client AR](#client-ar-udf), [Opportunity UDF](#opportunity-udf), [CRM UDF](#crm-udf), [Campaign UDF](#campaign-udf), [Order Line UDF](#order-line-udf).
 
-### **Client AR UDF** 
+In **Informer**, each of these types of UDF fields are stored in different mappings, but have the same format.
+
+First, UDF fields come in different types, **Text, Date, Numeric, Picklist**.  Also, you can define more than one of each type of UDF.  In Informer you will see them defined as:
+
+- **Text UDFs** - UDF 1 Text, UDF 2 Text, OR UDF Text 1, UDF Text 2, etc.
+- **Date UDFs** - UDF 1 Date, UDF 2 Date OR UDF Date 1, UDF Date 2, etc.
+- **Numeric UDFs** - UDF 1 Numeric, UDF 2 Numeric OR  UDF Numeric 1, UDF Numeric 2, etc.
+- **Picklist UDFs** - UDF 1 Picklist, UDF 2 Picklist OR  UDF Picklist 1, UDF Picklist 2, etc.
+
+> All UDFs EXCEPT for Picklists hold a single value, however, Picklists are multivalued fields and can hold multiple values.
+
+### **Client AR UDF**
 
 You can define the UDFs here - https://XXX.navigahub.com/ew/XXX/accounting/setup/ar_udf_codes?t=TEXT
 ![image-20220728103247702](images/informer_mapping_UDF_Client02.png)
 
-Once you set up the UDF, you can set it in the Account Maintenance module:
+Once you set up the UDF, you can applyit in the Account Maintenance module:
 
 ![img](images/informer_mapping_UDF_Client03.png)
 
-### **Opportunity UDF** 
+### **Opportunity UDF**
 
 You can define the UDFs here -  https://XXX.navigahub.com/ew/XXX/crm/setup/crm_parameters_udf_codes?m=OPP&t=TEXT
 When you enter an opportunity, you will have the option to assign to any defined UDFs for Opportunities.
 
-###  **CRM UDF** 
+###  **CRM UDF**
 
 You can define the UDFs here -  https://XXX.navigahub.com/ew/XXX/crm/setup/crm_parameters_udf_codes?m=CRM&t=TEXT
 
-### **Campaign UDF** 
+### **Campaign UDF**
 
 You can define the UDFs here -  https://XXX.navigahub.com/ew/XXX/ad/setup/campaign_udf_codes?t=TEX
 
-### **Order Line UDF** 
+You then associate the UDFs to Product Groups here - https://xxx.navigahub.com/EW/XXX/ad/setup/webgroup_details
+
+You can add UDF fields to a campaign here:
+
+![image-20220803103224252](images/informer_mapping_UDF_campaign_001.png)
+
+**INFORMER**
+
+You can then find the UDF fields that where given values to campaigns by adding them in Informer from the **AD Internet Campaigns** mapping.  
+
+### **Order Line UDF**
 
 You can define the UDFs here -  https://XXX.navigahub.com/ew/XXX/ad/setup/digital_line_udf_codes?t=TEXT
+
+You then associate the UDFs to Product Groups here - https://xxx.navigahub.com/EW/XXX/ad/setup/website_details
+
+You then can set the UDFs while editing a Line Item:
+
+![image-20220803103119905](images/informer_mapping_UDF_orderline_001.png)
+
+
+
+
+
+### UDF Security Settings
+
+Each Naviga user also needs to have permissions to see each UDF.  This is accomplished by setting group permissions for the UDFs.
+
+I'm only aware of security for the CRM UDF fields and those are set here:
+
+https://xxx.navigahub.com/EW/XXX/general/setup/group_security_crm
+
+---
 
 
 
 ---
+
+
 
 
 

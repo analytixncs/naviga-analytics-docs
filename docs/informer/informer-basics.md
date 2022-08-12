@@ -854,6 +854,12 @@ Consider that we have a Dataset shared with both of the above teams. When **User
 
 This is an important consideration when setting up complex security scenarios with users existing in multiple teams, giving you great flexibility, but also requiring you to spend some time fully mapping out what you want to get out of the security.
 
+### Dataset Permissions by Role
+
+![DatasetRole1.png](images/informer_basics_security_datasetrole-001.png)
+
+![DatasetRole1.png](images/informer_basics_security_datasetrole-002.png)
+
 ### Limiting Data by Team Assignment
 
 You can also use Team assignment to limit data in datasets.
