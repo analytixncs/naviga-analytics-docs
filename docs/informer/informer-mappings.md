@@ -1582,7 +1582,7 @@ First, UDF fields come in different types, **Text, Date, Numeric, Picklist**.  A
 
 > All UDFs EXCEPT for Picklists hold a single value, however, Picklists are multivalued fields and can hold multiple values.
 
-### **Client AR UDF**
+### Client AR UDF
 
 You can define the UDFs here - https://XXX.navigahub.com/ew/XXX/accounting/setup/ar_udf_codes?t=TEXT
 ![image-20220728103247702](images/informer_mapping_UDF_Client02.png)
@@ -1591,16 +1591,30 @@ Once you set up the UDF, you can applyit in the Account Maintenance module:
 
 ![img](images/informer_mapping_UDF_Client03.png)
 
-### **Opportunity UDF**
+### Opportunity UDF
 
 You can define the UDFs here -  https://XXX.navigahub.com/ew/XXX/crm/setup/crm_parameters_udf_codes?m=OPP&t=TEXT
-When you enter an opportunity, you will have the option to assign to any defined UDFs for Opportunities.
+When you enter an opportunity (https://XXX.navigahub.com/EW/XXX/crm/opportunity_add_update), you will have the option to assign to any defined UDFs for Opportunities. 
 
-###  **CRM UDF**
+**INFORMER**
+
+To find these UDF in Informer, you will look in the **CM Opportunities** mapping.
+
+###  CRM UDF
 
 You can define the UDFs here -  https://XXX.navigahub.com/ew/XXX/crm/setup/crm_parameters_udf_codes?m=CRM&t=TEXT
 
-### **Campaign UDF**
+These UDF fields are added to the Customer via the Sales CRM area:
+
+https://XXX.navigahub.com/ew/XXX/crm/default_new
+
+**INFORMER**
+
+These user defined fields are associated with the CRM client and are located in the base table `INF_CM.PROSPECTS.CTRL` with the associate mapping named **CM Prospects Control**.  This mapping is usually linked to the **GEN Clients** mapping, but can be found linked to the **AD Internet Campaigns** mapping also.
+
+When looking for this mapping as it relates to other mapping, you will se
+
+### Campaign UDF
 
 You can define the UDFs here -  https://XXX.navigahub.com/ew/XXX/ad/setup/campaign_udf_codes?t=TEX
 
@@ -1614,7 +1628,7 @@ You can add UDF fields to a campaign here:
 
 You can then find the UDF fields that where given values to campaigns by adding them in Informer from the **AD Internet Campaigns** mapping.  
 
-### **Order Line UDF**
+### Order Line UDF
 
 You can define the UDFs here -  https://XXX.navigahub.com/ew/XXX/ad/setup/digital_line_udf_codes?t=TEXT
 
@@ -1624,9 +1638,9 @@ You then can set the UDFs while editing a Line Item:
 
 ![image-20220803103119905](images/informer_mapping_UDF_orderline_001.png)
 
+**INFORMER**
 
-
-
+You can find these UDF fields in the **AD Internet Orders** mapping
 
 ### UDF Security Settings
 
@@ -1641,8 +1655,6 @@ https://xxx.navigahub.com/EW/XXX/general/setup/group_security_crm
 
 
 ---
-
-
 
 
 
