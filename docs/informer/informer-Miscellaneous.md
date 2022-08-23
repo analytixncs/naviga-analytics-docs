@@ -179,11 +179,9 @@ Table displaying F26, F27, F28 (Billing Schedule)
 
 Yes, it only applies to Performance Campaigns (it is a field on INET Orders…) and would be the full amount of the Order Line (at the time), but users could take some ill-advised steps and it would be a different amount than the previous Invoice on that Order Line. There are other types of Credits, but this specific field is only for that one type.
 
-1. Credits that are created     on Flexible Campaigns would be the result of a negative amount on the     Billing Schedule and are treated just like regular Invoices
-2. Credits that are created     with <Reverse Campaign Invoicing> will be listed in the Unbilled     Invoices section – INET Campaigns<251> through <255>.
-3. Credits that come from     outside of Ad (i.e. AR) and get associated with a Campaign – what you     mentioned - would appear as Prepayments only. Because of that they don’t     get associated with specific Order Lines.
-
- 
+1. Credits that are created on Flexible Campaigns would be the result of a negative amount on the Billing Schedule and are treated just like regular Invoices
+2. Credits that are created with Reverse Campaign Invoicing  will be listed in the Unbilled Invoices section – INET Campaigns<251> through <255>.
+3. Credits that come from outside of Ad (i.e. AR) and get associated with a Campaign – what you mentioned - would appear as Prepayments only. Because of that they don’t get associated with specific Order Lines.
 
 As far as your document is concerned, it is accurate in the discussion about INET Orders mapping. I would just be sure to limit the scope of “Credit” so it does not sound like all types of Credits.
 

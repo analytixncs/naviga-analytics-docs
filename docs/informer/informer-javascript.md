@@ -1595,6 +1595,27 @@ $record.sampleMonthsBetween = endDate.diff(startDate, "days");
 
 The only way to do this in Informer 5 is to use a calculated column or Powerscript with the below, replacing the 'valueHere' with the value to be decoded.
 
+```javascript
+// convert encoded field to readable text
+$record.longerNote  = Buffer.from($record['other_notes_assoc_comment'], 'base64').toString()
+```
+
+I have seen some encoded text in Naviga be in the incorrect format or too large for the above code.  You may want to put the above statement in a `try/catch` block:
+
+```javascript
+// convert encoded field to readable text
+try {
+   $record.longerNote  = Buffer.from($record['other_notes_assoc_comment'], 'base64').toString()  
+} catch (e) {
+  $record.longerNote = "Error Converting"
+}
+
+```
+
+
+
+**Only use if Informer Version before 5.5** 
+
 **Option 1**
 
 ```javascript

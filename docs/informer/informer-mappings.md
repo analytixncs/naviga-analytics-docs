@@ -1652,6 +1652,20 @@ https://xxx.navigahub.com/EW/XXX/general/setup/group_security_crm
 
 ---
 
+## CM Action Items
+
+The CM Actions items mapping holds information on the Reps interaction with customers and contacts.  
+
+There is one linked mapping called **Other Notes** and it has `Long Note` and `Completed Note` fields in it.  These fields are Base64 encoded, which means they will need to be decoded to make any sense.
+
+You will need to have at the least Informer version 5.5.1 to be able to run the code below.
+
+```javascript
+// Decode a base64 encoded field.
+$record.longerNote  = Buffer.from($record['other_notes_assoc_comment'], 'base64').toString()
+
+```
+
 
 
 ---
