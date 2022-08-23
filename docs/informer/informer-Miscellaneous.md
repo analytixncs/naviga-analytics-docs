@@ -187,25 +187,29 @@ As far as your document is concerned, it is accurate in the discussion about INE
 
 ## Payment Data
 
-There is a standard Ad Hoc Query called “Cash Receipts Register” that should be mostly the same as <List of Payments> in Web.
 
+
+ ```
+ There is a standard Ad Hoc Query called “Cash Receipts Register” that should be mostly the same as <List of Payments> in Web.
  
+ The main table is AR Cash – corresponds to UD SCASH file (“Sales Cash”) and technically in AR they are “Cash Receipts” although most people do call them “Payments” if they don’t also deal with AP.
+ 
+ 1. There is only one     Prepayment flag <47> that applies to the whole record, even if only     a partial amount was applied as a Prepayment. Because of that, it gets     difficult to report on the amount of Cash on Account that is actually a     Prepayment (applied to an Order) and not just an unallocated balance. Both     the SCASH and INET Campaigns save data on the Amount Prepaid and how much     of that has been applied to Invoices.
+ 2. The Prepaid Order ID     <49> has to be paired with Prepay Type (Module) <76> to     determine in which Module to look up the Order. For CRN that will be     simple because they only have IN (Digital Ads). [This was a recent RMA     issue for Campaigns vs. Exhibition.]
+ 3. Cash on Account used to     be allocated to a Product (or Pubs for Classic platform) and last year     that was changed to be a Product Group (“required” may be a setup option).     There might be some issues with that still lingering but start with     <14> on the Cash Receipt. If it is a Prepayment, then Product Group     can *also* be looked up through the Order ID.
+ 4. Other gotchas for     Unallocated Invoices, Voids/Returns, in-line Discounts and Write-Offs,     Foreign Currency, etc. may apply depending on what they try to report.
+ 
+ **AR Invoices has Check No and Check Amount.  These are MV fields** 
+ 
+ 1. We have Returned Checks (.RET) and *Adjustments* (.ADJ) for Cash Receipts, but those do affect Cash. 
+ 
+ 2. Changes to Receivable Balances on the Customer Account that do not involve Cash are just Credit Memos (and Debit Memos), a subset of Invoices. (most likely correct answer)
+    When a “Payment” against an Invoice is actually a Credit Memo, the reference ID (Invoices<25>) is CUSTOMER_ID*I*CREDIT_ID with the “I” for Invoice in the middle (versus CUSTOMER_ID*CHECK_ID for Checks, et al)
+ 
+ 3. Changes to the GL Balance of Receivables that do not affect the Customer Account Balance would be done with Journal Entries.
+ ```
 
-The main table is AR Cash – corresponds to UD SCASH file (“Sales Cash”) and technically in AR they are “Cash Receipts” although most people do call them “Payments” if they don’t also deal with AP.
 
-1. There is only one     Prepayment flag <47> that applies to the whole record, even if only     a partial amount was applied as a Prepayment. Because of that, it gets     difficult to report on the amount of Cash on Account that is actually a     Prepayment (applied to an Order) and not just an unallocated balance. Both     the SCASH and INET Campaigns save data on the Amount Prepaid and how much     of that has been applied to Invoices.
-2. The Prepaid Order ID     <49> has to be paired with Prepay Type (Module) <76> to     determine in which Module to look up the Order. For CRN that will be     simple because they only have IN (Digital Ads). [This was a recent RMA     issue for Campaigns vs. Exhibition.]
-3. Cash on Account used to     be allocated to a Product (or Pubs for Classic platform) and last year     that was changed to be a Product Group (“required” may be a setup option).     There might be some issues with that still lingering but start with     <14> on the Cash Receipt. If it is a Prepayment, then Product Group     can *also* be looked up through the Order ID.
-4. Other gotchas for     Unallocated Invoices, Voids/Returns, in-line Discounts and Write-Offs,     Foreign Currency, etc. may apply depending on what they try to report.
-
-**AR Invoices has Check No and Check Amount.  These are MV fields** 
-
-1. We have Returned Checks (.RET) and *Adjustments* (.ADJ) for Cash Receipts, but those do affect Cash. 
-
-2. Changes to Receivable Balances on the Customer Account that do not involve Cash are just Credit Memos (and Debit Memos), a subset of Invoices. (most likely correct answer)
-   When a “Payment” against an Invoice is actually a Credit Memo, the reference ID (Invoices<25>) is CUSTOMER_ID*I*CREDIT_ID with the “I” for Invoice in the middle (versus CUSTOMER_ID*CHECK_ID for Checks, et al)
-
-3. Changes to the GL Balance of Receivables that do not affect the Customer Account Balance would be done with Journal Entries.
 
 ## Campaign Start/End Dates
 
