@@ -1401,13 +1401,17 @@ If you need the Product Group detail information, you will need to either get th
 
 **Sales Rep Overrides by Product**
 
-In the AD Brands mapping, you will only have access to the Product IDs, but **not** the reps associated with each product.  This is stored in another mapping that has not yet been added to Informer as of 07/2022.
+In the AD Brands mapping, you will only have access to the Product IDs, but **not** the reps associated with each product.  This is stored in another mapping called **AD Internet Brand Product Reps**.
 
 The Field is in the AD Brands mapping
 
 - **PRODUCT.IDS<185>** - The Pub Group ID
 
 ![img](images/informerMapping_gen_adbrands_010.png)
+
+This the above will get you the Product Ids.  To get the associated reps, you will need to access the **AD Internet Brand Product Reps** mapping.
+
+![img](images/informerMapping_gen_clients_adbrand_004.png)
 
 ### Billing Overrides
 
@@ -1591,6 +1595,8 @@ Once you set up the UDF, you can applyit in the Account Maintenance module:
 
 ![img](images/informer_mapping_UDF_Client03.png)
 
+---
+
 ### Opportunity UDF
 
 You can define the UDFs here -  https://XXX.navigahub.com/ew/XXX/crm/setup/crm_parameters_udf_codes?m=OPP&t=TEXT
@@ -1599,6 +1605,8 @@ When you enter an opportunity (https://XXX.navigahub.com/EW/XXX/crm/opportunity_
 **INFORMER**
 
 To find these UDF in Informer, you will look in the **CM Opportunities** mapping.
+
+---
 
 ###  CRM UDF
 
@@ -1612,7 +1620,7 @@ https://XXX.navigahub.com/ew/XXX/crm/default_new
 
 These user defined fields are associated with the CRM client and are located in the base table `INF_CM.PROSPECTS.CTRL` with the associate mapping named **CM Prospects Control**.  This mapping is usually linked to the **GEN Clients** mapping, but can be found linked to the **AD Internet Campaigns** mapping also.
 
-When looking for this mapping as it relates to other mapping, you will se
+---
 
 ### Campaign UDF
 
@@ -1628,6 +1636,8 @@ You can add UDF fields to a campaign here:
 
 You can then find the UDF fields that where given values to campaigns by adding them in Informer from the **AD Internet Campaigns** mapping.  
 
+---
+
 ### Order Line UDF
 
 You can define the UDFs here -  https://XXX.navigahub.com/ew/XXX/ad/setup/digital_line_udf_codes?t=TEXT
@@ -1641,6 +1651,8 @@ You then can set the UDFs while editing a Line Item:
 **INFORMER**
 
 You can find these UDF fields in the **AD Internet Orders** mapping
+
+---
 
 ### UDF Security Settings
 
@@ -1676,7 +1688,9 @@ $record.longerNote  = Buffer.from($record['other_notes_assoc_comment'], 'base64'
 
 ### Date Time Stamp fields
 
-You may encounter Text fields in information called "Date Time Stamp".  These will be a string of numbers that are not useful until interpreted.  This field is a Unidata Date/Time formatted field.  Below is how to *decode* it.
+You may encounter Text fields in information called "Date Time Stamp".  These will be a string of numbers that are not useful until interpreted.  This field is a Unidata Date/Time formatted field.  Below is how to *decode* it.  
+
+You can also use the saved function [Parse Date Time Stamp](informer-saved-functions#parsedatetimestamp---usage) to do the decode for you.
 
 **Unidata Date / Time Format:**
 
