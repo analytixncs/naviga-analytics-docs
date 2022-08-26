@@ -769,11 +769,17 @@ Each Product will have a default Revenue GL Id and this field will hold it.  In 
 
 ![image-20220211143928173](images/informer_mapping_adinternetorders-GL-001.png)
 
-However, most sites will have GL Overrides, which means that a line won't be associated with the default Revenue ID.
+:::caution
 
-This makes things a bit more tricky.  
+However, most sites will have GL Overrides, which means that an order line won't be associated with the default Revenue ID (**IN Revenue GL ID**).  This is almost always the case, so never just use the **IN Revenue GL ID**. 
+
+This makes things a bit more tricky, but following the steps below will get you the correct GL.
+
+:::
 
 There is a **GL Type ID** field in the **AD Internet Orders** mapping.  This field will be the correct GL Type for the GL Code, meaning that if that line is "overridden", that GL Type ID field **will be** the overridden value.
+
+![img](images/informer_mapping_adinternetorders-GL-003.png)
 
 The tricky part is that we do not have a link to the AD Publication table on GL Type.  To overcome this, we can add some Powerscript code to help us.
 
