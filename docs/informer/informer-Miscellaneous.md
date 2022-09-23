@@ -209,6 +209,15 @@ As far as your document is concerned, it is accurate in the discussion about INE
  3. Changes to the GL Balance of Receivables that do not affect the Customer Account Balance would be done with Journal Entries.
  ```
 
+## Adjustments
+
+**From Russel on question of Adjustments to invoices.**
+
+For Invoicing, there is no “Debits” – it’s either an Invoice or a Credit Memo (“Credit”). To review about Invoices:
+
+1. For Flexible Campaigns, Invoices are assigned to the Campaign (AD Internet Campaigns) – on the Billing Schedule (F28). *Reversals* of prior Invoices (Credits) are also stored on the Campaign but in a different place (F252); This also moves the original Invoice ID to F251. Changes in price that are entered on the Billing Schedule as separate Billing Dates are treated just like regular Invoices, whether a reduction (Credit) or an increase (Debit?). More often they are just incorporated into future Billing Dates. [It is possible to build a Billing Schedule that mimics the Orders, but technically each Invoice is a percentage of the entire Campaign so not linked to any specific Order.
+2. On Performance Campaigns, Invoices are assigned to the Orders (AD Internet Orders) – F80. *Reversals* of prior Invoices are stored on the Campaign, same as above; This also removes the original Invoice ID from AD Internet Orders. *Cancellation* of an Order will record the Credit on the Order (F81). There can be no “changes” in price for Performance Campaigns; if it has an Invoice ID then the Order will be locked. The Invoice would have to be *reversed*, then the Order can be changed, then it would be re-billed in full (not just for the Adjustment amount). Or, if it is *cancelled* instead, then a new Order would be entered at the correct price.
+
 
 
 ## Campaign Start/End Dates

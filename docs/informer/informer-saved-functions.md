@@ -33,30 +33,70 @@ After clicking on this button you will be presented with a dialog to fill out.  
 **Function Body**
 
 ```javascript
+/*
+==============================
+Version 2.0 - Release 09/2022
+==============================
+type groupKeyObj = {
+    name: string,
+    groupKey: string,
+  }
+type groupKeys = groupKeyObj[]
+
+type groupAggrObj = {
+    name: string,
+    initValue: ???,
+    value: ??,
+    type: 'sum' | 'replace' | 'concat'
+  }
+type groupAggr = groupAggrObj[]
+*/
 const groupKeys = aggrConfigObject.groupKeys || [];
 const groupAggr = aggrConfigObject.groupAggr || [];
 const localHold = aggrConfigObject.$local;
 //---------------------------------------------------
 //Loop through the groupKeys Array
+// In this forEach loop we will process each groupAggr item
 groupKeys.forEach((groupKeyObj) => {
   //Create the groupInit object
   groupInit = {
     GroupSet: false,
     ...groupAggr.reduce(
-      (init, obj) => ({ ...init, [obj.name]: returnANumber(obj.initValue) }),
+      (init, obj) => ({ ...init, [obj.name]: obj.initValue }),
       {}
     ),
   };
-
+  //
   groupKey = groupKeyObj.groupKey;
   // Initialize the groupKey on the $local object
-  // To accomodate dynamic groupAggr values, spreading new groupInit first, then any existing value in local for given groupKey
+  // To accomodate dynamic groupAggr values, spreading new groupInit first, 
+  // then any existing value in local for given groupKey
   localHold[groupKey] = { ...groupInit, ...localHold[groupKey] };
   //---------------------------
   // Loop through groupAggr Array and perform the aggregation
   groupAggr.forEach((aggrObj) => {
-    localHold[groupKey][aggrObj.name] =
-      localHold[groupKey][aggrObj.name] + returnANumber(aggrObj.value);
+    switch (aggrObj.type) {
+      case 'replace':
+        localHold[groupKey][aggrObj.name] = aggrObj.value ? aggrObj.value : localHold[groupKey][aggrObj.name];
+        break;
+      case 'concat':
+        // Bail out if passed value is undefined
+        if (!aggrObj.value) return localHold
+        // We do not break because I want the concat to flow to the concatall step if 
+        // if it didn't bail above.
+      case 'concatall':     
+        // make sure the [aggrObj.name] exists on the [groupKey] on the local object if not return []
+        localHold[groupKey][aggrObj.name] = localHold[groupKey][aggrObj.name] ? localHold[groupKey][aggrObj.name] : []
+        currVals = [...localHold[groupKey][aggrObj.name], aggrObj.value]
+        localHold[groupKey][aggrObj.name] = currVals;
+        break;
+      case 'sum':
+        localHold[groupKey][aggrObj.name] = localHold[groupKey][aggrObj.name] + returnANumber(aggrObj.value);
+        break;        
+      default:
+        // If no type given, then sum
+        localHold[groupKey][aggrObj.name] = localHold[groupKey][aggrObj.name] + returnANumber(aggrObj.value);
+    }
   });
   //---------------------------
 });
@@ -76,7 +116,6 @@ function returnANumber(numberIn) {
   }
   return parsedNumber;
 }
-
 ```
 
 
@@ -160,14 +199,18 @@ For example, if you wanted to aggregate on Year and Rep, you have to define two 
 Here is the **groupKeys** array you would create:
 
 ```javascript
+// Define your group keys on the $record object so that
+// you can reuse them in the Post Aggregation function
+$record.groupKey1 = $record.Year;
+$record.groupKey2 = `${$record.Year}-${$record.salesrepId}`;
 groupKeys = [
   {
     name: "Year",
-    groupKey: $record.Year,
+    groupKey: $record.groupKey1,
   },
   {
     name: "Year_Rep",
-    groupKey: `${$record.Year}-${$record.salesrepId}`,
+    groupKey: $record.groupKey2,
   },
 ];
 ```
@@ -239,13 +282,9 @@ The GroupSet can be used if you only want the total to show up once in your data
 Here is example code of how you could implement the Post Aggregate code:
 
 ```javascript
-// Get the year of the issue date
-vIssueYear = $record.issueYear;
-
-// Define the groupKey to be used across aggregates
-// !!!!Must be the same as those defined in the first Powerscript
-groupKey1 = `${vIssueYear}`;
-groupKey2 = `${vIssueYear}-${$record.salesrep_id_assoc_id}`;
+// Get the group keys you defined in your Calc aggregations Powerscript
+groupKey1 = $record.groupKey1
+groupKey2 = $record.groupKey2
 
 // GROUP KEY 1
 $record.groupKey1 = groupKey1; // If you want a record in your data showing the groupKey for the record
@@ -267,7 +306,16 @@ if (!$local[groupKey2].GroupSet) {
 }
 ```
 
+### Advanced Usage
 
+The default aggregation taken when you are defining your Group Aggregations object is summation.  That is what is needed most of the time, but there is another object key you can add if you want to do something other than a sum.
+
+That is the **type** key.  It can have four values:
+
+- **sum** - This is the default and if left off, this is the aggregation used.  It will sum all values passed to it based on the group structure.
+- **replace** - This will not aggregate, but instead will only return a single value.  Each pass through the function will take what is passed and overwrite the previous value. It will ignore undefined or null values.
+- **concat** - This will create an array of passed values, excluding any undefined or null values.  NOTE: you will need to deal with this as an array in your Post Aggr Powerscript.  You could produce a string by simply using the `join(',')` command.
+- **concatall** - Same as above, but will include undefined and null values in your output array.
 
 ---
 
@@ -1095,4 +1143,6 @@ This is a very simple function that accepts a `campaign type`, the `Month Actual
 The function assumes that the data has been normalized and the the Amount fields are NOT multivalued.
 
 It is based on the information in the [Informer AD Internet Orders Mapping Docs](informer-mappings#month-actual--est-amt)
+
+
 
