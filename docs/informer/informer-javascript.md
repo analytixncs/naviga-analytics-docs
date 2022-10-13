@@ -1231,6 +1231,8 @@ Simply add a Remove Fields flow step to accomplish this.
 
 ### New Business Flag
 
+> IN PROCESS FEATURE - Create a lapsed customer option.  This would check a customers **last order date** against **today's date** and if it was greater than x months, we would mark the customer as lapsed.  Most likely you will want Lapsed Months to be Greater than the INACTIVE months.
+
 **<a  target="_blank"  href="/downloads/naviga-new-business-flag.tgz"> Sample New Business Flag Dataset - [NAVIGA]-New Business Flag</a>**
 
 Many times there is a need to declare a customer as a new customer after a defined length of inactivity.  That is where this code can help.
@@ -1268,23 +1270,35 @@ There are some constants that you will set in the first part of the script that 
 
 - **INACTIVE_MONTHS_LIMIT** - How many months of inactivity must a client have before being designated as "New" business
 - **PROBATION_MONTHS** - Many times you also want to know how long a customer has been identified as "New" business.  For example, if a customer starts doing business with your company, you would want them to retain that new status for a certain amount of time.  This is referred to as the **Probationary Period** in the code.  It is defined in months.
-- **NEW_STATUS_TEXT** - Text to use in the **ClientStatus** field  when the client is "New"
-- **EXISTING_STATUS_TEXT** - Text to use in the **ClientStatus** field when the client is not "New"
+- **INACTIVE_MONTHS_LIMIT** - How many months of no orders before we mark this customer as "Inactive".  
+- **NEW_STATUS_TEXT** - Text to use in the **finalSalesStatus** field  when the client is "New"
+- **EXISTING_STATUS_TEXT** - Text to use in the **finalSalesStatus** field when the client is not "New"
+- **INACTIVE_STATUS_TEXT** - Text to use in the **finalInactiveStatus** field when the client is considered "Inactive"
+- **ACTIVE_STATUS_TEXT** - Text to use in the **finalInactiveStatus** field when the client is considered "Active"
 
 Here is the code for the Constants.
 
 ```javascript
 //=====================
-//-- Constants
+//-- Constants - All checks are Exclusive (months between < LIMIT value)             
 //-- This is the number of months of inactivty between current and last ad before we call the customer new
-INACTIVE_MONTHS_LIMIT = 12;
+TIMETONEW_MONTHS_LIMIT = 12;
 //-- Number of months AFTER a customer is declared "new" that we keep there status as "New"
-PROBATION_MONTHS = 12;
+PROBATION_MONTHS = 3;
+//-- Number of months without an order to have customer's "finalInactiveStatus" set to the Inactive Text
+INACTIVE_MONTHS_LIMIT = 4
+
 // Status Text
 NEW_STATUS_TEXT = 'New';
 EXISTING_STATUS_TEXT = 'Existing';
+INACTIVE_STATUS_TEXT = 'Inactive'
+ACTIVE_STATUS_TEXT = 'Active'
 //=====================
 ```
+
+**Visual Overview of a Couple of Scenarios**
+
+![image-20221012112121128](images/informer_javascript-newbusinessflag-overview.png)
 
 **Definitions of some Variables**
 
@@ -1315,12 +1329,17 @@ EXISTING_STATUS_TEXT = 'Existing';
 //=====================
 //-- Constants
 //-- This is the number of months of inactivty between current and last ad before we call the customer new
-INACTIVE_MONTHS_LIMIT = 12;
+TIMETONEW_MONTHS_LIMIT = 12;
 //-- Number of months AFTER a customer is declared "new" that we keep there status as "New"
-PROBATION_MONTHS = 12;
+PROBATION_MONTHS = 3;
+//-- Number of months without an order to have customer's "finalInactiveStatus" set to the Inactive Text
+INACTIVE_MONTHS_LIMIT = 4
+
 // Status Text
 NEW_STATUS_TEXT = 'New';
 EXISTING_STATUS_TEXT = 'Existing';
+INACTIVE_STATUS_TEXT = 'Inactive'
+ACTIVE_STATUS_TEXT = 'Active'
 //=====================
 
 // get $local object and initialize if they don't yet exist
@@ -1331,7 +1350,7 @@ previousValues = $local.previousValues
 // Get Info for setting $local Adv Bucket
 AdvId = $record['advId'];
 //!! This is the date of activity for the current record.  It will be compared to
-//!! 	  the previous records "lastActivityDateMoment" field.
+//!!    the previous records "lastActivityDateMoment" field.
 currentActivityDateMoment = moment($record['startDate']).startOf('month');
 
 // Initialize AdvId bucket in $local var
@@ -1341,6 +1360,7 @@ $local[AdvId] = $local[AdvId]
       SalesStatusWorking: {
         salesStatus: NEW_STATUS_TEXT,
         startDateOfNewStatus: currentActivityDateMoment,
+        inactiveStatus: ACTIVE_STATUS_TEXT,
         isLastRecord: false,
         counter: 0,
       },
@@ -1360,6 +1380,11 @@ currDateMinusCurrStartDOfNS = currentActivityDateMoment.diff(
   'months'
 );
 
+// Months since last order from todays date
+// We will use this to determine if we should use Active Text or Inactive Text 
+inactiveCheckMonths = moment().diff(currentActivityDateMoment, 'months')
+inactiveText = inactiveCheckMonths > INACTIVE_MONTHS_LIMIT ? INACTIVE_STATUS_TEXT : ACTIVE_STATUS_TEXT;
+
 isNewAdvertiser = previousValues.advertiserId !== $record['advId'];
 
 // If the previous record was the final one for the previous advertiser, then set the
@@ -1370,7 +1395,7 @@ if (isNewAdvertiser && previousValues.advertiserId) {
 }
 
 // boolean - if true, cust marked as new with startDateOfNewStatus reset to currentActivityDateMoment
-isOver12MonthsSinceLastOrder = currMinusPrevDate > INACTIVE_MONTHS_LIMIT;
+isOver12MonthsSinceLastOrder = currMinusPrevDate > TIMETONEW_MONTHS_LIMIT;
 isPastProbationPeriod = currDateMinusCurrStartDOfNS > PROBATION_MONTHS;
 
 // ------ DEBUGS Start -----
@@ -1398,6 +1423,8 @@ if (isNewAdvertiser || isOver12MonthsSinceLastOrder) {
   // Setting counter.  Maybe use to determine last salesStatus
   $local[AdvId].SalesStatusWorking.counter =
     $local[AdvId].SalesStatusWorking.counter + 1;
+  
+
   // Check if out of probationary period, if so, then set Existing status text
   if (isPastProbationPeriod) {
     $local[AdvId].SalesStatusWorking.salesStatus = EXISTING_STATUS_TEXT;
@@ -1406,15 +1433,16 @@ if (isNewAdvertiser || isOver12MonthsSinceLastOrder) {
   // Setting counter.  Maybe use to determine last salesStatus
   $local[AdvId].SalesStatusWorking.counter =
     $local[AdvId].SalesStatusWorking.counter + 1;
+  $local[AdvId].SalesStatusWorking.inactiveStatus = inactiveText;
 //Before going on to the next record, store the "previous" values
 $local.previousValues = {
   advertiserId: $record['advId'],
-  lastActivityDateMoment: moment($record['endDate']).startOf('month'), // This will be a moment Object
+  lastActivityDateMoment: moment($record['startDate']).startOf('month'), // This will be a moment Object
 };
 
 // Expose the current info from our SalesStatusWorking object as records for this transaction
 // The $record.counter is very important for the post flush powerscript
-// It lets us know compare last record's counter to it, so that we know
+// It lets us know and compare last record's counter to it, so that we know
 // which transaction was the last record for the given advertiser.
 $record.workingSalesStatus = $local[AdvId].SalesStatusWorking.salesStatus;
 $record.counter = $local[AdvId].SalesStatusWorking.counter;
@@ -1431,15 +1459,16 @@ $record.counter = $local[AdvId].SalesStatusWorking.counter;
 ```javascript
 //!!!!--- Finalize Script - Set Last Record ---!!!!//
 advId = $record["advId"];
-$record.lastRecord = false;
-// We need to move the last record flag out of the $local variable and onto the record itself.
-if (
-  $local[advId].lastRecord &&
-  $local[advId].SalesStatusWorking.counter === $record.counter
+$record.isLastRecord = false;
+$record.workingcounter = $local[advId].SalesStatusWorking.counter
+
+if ($local[advId].SalesStatusWorking.counter == $record.counter
 ) {
-  $record.lastRecord = $local[advId].lastRecord;
-  $record.finalSalesStatus = $local[advId].SalesStatusWorking.salesStatus;
-}
+  // We need to move the last record flag out of the $local variable and onto the record itself.
+  $record.isLastRecord = $local[advId].isLastRecord || true;
+  $record.finalSalesStatus =  $local[advId].SalesStatusWorking.salesStatus;
+  $record.finalInactiveStatus = $local[advId].SalesStatusWorking.inactiveStatus
+} 
 ```
 
 **FLUSH Flow Step**
@@ -1501,6 +1530,86 @@ See how the Sum of the %'s is wrong (503%), but the Calculation of the totals of
 We MUST set the **Order By** in the Query to sort Ascending by **Advertiser ID** AND **Start Date**.  This will group the records by advertiser and also order each advertisers campaign in order of when the campaigns started.
 
 :::
+
+### Ranking Aggregated Groups
+
+**Sample Report Download**
+
+> **<a  target="_blank"  href="/downloads/naviga-advertiser-ranking-spend-report.tgz">Ranking Aggr Sample Dataset</a>**
+
+If you ever need to create a field that ranks a group that you have aggregated, you can do it using some extra logic in the Post Aggregation script.
+
+Here is a scenario, you want to rank customers by their revenue over 2 years of data.  A standard pivot table table on top of the data can do this aggregation and ranking for you automatically, however, if you need an actual "Rank" column in the data, this is one way to accomplish it.
+
+This example requires you to use the [calculateAggregates Saved Function](informer-saved-functions#calculateaggregates---when-to-use).
+
+**Aggregation**
+
+```javascript
+// AGGREGATIONS
+// Define your group keys on the $record object so that
+// you can reuse them in the Post Aggregation function
+$record.groupKey1 = `${$record['a_d_internet_campaigns_assoc_advId']}`; 
+groupKeys = [
+  {
+    name: "Client",
+    groupKey: $record.groupKey1,
+  },
+];
+
+groupAggr = [
+  {
+    name: "sumRev",
+    initValue: 0,
+    value: $record['monthActualAmt'],
+  } 
+];
+
+// Calling the calculate aggregates in a Powerscript
+naviga.calculateAggregates({ $local, groupKeys, groupAggr });
+```
+
+**FLUSH**
+
+```bash
+# FLUSH FLOW STEP
+```
+
+**Post Aggregation/Ranking**
+
+```javascript
+// Get the group keys you defined in your Calc aggregations Powerscript
+groupKey1 = $record.groupKey1
+
+if (!$local.sorted) {
+    // Grab all the keys on the local object and create an array of objects { groupKey1: string, amount: int }
+    groupsToSort = Object.keys($local).map((key) => ({groupKey1: key, amount: $local[key].sumRev }))
+    // sort by the amount field and reverse order so it is descending by amount
+    sorted = _.sortBy(groupsToSort, 'amount').reverse()
+    // create a rank object { [clientId]: ranknum }
+    final = {}
+    for (let i = 0; i < sorted.length; i++) {
+        	final[sorted[i].groupKey1] = i+1
+    }
+    $local.ranks = final;
+    // We only want to do the above once, so set the sorted flag to true
+    $local.sorted = true
+} 
+
+
+// Set the rank for every groupKey1 record
+$record.rank = $local.ranks[groupKey1]
+
+// GROUP KEY 1
+if (!$local[groupKey1].GroupSet) {
+  $record.FINAL_ClientRev = $local[groupKey1].sumRev;
+  $local[groupKey1].GroupSet = true; //Setting to true means we will not excute this code again during the load.
+} 
+```
+
+
+
+
 
 ## Using the momentjs Date Library
 
