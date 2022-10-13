@@ -287,21 +287,17 @@ groupKey1 = $record.groupKey1
 groupKey2 = $record.groupKey2
 
 // GROUP KEY 1
-$record.groupKey1 = groupKey1; // If you want a record in your data showing the groupKey for the record
 if (!$local[groupKey1].GroupSet) {
   $record.RepNetByYear_Total = $local[groupKey1].sumNet;
   $record.RepInvTotalForYear_Total = $local[groupKey1].sumInvoice;
-  $record.NetInv_VarianceByYear_Total =
-    $local[groupKey1].sumNet - $local[groupKey1].sumInvoice;
+  $record.NetInv_VarianceByYear_Total = $local[groupKey1].sumNet - $local[groupKey1].sumInvoice;
   $local[groupKey1].GroupSet = true; //Setting to true means we will not excute this code again during the load.
 }
 // GROUP KEY 2
-$record.groupKey2 = groupKey2;
 if (!$local[groupKey2].GroupSet) {
   $record.RepNetByYearRep_Total = $local[groupKey2].sumNet;
   $record.RepInvTotalForRepYear_Total = $local[groupKey2].sumInvoice;
-  $record.NetInv_VarianceByYearRep_Total =
-    $local[groupKey2].sumNet - $local[groupKey2].sumInvoice;
+  $record.NetInv_VarianceByYearRep_Total = $local[groupKey2].sumNet - $local[groupKey2].sumInvoice;
   $local[groupKey2].GroupSet = true;
 }
 ```

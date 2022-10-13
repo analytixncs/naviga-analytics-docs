@@ -27,9 +27,15 @@ Working through documenting this mapping
 
 ### AR Settings
 
+**Screen**
+
 ![img](images/Hearst_Security_ARSettings_002.PNG)
 
 ![img](images/Hearst_Security_ARSettings_001.PNG)
+
+
+
+![img](images/Hearst_Security_ARSettings_003.PNG)
 
 ## Emails
 
@@ -60,3 +66,26 @@ The reason the informer report doesn’t show a missing GL is because it uses th
 In the system these same campaigns are actually showing the suspense GL. For the single campaign I looked at today (446), I know the GL override has been there since before that campaign was created, so how is it that it got the suspense account?  It is definitely possible that a campaign could get the suspense GL and someone could immediately notice and go add the GL override but not fix the campaign. This would be a problem because we want our report to catch these campaigns prior to invoicing.
 
 How can we be sure the informer report is matching what is in the system. I thought the GL wasn’t saved anywhere and that’s why we had to derive it with supposedly the same logic used by the system. That is clearly not the case. Wonder if there is a way we see that 446 is going to the suspense account? 
+
+### Derive Period from End Date
+
+**Stasi**
+
+We are afraid to play with this setting in our HNPTEST system because we don’t want to end up with a bunch of campaign that suddenly don’t follow the rules we’ve been following all throughout testing but we want to understand the impact.  It controls that period in which we would recognize revenue, correct?
+
+If we set it to use end date then the period we see on the revenue allocation tab would be set using the Hearst fiscal period in which the END date of the campaign Line Item falls in for both performance and flexible campaigns, correct?   Today is sept 26, P10 Hearst fiscal period.   Using start date, our sept digital campaigns would recognize revenue in P9.  Using end date, our sept digital campaigns would recognize revenue in P10.
+
+It doesn’t change anything for print since they are set to SPLIT LINES; so our start date = stop date for every line. 
+
+For performance now you would recognize the revenue in the same period that it qualifies for billing (based off month end).
+For flexible, you could potentially bill the campaign before you ever recognize the revenue, since you can bill anytime but would rev rec at month end.
+
+What other things would be impacted by switching that setting?  Do we have the big picture?
+
+**Russell**
+
+Overall, that is my understanding as well. I am not aware of it having an effect other than Revenue Recognition (RevRec), because that is where Financial Period becomes relevant.
+
+Note that it is possible to have Digital Products that are Date-based/Issue-based. In those cases, the Revenue Period is defined in the Issue Configuration rather than derived from the run dates.
+
+Also, the potential billing issue as you describe it is the same for Performance and Flexible – the service dates (Performance) and Billing Schedule dates (Flexible) just give the user criteria for when it is supposed to be billed. Those dates criteria can be used to pull up the Orders and actually bill them at any time. What you might be trying to describe is that each Billing Date of a Flexible Campaign technically bills a portion of every Line Item for that Campaign, and some of those Line Items may not be having their RevRec until later (it may even be in later Periods, not just “this” Period defined by end-of-month).

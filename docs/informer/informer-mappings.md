@@ -1359,6 +1359,9 @@ The Product type (first option under General Settings), can be one of four optio
 2. AD Publications -> **INET.ENTER.POS<380>**
 3. AD Publications -> **INET.ENTER.SIZE<381>**
 4. AD Publications -> **INET.REQ.RC <382>**
+5. AD Publications -> **INVENTORY.NO.SECTIONS.IND <560>** - 
+   - "Y" - Positions are Defined **Independent** of Section
+   - "N" - Positions are Defined within each Section
 
 ![image-20220914145718853](images/informer_basics_ad_publications_indicators-002.png)
 
@@ -1453,6 +1456,16 @@ This the above will get you the Product Ids.  To get the associated reps, you wi
 The field **AD Brands** `DIGITALBILLING.CONTACT <141> `links to the **GEN Company/Individual Names** mapping, which is named "Digital Billing Contact" in the mapping relationship from **AD Brands**.  
 
 ![img](images/informerMapping_gen_clients_adbrand_001.png)
+
+:::caution
+
+You can get most of the information needed for the Billing Overrides in the **Digital Billing Contact** mapping, however, the billing address can be changed from the default.  Either way, the address that shows in the Billing Overrides section is in the field **DIGITAL.ADDRESS.ID <142>** in **AD Brands**.
+
+The details for this address are located in the relationship called **Digital Address**
+
+![image-20220927204745876](images/informerMapping_gen_client_adbrand_001-5.png)
+
+:::
 
 **Invoice Email Contacts**
 
