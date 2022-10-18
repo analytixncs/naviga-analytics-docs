@@ -23,6 +23,72 @@ Be sure to include the above dependencies in the refresh job for the Main datase
 
 ## GEN Security Mapping
 
+**Dynamic Building of Report**
+
+Greg has made a spreadsheet that maps out the field alias, field attribute number and field description from the **GEN Security File** mapping.
+
+The thought is to use this spreadsheet in conjunction with metadata from Informer to build a mapping object that will pair the mapping field alias with a description.  I can then, via Powerscript, change the label for the fields to their description.  This process will allow for the site to update the spreadsheet of descriptions with labels that they would prefer for each field if needed.
+
+**Step 1 Create Upload spreadsheet**
+
+Using Greg's spreadsheet that has descriptions for some of the fields in the GEN Security mapping, create a spreadsheet that has the following fields.  The hightlighted ones are the important ones.  We will using the **attribute number** to join to our Metadata and the **Field Description** to build our new label.
+
+![image-20221018143334517](images/Hearst_Security_dynamic_001.jpg)
+
+Once you have created this file, you will upload it into a workspace -> **Security Mapping Label Descriptions**
+
+**Step 2 GEN Security File Metadata**
+
+Get the Metadata from the mapping using https://hnpbi.navigahub.com/datasets/admin:gen-security-mapping-metadata
+
+If anything has changed in the Spreadsheet from Step 1 and you have uploaded it into the Workspace, you first need to refresh this dataset. 
+
+Once refreshed, export it to excel.  From the excel file, you will be using the following:
+
+- **Field Label Expression** - Used in the HNP Security dataset to update the label of fields with descriptions.
+- **Condense Multi Valued Expression** - Used in the HNP Security dataset to convert multivalued fields to a string of values
+- **Object Map Pair** - The key/value pairs will be extracted and used to create a lookup object in the **naviga.securityMapLookup** saved function
+- **SML Screen** - Informational value identifying which Naviga Screen this field comes from
+
+**Step 3 Build the naviga.securityMapLookup saved Function**
+
+This function is already created, but if you add or change any field descriptions, you will need to update the lookup object contained in the function.
+
+Simply copy every Object Map Pair in the Excel spreadsheet, filtering out rows without a value and paste this into the function:
+
+![image-20221018155451755](images/Hearst_Security_dynamic_002.jpg)
+
+
+
+**Step 4 Build the GEN Security Dataset**
+
+https://hnpbi.navigahub.com/datasets/admin:hnp-security-dev
+
+You can add ALL the fields from the GEN Security Mapping File and then add the following Flow Steps:
+
+- **Known calculations** - Powerscript -  This section can grow as you identify fields that need special processing:
+
+  ```javascript
+  moduleAccessString = $record['genWebModuleAccess'].map((el, index) => {
+  	return `${$record['genWebModuleCodes'][index]} = ${el}`
+  })
+  
+  $record.moduleAccessString = naviga.multiValuedToString(moduleAccessString, ", ", true)
+  
+  //
+  $record.statusCodes = naviga.multiValuedToString($record['inetStatusCodes'], ", ", true)
+  ```
+
+  
+
+- **Field Mapping** - Powerscript - simply copy every non blank entry in column **Field Label Expression** from the Spreadsheet in step 2 and paste into the Powerscript.
+
+- **Multivalued Fields**- Powerscript - simply copy every non blank entry in column **Condense Multi Valued Expression** from the Spreadsheet in step 2 and paste into the Powerscript.  
+
+- **Remove Fields** - Remove any fields that you don't need, but may have been used in the **Known Calculations** powerscript.
+
+
+
 Working through documenting this mapping
 
 ### AR Settings
