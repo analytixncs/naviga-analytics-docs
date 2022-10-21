@@ -58,10 +58,6 @@ The job to load should run every hour between 7am and 6pm.  This will need to be
 
 [Rep by Month Targets](https://m10bi.navigahub.com/v/report.html?id=185fd9b4-c41d-4a74-8931-ed49f01a80c3&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiI1ZWNiNDRlZi1kZWFiLTRlYTYtYTQ1Mi00NTFkOGQzNDVkNjQiLCJpYXQiOjE2NjYzNzA4MjYuOTAyfQ.F-1ixQug4rXrObkbnZm9ysgeSWC08Iq7rOnukL3FPoI)
 
-<iframe src="https://m10bi.navigahub.com/v/report.html?id=185fd9b4-c41d-4a74-8931-ed49f01a80c3&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJhZmRjY2VhNS00YTZiLTQwNWUtYTRjNi03YWQ2YTY4NWIwZTciLCJpYXQiOjE2NjYzNzA5NjYuNTh9.ZZp29Ft2drXZ2gizEWMfq3gxvVcrJsTvovCNi44Qg3g" frameborder="0" style="border:0;width:100%;height:100%;overflow:hidden;min-height:400px;min-width:600px" allowfullscreen></iframe>
-
 ---
 
 [Yearly Targets Top 10](https://m10bi.navigahub.com/v/report.html?id=8817ac97-53fd-4c30-8b62-854a2c6913f5&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiI3ZDhiZWZiYy1jNmE3LTQ4ZWMtYmZhNi02NGU3YTRlZDc3MWUiLCJpYXQiOjE2NjYzNzA4NzUuNjc3fQ.8xqcxV3Ktivm_IpSlJHm7tUOupUX7hQVMcVZAho3cIk)
-
-<iframe src="https://m10bi.navigahub.com/v/report.html?id=8817ac97-53fd-4c30-8b62-854a2c6913f5&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJjNjk1MzYzYy0zMzg5LTRkOWQtYjFkNS0zNmNkZjVlZDM3NWUiLCJpYXQiOjE2NjYzNzA5MjUuMzF9.PBlf8p_MZmN6b3NgDbw1L6P00YhYQMy1mAv5NOAq4Oc" frameborder="0" style="border:0;width:100%;height:100%;overflow:hidden;min-height:400px;min-width:600px" allowfullscreen></iframe>
