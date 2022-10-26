@@ -23,6 +23,8 @@ Be sure to include the above dependencies in the refresh job for the Main datase
 
 ## GEN Security Mapping
 
+### Dynamic Report Version 1
+
 **Dynamic Building of Report**
 
 Greg has made a spreadsheet that maps out the field alias, field attribute number and field description from the **GEN Security File** mapping.
@@ -86,6 +88,232 @@ You can add ALL the fields from the GEN Security Mapping File and then add the f
 - **Multivalued Fields**- Powerscript - simply copy every non blank entry in column **Condense Multi Valued Expression** from the Spreadsheet in step 2 and paste into the Powerscript.  
 
 - **Remove Fields** - Remove any fields that you don't need, but may have been used in the **Known Calculations** powerscript.
+
+### Dynamic Report Version 2
+
+:::info
+
+**Sample files**
+
+**<a  target="_blank"  href="/downloads/SecurityMappingLabelDescriptions.csv">Security Mapping Spreadsheet</a>**
+
+**<a  target="_blank"  href="/downloads/datasource-metadata-for-hnp-security.tgz">Datasource Metadata For HNP Security</a>**
+
+**<a  target="_blank"  href="/downloads/hnp-security-dev-crosstab-unwind.tgz">Security Crosstab Sample Dataset</a>**
+
+:::
+
+**Dynamic Building of Report**
+
+Greg has made a spreadsheet that maps out the field alias, field attribute number and field description from the **GEN Security File** mapping.
+
+The thought is to use this spreadsheet in conjunction with metadata from Informer to build a mapping object that will pair the mapping field alias with a description.  Then, via Powerscript, "unwind" the table so that is appears more like this:
+
+| User Group | Security Field Name          | Security Field Value |
+| ---------- | ---------------------------- | -------------------- |
+| ROOT       | Advertisers - Client type... | Y                    |
+| ROOT       | Allowed to apply...          | N                    |
+| ...        |                              |                      |
+| CLIENT     | Advertisers - Client type... | N                    |
+| CLIENT     | Allowed to apply...          | N                    |
+| ...        |                              |                      |
+
+The above format should make it easier to product an end result as below.
+
+![image-20221025112909807](images/Hearst_Security_dynamic_v2_001.jpg)
+
+#### Setup For Building Dataset
+
+**Step 1 Create Upload spreadsheet**
+
+Using Greg's spreadsheet that has descriptions for some of the fields in the GEN Security mapping, create a spreadsheet that has the following fields.  The hightlighted ones are the important ones.  We will using the **attribute number** to join to our Metadata and the **Field Description** to build our new label.
+
+![image-20221018143334517](images/Hearst_Security_dynamic_001.jpg)
+
+:::danger
+
+Once you have created this file, you will upload it into a workspace -> **Security Mapping Label Descriptions**
+
+:::
+
+**Step 2 "Datasource Metadata For HNP Security" Dataset**
+
+Get the Metadata from the mapping using [https://hnpbi.navigahub.com/datasets/MARK.MCCOID:datasource-metadata-for-hnp-security](https://hnpbi.navigahub.com/datasets/MARK.MCCOID:datasource-metadata-for-hnp-security)
+
+If anything has changed in the Spreadsheet from Step 1 and you have uploaded it into the Workspace, you first need to refresh this dataset. 
+
+Once refreshed, you can export it to excel for reference.  The fields of interest are:
+
+- **Field Label Expression** - Used in the HNP Security dataset to update the label of fields with descriptions.
+- **Condense Multi Valued Expression** - Used in the HNP Security dataset to convert multivalued fields to a string of values
+- **Object Map Pair** - --NO LONGER NEEDED-- The key/value pairs *was* extracted and used to create a lookup object in the **naviga.securityMapLookup** saved function
+- **SML Screen** - Informational value identifying which Naviga Screen this field comes from
+
+*However*, the fields that contain the information you need for the Powerscripts in the final dataset can simply be copied and pasted from the dataset.  These are:
+
+- **Final Field Label Expression** - NOT USED in this dataset, but for informational purposes, you could use this code to **update the label of fields** with descriptions.
+- **Final Condense Multi Valued Expression** - Used in the HNP Security dataset to convert multivalued fields to a string of values
+- **Final Object Map Pair** - --NO LONGER NEEDED-- The key/value pairs will be extracted and used to create a lookup object in the **naviga.securityMapLookup** saved function
+- **Final Alias Array** - the field array will tell us the fields in the mapping to process.
+
+#### Build the Final Dataset
+
+To transform a dataset with 300 columns to the above we will need to 
+
+- For every record, create three arrays:
+  - UserGroup - will be the @id (User Group) field
+  - SecurityFieldLabel - will be the column name
+  - SecurityFieldValue - will be the column value
+  - SecurityFieldAlias - used to join to the Workspace -> **Security Mapping Label Descriptions**
+
+We continue to add to these arrays (in the $local object so that they persist between rows) for every row.  
+
+**Step 1**
+
+Create a Dataset pointed to the GEN Security File mapping and then grab ALL of the fields.  
+
+**Step 2 - Flow Step Powerscript** 
+
+*Assign FieldsToLoop Local Array*
+
+```javascript
+// Create Array of field aliases that we will loop through and "unwind"
+$local.fieldsToLoop = ['adClientTypeReqdInd',...,'adCustOption']
+```
+
+
+
+**Step 3 - Flow Step Powerscript**
+
+This script can be modified to meet your needs.  Initially, there are many multivalued fields and if you are not sure how to handle them, it is best to simply convert the multiple values into a delimited string list.  The fun part is knowing which fields are multivalued.  Luckily, there is the **Datasource Metadata For HNP Security** dataset.  Simply run this dataset and copy the **Final Condense Multi Valued Expression** field.  It will contain the code that you need to convert all of the MV fields to string delimited.
+
+As an example, the moduleAccessCombined code is showing that you can do custom edits with MV fields if needed.  the genWebModuleAccess and genWebModuleCodes are two MV fields that are associated and so, we added them into a single field.
+
+:::caution
+
+If you create a new field with values as we have done with **$record.moduleAccessCombined**, you will need to add that field name to the array **$local.fieldsToLoop** defined in Step 2 above.
+
+:::
+
+*Deal with MV Fields*
+
+```javascript
+// Deal with Multivalued fields
+//-------------------------------
+// Custom coversion of a multivalued field
+moduleAccessCombined = $record['genWebModuleAccess'].map((el, index) => {
+    return `${$record['genWebModuleCodes'][index]} = ${el}`
+})
+
+// Since we are creating a new field IT MUST be added to the fieldsToLoop array in the previous powerscript
+$record.moduleAccessCombined = naviga.multiValuedToString(moduleAccessCombined, ", ", true)
+//-------------------------------
+
+// Convert all multivalued fields to strings - code from "Datasource Metadata For HNP Security" dataset
+$record["inClientAccessCodes"] = naviga.multiValuedToString($record["inClientAccessCodes"], ",", false)
+$record["inetStatusCodes"] = naviga.multiValuedToString($record["inetStatusCodes"], ",", false)
+...
+$record["incentiveAutoAdjustCodes"] = naviga.multiValuedToString($record["incentiveAutoAdjustCodes"], ",", false)
+```
+
+
+
+**Step 4 - Flow Step Powerscript**
+
+Here is the script where we start the process of "unwinding" the fields.  This is done by creating 4 arrays for each of the final fields that we want. 
+
+*Field Mapping*
+
+```javascript
+// GEN Security File Field Mapping
+//-- Initialize the $local arrays
+$local.UserGroup = $local.UserGroup || []
+$local.SecurityFieldLabel = $local.SecurityFieldLabel || []
+$local.SecurityFieldValue = $local.SecurityFieldValue || []
+$local.SecurityFieldAlias = $local.SecurityFieldAlias || []
+
+
+loopFields = $local.fieldsToLoop
+// Loop through the field alias array and build three arrays that will be 
+// the final three fields in the table
+for (let i=0; i < loopFields.length; i++) {
+    fieldName = loopFields[i]
+    // Make sure field exists in dataset
+    if ($fields[fieldName]) {
+        $local.UserGroup.push($record['id']) 
+        $local.SecurityFieldLabel.push($fields[fieldName].label + "_ZZZ")
+        $local.SecurityFieldValue.push($record[fieldName])
+        $local.SecurityFieldAlias.push(fieldName)
+    }
+}
+```
+
+**Step 5 - Flow Step Flush**
+
+We need a flush step because we want to process all of the above steps before proceeding to the next Powerscript.
+
+**Step 6 - Flow Step Powerscript**
+
+*Local To Records*
+
+```javascript
+// Copy all of our $local persistant arrays that were created to
+// records.  NOTE: These will be 4 large arrays.
+// ALSO, since we only need ONE value (hence one row), we delete all other rows
+// as we have aggregated the information we need into the below local arrays
+if (!$local.firstTime) {
+    $record.UserGroup = $local.UserGroup
+    $record.SecurityFieldLabel = $local.SecurityFieldLabel
+    $record.SecurityFieldValue = $local.SecurityFieldValue  
+    $record.SecurityFieldAlias = $local.SecurityFieldAlias
+    $local.firstTime = true
+} else {
+    $omit()
+}
+```
+
+**Step 7 Flow Step Normalize**
+
+Next we need to normalize on the four new fields we created above.
+
+Add the Normalize Flow step and choose 
+
+- UserGroup
+- SecurityFieldLabel
+- SecurityFieldValue
+- SecurityFieldAlias
+
+**Step 8 Flow Step Field from Another Datasource**
+
+There is some information in our Workspace table that we need.  We are going to join to the datasource and pull it in:
+
+![image-20221026150855255](images/Hearst_Security_dynamic_v2_datasource.jpg)
+
+**Step 9 Flow Step Powerscript**
+
+*Populate Final Field Description*
+
+```javascript
+// We expect some fields will not have a Description defined in the Workspace table, if not
+// Populate with the original field Label.
+$record['FinalFieldDescription'] = $record['smlFieldDescription'] || $record['SecurityFieldLabel']
+```
+
+
+
+**Step 10 After Run**
+
+After you have loaded the data, you will find that you have over 300 fields and you only want/need 4.  Click on the "Columns" button and deselect all fields except for the following.
+
+:::danger
+
+Do not use the Remove Fields flow steps to get rid of the fields.  Given how we are building the dataset, this causes issues when I tried in the past.  As new versions of Informer are released, this option could be tested again.
+
+:::
+
+![image-20221026151245745](images/Hearst_Security_dynamic_v2_finalfields.jpg)
+
+---
 
 
 
