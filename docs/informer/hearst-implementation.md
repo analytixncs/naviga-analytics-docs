@@ -64,7 +64,7 @@ Using Greg's spreadsheet that has descriptions for some of the fields in the GEN
 
 ![image-20221018143334517](images/Hearst_Security_dynamic_001.jpg)
 
-:::danger
+:::danger Important
 
 Once you have created this file, you will upload it into a workspace -> **Security Mapping Label Descriptions**
 
@@ -72,7 +72,9 @@ Once you have created this file, you will upload it into a workspace -> **Securi
 
 **Step 2 "Datasource Metadata For HNP Security" Dataset**
 
-Get the Metadata from the mapping using [https://hnpbi.navigahub.com/datasets/MARK.MCCOID:datasource-metadata-for-hnp-security](https://hnpbi.navigahub.com/datasets/MARK.MCCOID:datasource-metadata-for-hnp-security)
+The next step is to get Metadata for the GEN Security File mapping.  This dataset was created to get that information:
+
+ [https://hnpbi.navigahub.com/datasets/MARK.MCCOID:datasource-metadata-for-hnp-security](https://hnpbi.navigahub.com/datasets/MARK.MCCOID:datasource-metadata-for-hnp-security)
 
 If anything has changed in the Spreadsheet from Step 1 and you have uploaded it into the Workspace, you first need to refresh this dataset. 
 
@@ -83,18 +85,18 @@ Once refreshed, you can export it to excel for reference.  The fields of interes
 - **Object Map Pair** - --NO LONGER NEEDED-- The key/value pairs *was* extracted and used to create a lookup object in the **naviga.securityMapLookup** saved function
 - **SML Screen** - Informational value identifying which Naviga Screen this field comes from
 
-*However*, the fields that contain the information you need for the Powerscripts in the final dataset can simply be copied and pasted from the dataset.  These are:
+*However*, the fields that contain the information you need for the Powerscripts in the final dataset can simply be **copied and pasted from the dataset.**  These are:
 
-- **Final Field Label Expression** - NOT USED in this dataset, but for informational purposes, you could use this code to **update the label of fields** with descriptions.
-- **Final Condense Multi Valued Expression** - Used in the HNP Security dataset to convert multivalued fields to a string of values
+- **Final Field Label Expression** - NOT USED in the final dataset, but for informational purposes, you could use this code to **update the label of fields** with descriptions.
 - **Final Object Map Pair** - --NO LONGER NEEDED-- The key/value pairs will be extracted and used to create a lookup object in the **naviga.securityMapLookup** saved function
-- **Final Alias Array** - the field array will tell us the fields in the mapping to process.
+- **Final Condense Multi Valued Expression** - Used in the HNP Security dataset to convert multivalued fields to a string of values
+- **Final Alias Array** - Used in the HNP Security dataset to the field array will tell us the fields in the mapping to process.
 
 #### Build the Final Dataset
 
-To transform a dataset with 300 columns to the above we will need to 
+To transform a dataset with 300+ columns to the above we will need to 
 
-- For every record, create these arrays:
+- The following arrays will be created:
   - UserGroup - will be the @id (User Group) field
   - SecurityFieldLabel - will be the column name
   - SecurityFieldValue - will be the column value
@@ -106,9 +108,14 @@ We continue to push values onto these arrays (in the $local object so that they 
 
 Create a Dataset pointed to the GEN Security File mapping and then grab ALL of the fields.  
 
+**ADD** *Criteria* 
+
+- WHERE Group Name is Not Empty
+  ![image-20221031091710817](images/Hearst_Security_dynamic_final_002.jpg)
+
 **Step 2 - Flow Step Powerscript** 
 
-This array is defined in the **Final Alias Array** field in the **Datasource Metadata For HNP Security** dataset.  Just copy and paste it after the "="
+In this Powerscript, we are defining the `$local.fieldsToLoop` array. This array is defined in the **Final Alias Array** field in the **Datasource Metadata For HNP Security** dataset.  Just copy and paste it after the "="
 
 *Assign FieldsToLoop Local Array*
 
@@ -241,6 +248,8 @@ The completion of Step 9 will give you a dataset with the GEN Security File fiel
 
 However, if you want to convert this into a Crosstab style report that looks like the image below, **SKIP** Step 10 and proceed to **Step 11**.
 
+![image-20221028142012818](images/Hearst_Security_dynamic_final_001.jpg)
+
 :::
 
 **Step 10 After Run**
@@ -261,7 +270,7 @@ Do not use the Remove Fields flow steps to get rid of the fields.  Given how we 
 
 To accomplish the output, we will need to take the User Group field and make all unique values in it their OWN field AND the values of each field must be the corresponding SecurityFieldValue values.
 
-We are going to use the `naviga.calculateAggregates` saved script to help.  Make sure you have version 2, which include the `type` option.
+We are going to use the `naviga.calculateAggregates` saved function to help.  Make sure you have version 2, which includes the `type` option.
 
 Using this function, we will group by the "UserGroup" field and do a special aggregation which will concatenate ALL the value from the following fields:
 
@@ -347,6 +356,8 @@ NOTE that we store the User Group and value fields each time a new groupKey1 is 
 
 For example, the field description might be "AD Can Open Something" and it will have "answers/values" for each user group.
 
+These are the keys we will create on the final object.
+
 - $local.final.fieldDesc_FINAL
 - $local.final.screen_FINAL
 - $local.final.fieldLabel_FINAL
@@ -411,15 +422,26 @@ if (!$local.stopProcessing) {
 
 The last step is to normalize your single row, which is now just Arrays.
 
-You will need to choose the fields we know:
+You will need to choose the following fields to normalize on (and the dynamic user group fields):
 
 - fieldDesc_ALL
+
 - screen_ALL
 - fieldLabel_FINAL
 - attributeNum_FINAL
 - alias_FINAL
 
-AND you will need to choose the dynamic fields that were created for each User Group.  Just search for fields with "Group" in the label and you will be able to discern which ones to normalize.
+:::caution Don't Forget
+
+You will need to choose the dynamic fields that were created for each User Group.  Just search for fields with "Group" in the label and you will be able to discern which ones to normalize. 
+
+::: 
+
+---
+
+---
+
+
 
 ### Dynamic Report Version 1
 
