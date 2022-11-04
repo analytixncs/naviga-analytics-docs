@@ -27,19 +27,21 @@ Be sure to include the above dependencies in the refresh job for the Main datase
 
 :::info
 
+The **Security** folder in the Dataset area holds the Security Reports.
+
 **Sample files**
 
+**<a  target="_blank"  href="/downloads/hnp-security-dev-crosstab-unwind-columns.tgz">Security Crosstab with Columns Sample Dataset</a>** - ***Dependent on*** Datasrouce MetaData for HNP Security
+
+**<a  target="_blank"  href="/downloads/datasource-metadata-for-hnp-security.tgz">Datasource Metadata For HNP Security</a>** - ***Dependent on*** Security Mapping Spreadsheet
+
 **<a  target="_blank"  href="/downloads/SecurityMappingLabelDescriptions.csv">Security Mapping Spreadsheet</a>**
-
-**<a  target="_blank"  href="/downloads/datasource-metadata-for-hnp-security.tgz">Datasource Metadata For HNP Security</a>**
-
-**<a  target="_blank"  href="/downloads/hnp-security-dev-crosstab-unwind-columns.tgz">Security Crosstab with Columns Sample Dataset</a>**
 
 :::
 
 **Dynamic Building of Report**
 
-Greg has made a spreadsheet that maps out the field alias, field attribute number and field description from the **GEN Security File** mapping.
+Greg has made a spreadsheet that maps out the field alias, field attribute number and field description from the **GEN Security File** mapping. I then converted his format into a more "importable" format, which is the *Security Mapping Spreadsheet* above.
 
 The thought is to use this spreadsheet in conjunction with metadata from Informer to build a mapping object that will pair the mapping field alias with a description.  Then, via Powerscript, "unwind" the table so that is appears more like this:
 
@@ -60,13 +62,27 @@ We will then need to take the above format and create new fields for each **User
 
 **Step 1 Create Upload spreadsheet**
 
-Using Greg's spreadsheet that has descriptions for some of the fields in the GEN Security mapping, create a spreadsheet that has the following fields.  The hightlighted ones are the important ones.  We will using the **attribute number** to join to our Metadata and the **Field Description** to build our new label.
+Using Greg's spreadsheet that has descriptions for some of the fields in the GEN Security mapping, create a spreadsheet that has the following fields.  We will use the **attribute number** to join to the Metadata and the **Field Description** to build our new label.
+
+The only fields we use in this version of the report are:
+
+- sml_field_description
+- sml_attribute_number
+- sml_screen
+
+:::tip
+
+All other fields are for informational purposes.  If you find they are difficult to get into the spreadsheet, you can omit them.
+
+:::
 
 ![image-20221018143334517](images/Hearst_Security_dynamic_001.jpg)
 
 :::danger Important
 
-Once you have created this file, you will upload it into a workspace -> **Security Mapping Label Descriptions**
+Once you have created this file, you will upload it into a Workspace -> **Security Mapping Label Descriptions**
+
+If you make any changes in the spreadsheet, you MUST upload and replace the data in the Workspace!
 
 :::
 
@@ -89,7 +105,7 @@ Once refreshed, you can export it to excel for reference.  The fields of interes
 
 - **Final Field Label Expression** - NOT USED in the final dataset, but for informational purposes, you could use this code to **update the label of fields** with descriptions.
 - **Final Object Map Pair** - --NO LONGER NEEDED-- The key/value pairs will be extracted and used to create a lookup object in the **naviga.securityMapLookup** saved function
-- **Final Condense Multi Valued Expression** - Used in the HNP Security dataset to convert multivalued fields to a string of values
+- **Final Condense Multi Valued Expression** - Used in the HNP Security dataset to convert multivalued fields to a string of values.  
 - **Final Alias Array** - Used in the HNP Security dataset to the field array will tell us the fields in the mapping to process.
 
 #### Build the Final Dataset
@@ -100,7 +116,7 @@ To transform a dataset with 300+ columns to the above we will need to
   - UserGroup - will be the @id (User Group) field
   - SecurityFieldLabel - will be the column name
   - SecurityFieldValue - will be the column value
-  - SecurityFieldAlias - used to join to the Workspace -> **Security Mapping Label Descriptions**
+  - SecurityFieldAlias - used to join to the Dataset-> **Datasource Metadata For HNP Security**
 
 We continue to push values onto these arrays (in the $local object so that they persist between rows) for every row.  
 
@@ -226,11 +242,19 @@ Add the Normalize Flow step and choose
 - SecurityFieldValue
 - SecurityFieldAlias
 
-**Step 8 Flow Step Field from Another Datasource**
+**Step 8 Flow Step Field from Another Dataset**
 
-There is some information in our Workspace table that we need.  We are going to join to the datasource and pull it in:
+There is some information in our Datasource Metadata For HNP Security dataset that we need.
 
-![image-20221026150855255](images/Hearst_Security_dynamic_v2_datasource.jpg)
+Join the **Security Field Alias** to the **Dfield Alias** and then pull in the following fields:
+
+- **Dfield Name**
+- **Dfield Alias**
+- **Dfield Attribute**
+- **Sml Screen**
+- **Sml Field Description**
+
+![image-20221104142003559](images/Hearst_Security_dynamic_v2_dataset.jpg)
 
 **Step 9 Flow Step Powerscript**
 
@@ -405,16 +429,16 @@ if (!$local[groupKey1].GroupSet) {
 
 In this last Powerscript, the code loops over the keys in the final object and assigns them to an actual Record.   We just need to loop through and assign value in the keys to a $record name with the Key for each Key.
 
-
-
 **Final Processing**
 
 ```javascript
 if (!$local.stopProcessing) {
     for (key of Object.keys($local.final)) {
-      $record[key] = $local.final[key]
+      $record[`${key}_VIEWFINAL`] = $local.final[key]
     }
     $local.stopProcessing = true
+} else {
+    $omit()
 }
 ```
 
@@ -422,20 +446,11 @@ if (!$local.stopProcessing) {
 
 The last step is to normalize your single row, which is now just Arrays.
 
-You will need to choose the following fields to normalize on (and the dynamic user group fields):
+You will want to select all the field that end with `VIEWFINAL`.  
 
-- fieldDesc_ALL
+**Step 17 Choose Columns**
 
-- screen_ALL
-- fieldLabel_FINAL
-- attributeNum_FINAL
-- alias_FINAL
-
-:::caution Don't Forget
-
-You will need to choose the dynamic fields that were created for each User Group.  Just search for fields with "Group" in the label and you will be able to discern which ones to normalize. 
-
-::: 
+The final step is to choose the columns to display.  The easiest way to do this, is to click on the Columns and, the same way you chose the fields in the Normalize step, search for `VIEWFINAL` and choose those fields.
 
 ---
 
