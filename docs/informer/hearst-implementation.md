@@ -69,6 +69,7 @@ The only fields we use in this version of the report are:
 - sml_field_description
 - sml_attribute_number
 - sml_screen
+- sml_screen_order - this field holds the order of the fields as they appear in the Naviga security screen.
 
 :::tip
 
@@ -93,6 +94,29 @@ The next step is to get Metadata for the GEN Security File mapping.  This datase
  [https://hnpbi.navigahub.com/datasets/MARK.MCCOID:datasource-metadata-for-hnp-security](https://hnpbi.navigahub.com/datasets/MARK.MCCOID:datasource-metadata-for-hnp-security)
 
 If anything has changed in the Spreadsheet from Step 1 and you have uploaded it into the Workspace, you first need to refresh this dataset. 
+
+:::caution
+
+I found discrepancies in the metadata JSON field "Field Data" for the alias name.  
+
+To work around this, I used the FIeld Id in from the **Mapping** mapping and used it to calculate the field Alias.  The Field Id is what you see in the datasource mapping lists in the format "FIELD.NAME".  However, sometimes the value separating words is a period "." and sometimes an underscore "\_". 
+
+Here is the code.
+
+```javascript
+// Below code is creating a calculated field for the field name to join with our main dataset
+// I found that certain fields were getting incorrect alias names when pulling from teh field_data JSON file.
+// This one is calculating from teh Field ID.
+splitDelimiter = $record['field_fieldId'].indexOf(".") > 0 ? "." : "_"
+fieldNameArray = $record['field_fieldId'].split(splitDelimiter) // $record['field_data'].name.split(" ")
+
+lastFieldVals = fieldNameArray.slice(1).map(el => el.toLowerCase()[0].toUpperCase() + el.slice(1).toLowerCase())
+$record.dfieldAliasCalced = fieldNameArray[0].toLowerCase() + lastFieldVals.join("")
+```
+
+I point this out, because we use the calced field as the Join field in the final dataset and if you see any field that isn't pulling its description, first look to this value to make sure it is "calculating" the correct alias.
+
+:::
 
 Once refreshed, you can export it to excel for reference.  The fields of interest are:
 
@@ -303,6 +327,8 @@ Using this function, we will group by the "UserGroup" field and do a special agg
 - **SecurityFieldLabel** - This is the ORIGINAL label for the field.
 - **SecurityFieldAlias** - This is the alias for the field
 - **smlAttributeNumber** - The attribute number of the field.  NOTE: this will only be populated for fields that had a description in the spreadsheet/workspace
+- **smlScreen**
+- **smlScreenOrder**
 
 **Aggregation Step**
 
@@ -343,9 +369,15 @@ groupAggr = [
     type:  'concatall'
   }, 
   {
+    name: "screenOrder",
+    initValue: '',
+    value: $record['smlScreenOrder'] ,
+    type:  'concatall'
+  },     
+  {
     name: "attributeNum",
     initValue: '',
-    value: $record['smlAttributeNumber'],
+    value: $record['dfieldAttribute'],
     type:  'concatall'
   },    
   {
@@ -394,6 +426,7 @@ These are the keys we will create on the final object.
 // Get the group keys you defined in your Calc aggregations Powerscript
 groupKey1 = $record.groupKey1
 
+
 // GROUP KEY 1
 if (!$local[groupKey1].GroupSet) {
   // Create a persistant "final" key on the local object
@@ -402,6 +435,7 @@ if (!$local[groupKey1].GroupSet) {
   if (!$local.fieldDescDone) {
     $local.final.fieldDesc_FINAL = $local[groupKey1].desc 
     $local.final.screen_FINAL = $local[groupKey1].screen 
+    $local.final.screenOrder_FINAL = $local[groupKey1].screenOrder     
     $local.final.fieldLabel_FINAL = $local[groupKey1].label 
     $local.final.attributeNum_FINAL = $local[groupKey1].attributeNum
     $local.final.alias_FINAL = $local[groupKey1].alias     
