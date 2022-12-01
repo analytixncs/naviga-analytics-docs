@@ -337,3 +337,18 @@ On flexible campaigns we bill off estimates, sometimes that is what publishers w
 Are all Print and Flat Fee digital ads Flexible campaigns? 
 
 ***[Wayne Burrows]\*** Unfortunately not. So … separate setting … here is why you use flexible vs performance: Performance system assumes it will invoice as you perform (so if an ad ran in Jan/Feb/March we assume we will bill end of each of those 3months). Flexible: no system assumption on when to bill, user can enter any billing date they wish. So on my 3month order I could have one bill all up front, or one at the end, or 2 bills, anything customer wants. Flexible does only look at estimates ignores settings above, Performance depends on settings above. Invoices for flexible are a % of the whole so all orders are summed up and amount is not related at all to any line item detail. Performance you are billing each line for that month. Flexible creates all sorts of journal entries behind the scenes to defer and recognize the transactions, performance does not. So … now I bet it is clear as mud … and yes the customers should understand the difference … I’m guessing certain people in the organization do and they are perhaps not involved in writing the reports. I’m happy to talk with the customer if that would help.
+
+## AD Internet Sizes mapping
+
+FIRST two ways we find the size code:
+
+1. If the “Dimensions” field on Ad Internet Orders (INET.ORDERS<9>) is populated then read the size record from INET.SIZES (looks like the link is missing, we can add that).
+   **OR**
+2. If it isn’t populated we look at Ad Orders, “Ratecard Line ID” which links to Ad Ratecards Det and the “Digital Size” is on INET.RATECARDS.DET<6>.
+
+THEN
+Once one of those has been satisfied we look at the INET.SIZES table and the height is going to be “Size Height” on Ad Internet Sizes.
+
+It looks like we are missing some links to do this but that’s an easy fix.  I can add it to the source mapping and move it over.
+
+![image-20221121200931932](images/informer-misc-001.png)

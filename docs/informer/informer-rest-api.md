@@ -369,7 +369,7 @@ This route will return an integer with the count of rows in the dataset index.
 
 **/api/datasets/{id}/index/count**
 
-## Report Routes
+## Ad Hoc Query Report Routes
 
 ### POST - Request Data
 
@@ -378,6 +378,44 @@ This route will run the report and return the data. Many reports have required o
 The base route is:
 
 **/api/queries/{id}/\_execute**
+
+#### Sending Input Values
+
+If you have Input values that you want to pass to the report, you can pass them in the body of the post as a JSON object:
+
+```json
+{
+    "invoiceId": ["1014956.1"]
+}
+```
+
+#### Optional Parameters
+
+You can attach some **parameters** to the request.
+
+- **output** - *json* | *csv* - **default = JSON** - This determines the output format.  If left off, JSON will be returned.
+  **/api/queries/{id}/\_execute?output=csv**
+- **limit** - *integer* - **default = -1** - This will limit the number of rows returned from the base query.  The default of -1 will return ALL rows.  This is the **Row Limit** found in the query editor.
+- **pretty** - *true* | *false* - **Default = false** - Should the results be formatted.  Usually best to be left off or false.
+- **applyformatting** - *true* | *false* - **Default = true** - Apply the configured type formatting options from the grid. When checked, certain number options can cause numbers to appear as strings. When unchecked, dates will be strings in ISO-8601 standard format (eg. 2014-05-17T17:00:00.000Z).
+
+**Results **
+
+The results from this request will be JSON (array of objects):
+
+```json
+[
+    {
+        "campaignId": "10863",
+        "id": "28259",
+        "webSiteId": "DEMO10",
+      	...
+    },
+    {...},
+     ...
+```
+
+
 
 ## Other Information
 
