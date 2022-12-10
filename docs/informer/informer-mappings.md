@@ -877,13 +877,16 @@ Be aware that the **Month Actual Imps** and **Month Est Qty** are both multivalu
 
 ### Digital Size - Columns - Inches
 
-![image-20220517184953502](images/informerMapping_aio_size_001.jpg)
+Size information is located in a couple of places based on the value in the **Dimensions <9>** field in **AD Internet Orders**.
 
+1. If the **Dimensions** field in Ad Internet Orders **IS** populated then read the size record from the **AD Internet Sizes** linked to AD Internet Orders.
 
+   ![image-20220517184953502](images/informerMapping_aio_size_001.jpg)
 
-![image-20220517185041331](images/informerMapping_aio_size_002.jpg)
+2. If it **IS NOT** populated we then read the size record from the **AD Internet Sizes** linked to the **AD Internet Ratecards Detail**.
+   ![image-20220517185041331](images/informerMapping_aio_size_002.jpg)
 
-
+Lastly, there is sometimes size information in the **X Value <157>** and **Y Value <158>** fields in **AD Internet Orders**
 
 ![image-20220517185113482](images/informerMapping_aio_size_003.jpg)
 

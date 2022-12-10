@@ -352,3 +352,6 @@ Once one of those has been satisfied we look at the INET.SIZES table and the hei
 It looks like we are missing some links to do this but that’s an easy fix.  I can add it to the source mapping and move it over.
 
 ![image-20221121200931932](images/informer-misc-001.png)
+
+## Other Size Info
+

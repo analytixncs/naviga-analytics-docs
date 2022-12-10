@@ -449,9 +449,49 @@ It is very easy to make a copy of an existing Dataset. Simply click on the verti
 
 ![image-20200518105542330](images/informer_tips_datasetcopy-001.png)
 
-### Bundle Copy a Dataset
+### Copying Dataset to Different Datasource
 
-You will want to use this method to copy a Dataset if you want to retain the Filters and Visuals that exist on the Dataset being copied.
+If you develop a Dataset in one Datasource and want to move or copy it to a new Datasource, you will need to follow these steps.
+
+> NOTE: There is currently a "bug" in Informer which causes you any saved **Visuals** and **Filters** on the dataset to be lost when performing the copy. Unfortunately, this is the only way to point a Dataset to a different Datasource.
+
+**Step 1**
+
+Make a copy of the Dataset in question. This is very important, you must have a COPY of the dataset.
+
+**Step 2**
+
+Highlight the copied Dataset, click on the Actions menu and choose **Bundle and download**
+
+![image-20200831121453939](images/informer_tips_dscopy-001.png)
+
+**Step 3**
+
+**Delete** the Dataset that you just _bundled and downloaded_. You need to do this so that in the next step when we reimport the dataset (even though we will point to a different Datasource) it doesn't conflict with an existing dataset.
+
+**Step 4**
+
+The **Bundle and download** step will have created a **_tgz_** file in your download directory. This is the file that you will need to drag and drop onto the Dataset window.
+
+![image-20200831122201761](images/informer_tips_dscopy-002.png)
+
+Once you drop this file in the Dataset window, it will pop up with a dialog where you can set the options for the import.
+
+You can choose to import items like Teams, User, Tags or Folders.
+
+You can also change the default owner.
+
+You will want to leave the Update rule to "Overwrite if Newer".
+
+And lastly, if you want this imported Dataset to point to a new datasource, then change the datasource listed in the "Select Datasource" section.
+
+You want to also leave it as "Merge with existing datasource".
+
+![image-20200831122230323](images/informer_tips_dscopy-003.png)
+
+Click on Save and then verify that the new Dataset has been created.
+
+I have seen times where if steps are not followed, that the target Datasource may get renamed. If this ever happens you simply need to rename the Datasource back to its original name.
 
 ## Jobs & Emails
 
@@ -467,6 +507,25 @@ You can pair the reloading with Actions like emailing, however, you don't have t
 A job is made up of two parts, the **Data** and the **Actions**.
 
 You can have a Job with just Data (probably for a reload) or just Actions, you don't need both.
+
+### Job Dataset Not Updating
+
+:::caution
+
+If you update a Datasets Query definition AFTER you have already added it to a job(s), be aware that the change will NOT automatically be propagated to the jobs that "use" the dataset. 
+
+:::
+
+Changes to Datasets post being added to a Job do not reflect changes made to the Dataset. 
+
+This is by design. Why? - Informer does not want to introduce unforeseen changes to a query definition in a Job that is running in the background. It is then an opt-in approach. 
+
+When there are changes made to the underlying query used in a Job, the Data value under the Job will have an indicator next to the Refresh check box—showing that that query has changed and allows to accept those changes or not. 
+
+See the screenshot below. It is from 5.6, where the note that the underlying query has been modified. To then push the changes from the query click the button. 
+
+
+![img](images/informer-basics-JOB-notupdated-001.png)
 
 ### Job Data Options
 
@@ -714,50 +773,6 @@ Here is a sample of JSON output from a sample Dataset:
   ...
 ]
 ```
-
-## Copying Dataset to Different Datasource
-
-If you develop a Dataset in one Datasource and want to move or copy it to a new Datasource, you will need to follow these steps.
-
-> NOTE: There is currently a "bug" in Informer which causes you any saved **Visuals** and **Filters** on the dataset to be lost when performing the copy. Unfortunately, this is the only way to point a Dataset to a different Datasource.
-
-**Step 1**
-
-Make a copy of the Dataset in question. This is very important, you must have a COPY of the dataset.
-
-**Step 2**
-
-Highlight the copied Dataset, click on the Actions menu and choose **Bundle and download**
-
-![image-20200831121453939](images/informer_tips_dscopy-001.png)
-
-**Step 3**
-
-**Delete** the Dataset that you just _bundled and downloaded_. You need to do this so that in the next step when we reimport the dataset (even though we will point to a different Datasource) it doesn't conflict with an existing dataset.
-
-**Step 4**
-
-The **Bundle and download** step will have created a **_tgz_** file in your download directory. This is the file that you will need to drag and drop onto the Dataset window.
-
-![image-20200831122201761](images/informer_tips_dscopy-002.png)
-
-Once you drop this file in the Dataset window, it will pop up with a dialog where you can set the options for the import.
-
-You can choose to import items like Teams, User, Tags or Folders.
-
-You can also change the default owner.
-
-You will want to leave the Update rule to "Overwrite if Newer".
-
-And lastly, if you want this imported Dataset to point to a new datasource, then change the datasource listed in the "Select Datasource" section.
-
-You want to also leave it as "Merge with existing datasource".
-
-![image-20200831122230323](images/informer_tips_dscopy-003.png)
-
-Click on Save and then verify that the new Dataset has been created.
-
-I have seen times where if steps are not followed, that the target Datasource may get renamed. If this ever happens you simply need to rename the Datasource back to its original name.
 
 ## Creating a Datasource Link
 

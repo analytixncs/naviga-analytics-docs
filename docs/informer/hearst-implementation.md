@@ -6,20 +6,22 @@ sidebar_label: H-I
 
 ## Flexible Revenue Dataset
 
-**Main Dataset**
+**Main Dataset - HNP Dev version**
 
-- [**[NAVIGA]-AD Internet Orders With GL FLEXIBLE**](https://hnpbi.navigahub.com/datasets/2849bbb5-c7d1-4222-a657-887f18ad01a7)
+- [**DEV_HNP-AD Internet Orders With GL FLEXIBLE**](https://hnpbi.navigahub.com/datasets/STASI.MOFFRE@HEARSTNP.COM:dev_hnp-ad-internet-orders-with-gl-flexible)
 
-**Dependencies**
+**Dependencies - HNP DEV version**
 
-- [**[JOIN]-GL To External GL**](https://hnpbi.navigahub.com/datasets/0e56cd6b-b005-4449-a9c7-5659be127559) - Joins on the **GL Code** and returns the External GL Code
-- [**[JOIN]-Campaigns Journal Entries**](https://hnpbi.navigahub.com/datasets/f2662e21-b346-4e0f-b62a-34302d7302a1) - Joins on the **Campaign Id** and **Line Id** and returns revenue side of the journal entry.
+- [**DEV_HNP-JOIN-GL To External GL**](https://hnpbi.navigahub.com/datasets/STASI.MOFFRE@HEARSTNP.COM:dev_hnp-join-gl-to-external-gl) - Joins on the **GL Code** and returns the External GL Code
+- [**DEV_HNP-JOIN-Campaigns Journal Entries**](https://hnpbi.navigahub.com/datasets/STASI.MOFFRE@HEARSTNP.COM:dev_hnp-join-campaigns-journal-entries) - Joins on the **Campaign Id**, **Line Id**, and **Month Start Date** and returns revenue side of the journal entry.
 
 :::info
 
 Be sure to include the above dependencies in the refresh job for the Main dataset.
 
 :::
+
+The **JOIN Campaigns Journal Entries**
 
 ## GEN Security Mapping
 
