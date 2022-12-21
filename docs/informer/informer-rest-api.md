@@ -371,9 +371,9 @@ This route will return an integer with the count of rows in the dataset index.
 
 ## Ad Hoc Query Report Routes
 
-### POST - Request Data
+### POST - Execute Report
 
-This route will run the report and return the data. Many reports have required or optional parameters and these can be sent in the body of the Post request.
+This route will execute the report and return the data. Many reports have required or optional parameters and these can be sent in the body of the Post request.
 
 The base route is:
 
@@ -395,6 +395,8 @@ You can attach some **parameters** to the request.
 
 - **output** - *json* | *csv* - **default = JSON** - This determines the output format.  If left off, JSON will be returned.
   **/api/queries/{id}/\_execute?output=csv**
+  
+  > For exporters like Excel, see the `_run` command in the next section.
 - **limit** - *integer* - **default = -1** - This will limit the number of rows returned from the base query.  The default of -1 will return ALL rows.  This is the **Row Limit** found in the query editor.
 - **pretty** - *true* | *false* - **Default = false** - Should the results be formatted.  Usually best to be left off or false.
 - **applyformatting** - *true* | *false* - **Default = true** - Apply the configured type formatting options from the grid. When checked, certain number options can cause numbers to appear as strings. When unchecked, dates will be strings in ISO-8601 standard format (eg. 2014-05-17T17:00:00.000Z).
@@ -415,7 +417,33 @@ The results from this request will be JSON (array of objects):
      ...
 ```
 
+### POST - \_run Report Command
 
+The Dataset API offers the [Exports route](#get---exporters-json/csv/etc), but an Ad Hoc Query report accessed via the API, does not have this functionality directly.
+
+You can get this functionality by use the `/api/queries/{id}/_run` route along with a few other steps.
+
+The `_run` route does not return the data from the Ad Hoc Query report, but instead "runs" it and stores the data in a temporary Dataset in the background.
+
+It also has a different format for sending input values to the report.
+
+```json
+{
+    "params": {
+        "inputValue": ["2022-09"]
+    }
+}
+```
+
+> NOTE: Even if you have no input values, you must have an empty object in your post body -> {}
+
+Next, find the following route in the Response of that call: `_links -> inf:dataset -> href`. The value here should be something like `http://yourserveraddress.com/api/queries/{id}/dataset`. 
+
+Issue a GET request against that URL.
+
+ Next, find the following route in the Response of that call: `_links -> self -> href`. The value here should be something like `http://yourserveraddress.com/api/datasets/{id}`. 
+
+This is the the route of the temporary Dataset behind the Ad hoc results, and you should can now use the [Dataset Exporter Route](#get---exporters-json/csv/etc) to build a call to export the data the way you would export any other Dataset.
 
 ## Other Information
 
