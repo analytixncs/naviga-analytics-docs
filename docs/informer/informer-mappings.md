@@ -527,7 +527,6 @@ $record.netLineForeignAmount = calcNetAmount($record['a_d_internet_campaigns_ass
 
 // Inline function to calculate net amount.
 function calcNetAmount (campaignType, monthActualAmt, monthEstAmt) {
-    return monthActualAmt
     if (campaignType === "F") {
       return monthEstAmt;
     } else {
@@ -582,7 +581,6 @@ $record.estRepForeignAmount = repEstForeignAmount
 $record.netRepForeignAmount = repNetForeignAmount
 
 function calcNetAmount (campaignType, monthActualAmt, monthEstAmt) {
-    return monthActualAmt
     if (campaignType === "F") {
       return monthEstAmt;
     } else {
