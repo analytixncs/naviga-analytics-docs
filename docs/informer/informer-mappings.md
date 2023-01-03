@@ -478,9 +478,15 @@ Below is an image of the output, when you DON'T include the **Month Actual Amt a
 
 ![img](images/informer_mapping_adinternetorders-reps-month-004.png)
 
+Lastly, you will most likely want to get the Sales Reps names also.  These are in a joined mapping called **Month Curr Rep Id**
+
+![image-20221228145242293](images/informer_mapping_adinternetorders-reps-month-005.png)
+
 ---
 
 #### Add Reps Using Current Rep Fields
+
+If you choose to use the Current Rep ID.
 
 These are the fields you would need:
 
