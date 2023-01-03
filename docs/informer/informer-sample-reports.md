@@ -1,9 +1,7 @@
 ---
-​---
 id: informer-sample-reports
 title: Informer Sample Reports
 sidebar_label: Informer Sample Reports
-​---
 ---
 
 ## GEN Security File Report
