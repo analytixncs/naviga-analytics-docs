@@ -17,28 +17,29 @@ module.exports = {
 
   tutorialSidebar: [
     {
-      type: 'category',
-      label: 'Informer',
+      type: "category",
+      label: "Informer",
       items: [
-        'informer/informer-video-training',
-        'informer/informer-basics',
-        'informer/informer-mappings',
-        'informer/informer-templates',
-        'informer/informer-system',
+        "informer/informer-video-training",
+        "informer/informer-basics",
+        "informer/informer-mappings",
+        "informer/informer-sample-reports",
+        "informer/informer-templates",
+        "informer/informer-system",
       ],
     },
     {
-      type: 'category',
-      label: 'Informer JavaScript',
+      type: "category",
+      label: "Informer JavaScript",
       items: [
-        'informer/informer-javascript',
-        'informer/informer-saved-functions',
+        "informer/informer-javascript",
+        "informer/informer-saved-functions",
       ],
     },
     {
-      type: 'category',
-      label: 'Informer API',
-      items: ['informer/informer-rest-api'],
+      type: "category",
+      label: "Informer API",
+      items: ["informer/informer-rest-api"],
     },
   ],
 };
