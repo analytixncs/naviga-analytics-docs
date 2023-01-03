@@ -6,8 +6,6 @@ sidebar_label: Informer Sample Reports
 ​---
 ---
 
-
-
 ## GEN Security File Report
 
 This section has the sample files and explains in detail how to build a report that takes the fields from the **GEN Security File** mapping in Informer and transforms it into a more readable and usable format.  Steps 1-10 will get you a report that has the following format.
