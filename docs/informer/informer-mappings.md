@@ -4,7 +4,218 @@ title: Informer Mappings
 sidebar_label: Informer Mappings
 ---
 
-#### 
+## Templates
+
+### User Reports
+
+This dataset template uses the User Reports Mapping as its starting point.
+
+> Download the Dataset:
+> **<a  target="_blank"  href="/downloads/template-user-reports.tgz"> [TEMPLATE]-User Reports</a>**
+
+The User Reports mapping is a table in the Naviga Database that brings together commonly used reporting items into a single table.
+
+With that said, the User Reports mapping also has useful relationships to other mappings that can be utilized to access information that is not contained in the User Reports mapping itself.
+
+**Base Mapping** - User Reports
+
+| Field Name                | Mapping - User Reports                                       | Description                                                  |
+| ------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Campaign ID               |                                                              | ID Identifying the Campaign                                  |
+| Line ID                   | Internet Orders (newer Elan Releases)                        | Every campaign has Lines (Orders). This ID identifies the line within a campaign. |
+| Advertiser Name           |                                                              |                                                              |
+| Brand Name                |                                                              |                                                              |
+| Product Id                |                                                              | Product or Website ID                                        |
+| Product Name              |                                                              | Product or Website Name                                      |
+| Start Date                |                                                              | Month Start Date for the Line ID (Note: Line IDs can have multiple rows with different start dates.) |
+| End Date                  |                                                              | Month End Date for the Line ID                               |
+| Rep Name                  |                                                              |                                                              |
+| Line Net Amount           |                                                              | Calculated Net amount for the Line ID. This field can be aggregated [More Info](#user-reports-revenue-fields) |
+| Rep Net Amt               |                                                              | If you have Rep Name in your report, you will want to use this amount field. It takes into account when multiple reps are on a Line and their Rep Percentage. |
+| Salesrep Percent          |                                                              | Percentage of Line attributed to the Rep (already taken into account in the Rep Net Amt field.) |
+| Confirmed Date            |                                                              |                                                              |
+| Period                    |                                                              | Date Order was recognized in the format of "YYYY-MM"         |
+| Revenue Date              |                                                              | Same as Period except in a Date format MM-DD-YYYY. The day will always be the first day of the month. |
+| Status                    |                                                              | EX - Billed, RU - Confirmed, IS - Invoicing Started, DE - Line Deleted |
+| Campaign Type             | Internet Orders (newer Elan Releases) -><br />AD Internet Campaigns | F - Flexible Campaign<br />M - Performance Campaign          |
+| Campaign Description      | Internet Orders (newer Elan Releases) -><br />AD Internet Campaigns |                                                              |
+| Line Desc                 | Internet Orders (newer Elan Releases)                        |                                                              |
+| Ad Size                   |                                                              |                                                              |
+| GL Type ID                |                                                              |                                                              |
+| GL Types Description      | AD Internet GL Types                                         |                                                              |
+| Position Description      | Internet Orders (newer Elan Releases) -><br />AD Internet Positions |                                                              |
+| Ad Types Description      | Internet Orders (newer Elan Releases) -><br />AD Internet AD Types |                                                              |
+| Rep Indicator             |                                                              | Used in Line Net Amt Calculation see [User Reports Revenue Fields](#user-reports-revenue-fields) |
+| Advertiser Client Type    | Advertiser                                                   |                                                              |
+| Advertiser Client Type ID | Advertiser                                                   |                                                              |
+| IN Size                   |                                                              |                                                              |
+| Size                      |                                                              |                                                              |
+| Mo Est Impression Qty     |                                                              |                                                              |
+| Mo Act Impression Qty     |                                                              |                                                              |
+| Division                  |                                                              |                                                              |
+| Division Name             |                                                              |                                                              |
+
+### CM Opportunities
+
+There are two versions of this template, one with the Product Groups and one without the Product Groups. If you download and use the one with Product Groups, you must be aware that the Product groups create a many to many relationship and will overstate values UNLESS you filter by the product group you are interested in. If this doesn't make sense, use the template without the Product Groups.
+
+> Download the Dataset:
+>
+> **<a  target="_blank"  href="/downloads/template-cm-opportunities.tgz"> [TEMPLATE]-CM Opportunities</a>**
+>
+> **<a  target="_blank"  href="/downloads/template-cm-opportunities-with-productgroups.tgz"> [TEMPLATE]-CM Opportunities With Product Group</a>**
+
+There is quite a bit happening behind the scenes with this template dataset. Specifically, it is looking at the Start and End Dates of a row and then figuring out how many months the campaign is scheduled to run and creates a new row for each of those months.
+
+If you have a row with a Digital Start Date of `Sept 1st 2021` and a Digital End Date of `Oct 31st 2021`. The flow steps will create TWO rows for this single row, one for September and one for October.
+
+Remember, we started out with a single row, now we have two rows. All of the other data is duplicated, however, a couple of new fields are created
+
+- **Opp Split Price** - This takes into account how many rows were created and splits the `digitalPrice` between the rows AND multiplies each result by the `probPct` field from the CM Opportunities table.
+- **Opp Split Month** - Utility field in the format of `YYYY-MM` which designates a row created.
+
+> **Some Rules:**
+>
+> - If there is only a **Digital Start Date** and NO **Digital End Date**, then there will be only one row and the Opp Split Month field will be from the Digital Start Date.
+> - If **Digital Start Date** and NO **Digital End Date**, then no **Opp Split Price/Month** fields will be created.
+
+> **OTHER NOTES**
+>
+> **Users vs Reps**
+> You will notice that there are NO reps associated with an opportunity. The two fields you will find are **Entered By User Id** and **Owner User Id**.
+>
+> These are Users of the Naviga Ad system and since an opportunity is not yet an Order, the system does not know how the reps will be assigned to the final order.
+>
+> ---
+>
+> **Proposals vs Opportunities**
+>
+> This dataset is focused on information pertaining to opportunities. If you need proposals, you can get that from the User Reports template and filter on the Status field and just pull those Status's that pertain to Proposals.
+>
+> The only different between a **proposal** and a **campaign** is the status. So if you enter a campaign with a Q1, Q2 orQ3 status that will be a quote/proposal. If you enter exactly the same data with an R1, R2, R3 or CO status that will be a campaign/order.
+>
+> The opportunity area allows you to create a potential opportunity without a lot of details. You can create an opportunity with only the customer and an opportunity description. Optionally you can add products, $, dates, etc. Eventually when you have all the details you can convert an opportunity and turn it into a proposal.
+
+In the _Description_ column, if you see a #n value, you can use that to reference to the screenshots of the Naviga system to see what the source of the fields are.
+
+| Field Name                                            | Mapping - CM Opportunities                                   | Description                                                  |
+| ----------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Opportunity Id                                        |                                                              | **#1**                                                       |
+| Opportunity Type                                      |                                                              | **#2**                                                       |
+| Group Name                                            | From Dataset (Flow step)<br />PubGroup-PublicationMapping-PROD | \*Only in Product Group Template                             |
+| Product ID                                            |                                                              |                                                              |
+| Product Name                                          | Digital Product                                              |                                                              |
+| Reporting Date                                        | Calculated\*                                                 | Opp Split Month (YYYY-MM) converted to a Date format (MM-01-YYYY) |
+| Opp Split Month                                       | Calculated\*                                                 |                                                              |
+| Opp Split Price                                       | Calculated\*                                                 | Amount of opportunity for **Opp Split Month** - NOTE: Opportunity % is used in this calculation. |
+| Opportunity Weighted Amount <br />By Month Year Total | Calculated\*                                                 | Opp Split Price aggregated by **Opportunity Id + Opp Split Month + Product ID**.<br />This field is just an example of aggregation via Flow steps. |
+| Group Key1                                            | Calculated\*                                                 | Used in Opportunity Weighted Amount By Month Year Total field. Only useful for debugging if doing [flow step aggregation](informer-javascript#calculations-on-aggregated-values). |
+| Stage Id                                              |                                                              | #8                                                           |
+| Opportunity Stage Description                         |                                                              | #8                                                           |
+| Advertiser Name                                       | Advertiser -> Client Name                                    | **#3**                                                       |
+| Advertiser Id                                         |                                                              | **#3**                                                       |
+| Brand Id                                              |                                                              | **#4**                                                       |
+| Digital Start Date                                    |                                                              | **#**                                                        |
+| Digital End Date                                      |                                                              | **#**                                                        |
+| Error Issues                                          | Calculated\*                                                 | Checks for errors when calculating the Opp Split Month/Price fields. Helpful in debugging. |
+| Digital Rate                                          |                                                              |                                                              |
+| Digital Qty                                           |                                                              |                                                              |
+| Digital Price                                         |                                                              | Used in calculating **Opp Split Price**. <br />**NOTE:** You cannot use this field for aggregating in a report since the flow steps in this Dataset will be creating new rows. |
+| Opportunity Stage Probability Pct                     | Opportunity Stage                                            | Probability percentage from the Opportunity Stage table.<br />**NOTE**- This is **NOT** the field used in calculating the **Opp Split Price** field. |
+| Publication Pub Group ID                              |                                                              |                                                              |
+| Start Date                                            |                                                              | **#5**                                                       |
+| End Date                                              |                                                              | **#6**                                                       |
+| Probability Pct                                       |                                                              | Field used in the calculating the **Opp Split Price**        |
+| Mkt Campaign ID                                       |                                                              |                                                              |
+| Entered By User ID                                    |                                                              |                                                              |
+| Owner User Id                                         |                                                              | **#7**                                                       |
+| Owner Email                                           |                                                              | **#7**                                                       |
+| Owner Name                                            |                                                              | **#7**                                                       |
+| Digital Line Desc                                     |                                                              |                                                              |
+| GL Types Description                                  | Digital Internet Orders -> GL Types                          |                                                              |
+| Digital Ratecard Line Detail Gl Type                  | Digital Ratecard Line Detail                                 |                                                              |
+| Gl Type Description                                   | Calculated\*                                                 | In the **Map GL Types** flow step, you can modify this calculation to map your _Digital Ratecard Line Detail Gl Type_ field to a new value. |
+| Digital Format                                        | Digital Product                                              |                                                              |
+| Split Length                                          | Calculated\*                                                 | Debug field indicating how many months were created for for this row. |
+| Digital Ratecard Line ID                              |                                                              |                                                              |
+| Digital Ratecard Line Desc                            | Digital Ratecard Line Detail                                 |                                                              |
+| Pub Sizes                                             |                                                              |                                                              |
+| Contact Type Codes Field                              | Calculated\*                                                 |                                                              |
+
+![image-20210811133035929](images/informer-mapping-cmopportunities-005.png)
+
+## User Reports Mappings
+
+### User Reports vs User Reports Original Rep
+
+The `User Reports` mapping does not have the original rep but they can go to the source record in AD ORDERS or INET.CAMPAIGNS and get the original rep.
+
+When the USER REPORTS trigger was first created it was two files USER_REPORTS_DETAIL (current) and USER_REPORTS_DETAIL_O (original). Then most of our clients complained that they needed something to represent the “Brand Rep” and keep the “current rep” so as of now here is how it looks:
+
+**User Reports** - BRAND REP (the rep with the current assignment on the brand regardless of what is on the order)
+
+**User Reports Original Rep** - CURRENT REP (the current rep assigned on the order which would be the brand rep at the time of order entry and/or if orders were updated because users are given a choice.)  
+When the order is created, the Brand rep becomes the "Original Rep", however, the critical question is, when they update the brand rep, they are prompted, **“Do you want to update future orders?”**. If they answer YES, then the **Current Rep** will become the Brand Rep and will have the same info as the User Reports mapping. Up to that point the Current rep on the order is the same as the original rep and will stay the same unless they say “Yes, update future orders”. In that case the current rep on future orders changes to the brand rep and the original rep on the order never changes but we have no User Reports that points to the Original rep on the order.
+If they change the Brand Rep and **do not say yes to update future orders** then User Reports Original Rep (Current Rep on the order) would then be the same as the Original Rep on the order.
+
+> **History on Naming**: The way it is at the moment, User Reports will pull the Brand Rep (from the brand record itself), and User Reports Original will pull the current Rep on the order. I know the label is confusing, that is because years ago we had it as the actual current rep and original rep on the order but the demand was to change this instead to Brand rep for User Reports and Current Rep on the order for User Reports Original Rep
+
+---
+
+### User Reports Revenue Fields
+
+While there are over 80 "Amt" fields in the User Reports mapping. You most likely will only need one, but I will explain the three that will jump out as being usable.
+
+> NOTE: All of the fields described below will show NET revenue:
+>
+> ![image-20210825100739241](images/informer-mapping-userreports-revenue001.png)
+
+- **Order Net Amt** - This is the total net amount for the campaign. The problem with this field is that it will be duplicated for every line item in User Reports for an order. If you are going to do any aggregation on the field, you will need to add a flow step to remove the duplicates. [Remove Duplicates Code](informer-javascript/#remove-duplicate-values-in-aggregation)
+
+  > Be aware that to use the above field, you will need to Sort your Dataset using the **Order By** step when building the "query". This can slow the query down. I don't feel you really will ever or should ever use the Order Net Amt.
+  > Instead, if you just need net amount for campaigns, use the Rep Split Net Amt field fix below.
+
+- **Rep Split Net Amt** - This field can be aggregated to get total net revenue for a campaign **ONLY when the Rep Indicator is filtered to 1.**
+  To expand on this, there is a field in User Reports called **Rep Indicator(REP_MV)**. This indicator is used to indicate the number of reps on the order. If you do not filter by the Rep Indicator, your revenue will be overstated for some ads.
+
+  The **Rep Split Net Amt** field is the total net amount for a line within a campaign
+
+  To keep from having to filter on the Rep Indicator, you could also set the Rep Net Amt field to zero for those that have a Rep Indicator not equal to zero.
+  I would also suggest removing the original RepSplitNetAmt field from your dataset after the above Powerscript has been run.
+
+```javascript
+// Rep Split Net Amt Fix
+$record.LineNetAmount = $record.repMv === 1 ? $record.netCost : 0;
+```
+
+- **Rep Net Amt** - This field IS the **Rep Split Net Amt \* Salesrep Percentage**. Note that the aggregation of this at the campaign level is not always the Net amount of the order. This is because multiple reps may be getting commission or a percentage of the campaign.
+
+### User Report NEEDED Status Criteria
+
+Most of the time when you are creating a report to get revenue, you **DO NOT** want to include deleted lines. To ensure this, you will need to add the following criteria to only pull the following **Status** field values
+
+The **Status** field is located in the **User Reports** mapping and you will want to exactly match the following:
+
+- **EX** - Billed
+- **RU** - Confirmed
+- **IS** - Invoicing Started
+
+The filter will look like this:
+
+![image-20210401095638103](images/informer-mapping-userreports-001.png)
+
+### User Report Other Fields
+
+#### Product or Website Field
+
+The product and website are stored in the same field. In the User Reports mapping you can get at the Product/Website ID and Product/Website name from a couple of different places.
+
+In the User Reports mapping you can use:
+
+- **Pub Id** - This will be the Product/Website Id
+- **Pub Desc** - This will be the Product/Website Description
+
+#### Classified Category Tree and Classified Category
 
 These fields exist in the **AD Internet Classified** mapping but are NOT linked to anything. However, the individual fields _Category Tree_ and _Category_ exist on the **AD Internet Orders** mapping. You can pull these fields in from this mapping and in from the **User Reports** mapping you would get to it by going to the **Internet Order (newer Elan releases)**, which is just the **AD Internet Orders** mapping renamed for this link.
 
@@ -688,7 +899,7 @@ This dataset is name **[NAVIGA]-GL To External GL**
 Lastly, you will want to remove the Web Site GL Type ID and Web Site GL Type Revenue ID field from you report so that you don't get the multivalued fields showing.
 
 > Download a sample Dataset:
-> **<a  target="_blank"  href="/downloads/naviga-ad-internet-orders-with-gl.tgz"> [NAVIGA]-AD Internet Orders With GL</a>**
+> **<a  target="_blank"  href="/downloads/naviga-ad-internet-orders-with-gl.tgz"> [NAVIGA]-AD Internet Orders With GL</a>**
 > NOTE: This sample has some campaign criteria that you will want to clear or update.
 
 ### Adjustments On Lines
@@ -1584,8 +1795,6 @@ $record.longerNote  = Buffer.from($record['other_notes_assoc_comment'], 'base64'
 
 
 ---
-
-
 
 ## Miscellaneous Information
 
