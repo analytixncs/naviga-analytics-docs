@@ -22,10 +22,17 @@ module.exports = {
       items: [
         "informer/informer-video-training",
         "informer/informer-basics",
-        "informer/informer-mappings",
         "informer/informer-sample-reports",
         "informer/informer-templates",
         "informer/informer-system",
+      ],
+    },
+    {
+      type: "category",
+      label: "Informer Mappings",
+      items: [
+        "informer/informer-mappings",
+        "informer/informer-mappings-ad-internet-orders",
       ],
     },
     {
