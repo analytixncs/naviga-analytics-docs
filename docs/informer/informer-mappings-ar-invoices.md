@@ -1,6 +1,6 @@
 ---
 id: informer-mappings-ar-invoices
-title: Informer Mappings AR Invoices
+title: AR Invoices
 sidebar_label: AR Invoices
 ---
 

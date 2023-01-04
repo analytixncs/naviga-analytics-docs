@@ -1,6 +1,6 @@
 ---
 id: informer-mappings-ad-internet-orders
-title: Informer Mappings AD Internet Orders
+title: AD Internet Orders
 sidebar_label: AD Internet Orders
 ---
 

@@ -1,6 +1,6 @@
 ---
 id: informer-mappings-user-reports
-title: Informer Mappings User Reports
+title: User Reports
 sidebar_label: User Reports 
 ---
 

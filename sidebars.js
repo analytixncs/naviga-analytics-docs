@@ -33,6 +33,14 @@ module.exports = {
       items: [
         "informer/informer-mappings",
         "informer/informer-mappings-ad-internet-orders",
+        "informer/informer-mappings-ar-invoices",
+        "informer/informer-mappings-gen-clients",
+        "informer/informer-mappings-ad-brands",
+        "informer/informer-mappings-ad-publications",
+        "informer/informer-informer-mappings-cm-opportunities",
+        "informer/informer-mappings-udf-fields",
+        "informer/informer-mappings-other",
+        "informer/informer-mappings-user-reports",
       ],
     },
     {
