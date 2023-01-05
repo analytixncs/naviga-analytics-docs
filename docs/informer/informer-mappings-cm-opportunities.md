@@ -10,7 +10,7 @@ The CM Opportunities mapping allows you to report on the opportunities that you 
 
 Here is a template Dataset to review and modify to your needs:
 
-**<a  target="_blank"  href="/downloads/naviga-cm-opportunities.tgzsomething.tgz">CM Opportunities Template Dataset</a>**
+**<a  target="_blank"  href="/downloads/naviga-cm-opportunities.tgz">CM Opportunities Template Dataset</a>**
 
 To import this template dataset into your system, start at **step 4** in the documentation [Copying a Dataset To a Different Datasource](informer-basics/#copying-dataset-to-different-datasource)
 
