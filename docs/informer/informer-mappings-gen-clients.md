@@ -185,5 +185,14 @@ Print Billing Delivery Method - `GEN Clients - Invoice Delivery Method (226)`
 
 
 
+## Auto-Clear Balance
 
+![image-20230117131814883](images/informer_mapping_genclients-autoclear-balance-001.png)
 
+If your client has the Auto-Clear Balance Credit Card number assigned in the Customer A/R Setup section, you will be able to find that information when creating a report using GEN Clients as the base mapping.
+
+In GEN Clients the field AR.AUTH.CC.TO.CHARGE <438> will either be empty, indicating there NOT a default card set for auto-clear, OR it will have a value in it.
+
+The value itself is not helpful for your report, however, it allows a join to the **AR Auth CC To Charge** associated mapping (See below), which will have the card details for the selected auto-clear card.
+
+![image-20230117132205253](images/informer_mapping_genclients-autoclear-balance-002.png)
