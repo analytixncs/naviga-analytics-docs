@@ -493,6 +493,14 @@ Click on Save and then verify that the new Dataset has been created.
 
 I have seen times where if steps are not followed, that the target Datasource may get renamed. If this ever happens you simply need to rename the Datasource back to its original name.
 
+:::caution
+
+BUT WAIT, what if you have embedded Datasets in your Flow steps?  Then things get a bit more complicated.  Here is are the steps to follow if you run into that scenario:
+
+![image-20230126153539511](images/informer_basics-copydatasetwithembeds.png)
+
+:::
+
 ## Jobs & Emails
 
 Jobs are the Informer way to take some sort of action.

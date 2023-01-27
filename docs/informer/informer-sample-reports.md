@@ -112,6 +112,8 @@ Once refreshed, you can export it to excel for reference.  The fields of interes
 *However*, the fields that contain the information you **need** for the Powerscripts in the final dataset can simply be **copied and pasted from the dataset.**  These are:
 
 - **Final Condense Multi Valued Expression** - Used in the HNP Security dataset to convert multivalued fields to a string of values.  
+
+  > NOTE: There may be some MV fields that need additional processing and this will take place in the Flow step during the final report build.
 - **Final Alias Array** - Used in the HNP Security dataset to the field array will tell us the fields in the mapping to process.
 - **Final Field Label Expression** - **NOT USED** in the final dataset, but for informational purposes, you could use this code to **update the label of fields** with descriptions.
 - **Final Object Map Pair** - --**NOT USED**-- The key/value pairs will be extracted and used to create a lookup object in the **naviga.securityMapLookup** saved function
@@ -181,6 +183,13 @@ $record["inClientAccessCodes"] = naviga.multiValuedToString($record["inClientAcc
 $record["inetStatusCodes"] = naviga.multiValuedToString($record["inetStatusCodes"], ",", false)
 ...
 $record["incentiveAutoAdjustCodes"] = naviga.multiValuedToString($record["incentiveAutoAdjustCodes"], ",", false)
+
+//-----------------------------
+// The below code will be used to modify any MV fields that need further refinement.
+// cmrAdRepScreens has the description fields in an iDescriptor, BUT iDescriptors do NOT Have an attribute number
+// to map to
+// so we are just copying over the ids with descriptions here.
+$record["crmAdRepScreens"] = $record["crmAdRepScrDesc"]
 ```
 
 
