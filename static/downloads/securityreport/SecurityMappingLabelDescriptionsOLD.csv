@@ -1,0 +1,253 @@
+﻿sml_field_description,sml_attribute_number,sml_alias,sml_screen,sml_informer_mapping,sml_field_name,sml_screen_order
+Allowed Status Codes,105,,Ad Security,GEN Security File<105>,IN Status Codes,4
+Allowed to Edit Campaigns Y/N,152,,Ad Security,GEN Security File<152>,IN Edit Campaigns,18
+Allowed to change Curret Reps Y/N,153,,Ad Security,GEN Security File<153>,IN Change Current Reps,22
+Allowed to change Original Reps Y/N,154,,Ad Security,GEN Security File<154>,IN Change Orig Reps,21
+Allowed to change the Agency Y/N,155,,Ad Security,GEN Security File<155>,IN Change Agency,23
+Allowed to change the Billing Contact Y/N,156,,Ad Security,GEN Security File<156>,IN Change Billing Contact,25
+Allowed to change the Terms Code Y/N,157,,Ad Security,GEN Security File<157>,IN Change Terms,24
+Allowed to Cancel Campaigns Y/N,158,,Ad Security,GEN Security File<158>,IN Cancel Campaigns,19
+Allowed to create Brands from Campaign Entry Y/N,159,,Ad Security,GEN Security File<159>,IN Permit Create Brands,27
+Allowed to enter new Campaigns Y/N,160,,Ad Security,GEN Security File<160>,IN Permit New Campaigns,17
+Mandatory entry of Ratecard for Pricing Ind. Y/N,150,,Ad Security,GEN Security File<150>,IN Ratecard Required,50
+Allowed to enter New Campaigns before today Ind. Y/N,329,,Ad Security,GEN Security File<329>,IN Campaign Dates,32
+Allowed to change the Tax Code on a Line Ind. Y/N,173,,Ad Security,GEN Security File<173>,IN Override Tax Ind,52
+Allowed to access Setup Screens Y/N,218,,Ad Security,GEN Security File<218>,IN Allow Setup,76
+Allowed to change a Campaign's Type Y/N,221,,Ad Security,GEN Security File<221>,IN Change Type,
+Allowed to enter Pre-Payments Y/N,222,,Ad Security,GEN Security File<222>,IN Enter PP,
+Allowed to used Brands with no rep assignment Y/N,224,,Ad Security,GEN Security File<224>,IN Assign Reps,
+Allowed to override Currency Code Y/N,225,,Ad Security,GEN Security File<225>,IN Override Currency,
+Allowed to create Advertisers from Campaign Entry Y/N,247,,Ad Security,GEN Security File<247>,IN Create Advertisers,26
+Allowed to override G/L Periods Y/N,328,,Ad Security,GEN Security File<328>,IN Change Period,
+Is Order Contact Mandatory Y/N,348,,Ad Security,GEN Security File<348>,IN Mandatory Order Contact,40
+"Validate Sponsorship Inventory (W=Warn,S=Stop,N=No)",350,,Ad Security,GEN Security File<350>,IN Val Sponsorship Ind,68
+"Validate Impression Inventory (W=Warn,S=Stop,N=No)",351,,Ad Security,GEN Security File<351>,IN Val Impressions Ind,69
+Inventory - allowed to oversell Impressions by percentage,352,,Ad Security,GEN Security File<352>,IN Impressions Oversell Pct,70
+"Default Campaign Type (M=Performace,F=Flexible)",367,,Ad Security,GEN Security File<367>,IN Dflt Campaign Type,20
+"Default Flexible Campaign Billing Type (D=Dynamic,M=Manual)",368,,Ad Security,GEN Security File<368>,IN Dflt Billing Type,42
+Do not allow chnges to past Campaign Lines on Flexible Campaigns Y/N,379,,Ad Security,GEN Security File<379>,IN Restrict Changes Ind,53
+"Save OE Rep assignments back to the Brand (Y=Group,P=Pub,D=Default,A=Ask,N=no)",381,,Ad Security,GEN Security File<381>,IN Save Reps On Brand,
+"Set Reps on a new Brand to ""Assign at Order Entry""",382,,Ad Security,GEN Security File<382>,IN Set Reps to All,
+Default setting for Proportion Lines by day or month,383,,Ad Security,GEN Security File<383>,IN Proportion Option,54
+Maximum Discount % on a line,401,,Ad Security,GEN Security File<401>,IN Max Disc Pct,14
+Billing - Allow posting to A/R,403,,Ad Security,GEN Security File<403>,IN Post to AR Ind,67
+Default Campaign Status Code,409,,Ad Security,GEN Security File<409>,IN Dflt Status Code,1
+"Tracking Currencies - show All, Budget Only or None (A/B/N)",413,,Ad Security,GEN Security File<413>,AD Tracking Curr Opt,
+Allowed to change Campaign discount on Brands Y/N,414,,Ad Security,GEN Security File<414>,IN Change Brand Discount Ind,28
+Allowed to Change I/O Received Flag on a Confirmed Campaign Y/N,435,,Ad Security,GEN Security File<435>,IN Change to Flag,41
+"Require valid DFP Innventory when nusing a DFP Template (N=No,S=Stop,W=Warn)",422,,Ad Security,GEN Security File<422>,DFP Validation Opt,
+Allowed oversell Percentage,423,,Ad Security,GEN Security File<423>,DFP Oversell Pct,
+"Which DFP Inventory number to use (A=Available,P=Possible)",424,,Ad Security,GEN Security File<424>,DFP Inventory Number,
+Prevent Confirming Campaign if any lines tart before Today Y/N,427,,Ad Security,GEN Security File<427>,IN Prevent Confirm Ind,
+Prevent Changes to G/L Type in Line Entry Y/N,436,,Ad Security,GEN Security File<436>,IN Change GL Type,
+Prevent Entry of Opportunities if customer not approved Y/N,437,,Ad Security,GEN Security File<437>,IN Approval Prevent Opps,6
+Prevent Entry of Orders if customer not approved Y/N,438,,Ad Security,GEN Security File<438>,IN Approval Prevent Orders,7
+Prevent Entry of Quotes if customer not approved Y/N,439,,Ad Security,GEN Security File<439>,IN Approval Prevent Quotes,8
+Allowed to bypass Issue Closing Dates Y/N,445,,Ad Security,GEN Security File<445>,IN Bypass Closing Date,
+Audience field Required on Newsletter Lines Y/N,446,,Ad Security,GEN Security File<446>,IN Aud Reqd Ind,58
+Proposals must be approved by a Manager Y/N,441,,Ad Security,GEN Security File<441>,IN Proposal Approval Reqd,10
+Proposals must be approved by a Manager - min. Value (2 decimal places),442,,Ad Security,GEN Security File<442>,IN Proposal Approval Min Val,11
+Proposals must be approved by a Manager - if % discount on any line exceeds,443,,Ad Security,GEN Security File<443>,IN Proposal Approval Line Pct,12
+Proposals must be approved by a Manager - if % discount on Campaign exceeds,444,,Ad Security,GEN Security File<444>,IN Proposal Approval Camp Pct,13
+Proposals must be approved by a Manager - prevent Approval if credit check fails,448,,Ad Security,GEN Security File<448>,IN Proposal Credit Check Ind,
+No changes to Section/Position if they were set on a Ratecard Y/N,447,,Ad Security,GEN Security File<447>,IN Section Position Ind,59
+New Advertiser Default - requires Pre-Payment Y/N,449,,Ad Security,GEN Security File<449>,IN Adv Dflt Pre Pay,9
+Billing - retrict Generation to Campaigns prepared by the User,451,,Ad Security,GEN Security File<451>,IN Restrict Billing Ind,
+Campaign Lines - prevent the use of Custom revenue allocation,452,,Ad Security,GEN Security File<452>,IN Prevent Custom Alloc,55
+Campaigns - Allow Auto Payments Y/N,453,,Ad Security,GEN Security File<453>,IN Auto Payment Ind,46
+Diable editing of Confirmation before sending Y/N,454,,Ad Security,GEN Security File<454>,IN Disable Conf Changes,
+Allowed to Assign Rep % > 100% Y/N,250,,Ad Security,GEN Security File<250>,AD Exceed 100 Pct,47
+Warn if Duplicate Issues are selected on line Y/N,455,,Ad Security,GEN Security File<455>,IN Duplicate Warning,60
+Campaign Description Required Y/N,456,,Ad Security,GEN Security File<456>,IN Campaign Desc Reqd,48
+"Default Credit Card ""Pay Later"" option to False on Campaign Entry Y/N",461,,Ad Security,GEN Security File<461>,IN Dflt CC Pay Later,45
+Default View on Rep Delivery Report,462,,Ad Security,GEN Security File<462>,IN Rep Delivery Dflt View,
+Only allow Campaign Entry thru Salesforce.com Canvas integration Y/N,463,,Ad Security,GEN Security File<463>,IN SF Canvas Ind,77
+Order Entry - allowed Payment Types,464,,Ad Security,GEN Security File<464>,IN Allowed Pay Types,
+Order Entry - allow removal of Auto Adjustments Y/N,465,,Ad Security,GEN Security File<465>,IN Allow Auto Adj Override,61
+Order Entry - allow pre-payment overpayment if payment is by a cheque Y/N,466,,Ad Security,GEN Security File<466>,IN Allow PP Overpayment,
+List of all available CRM Reports - Unique Id,,,Ad Security,DO WE NEED THIS?,?,
+List of all available CRM Reports - Desc.,,,Ad Security,DO WE NEED THIS?,?,
+List of selected CRM Reports - Unique Id,,,Ad Security,DO WE NEED THIS?,?,
+List of selected CRM Reports - Desc.,,,Ad Security,DO WE NEED THIS?,?,
+Disable Discount % on Quick Line Entry Y/N,467,,Ad Security,GEN Security File<467>,IN Disable Disc Pct,62
+Lock Pricing on Quick Line Entry Y/N,468,,Ad Security,GEN Security File<468>,IN Lock Pricing Ind,63
+Bulk Change Campaign Status - Auto apply COA when Confirming Y/N,469,,Ad Security,GEN Security File<469>,IN Auto Apply COA,
+"Prevent removal of prior, unbilled dates on a Campaign Line",470,,Ad Security,GEN Security File<470>,IN Prevent Date Change,64
+Prevent adding / editing Material in Campaign Line Entry Y/N,472,,Ad Security,GEN Security File<472>,IN Prevent Material Changes,65
+Advertisers - Client Type is Reqd Y/N,474,,Ad Security,GEN Security File<474>,AD Client Type Reqd Ind,78
+Incentives - auto adjust over-applied Incentives Y/N,475,,Ad Security,GEN Security File<475>,IN Incentive Auto Adjust,15
+Incentives - auto adjust over-applied Incentives - Status Codes,476,,Ad Security,GEN Security File<476>,Incentive Auto Adjust Codes,16
+Run GAM inventory check on line update Y/N,477,,Ad Security,GEN Security File<477>,Run GAM Inv Ck Line Upd,75
+Disable Amount changes when doing Custom Allocations on Digital Lines (not Flat Fee),478,,Ad Security,GEN Security File<478>,Disable Amount Changes Ind,56
+"Default Stats Code if Client is set to ""PrePayment Reqd.""",480,,Ad Security,GEN Security File<480>,IN Dflt PP Status,
+Allowed to override Customer's Pre-Payment required Y/N,482,,Ad Security,GEN Security File<482>,IN Allow PP Override,49
+Allow use of ALL when posting Batches,43,,AP Security,GEN Security File<43>,All Ap Batches To Post,0
+Allowed to change Vendor Auto Clearing Info,52,,AP Security,GEN Security File<52>,Allow Vend Acct,6
+Prevent override of Check Number,82,,AP Security,GEN Security File<82>,Chk Mod,1
+Prevent changing status from to STOP to PAY or HOLD,100,,AP Security,GEN Security File<100>,Chk Stop,7
+Prevent Changes to 1099 Amount in Invoice Inquiry,104,,AP Security,GEN Security File<104>,Disallow Chg 1099 Amt,2
+Allowed to Approve Purchase Orders,295,,AP Security,GEN Security File<295>,PO Allowed,11
+Prevent Invoice Amount to exceed P.O. Line Amounts,327,,AP Security,GEN Security File<327>,Inv Amt wont exceed PO Line Amt,3
+Vendor Maintenance - Allowed to Change Tax Id,355,,AP Security,GEN Security File<355>,Allowed To Change Ven Tax ID,5
+Bank Reconcilaition - Allowed to Re-Open a Closed Statement,356,,AP Security,GEN Security File<356>,AP Reopen Bank Rec,8
+Require Balancing Invoice Batches before Posting,364,,AP Security,GEN Security File<364>,AP Batch Balance Ind,4
+Allowed to enter Quote / Requisitions Y/N,369,,AP Security,GEN Security File<369>,AP Enter Quotes,9
+Allowed to enter P.O.s Y/N,370,,AP Security,GEN Security File<370>,AP Enter Pos,10
+Allowed to Enter P.O. Receipts Y/N,372,,AP Security,GEN Security File<372>,AP Enter PO Receipts,12
+Allowed to Re-open a Closed P.O. Y/N,373,,AP Security,GEN Security File<373>,AP Reopen Pos,13
+"Invoice Entry - Suppress ""Import all P.O. Lines"" prompt Y/N",408,,AP Security,GEN Security File<408>,AP Suppress Import PO Prompt,14
+Allowed to Enter a new Check Y/N,260,,AR Group Security,GEN Security File<260>,AR Check Entry,9
+Allowed to Enter Credit Card Payments Y/N,261,,AR Group Security,GEN Security File<261>,AR CC Entry,8
+Allowed to Enter G/L Cash Y/N,262,,AR Group Security,GEN Security File<262>,AR GL Cash Entry,10
+Prompt for Receipt in non Batch Entry Cash Receipts,385,,AR Group Security,GEN Security File<385>,AR.RECEIPT.PROMPT,11
+Allowed to Apply Cash on Account that is flagged as a Pre-Payment Y/N,263,,AR Group Security,GEN Security File<263>,AR Cash Allow Realloc PP,13
+Cash on Account - Default Type,264,,AR Group Security,GEN Security File<264>,AR Cash COA Module,14
+Cash on Account - Mandatory entry of a Product Y/N,265,,AR Group Security,GEN Security File<265>,AR Cash Mandatory,15
+Allowed to apply Terms Discount after grace days Y/N,266,,AR Group Security,GEN Security File<266>,AR Cash Disc After Grace,16
+Allowed to apply Terms Discount - grace days after allowed date,267,,AR Group Security,GEN Security File<267>,AR Cash Disc Grace Days,17
+Operator Discounts - Allowed to Manually enter Discounts Y/N,268,,AR Group Security,GEN Security File<268>,AR Cash Allow Manual Disc,18
+Operator Discounts - Maximum Discount as a % of Invoice Balance,269,,AR Group Security,GEN Security File<269>,AR Cash Manual Disc Max Pct,19
+Write-Offs - Allowed to Write off Entire invoices Y/N,270,,AR Group Security,GEN Security File<270>,AR Cash WO Invoice,20
+"Write-Offs - Allowed to Write off invoices is balance is less than ""x""",271,,AR Group Security,GEN Security File<271>,AR Cash WO Max Pct,21
+"Allowed to use ""Also Pays for"" Y/N",272,,AR Group Security,GEN Security File<272>,AR Cash Allow Also Pays For,23
+Allowed to pay Invoices for other Customers Y/N,272,,AR Group Security,GEN Security File<272>,AR Cash Allow Also Pays for,24
+Prompt to Change Status of CH Orders Y/N,277,,AR Group Security,GEN Security File<277>,AR Cash Prompt CH Orders,
+Allowed to unallocate previously paid Invoices Y/N,274,,AR Group Security,GEN Security File<274>,AR Cash Allow Unallocate,31
+Allowed to create DB/CR notes Y/N,275,,AR Group Security,GEN Security File<275>,AR Cash Allow Create DB CR,32
+Allowed to over Pay Invoices Y/N,108,,AR Group Security,GEN Security File<108>,AR Cash Allow Overpay,34
+Batches - Batch number required on New Checks Y/N,276,,AR Group Security,GEN Security File<276>,AR Cash Batch Reqd,25
+Batches - Allowed to Create Batches Y/N,290,,AR Group Security,GEN Security File<290>,AR Cash Create Batch,26
+Batches - Allowed to Delete Batches Y/N,291,,AR Group Security,GEN Security File<291>,AR CAsh Delete Batch,27
+Batches - Allowed to close a Batch if it doesn't tally Y/N,292,,AR Group Security,GEN Security File<292>,AR Cash Close Batch,28
+Batches - Allowed to Override Bank Code Y/N,293,,AR Group Security,GEN Security File<293>,AR Cash Override Bank,29
+Batches - Allowed to Override Period Y/N,294,,AR Group Security,GEN Security File<294>,AR Cash Override Period,30
+Allowed to apply check to Orders (for Pre-Payment),280,,AR Group Security,GEN Security File<280>,AR Allow Cash PP,35
+Allowed to Return Checks Y/N,281,,AR Group Security,GEN Security File<281>,AR Allow Return Checks,36
+Allowed to Delete (Unposted) Checks Y/N,282,,AR Group Security,GEN Security File<282>,AR Cash Allow Delete Checks,37
+Allowed to Transfer Checks Y/N,283,,AR Group Security,GEN Security File<283>,AR Cash Allow Check Transfer,38
+Allowed to Change a Payment's Cash on Account Reason Y/N,215,,AR Group Security,GEN Security File<215>,Allow Update COA Reason,41
+Account Summary Screen - sort oldest Invoices first,375,,AR Group Security,GEN Security File<375>,AR Dflt Invoice Sort,6
+Allowed to apply Credit Notes Y/N,287,,AR Group Security,GEN Security File<287>,AR Allow Apply Credits,39
+Allowed to Reverse an Applied Credit Note Y/N,288,,AR Group Security,GEN Security File<288>,AR Allow Credit Reversals,40
+Add a Contacted Note Y/N,320,,AR Group Security,GEN Security File<320>,AR CC Contacted Note,1
+Add an Internal Note,321,,AR Group Security,GEN Security File<321>,AR CC Internal Note,2
+Send Emails Y/N,322,,AR Group Security,GEN Security File<322>,AR CC Emails,5
+Add New Contacts Y/N,323,,AR Group Security,GEN Security File<323>,AR CC New Contacts,3
+Edit Contacts Y/N,324,,AR Group Security,GEN Security File<324>,AR CC Edit Contacts,4
+Customer Maint - allowed to set Credit Stop Flag Y/N,29,,AR Group Security,GEN Security File<29>,Allow Modify Credit Stop Flag,45
+Write Offs - Maximum Amount,99,,AR Group Security,GEN Security File<99>,AR WO Max Amt,42
+Allowed to issue Refund thru A/P Y/N,359,,AR Group Security,GEN Security File<359>,AR Allow AP Refund,44
+Allowed to issue Refund to Credit Cards Y/N,360,,AR Group Security,GEN Security File<360>,AR Allow CC Refund,43
+Allowed to Transfer Invoices to another Client Y/N,362,,AR Group Security,GEN Security File<362>,AR Transfer to Client Ind,46
+Allowed to Transfer Invoices to a Collection Agency Y/N,363,,AR Group Security,GEN Security File<363>,AR Transfer to Coll Ind,47
+Account Summary Screen - Age by Due Date or Invoice Date D/I,384,,AR Group Security,GEN Security File<384>,AR Age By,
+Display Cash Summary on Home Page Y/N,388,,AR Group Security,GEN Security File<388>,AR Summary Ind,48
+Cash Entry - Default Reversing Debits Question to YES,396,,AR Group Security,GEN Security File<396>,AR Cash Dlft Debits Ind,33
+Cash Entry - Maximum Cash on Account Write-Off Amount,397,,AR Group Security,GEN Security File<397>,AR Cash Max COA Amt,22
+Allowed to changeMisc. Invoice Descriptions after Posted to A/R Y/N,398,,AR Group Security,GEN Security File<398>,AR Change Misc Invoices Ind,49
+Cash Entry - sort Open Invoices by oldest first,405,,AR Group Security,GEN Security File<405>,AR Cash Inv Sort Ind,12
+A/R Invoice Inquiry screen - allowed to update Rep Commissions Y/N,412,,AR Group Security,GEN Security File<412>,AR Update Rep Comm Ind,50
+Only allow selection of Banks if they match user's Company Security,450,,AR Group Security,GEN Security File<450>,AR Bank Security,51
+Companies that can be accessed - Id,40,,Company Security,SEC.REC<40>,Companies,
+Companies that can be accessed - Name,,,Company Security,NEW MAPPING,Company Desc,
+Disable Excel / PDF export Options Y/N,428,,Company Security,SEC.REC<428>,GEN Disable Export,
+Allowed to Add a New Company Ind.,133,,CRM Security,GEN Security File<133>,CRM Add Company,
+Allowed to Change a Company Address Ind.,128,,CRM Security,GEN Security File<128>,CRM Change Customer Address,
+Allowed to Add a Company Address Ind.,129,,CRM Security,GEN Security File<129>,CRM Add Customer Address,
+Allowed to Change a Company Name Ind.,130,,CRM Security,GEN Security File<130>,CRM Change Customer Name,
+Allowed to Change a Company's Parent Ind.,131,,CRM Security,GEN Security File<131>,CRM Change Parent,
+Allowed to Change a Company's Web Site Ind.,132,,CRM Security,GEN Security File<132>,CRM Change Customer Web Site,
+Default Name Class,380,,CRM Security,GEN Security File<380>,CRM Dflt Name Class,
+"Call List - Tab Prompt (Blank=Always Prompt, N=Always open in new tab,S=Always open in same tab)",425,,CRM Security,GEN Security File<425>,CRM Call List Prompt,
+Allowed to Add a Contact Ind.,134,,CRM Security,GEN Security File<134>,CRM Add Contact,
+Allowed to Change a Contact's Address,135,,CRM Security,GEN Security File<135>,CRM Change Contact Address,
+Allowed to Add a Contact Address,136,,CRM Security,GEN Security File<136>,CRM Add Prospect Address,
+Allowed to Change a Contact's Name Ind.,137,,CRM Security,GEN Security File<137>,CRM Change Contact Name,
+Allowed to Change a Contact's Employer Ind.,138,,CRM Security,GEN Security File<138>,CRM Change Contact Employer,
+Allowed to Change a Contact's Phone no. Ind.,139,,CRM Security,GEN Security File<139>,CRM Change Contact Phone,
+Allowed to Change a Contact's Email Address Ind.,140,,CRM Security,GEN Security File<140>,CRM Change Contact Email,
+Allowed to Change a Contact's Job Title Ind.,141,,CRM Security,GEN Security File<141>,CRM Change Contact Job Title,
+Allowed to Change a Contact's Social Media Links Ind.,142,,CRM Security,GEN Security File<142>,CRM Change Contact Social Media,
+Allowed to Change a Contact's Type Ind.,143,,CRM Security,GEN Security File<143>,CRM Change Contact Type,
+Allowed to Change a Contact's Privacy Prefernces Ind.,144,,CRM Security,GEN Security File<144>,CRM Change Contact Privacy,
+Allowed access to Full Name Maintenance Screen Ind.,330,,CRM Security,GEN Security File<330>,CRM Full Name Maint,
+Allowed Access to Set Up Screens Ind.,216,,CRM Security,GEN Security File<216>,CRM Allow Setup,
+Allowed to Enter Credit Control Notes Ind.,210,,CRM Security,GEN Security File<210>,CRM Enter CC Notes,
+Only allow Print / Digital Orders via Proposals Y/N,254,,CRM Security,GEN Security File<254>,CRM Orders Via Proposals,
+List of User Defined Fields - Field Ids,127,,CRM Security,GEN Security File<127>,CRM UDF Key,
+List of Name Removal Reason Codes - Code Ids,146,,CRM Security,GEN Security File<146>,CRM Reason Codes,
+List of Comp. Type Codes - Code Ids,147,,CRM Security,GEN Security File<147>,CRM Comp Type Codes,
+List of Category Group Codes - Code Ids,211,,CRM Security,GEN Security File<211>,CRM Category Groups,
+Opportunities - Pevent Change of Opportunity Pct%,310,,CRM Security,GEN Security File<310>,CRM No Change Opp Pct,
+Opportunities - Warn user on Save if stage didn't change,243,,CRM Security,GEN Security File<243>,CRM Opportunity Check,
+Opportunities - Make the expected Close Date Mandatory,399,,CRM Security,GEN Security File<399>,CRM Opp Close Date Ind,
+Allowed to change notes on Closed Actions,402,,CRM Security,GEN Security File<402>,CRM Change Notes Ind,
+"Option to show ""Add New Contact"" on CRM Menu Y/N",389,,CRM Security,GEN Security File<389>,CRM New Contact Prompt,
+CRM prospect Screen - only show Pipeline Opportunites Y/N,426,,CRM Security,GEN Security File<426>,CRM Opp Display,
+List of selected Ad CRM Reports - Unique Id,386,,CRM Security,GEN Security File<386>,CRM Ad Rep Screens,
+List of selected Ad CRM Reports - Desc.,,,CRM Security,iDescriptor,CRM Ad Rep Screen Desc,
+List of selected Exhib CRM Reports - Unique Id,387,,CRM Security,GEN Security File<387>,CRM EX Rep Screens,
+List of selected Exhib CRM Reports - Desc.,,,CRM Security,iDescriptor,CRM EX Rep Screen Desc,
+Client Inquiry screen - only show Confirmed Future orders in Order Summary Y/N,484,,CRM Security,GEN Security File<484>,CRM Confirmed Orders Ind,
+List of Exhibition Groups for this record - Group Id,47,,EX Security,SEC.REC<47>,EX Group,
+List of Exhibition Groups for this record - Group Name,,,EX Security,SEC.REC<0.M>,EX Group Desc,
+List of Status Codes for this record - Code id,180,,EX Security,SEC.REC<180>,EX Allowed Status Codes,
+List of Status Codes for this record - Code Desc.,,,EX Security,SEC.REC<0.M>,EX Allowed Status Desc,
+Exhibition Analysis - hide budgets and Targets Y/N,473,,EX Security,SEC.REC<473>,EX Hide Budgets Ind,
+Floorplan - View Only Ind.,183,,EX Security,SEC.REC<183>,EX Fp View Only,
+Floorplan - Is User allowed to Split Booths Ind.,184,,EX Security,SEC.REC<184>,EX Fp Split Ind,
+Floorplan - Is User allowed to Merge Booths Ind.,185,,EX Security,SEC.REC<185>,EX Fp Merge Ind,
+Floorplan - Is User allowed to Renumber Booths Ind.,186,,EX Security,SEC.REC<186>,EX Fp Renumber Ind,
+Floorplan - Is User allowed to Transfer Booths Ind.,187,,EX Security,SEC.REC<187>,EX Fp Transfer Ind,
+Floorplan - Is User allowed to Link Booths Ind.,188,,EX Security,SEC.REC<188>,EX FP Link Ind,
+Floorplan - Is User allowed to Delete Booths Ind.,189,,EX Security,SEC.REC<189>,EX Fp ,
+Floorplan - Is User allowed to Move Booths Ind.,190,,EX Security,SEC.REC<190>,EX Fl Move Ind,
+Floorplan - Is User allowed to Copy Booths Ind.,201,,EX Security,SEC.REC<201>,EX Fp Copy Ind,
+Floorplan - Is User allowed to Redraw Booths Ind.,202,,EX Security,SEC.REC<202>,EX Fp Redraw Ind,
+Floorplan - Is User allowed to Resize Booths Ind.,203,,EX Security,SEC.REC<203>,EX Fp Resize Ind,
+Bill-To on Orders must match Campaign's Bill-To Y/N (if linked to a Campaign),238,,EX Security,SEC.REC<238>,Mmd Billto Ind,
+Change an Order - Allowed to Change Confirmed Orders Y/N,391,,EX Security,SEC.REC<391>,EX Change CO Orders Ind,
+Change an Order - Allowed to Change Billed Orders Y/N,392,,EX Security,SEC.REC<392>,EX Change Billed Orders Ind,
+Change an Order - Allowed to Change Orders in a closed show Y/N,393,,EX Security,SEC.REC<393>,EX Change Closed Orders Ind,
+Change an Order - Allowed to Swap Booth on Confirmed Orders Y/N,429,,EX Security,SEC.REC<429>,EX Swap CO Orders,
+Change an Order - Allowed to Swap Booth on Billed Orders Y/N,430,,EX Security,SEC.REC<430>,EX Swap Billed Orders,
+Change an Order - Do not allow billing schedule if there's a Default Schedule Y/N,479,,EX Security,SEC.REC<479>,EX Change Sched Billed Ind,
+Order Entry - Allowed to create Divisions Ind.,212,,EX Security,SEC.REC<212>,EX OE Create Divisions,
+Order Entry - Allowed to change Reps on an Order Ind.,213,,EX Security,SEC.REC<213>,EX OE Override Reps,
+Order Entry - Allowed to assign changed Reps to the Division Ind.,214,,EX Security,SEC.REC<214>,EX OE Rep Divisions,
+Order Entry - Allowed to enter Pre-Payments Ind.,223,,EX Security,SEC.REC<223>,EX Enter PP,
+Order Entry - Allow space overbooking on Quotes Y/N,390,,EX Security,SEC.REC<390>,EX Oversell Booths,
+Order Entry - Disable Forms Tracking in Order Entry Y/N,407,,EX Security,SEC.REC<407>,EX OE Disable Forms,
+List of Exhibitor Types for this Group - Type Id,200,,EX Security,SEC.REC<200>,EX Exhibitor Typesk,
+Allowed to use Approved Status on Journal Entries,361,,GL Group Security,GEN Security File<361>,GL JE Approved Status,
+Display Cash Summary on G/L Home Page,366,,GL Group Security,GEN Security File<366>,GL Show Cash Summary,
+Restrict Trial Balance / Budget List to Allowed G/L Groups Y/N,371,,GL Group Security,GEN Security File<371>,GL Trial Balance Ind,
+"Default Journal Entrry Status (P=Pending,A=Approved)",374,,GL Group Security,GEN Security File<374>,GL Dflt Journal Status,
+"Journal Entry Import - Default Auto Assign to ""Y""",395,,GL Group Security,GEN Security File<395>,GL JE Dflt Ind,
+Can User Access Customer Maintenance Y/N,296,,Name Security,GEN Security File<296>,Allow Customer Maint,
+Can User Add New Names Y/N,297,,Name Security,GEN Security File<297>,Allow Add Names,
+Ad - View only / Editing allowed / No Access (V/E/N),300,,Name Security,GEN Security File<300>,AD Cust Option,
+Exhib - View only / Editing allowed / No Access (V/E/N),301,,Name Security,GEN Security File<301>,EX Cust Option,
+Circ  - View only / Editing allowed / No Access (V/E/N),302,,Name Security,GEN Security File<302>,CW Cust Option,
+Book  - View only / Editing allowed / No Access (V/E/N),303,,Name Security,GEN Security File<303>,BW Cust Option,
+Conf  - View only / Editing allowed / No Access (V/E/N),304,,Name Security,GEN Security File<304>,CF Cust Option,
+A/R   - View only / Editing allowed / No Access (V/E/N),305,,Name Security,GEN Security File<305>,AR Cist Option,
+Memb  - View only / Editing allowed / No Access (V/E/N),306,,Name Security,GEN Security File<306>,Mm Cust Option,
+Single Copy Sales/Newsstand - View only / Editing allowed / No Access (V/E/N),307,,Name Security,GEN Security File<307>,SC Cust Option,
+Alerts - View only/ Editing allowed / No Access V/E/N,308,,Name Security,GEN Security File<308>,Alert Cust Option,
+General - View only/ Editing allowed / No Access V/E/N,309,,Name Security,GEN Security File<309>,GEN Cust Option,
+"Name Changes - Allowed to Change ""Do Not Use Flag"" Y/N",90,,Name Security,GEN Security File<90>,Allow Change DNU Flag,
+"Name Changes - Allowed to Change ""Employer"" Y/N",91,,Name Security,GEN Security File<91>,Allow Change Employer,
+"Name Changes - Allowed to Change ""Legacy Id"" Y/N",357,,Name Security,GEN Security File<357>,Allow Change Legacy ID,
+Allow selection of Do Not use Names in Book/Circ Order Entry Y/N,88,,Name Security,GEN Security File<88>,Allow Sel DNU Names BW OE,
+Include Do Not use Names Book/Circ Select Lists Y/N,89,,Name Security,GEN Security File<89>,Include DNU BK CI Sel Lists,
+Allowed Client Access Codes,483,,Name Security,GEN Security File<483>,IN Client Access Codes,
+Product Groups user has access to,103,,Product Group Security,GEN Security File<103>,Web Group ID,
+Apply Product Group Security in Client Inquiry screen Y/N,471,,Product Group Security,GEN Security File<471>,IN Client Inquiry Groups,
+Exhibition Groups user has access to,47,,Product Group Security,GEN Security File<47>,EX Group,
+Changing Materials - Suppress prompt to create New Materials,432,,PW Security,GEN Security File<432>,Pw Suppress Material Prompt,
+Disallowed Preflight status Codes for Material Trafficking Dashboard,416,,PW Security,GEN Security File<416>,AD Disallow Prefight Codes,
+Materials - Require Material Desc. Y/N,457,,PW Security,GEN Security File<457>,IN Material Desc Reqd,
+Materials - Require Creative Type on Digital material Y/N,458,,PW Security,GEN Security File<458>,IN Mat Creative Type Reqd,
+Materials - Require Click Url on Digital material Y/N,459,,PW Security,GEN Security File<459>,IN Mate click URL Reqd,
+Materials - Require Ad Headline on Print material Y/N,460,,PW Security,GEN Security File<460>,Mat Ad Headline Reqd,
