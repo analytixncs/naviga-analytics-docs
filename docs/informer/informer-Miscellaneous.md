@@ -353,40 +353,5 @@ It looks like we are missing some links to do this but that’s an easy fix.  I 
 
 ![image-20221121200931932](images/informer-misc-001.png)
 
-## Trade Contract Pre Payments
 
-Trade Contracts as a Prepayment will produce a Credit Memo, not a Cash Receipt. Credit CM1.265 is listed as the Payment for all 5 Invoices on Campaign 53833
 
-![img](file:///C:/Users/Markm.000/AppData/Local/Temp/msohtmlclip1/01/clip_image002.gif)
-
-The Credit Memo itself does not record that it is related to Campaign 53833 in the Order Details reference because it is filling a Payment role and not an Invoice role.
-
-![img](file:///C:/Users/Markm.000/AppData/Local/Temp/msohtmlclip1/01/clip_image004.gif)
-
-The naming convention is “CM” followed by the Contract ID, then “.” and the sequential Credit counter. The only Trade Contract for Customer 110359 is #1.
-
-https://swn.navigahub.com/ew/swn/general/setup/trade_contract
-
-![img](file:///C:/Users/Markm.000/AppData/Local/Temp/msohtmlclip1/01/clip_image006.gif)
-
-As long as Client does not manually create Credit Memos starting with “CM” (not a reserved name, I think) then that should be unique enough ID, but “how to identify” needs more explanation/context to fully answer.
-
-## Customer Portal Payment
-
-Customers are activated for the Portal with a flag on the Brand.
-
-![img](file:///C:/Users/Markm.000/AppData/Local/Temp/msohtmlclip1/01/clip_image002.gif)
-
-Individual Users are not referenced except by Count (Active Users column) on the < Clients with Portal Access> report. 
-
-![img](file:///C:/Users/Markm.000/AppData/Local/Temp/msohtmlclip1/01/clip_image004.gif)
-
-If they are looking for the detail of that column, then that is set up in <Client Access Setup> by the email address. I don’t know which UD file this is stored in. I do see the First Name/Last Name (I think) in CLIENTS<385>/<386>
-
-https://dev.navigahub.com/ew/devdigital/general/setup/client_access
-
-![img](file:///C:/Users/Markm.000/AppData/Local/Temp/msohtmlclip1/01/clip_image006.gif)  
-
-![img](file:///C:/Users/Markm.000/AppData/Local/Temp/msohtmlclip1/01/clip_image008.gif)
-
-Note that it is possible to have Employee Access set up yet NOT have the Brand set up, in which case the employee would not be able to log in.
