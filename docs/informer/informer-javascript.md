@@ -1431,6 +1431,45 @@ $record.sampleMonthsBetween = endDate.diff(startDate, "years", true);
 $record.sampleMonthsBetween = endDate.diff(startDate, "days");
 ```
 
+## Other Date Stuff
+
+### Sort Date MV Field
+
+To sort a date field that is stored in an Array (MV Field), you can simply use the `lodash` [`_.sortBy` function](https://lodash.com/docs/3.10.1#sortBy).
+
+```javascript
+sortedDates = _.sortBy($record.dateValues)
+```
+
+
+
+However, if you multiple MV fields that are associated and you want to pluck the earliest date along with another field in the association, you will need to do a little more work.
+
+**Scenario**: In the **AD Internet Campaigns**, there is an **Attachment Date** and **Attachment Desc** field.  Let's say you want to only use the most recent Attachment Date and Desc.  We will need to sort by the Attachment date, while also making sure to return the proper description.
+
+We will do this by creating an object to store both the Attachment date and desc, then sort that object by date.
+
+> NOTE: Informer, as of version 5.6, uses lodash version 3.10.1 (not the latest version of lodash).  If the version ever changes, then we may need to approach this differently.
+
+```javascript
+// Convert dates to a format to sort by
+myDates = $record['a_d_internet_campaigns_assoc_attachmentsDate'].map(el => moment(el).format("YYYYMMDD"))
+myDesc = $record['a_d_internet_campaigns_assoc_attachmentsDesc']
+
+// create an array of object [{date, desc}, ... ]
+dynArray = myDates.reduce((final, el, index) => {
+  final = [...final, { date: el, desc: myDesc[index]}]
+  return final
+}, [])
+
+attachedObj = _.sortByOrder(dynArray, ["date"], ["asc"])
+
+$record['a_d_internet_campaigns_assoc_attachmentsDate'] = attachedObj[0].date
+$record['a_d_internet_campaigns_assoc_attachmentsDesc'] = attachedObj[0].desc
+```
+
+
+
 ## Miscellaneous
 
 ### Base 64 Decode.

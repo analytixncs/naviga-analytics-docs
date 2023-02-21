@@ -545,7 +545,7 @@ ACTIVE_STATUS_TEXT = 'Active'
 
 ### Visual Overview of a Couple of Scenarios
 
-![image-20221012112121128](C:/Users/Markm.000/Documents/GitHub/naviga-analytics-docs/docs/informer/images/informer_javascript-newbusinessflag-overview.png)
+![image-20221012112121128](images/informer_javascript-newbusinessflag-overview.png)
 
 :::tip
 
