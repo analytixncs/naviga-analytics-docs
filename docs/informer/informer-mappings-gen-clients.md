@@ -52,7 +52,7 @@ Many of the Indicator fields can not only be Y or N, but sometimes they are empt
 
 https://xxx.navigahub.com/EW/XXX/general/setup/name_maint_ar
 
-![img](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_basics_gen_clients_indicators-001-5.png)
+![img1](images/informer_basics_gen_clients_indicators-001-5.png)
 
 
 
@@ -61,7 +61,7 @@ https://xxx.navigahub.com/EW/XXX/general/setup/name_maint_ar
 
 https://xxx.navigahub.com/EW/XXX/general/setup/name_maint_ad
 
-![image-20220812085829314](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_basics_gen_clients_indicators-002.png)
+![image-20220812085829314](images/informer_basics_gen_clients_indicators-002.png)
 
 
 
