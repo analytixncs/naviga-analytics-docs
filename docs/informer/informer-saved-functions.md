@@ -1140,5 +1140,164 @@ The function assumes that the data has been normalized and the the Amount fields
 
 It is based on the information in the [Informer AD Internet Orders Mapping Docs](informer-mappings#month-actual--est-amt)
 
+:::tip
 
+If you need foreign amounts and amounts net of agency commission, see the **calculateLinkAmounts** saved function.
+
+:::
+
+## calculateLineAmounts- Create Function
+
+- **Function name:** calculateLineAmounts
+
+- **Namespace:** naviga
+
+- **Description:** Return an object of amounts - Local, Foreign, Gross and Net.
+
+- **Parameters:**
+
+  | Data Type | Variable name | Label    | Sample      |
+  | --------- | ------------- | -------- | ----------- |
+  | Object    | inputObj      | inputObj | // See docs |
+
+**Function Body**
+
+```javascript
+ const { actAmount, estAmount, campaignType, 
+         exchangeRate = 1, actCommAmount = 0, estCommAmount = 0 } = inputObj;
+  // validate and default inputs
+  const actAmountNum = returnANumber(actAmount)
+  const estAmountNum = returnANumber(estAmount)
+  // 
+  const actLineLocal = actAmountNum / exchangeRate
+  const estLineLocal = estAmountNum / exchangeRate
+  const grossLocal = calculateNetAmount(campaignType, actLineLocal, estLineLocal)
+  const grossForeign = calculateNetAmount(campaignType, actAmountNum, estAmount)
+  return {
+    actualLocal: actLineLocal,
+    estLocal: estLineLocal,
+    grossLocal,
+    netLocal: grossLocal - calculateNetAmount(campaignType, actCommAmount, estCommAmount),
+    actForeign: actAmountNum,
+    estForeign: estAmountNum,
+    grossForeign,
+    netForeign: grossForeign - calculateNetAmount(campaignType, actCommAmount, estCommAmount),
+  }
+
+function returnANumber(numberIn) {
+  // If a date is passed return 0 otherwise dates get converted to unix time value
+  numberIn = Object.prototype.toString.call(numberIn) === "[object Date]" ? 0 : numberIn;
+  const parsedNumber = Number(numberIn);
+  if (isNaN(parsedNumber)) {
+    return 0;
+  }
+  return parsedNumber;  
+}
+
+function calculateNetAmount(campaignType, monthActualAmt, monthEstAmt) {
+  // Make sure both passed in values are a number
+  monthEstAmt = returnANumber(monthEstAmt)
+  monthActualAmt = returnANumber(monthActualAmt)
+
+  if (campaignType === "F") {
+      return monthEstAmt;
+  } else {
+      return monthActualAmt === 0 || !monthActualAmt
+          ? monthEstAmt
+          : monthActualAmt;
+  }
+}
+```
+
+## calculateLineAmounts - Usage
+
+This saved function will accept a JavaScript object as input and will use those inputs to calculate the Gross and Net amounts [See AD Internet Orders Documentation](informer-mappings-ad-internet-orders#month-actual--est-amt).  It will also return Foreign and Local amounts if the campaign is in a different currency.  If the campaign is not, then Foreign and Local will be the same amounts.
+
+### Input Object
+
+You will need to call the function and send it an object with, at the very least, the three required fields below.
+
+- **actAmount** - (Required) - This will be the AD Internet Orders MONTH.ACTUAL.AMT <76> field.
+- **estAmount** - (Required) - This will be the AD Internet Orders MONTH.EST.AMT <73> field.
+- **campaignType** - (Required) - This will be the  AD Internet Campaigns CAMPAIGN.TYPE<8> field.
+- *exchangeRate* - (Optional, default=1)  - This will be the AD Internet Campaigns CURR.RATE <226> field.
+- *actCommAmount* - (Optional, default=0)  - This will be the AD Internet Orders MONTH.ACTUAL.COMM.AMT <202> field.
+- *estCommAmount* - (Optional, default=0)  - This will be the AD Internet Orders MONTH.ACTUAL.EST.AMT <201> field.
+
+Here is an example call of the function:
+
+```javascript
+campaignType = $record['a_d_internet_campaigns_assoc_campaignType']
+
+// Create the input object to pass to the naviga.calculateLineAmounts function
+ lineAmtInputs = {
+   actAmount: naviga.returnANumber($record['monthActualAmt']), 
+   estAmount: naviga.returnANumber($record['monthEstAmt']), 
+   actCommAmount: $record['monthActualCommAmt'], 
+   estCommAmount: $record['monthEstCommAmt'],
+   exchangeRate: $record['a_d_internet_campaigns_assoc_currRate'],
+   campaignType
+ }
+
+// Call the function
+localAmounts = naviga.calculateLineAmounts(lineAmtInputs)
+```
+
+### Output Object
+
+The `naviga.calculateLineAmounts` function will return an object of data to you.  You must take this object and assign each key to a new column in your report or dataset.
+
+:::tip **Foreign Currency**
+
+If a Campaign is stored in a currency other than the 'home' currency, it will be a foreign currency. 
+
+They way Naviga stores that data in AD Internet Orders, is to store the foreign amount in the Month Act Amt and Month Est Amt fields.  You will see in the return object below, that there is an actualLocal and foreignLocal.  If a campaign was placed with a foreign currency, the foreignLocal amount will be the same as the monthActualAmt value passed in, but the actualLocal field in the output will be the foreign currency converted back to the 'home' currency.
+
+This is the same for the estLocal and estForeign keys.
+
+:::
+
+The return object contains the following keys
+
+- **actualLocal** - Actual amount in "Home" currency.
+- **estLocal** - Estimated amount in "Home" currency.
+- **grossLocal** - Based on the CampaignType passed in, this will be either the Actual or Estimated Local amount.  [See AD Internet Orders Documentation](informer-mappings-ad-internet-orders#month-actual--est-amt).
+- **netLocal** - If Agency commission amounts were passed in, this value will be the grossLocal amount NET of any Agency commissions.
+- **actForeign** - Actual amount in foreign currency.
+- **estForeign** - Estimated amount in foreign currency.
+- **grossForeign** - Based on the CampaignType passed in, this will be either the Actual or Estimated Foreign amount.
+- **netForeign** -If Agency commission amounts were passed in, this value will be the grossForeign amount NET of any Agency commissions.
+
+**Full Powerscript Code**
+
+> The function expects all Month values to be normalized
+
+```javascript
+exchangeRate = $record['a_d_internet_campaigns_assoc_currRate']
+campaignType = $record['a_d_internet_campaigns_assoc_campaignType']
+
+// Setup the input object
+// NOTE: I did not include the 
+lineAmtInputs = {
+  actAmount: naviga.returnANumber($record['monthActualAmt']), 
+  estAmount: naviga.returnANumber($record['monthEstAmt']), 
+  actCommAmount: $record['monthActualCommAmt'], 
+  estCommAmount: $record['monthEstCommAmt'],
+  exchangeRate, 
+  campaignType
+}
+// Call the function and get our amount data back in an object
+finalLineAmounts = naviga.calculateLineAmounts(lineAmtInputs)
+
+// Create new fields for each needed value in our return object
+$record.actualLineLocalAmount = finalLineAmounts.actualLocal;
+$record.estLineLocalAmount = finalLineAmounts.estLocal;
+$record.grossLineLocalAmount = finalLineAmounts.grossLocal;
+$record.netLineLocalAmount = finalLineAmounts.netLocal;
+// pull foreign amounts from object
+$record.actualLineForeignAmount = finalLineAmounts.actForeign
+$record.estLineForeignAmount = finalLineAmounts.estForeign
+$record.grossLineForeignAmount = finalLineAmounts.grossForeign
+$record.netLineForeignAmount = finalLineAmounts.netForeign
+```
 
