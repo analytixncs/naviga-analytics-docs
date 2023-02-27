@@ -119,3 +119,7 @@ You can get details for Invoices and Credits from the associated mapping **Month
 Please note, that the Month Credit Id mapping will hold credit that only apply to Performance Campaigns and would be the full amount of the Order Line (at the time) of the Credit.  There are other types of Credits in the system, but they would not be found via this relationship.
 
 :::
+
+### Reversing Credits
+
+Reversing Credits are stored in **AD Internet Campaigns** for both Performance and Flexible Campaigns in attribute **UNBILLED.CREDIT.IDS <252>** with related information in F251 through F255.

@@ -113,11 +113,7 @@ Here are the rules:
 - **Flexible Campaigns** - If the line is part of a flexible campaign, then you will **only** use the **Month Est Amt**
 - **Other Types of Campaigns** - If the line is not part of a flexible campaign, then we need to determine whether to use the Actual or Estimated amount field. You will simply choose the Estimated amount if the Actual amount field is zero or empty.
 
-:::danger
 
-The **monthEstAmt** and **MonthActualAmt** fields are inclusive of Agency Commission.  If you want to remove agency commission, you will need to include the **monthActualCommAmt <202>** field from the **AD Internet Orders** mapping.
-
-:::
 
 Here is a Powerscript excerpt that embodies the above rules and creates a single revenue field called **NetAmount**:
 
@@ -133,6 +129,32 @@ if ($record.a_d_internet_campaigns_assoc_campaignType === "F") {
 }
 ```
 
+:::danger
+
+The **monthEstAmt** and **MonthActualAmt** fields are inclusive of Agency Commission.  If you want to remove **agency** commission, you will need to include the **monthActualCommAmt <202>** and the **monthEstCommAmt <201>** fields from the **AD Internet Orders** mapping.
+
+Here is Powerscript that will create a **GrossAmount** field (that **includes** Agency Commission) and **NetAmount** field (that **excludes** Agency Commission)
+
+```javascript
+// Calculated the Gross and Net Revenue Amount fields
+if ($record.a_d_internet_campaigns_assoc_campaignType === "F") {
+  $record.grossAmount = $record.monthEstAmt;
+  $record.netAmount = $record.monthEstAmt - naviga.returnANumber($record['monthEstCommAmt']);
+} else {
+  $record.grossAmount =
+    $record.monthActualAmt === 0 || !$record.monthActualAmt
+      ? $record.monthEstAmt
+      : $record.monthActualAmt;
+ // Calc net of Agency Commission
+    $record.netAmount =
+    $record.monthActualAmt === 0 || !$record.monthActualAmt 
+      ? $record.monthEstAmt - naviga.returnANumber($record['monthEstCommAmt'])
+      : $record.monthActualAmt - naviga.returnANumber($record['monthActualCommAmt']);
+}
+```
+
+:::
+
 > NOTE: The above code references the following fields:
 >
 > - **$record.a_d_internet_campaigns_assoc_campaignType** - This is the Campaign Type from the **AD Internet Campaign** mapping
@@ -140,6 +162,8 @@ if ($record.a_d_internet_campaigns_assoc_campaignType === "F") {
 > - **$record.monthActualAmt** - This is the Month Actual Amt from the **AD Internet Orders** mapping
 >
 > The above code assumes the base mapping is **AD Internet Orders**. If not, the field reference name may be different.
+
+
 
 ### Adding Reps into the Mix
 
