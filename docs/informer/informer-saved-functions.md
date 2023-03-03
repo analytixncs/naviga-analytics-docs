@@ -1249,11 +1249,11 @@ The `naviga.calculateLineAmounts` function will return an object of data to you.
 
 :::tip **Foreign Currency**
 
-If a Campaign is stored in a currency other than the 'home' currency, it will be a foreign currency. 
+If a Campaign is placed in a currency other than the 'home' currency, it is considered a **foreign currency** and will be stored as such. 
 
-They way Naviga stores that data in AD Internet Orders, is to store the foreign amount in the Month Act Amt and Month Est Amt fields.  You will see in the return object below, that there is an actualLocal and foreignLocal.  If a campaign was placed with a foreign currency, the foreignLocal amount will be the same as the monthActualAmt value passed in, but the actualLocal field in the output will be the foreign currency converted back to the 'home' currency.
+Orders placed in a foreign currency are stored in the AD Internet Orders mapping MONTH revenue fields in the foreign currency.  This means that the foreign amount will be stored in the Month Act Amt and Month Est Amt fields.  You will see in the return object below, that there are *actualLocal* and *foreignLocal* fields.  If a campaign was placed with a **foreign currency**, the *foreignLocal* amount will be **the same as** the monthActualAmt value passed in, but the *actualLocal* field in the output will be the **foreign currency converted back to the 'home' currency**.
 
-This is the same for the estLocal and estForeign keys.
+This is the same for the *estLocal* and *estForeign* keys.
 
 :::
 

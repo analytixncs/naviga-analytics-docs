@@ -127,6 +127,8 @@ $ctx.intlFormatNum = (num) => {
 
 The above will create a function on your Context object that you can access in your Nunjucks template.  Notice the `{{intlFormatNum(record.RepNetByDate_Total)}}`
 
+> NOTE: The below code is a snipper from within a Nunjucks for loop.
+
 ```html
 <div style="display: flex; justify-content: space-between">
     <div>{{ record.repName}}</div>
@@ -213,9 +215,23 @@ To access the records from the above Processor, you would use the following synt
 
 ### Looping and Totaling
 
-THis i
+You can loop through the records returned from you Dataset or Report using the nunjucks [`for` syntax](https://mozilla.github.io/nunjucks/templating.html#for).
 
+Most of the time your dataset will be at a detail level.  For example:
 
+| CampaignId | LineId | Period  | Rep   | Amount |
+| ---------- | ------ | ------- | ----- | ------ |
+| 1          | 100    | 06/2023 | Rep 1 | $100   |
+| 1          | 101    | 06/2023 | Rep 2 | $50    |
+| 2          | 200    | 07/2023 | Rep 2 | $10    |
+| 2          | 201    | 08/2023 | Rep 1 | $100   |
+| 3          | 300    | 08/2023 | Rep 2 | $500   |
+
+If you wanted output to look like the following image, you are going to need to add some logic to your Nunjucks template to handle this.
+
+![image-20230302102013361](images/informer_templates_forloops.PNG)
+
+This sample below is sample logic to massage the data to take the transactional row and group them together.
 
 ```html
 <!DOCTYPE html>
@@ -252,7 +268,13 @@ THis i
 
 
 
+:::tip
 
+The Nunjucks templating language can be complicated.  Make sure that you have first taken the time to structure your dataset in the best way to accomplish your goals.
+
+Also use the ability to massage your data in a Powerscript Processor to make formatting the output via Nunjucks easier.
+
+:::
 
 ## Inject Data into JavaScript Assets
 
