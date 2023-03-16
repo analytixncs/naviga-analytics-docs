@@ -467,36 +467,57 @@ The filter param must be a valid JSON string. The filter is actually an query bu
 
 The Query DSL is complicated in its own right, so I will just give you a few simple examples, but do explore the documentation above for more details.
 
-**Only return campaignId in 6736 or 6796**
+Below you will find the DSL that I was able to test.  The `match` keyword is supposed to be a fuzzy match, but I have found that it does not work and so I am only using the `terms` keyword, which gives us exact matching.
+
+#### Terms Keyword - Exact Match
+
+The `terms` keyword expects the matching value(s) to be an array, hence, enclosed is square brackets `[]`.  
+
+Even if you have only one value to check, if you are using the terms keyword, you must enclose in `[]`.  If you have only one, you can instead use the `term` keyword.  
+
+I find it more clear to simply always use `terms` and `[]` around my search value.
+
+```json
+// Match Single
+{ "terms": { "campaignId": [11677]}}
+// Match multiple
+{ "terms": { "campaignId": [11677,11712]}}
+```
+
+#### Date Range Filter
+
+You can send a date range Elasticsearch filter using the `range` keyword with the `gte` and `lte` modifiers.
+
+```json
+{
+  "range": {
+    "a_d_internet_campaigns_assoc_dateEntered": {
+      "gte":"2023-01-01",
+      "lte": "2023-03-01"
+    }
+  }
+}
+// Without formatting
+{"range":{"a_d_internet_campaigns_assoc_dateEntered":{"gte":"2023-01-01","lte": "2023-03-01"}}}
+```
+
+#### Compound Filters
+
+If you need to filter data on multiple fields, you will put them in a filter block.  This will perform an `and` operation between each of the filter operations.
 
 ```json
 {
   "bool": {
-    "filter": {
-      "terms": {
-        "campaignId": [
-          6736,
-          6796
-        ]
-      }
-    }
+    "filter": [
+      {"range":{"a_d_internet_campaigns_assoc_dateEntered":{"gte":"2023-01-01","lte": "2023-03-01"}}},
+      {"terms": { "webSiteId": ["DEMO11"]}},
+      {"terms": { "a_d_internet_campaigns_assoc_advName": ["FAY DRIVE BREWERY"]}}
+    ]
   }
 }
-// You would send without formatting:
-{"bool":{"filter":{"terms":{"campaignId":[6736,6796]}}}}
 ```
 
-OR using a Match query:
 
-```json
-{
-  "match": {
-    "campaignId": 6736
-  }
-}
-// You would send without formatting:
-{"match":{"campaignId":6736}}
-```
 
 ### Common Exporters
 

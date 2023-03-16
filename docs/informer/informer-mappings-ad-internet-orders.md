@@ -179,56 +179,18 @@ To add Reps to your report, you will first have to choose, whether you want the 
 
 :::info
 
-There are two ways to get the Rep information into your Dataset/Report. The end result is the same, but one way may fit your needs better.
+Below are the fields for Current and Original Rep.  The rest of the examples will use Current Rep, but you may substitute Original rep if that is data you prefer.
 
-- [Add Reps Using Month Rep fields](#add-reps-using-month-rep-fields) - This method uses the Rep Multi-Valued / Sub-Valued fields below:
-  - MONTH.CURR.REP.ID <93>
-  - MONTH.CURR.REP.PCT <94>
-  - MONTH.CURR.REP.AMT <95>
-- [Add Reps Using the Current Rep Fields](#add-reps-using-current-rep-fields) - This method uses the Multi-Valued Rep fields that are NOT associated with the Month MV fields.  This method is a bit more cumbersome, but will give you more control over the Rep Amount fields if you need it.
+- [Add Reps Using the Current Rep Fields](#add-reps-using-current-rep-fields) - This method uses the Multi-Valued Rep fields that are NOT associated with the Month MV fields. 
   - CURRENT.REP.IDS <263>
   - CURRENT.REP.PCTS <264>
+- Add Reps Using the Original Rep Fields - This method uses the Multi-Valued Rep fields that are NOT associated with the Month MV fields. 
+  - ORIG.REP.IDS <260>
+  - ORIG.REP.PCTS <261>
 
 :::
 
-#### Add Reps Using Month Rep fields
 
-The fields you will need will be either the Month Curr or Month Orig Rep fields, however we will focus only on the **Month Curr Rep** fields.
-
-![image-20221228103543531](images/informer_mapping_adinternetorders-reps-month-001.png)
-
-:::tip
-
-Two things to note about these fields:
-
-1. **They are MS (Multivalued - Sub-valued) fields** - This means that they are Arrays of Arrays.  Remember that each Line Detail can have multiple reps.  Since the Line Detail fields (Month Act Amount, etc) are already MV fields, the Rep fields need to be this Array of Arrays structure.
-2. **Month Curr Rep Amt** has the Percentage (Month Curr Rep Pct) applied to it already.  This means if the Line Detail **Month Act Amount** field was $750 and there were two reps each getting 50%.  The **Month Curr Rep Amt** field would be $375 for each Rep.
-
-:::
-
-The fact the the **Month Curr Rep** fields are MS fields, means that if we want a single row for every transaction, we will need two normalize steps. 
-
-The first normalize will include all of the **Month** fields.  The fields in **AD Internet Orders** that start with *Month* are all associated Multivalued fields.  Even the **Month Curr Rep** fields are associated at this level.  
-
-So the first step is to add a **Normalize** flow step and add ALL of the Month fields:
-
-![image-20221228104727640](images/informer_mapping_adinternetorders-reps-month-002.png)
-
-The above normalize step will leave the **Month Curr Rep** fields still in a multivalued state.
-
-> Note, that if you do not have a lot of Campaigns with multiple reps, it may look like you are done at this step.  But you are not.  The next step will take any sub-valued Rep fields and normalize them.
-
-Next add **another** Normalize Flow step and add the **Month Curr  Rep** fields.
-
-![img](images/informer_mapping_adinternetorders-reps-month-003.png)
-
-Below is an image of the output, when you DON'T include the **Month Actual Amt and Month Est Amt** fields in the second normalize versus when you do:
-
-![img](images/informer_mapping_adinternetorders-reps-month-004.png)
-
-Lastly, you will most likely want to get the Sales Reps names also.  These are in a joined mapping called **Month Curr Rep Id**
-
-![image-20221228145242293](images/informer_mapping_adinternetorders-reps-month-005.png)
 
 ---
 
@@ -706,3 +668,46 @@ Lastly, there is sometimes size information in the **X Value <157>** and **Y Val
 ### Invoices
 
 [See AR Invoice section](informer-mappings-ar-invoices#ar-invoices)
+
+
+
+## DEPRICATED FIELDS
+
+### Add Reps Using Month Rep fields
+
+The fields you will need will be either the Month Curr or Month Orig Rep fields, however we will focus only on the **Month Curr Rep** fields.
+
+![image-20221228103543531](images/informer_mapping_adinternetorders-reps-month-001.png)
+
+:::tip
+
+Two things to note about these fields:
+
+1. **They are MS (Multivalued - Sub-valued) fields** - This means that they are Arrays of Arrays.  Remember that each Line Detail can have multiple reps.  Since the Line Detail fields (Month Act Amount, etc) are already MV fields, the Rep fields need to be this Array of Arrays structure.
+2. **Month Curr Rep Amt** has the Percentage (Month Curr Rep Pct) applied to it already.  This means if the Line Detail **Month Act Amount** field was $750 and there were two reps each getting 50%.  The **Month Curr Rep Amt** field would be $375 for each Rep.
+
+:::
+
+The fact the the **Month Curr Rep** fields are MS fields, means that if we want a single row for every transaction, we will need two normalize steps. 
+
+The first normalize will include all of the **Month** fields.  The fields in **AD Internet Orders** that start with *Month* are all associated Multivalued fields.  Even the **Month Curr Rep** fields are associated at this level.  
+
+So the first step is to add a **Normalize** flow step and add ALL of the Month fields:
+
+![image-20221228104727640](images/informer_mapping_adinternetorders-reps-month-002.png)
+
+The above normalize step will leave the **Month Curr Rep** fields still in a multivalued state.
+
+> Note, that if you do not have a lot of Campaigns with multiple reps, it may look like you are done at this step.  But you are not.  The next step will take any sub-valued Rep fields and normalize them.
+
+Next add **another** Normalize Flow step and add the **Month Curr  Rep** fields.
+
+![img](images/informer_mapping_adinternetorders-reps-month-003.png)
+
+Below is an image of the output, when you DON'T include the **Month Actual Amt and Month Est Amt** fields in the second normalize versus when you do:
+
+![img](images/informer_mapping_adinternetorders-reps-month-004.png)
+
+Lastly, you will most likely want to get the Sales Reps names also.  These are in a joined mapping called **Month Curr Rep Id**
+
+![image-20221228145242293](images/informer_mapping_adinternetorders-reps-month-005.png)
