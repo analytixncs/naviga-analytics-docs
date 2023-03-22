@@ -116,4 +116,14 @@ If you need this information, you will need to create a manual link in your data
 
  ![image-20220610153606636](images/informerMapping_gen_clients_adbrand_003.png)
 
+## PIB Codes
 
+In the **AD Brands** mapping you will find the PIB Code in the **PIB_CODE <4>** field.
+
+![image-PIBCODE](images/informerMapping_gen_adbrands_pib-code.png)
+
+:::caution
+
+You may also see a **PIB_CODE <101>** field in the **GEN Clients** mapping.  DO NOT USE this fields as it is not maintained. 
+
+:::
