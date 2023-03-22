@@ -4,7 +4,7 @@ title: AD Internet Orders
 sidebar_label: AD Internet Orders
 ---
 
-## AD Internet Orders mapping
+# AD Internet Orders mapping
 
 The AD Internet Orders mapping is the detail level of a campaign. It will hold the individual line items.
 
@@ -12,7 +12,7 @@ The AD Internet Orders mapping is the detail level of a campaign. It will hold t
 
 Given that most of the reports that you write that pull data for Orders will want the detail level information found in **Ad Internet Orders**, it is recommended that you start with the AD Internet Orders mapping.
 
-### Filtering
+## Filtering
 
 When pulling data from the **AD Internet Orders** mapping, realize that Deleted Lines and potentially unwanted Campaign Status's will be included in your results. Since most reports do not want this information, you will want to add criteria to filter this information out.
 
@@ -28,7 +28,7 @@ The second field, **Line Cancel Status ID**, makes sure that no Deleted Lines ar
 
 ![image-20210511150826980](images/informer-mapping-adinternetorders-003.png)
 
-### Multivalued Fields
+## Multivalued Fields
 
 You will notice in this mapping that there are a number of Multivalued fields. Even though we are at the Line level in the **AD Internet Orders** mappings, you will still see multivalued fields. One of these fields that we will use for Revenue is the **Month Period** field. Why would a single line within a Campaign have multiple Month Period fields?
 
@@ -62,7 +62,7 @@ After Normalizing, the above data will now look like this:
 
 ![image-20210511161333417](images/informer-mapping-adinternetorders-006.png)
 
-### Print vs Digital
+## Print vs Digital
 
 To find if a campaign line is associated with a Print or Digital publication, you would use the **Print Pub Ind** field from the **AD Publications** mapping.
 
@@ -72,7 +72,7 @@ If you have created a report using the AD Internet Orders mapping, you would fin
 
 ![image-20220131123541539](images/informerMapping_adinternetorders-printdigital001.jpg)
 
-### Amount Fields
+## Amount Fields
 
 There are a lot of Amount fields in the **AD Internet Orders** mapping. We will focus on the Month Actual/Est Amt fields and the **Line Price Amt** fields in this document.
 
@@ -84,7 +84,7 @@ Also, the be aware that the **Line Price Amt** is the **Price per Issue**.  That
 
 If that is what you are looking for, then you will want to take a look at the Month Actual/ Est Amt section below.
 
-### Month Actual / Est Amt
+## Month Actual / Est Amt
 
 The **Month Actual and Est Amt** multivalued fields, which means that you will most likely want to normalize them and they also have some special rules that need to be followed to get the correct information from a report written using them.
 
@@ -163,9 +163,14 @@ if ($record.a_d_internet_campaigns_assoc_campaignType === "F") {
 >
 > The above code assumes the base mapping is **AD Internet Orders**. If not, the field reference name may be different.
 
+### Gross / Net alternative Calculation
 
+You can manually calculate the agency commission by using the following fields:
 
-### Adding Reps into the Mix
+- **AD Internet Orders -> NO.AGY.COMM.IND <68>** - Indicates if this 
+- **AD Internet Campaigns -> COMMISSION.PCT<19>**
+
+## Adding Reps into the Mix
 
 Obviously, you will want to have reports with rep data.  Have a Rep in the report seems straightforward, however, given that you can have MULTIPLE reps assign to every one of the line details, this can sometimes be confusing.
 
@@ -194,7 +199,7 @@ Below are the fields for Current and Original Rep.  The rest of the examples wil
 
 ---
 
-#### Add Reps Using Current Rep Fields
+### Add Reps Using Current Rep Fields
 
 If you choose to use the Current Rep ID.
 
@@ -253,7 +258,7 @@ $record.RepAmount =  $record['currentRepIds'] ? $record.NetAmount * ($record.cur
 
 ```
 
-#### Keeping Month Actual/Est Amounts with Rep Amounts
+### Keeping Month Actual/Est Amounts with Rep Amounts
 
 Many times you will want to have a single dataset contain both the Rep amounts and the Month Amounts, however, as stated above, this can be problematic because multiple reps may be assigned to a Month line.
 
@@ -373,7 +378,7 @@ function calcNetAmount (campaignType, monthActualAmt, monthEstAmt) {
 
 I would recommend removing the `monthActualAmt` and `monthEstAmt `fields as they will not be usable in any aggregations.
 
-### Foreign Currency and Exchange Rates
+## Foreign Currency and Exchange Rates
 
 When an ad is placed using a foreign currency, certain fields will show up in the foreign currency and some in the local currency.
 
@@ -442,7 +447,7 @@ if ($record.a_d_internet_campaigns_assoc_campaignType === 'F') {
 >
 > The last piece is the AR Invoice mapping.  It has a field called the **Exchange Revaluation Amount**, which is the difference **in LOCAL Currency** between the converted price at booking and the converted price at invoicing.
 
-#### Using Foreign Currency with Rep Amounts 
+### Using Foreign Currency with Rep Amounts
 
 You may also want to extend the foreign currency over to Rep Amounts.  Rep amounts are unique since there may be multiple reps per Month/Order line as each rep may get a different percentage of that Month/Order line.
 
@@ -523,7 +528,7 @@ The last thing we need to do is remove the `monthActualAmt` and `monthEstAmt` fi
 
 ---
 
-### Metadata Fields
+## Metadata Fields
 
 The Metadata fields are found on the Category MetaData tab in the Naviga system:
 
@@ -536,7 +541,7 @@ To access these fields in Informer, you will need to pull in the following field
 
 The above fields are Multivalued and you will most likely want to Normalize them.
 
-### GL Codes in AD Internet Orders
+## GL Codes in AD Internet Orders
 
 In the most basic scenario, you can get the GL Code string from the AD Publications mapping grabbing the **IN Revenue GL ID**. 
 
@@ -612,7 +617,7 @@ Lastly, you will want to remove the Web Site GL Type ID and Web Site GL Type Rev
 > **<a  target="_blank"  href="/downloads/naviga-ad-internet-orders-with-gl.tgz"> [NAVIGA]-AD Internet Orders With GL</a>**
 > NOTE: This sample has some campaign criteria that you will want to clear or update.
 
-### Adjustments On Lines
+## Adjustments On Lines
 
 If you need to get the Adjustment Amount and Descriptions for Campaign Lines, you will find this information on the **AD Internet Orders** mapping.
 
@@ -628,7 +633,7 @@ Here is a visual example:
 
 ![image-20220304150858841](images/informer_mapping_adinternetorders-adj-002.png)
 
-### Preprints
+## Preprints
 
 The fields listed below are multivalued and are at the SAME grain (i.e. associated with) the Month amount fields mentioned [above](#month-actual-/-est-amt)
 
@@ -638,7 +643,7 @@ The fields listed below are multivalued and are at the SAME grain (i.e. associat
 
 ![img](images/informer_mapping_adinternetorders-pp-001.png)
 
-### Impressions
+## Impressions
 
 The below image shows how the Estimated and Actual impressions map from Naviga to Informer.
 
@@ -650,7 +655,7 @@ Be aware that the **Month Actual Imps** and **Month Est Qty** are both multivalu
 
 ![img](images/informer_mapping_impressions-001.png)
 
-### Digital Size - Columns - Inches
+## Digital Size - Columns - Inches
 
 Size information is located in a couple of places based on the value in the **Dimensions <9>** field in **AD Internet Orders**.
 
@@ -665,7 +670,7 @@ Lastly, there is sometimes size information in the **X Value <157>** and **Y Val
 
 ![image-20220517185113482](images/informerMapping_aio_size_003.jpg)
 
-### Invoices
+## Invoices
 
 [See AR Invoice section](informer-mappings-ar-invoices#ar-invoices)
 
@@ -673,7 +678,7 @@ Lastly, there is sometimes size information in the **X Value <157>** and **Y Val
 
 ## DEPRICATED FIELDS
 
-### Add Reps Using Month Rep fields
+## Add Reps Using Month Rep fields
 
 The fields you will need will be either the Month Curr or Month Orig Rep fields, however we will focus only on the **Month Curr Rep** fields.
 

@@ -1156,32 +1156,55 @@ If you need foreign amounts and amounts net of agency commission, see the **calc
 
 - **Parameters:**
 
-  | Data Type | Variable name | Label    | Sample      |
-  | --------- | ------------- | -------- | ----------- |
-  | Object    | inputObj      | inputObj | // See docs |
+  | Data Type | Variable name | Label    | Sample                                    |
+  | --------- | ------------- | -------- | ----------------------------------------- |
+  | Object    | inputObj      | inputObj | [See Docs](#calculatelineamounts---usage) |
 
 **Function Body**
 
 ```javascript
- const { actAmount, estAmount, campaignType, 
-         exchangeRate = 1, actCommAmount = 0, estCommAmount = 0 } = inputObj;
-  // validate and default inputs
+ const { actAmount, estAmount, 
+         campaignType, exchangeRate = 1, 
+         agencyCommMethod = 1, 
+         actCommAmount = 0, estCommAmount = 0,
+         noAgencyCommFlag = "Y", agencyCommissionPctIn = 0 } = inputObj;
+
+  // force number inputs to numbers
   const actAmountNum = returnANumber(actAmount)
   const estAmountNum = returnANumber(estAmount)
-  // 
-  const actLineLocal = actAmountNum / exchangeRate
-  const estLineLocal = estAmountNum / exchangeRate
-  const grossLocal = calculateNetAmount(campaignType, actLineLocal, estLineLocal)
-  const grossForeign = calculateNetAmount(campaignType, actAmountNum, estAmount)
+  const actCommAmountNum = returnANumber(actCommAmount)
+  const estCommAmountNum = returnANumber(estCommAmount)
+  const exchangeRateNum = returnANumber(exchangeRate) === 0 ? 1 : exchangeRate
+  // determine agency commission percent base on the "No Agency Comm Ind" Y means NO agency commission
+  agencyCommissionPct = noAgencyCommFlag === "Y" ? 0 : returnANumber(agencyCommissionPctIn) / 100
+
+  // If foreign, convert to home currency and store in "LineLocal"
+  // If not foreign, the exchange rate will be 1
+  const actLineLocal = actAmountNum / exchangeRateNum
+  const estLineLocal = estAmountNum / exchangeRateNum
+  const actLineLocalCommAmt = actCommAmountNum / exchangeRateNum
+  const estLineLocalCommAmt = estCommAmountNum / exchangeRateNum
+
+  const grossLocal = calculateAmountByType(campaignType, actLineLocal, estLineLocal)
+  const grossForeign = calculateAmountByType(campaignType, actAmountNum, estAmount)
+  
+  // Calculate Net of Agency Commission Amounts
+  // per method one get proper commission amount (act vs est)
+  const commAmount = calculateAmountByType(campaignType, actLineLocalCommAmt, estLineLocalCommAmt)
+  const netLocal = grossLocal - calculateAgencyCommission(agencyCommMethod, grossLocal, agencyCommissionPct, commAmount)
+  // Calculate foreign
+  const foreignCommAmount = calculateAmountByType(campaignType, actCommAmountNum, estCommAmountNum)
+  const netForeign = grossForeign - calculateAgencyCommission(agencyCommMethod, grossForeign, agencyCommissionPct, foreignCommAmount)
+
   return {
     actualLocal: actLineLocal,
     estLocal: estLineLocal,
     grossLocal,
-    netLocal: grossLocal - calculateNetAmount(campaignType, actCommAmount, estCommAmount),
+    netLocal,
     actForeign: actAmountNum,
     estForeign: estAmountNum,
     grossForeign,
-    netForeign: grossForeign - calculateNetAmount(campaignType, actCommAmount, estCommAmount),
+    netForeign,
   }
 
 function returnANumber(numberIn) {
@@ -1194,7 +1217,7 @@ function returnANumber(numberIn) {
   return parsedNumber;  
 }
 
-function calculateNetAmount(campaignType, monthActualAmt, monthEstAmt) {
+function calculateAmountByType(campaignType, monthActualAmt, monthEstAmt) {
   // Make sure both passed in values are a number
   monthEstAmt = returnANumber(monthEstAmt)
   monthActualAmt = returnANumber(monthActualAmt)
@@ -1207,6 +1230,18 @@ function calculateNetAmount(campaignType, monthActualAmt, monthEstAmt) {
           : monthActualAmt;
   }
 }
+
+function calculateAgencyCommission(agencyCommMethod, grossAmt, agencyCommissionPct, commAmount) {
+  // Method one calculates based on comm amounts
+  if (agencyCommMethod === 1) {
+    return commAmount;
+  }
+  // Method two calculates based on CommPercentage and No Comm Agency Flag
+  // If we get here we assume they want the second method
+  return returnANumber(grossAmt * agencyCommissionPct);
+}
+
+
 ```
 
 ## calculateLineAmounts - Usage
@@ -1221,27 +1256,11 @@ You will need to call the function and send it an object with, at the very least
 - **estAmount** - (Required) - This will be the AD Internet Orders MONTH.EST.AMT <73> field.
 - **campaignType** - (Required) - This will be the  AD Internet Campaigns CAMPAIGN.TYPE<8> field.
 - *exchangeRate* - (Optional, default=1)  - This will be the AD Internet Campaigns CURR.RATE <226> field.
+- *agencyCommMethod* - (Optional, default=1)  - Pass "1" to calculate agency commissions based on the passed "actCommAmount" and "estCommAmount" fields.  Pass "2" to calculate the agency commission based on the "noAgencyCommFlag" and "agencyCommissionPct" fields.
 - *actCommAmount* - (Optional, default=0)  - This will be the AD Internet Orders MONTH.ACTUAL.COMM.AMT <202> field.
 - *estCommAmount* - (Optional, default=0)  - This will be the AD Internet Orders MONTH.ACTUAL.EST.AMT <201> field.
-
-Here is an example call of the function:
-
-```javascript
-campaignType = $record['a_d_internet_campaigns_assoc_campaignType']
-
-// Create the input object to pass to the naviga.calculateLineAmounts function
- lineAmtInputs = {
-   actAmount: naviga.returnANumber($record['monthActualAmt']), 
-   estAmount: naviga.returnANumber($record['monthEstAmt']), 
-   actCommAmount: $record['monthActualCommAmt'], 
-   estCommAmount: $record['monthEstCommAmt'],
-   exchangeRate: $record['a_d_internet_campaigns_assoc_currRate'],
-   campaignType
- }
-
-// Call the function
-localAmounts = naviga.calculateLineAmounts(lineAmtInputs)
-```
+- *noAgencyCommFlag* - (Optional, default="Y")  -  <201> field.
+- *agencyCommissionPctIn* - (Optional, default=0)  - <201> field.
 
 ### Output Object
 
@@ -1268,36 +1287,44 @@ The return object contains the following keys
 - **grossForeign** - Based on the CampaignType passed in, this will be either the Actual or Estimated Foreign amount.
 - **netForeign** -If Agency commission amounts were passed in, this value will be the grossForeign amount NET of any Agency commissions.
 
-**Full Powerscript Code**
+### Examples
 
-> The function expects all Month values to be normalized
+**Example 1 - Get Net and Gross Amount**
+
+> This example is based on a dataset using the **AD Internet Orders** as the base mapping AND expects **all Month values to be normalized**
+
+**Setup The Input Obejct and Call the function**
 
 ```javascript
-exchangeRate = $record['a_d_internet_campaigns_assoc_currRate']
-campaignType = $record['a_d_internet_campaigns_assoc_campaignType']
+// == Setup The Input Obejct and Call the function
+// Create the input object to pass to the naviga.calculateLineAmounts function
+ lineAmtInputs = {
+   actAmount: naviga.returnANumber($record['monthActualAmt']), 
+   estAmount: naviga.returnANumber($record['monthEstAmt']), 
+   agencyCommMethod: 1,
+   actCommAmount: $record['monthActualCommAmt'], 
+   estCommAmount: $record['monthEstCommAmt'],
+   exchangeRate: $record['a_d_internet_campaigns_assoc_currRate'],
+   campaignType: $record['a_d_internet_campaigns_assoc_campaignType']
+ }
 
-// Setup the input object
-// NOTE: I did not include the 
-lineAmtInputs = {
-  actAmount: naviga.returnANumber($record['monthActualAmt']), 
-  estAmount: naviga.returnANumber($record['monthEstAmt']), 
-  actCommAmount: $record['monthActualCommAmt'], 
-  estCommAmount: $record['monthEstCommAmt'],
-  exchangeRate, 
-  campaignType
-}
-// Call the function and get our amount data back in an object
-finalLineAmounts = naviga.calculateLineAmounts(lineAmtInputs)
+// Call the function
+returnAmounts = naviga.calculateLineAmounts(lineAmtInputs)
+```
+
+**Use the Results (can be in the same Powerscript as the above)**
+
+```javascript
 
 // Create new fields for each needed value in our return object
-$record.actualLineLocalAmount = finalLineAmounts.actualLocal;
-$record.estLineLocalAmount = finalLineAmounts.estLocal;
-$record.grossLineLocalAmount = finalLineAmounts.grossLocal;
-$record.netLineLocalAmount = finalLineAmounts.netLocal;
+$record.actualLineLocalAmount = returnAmounts.actualLocal;
+$record.estLineLocalAmount = returnAmounts.estLocal;
+$record.grossLineLocalAmount = returnAmounts.grossLocal;
+$record.netLineLocalAmount = returnAmounts.netLocal;
 // pull foreign amounts from object
-$record.actualLineForeignAmount = finalLineAmounts.actForeign
-$record.estLineForeignAmount = finalLineAmounts.estForeign
-$record.grossLineForeignAmount = finalLineAmounts.grossForeign
-$record.netLineForeignAmount = finalLineAmounts.netForeign
+$record.actualLineForeignAmount = returnAmounts.actForeign
+$record.estLineForeignAmount = returnAmounts.estForeign
+$record.grossLineForeignAmount = returnAmounts.grossForeign
+$record.netLineForeignAmount = returnAmounts.netForeign
 ```
 
