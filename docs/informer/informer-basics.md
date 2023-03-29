@@ -501,6 +501,26 @@ BUT WAIT, what if you have embedded Datasets in your Flow steps?  Then things ge
 
 :::
 
+### Datasets Owned by Teams
+
+If you want to allow certain users (who are not super users), the ability to edit and refresh a Dataset, you must make that Dataset **owned** by a team.
+
+Then any users who are Data Wizards or above on the Team the Dataset is owned by, will have the ability to Refresh the Dataset.
+
+:::danger IMPORTANT
+
+There two other very important steps:
+
+1. You must give access to the Datasource used by the Dataset.
+   ![image-20230329104701695](images/informer_basics-sharedatasource.png)
+
+   
+
+2. You must turn OFF the Row Filter plugin
+   ![image-20230329104450259](images/informer_basics-rowfilterpluginOFF.png)
+
+:::
+
 ## Jobs & Emails
 
 Jobs are the Informer way to take some sort of action.

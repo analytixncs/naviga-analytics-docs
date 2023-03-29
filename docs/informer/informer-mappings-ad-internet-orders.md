@@ -170,6 +170,13 @@ You can manually calculate the agency commission by using the following fields:
 - **AD Internet Orders -> NO.AGY.COMM.IND <68>** - Indicates if this 
 - **AD Internet Campaigns -> COMMISSION.PCT<19>**
 
+:::tip Make Life Easier!
+
+We have a saved function that will take care of all the calculations above.  You can find the documentation on this function here:
+[Calculate Line Amounts Function](informer-saved-functions#calculatelineamounts---usage)
+
+:::
+
 ## Adding Reps into the Mix
 
 Obviously, you will want to have reports with rep data.  Have a Rep in the report seems straightforward, however, given that you can have MULTIPLE reps assign to every one of the line details, this can sometimes be confusing.

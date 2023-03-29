@@ -1240,8 +1240,6 @@ function calculateAgencyCommission(agencyCommMethod, grossAmt, agencyCommissionP
   // If we get here we assume they want the second method
   return returnANumber(grossAmt * agencyCommissionPct);
 }
-
-
 ```
 
 ## calculateLineAmounts - Usage
@@ -1252,15 +1250,15 @@ This saved function will accept a JavaScript object as input and will use those 
 
 You will need to call the function and send it an object with, at the very least, the three required fields below.
 
-- **actAmount** - (Required) - This will be the AD Internet Orders MONTH.ACTUAL.AMT <76> field.
-- **estAmount** - (Required) - This will be the AD Internet Orders MONTH.EST.AMT <73> field.
-- **campaignType** - (Required) - This will be the  AD Internet Campaigns CAMPAIGN.TYPE<8> field.
-- *exchangeRate* - (Optional, default=1)  - This will be the AD Internet Campaigns CURR.RATE <226> field.
+- **actAmount** - (Required) - This will be the AD Internet Orders **MONTH.ACTUAL.AMT** <76> field.
+- **estAmount** - (Required) - This will be the AD Internet Orders **MONTH.EST.AMT** <73> field.
+- **campaignType** - (Required) - This will be the  AD Internet Campaigns **CAMPAIGN.TYPE**<8> field.
+- *exchangeRate* - (Optional, default=1)  - This will be the AD Internet Campaigns **CURR.RATE** <226> field.
 - *agencyCommMethod* - (Optional, default=1)  - Pass "1" to calculate agency commissions based on the passed "actCommAmount" and "estCommAmount" fields.  Pass "2" to calculate the agency commission based on the "noAgencyCommFlag" and "agencyCommissionPct" fields.
-- *actCommAmount* - (Optional, default=0)  - This will be the AD Internet Orders MONTH.ACTUAL.COMM.AMT <202> field.
-- *estCommAmount* - (Optional, default=0)  - This will be the AD Internet Orders MONTH.ACTUAL.EST.AMT <201> field.
-- *noAgencyCommFlag* - (Optional, default="Y")  -  <201> field.
-- *agencyCommissionPctIn* - (Optional, default=0)  - <201> field.
+- *actCommAmount* - (Optional, default=0)  - This will be the AD Internet Orders **MONTH.ACTUAL.COMM.AMT** <202> field.
+- *estCommAmount* - (Optional, default=0)  - This will be the AD Internet Orders **MONTH.ACTUAL.EST.AMT** <201> field.
+- *noAgencyCommFlag* - (Optional, default="Y")  -  AD Internet Orders **NO.AGY.COMM.IND** <68> field.
+- *agencyCommissionPctIn* - (Optional, default=0)  - AD Internet Campaigns **COMMISSION.PCT** <19> field.
 
 ### Output Object
 
@@ -1305,7 +1303,9 @@ The return object contains the following keys
    actCommAmount: $record['monthActualCommAmt'], 
    estCommAmount: $record['monthEstCommAmt'],
    exchangeRate: $record['a_d_internet_campaigns_assoc_currRate'],
-   campaignType: $record['a_d_internet_campaigns_assoc_campaignType']
+   campaignType: $record['a_d_internet_campaigns_assoc_campaignType'],
+   noAgencyCommFlag: $record['noAgyCommInd'],
+   agencyCommissionPctIn: $record['aDInternetCampaigns_assoc_commissionPct']
  }
 
 // Call the function
