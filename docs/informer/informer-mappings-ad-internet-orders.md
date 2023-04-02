@@ -4,6 +4,8 @@ title: AD Internet Orders
 sidebar_label: AD Internet Orders
 ---
 
+import { Accordion } from '@site/src/components/UIHelpers';
+
 # AD Internet Orders mapping
 
 The AD Internet Orders mapping is the detail level of a campaign. It will hold the individual line items.
@@ -86,6 +88,15 @@ If that is what you are looking for, then you will want to take a look at the Mo
 
 ## Month Actual / Est Amt
 
+:::tip Make Life Easier!
+
+We have a saved function that will take care of all the calculations described below.  You can find the documentation on this function here:
+**[Calculate Line Amounts Function](informer-saved-functions#calculatelineamounts---usage)**	
+
+It is still good to read the below descriptions to understand how the information in the function is being processed.
+
+:::
+
 The **Month Actual and Est Amt** multivalued fields, which means that you will most likely want to normalize them and they also have some special rules that need to be followed to get the correct information from a report written using them.
 
 First, you will want to normalize the **Month Actual Amt** and **Month Est Amt** fields.  If you look at a single line in Naviga, you will see that a single line id can have multiple "runs".  You can see below, that this Line ID of 11644 has three run days:
@@ -167,19 +178,16 @@ if ($record.a_d_internet_campaigns_assoc_campaignType === "F") {
 
 You can manually calculate the agency commission by using the following fields:
 
-- **AD Internet Orders -> NO.AGY.COMM.IND <68>** - Indicates if this 
-- **AD Internet Campaigns -> COMMISSION.PCT<19>**
+- **AD Internet Orders -> NO.AGY.COMM.IND <68>** - Indicates if this  Order line should have Agency commission removed.  This is a "double negative" flag.  So **"Y"** means that there is NOT any agency commission on the order line versus **"N"** which means that we will need to take out Agency commission.
+- **AD Internet Campaigns -> COMMISSION.PCT<19>** - This is the percentage of Agency commission to use if commission is to be removed from the Line amounts.
 
-:::tip Make Life Easier!
 
-We have a saved function that will take care of all the calculations above.  You can find the documentation on this function here:
-[Calculate Line Amounts Function](informer-saved-functions#calculatelineamounts---usage)
 
-:::
+
 
 ## Adding Reps into the Mix
 
-Obviously, you will want to have reports with rep data.  Have a Rep in the report seems straightforward, however, given that you can have MULTIPLE reps assign to every one of the line details, this can sometimes be confusing.
+Obviously, you will want to have reports with rep data.  Having a Rep in the report seems straightforward, however, given that you can have MULTIPLE reps assign to every one of the line details, this can sometimes be confusing.
 
 The image below shows a Campaign, with a single Line.  The Line has 4 line detail transactions.  The order also has two sales reps that will get 50% of each line detail.
 
@@ -224,7 +232,7 @@ Once, you select those, fields you may also want the Rep name, you can get this 
 
 For our example, I will be selecting the **Salesrep Name** field from the **Curr AD Salesrep** mapping.
 
-You might think you are done, but not yet.  Notice that each of the Rep fields are *multivalued*, this is similar to what you saw with the Amount fields.  We had to normalize them.  Is most cases, where you have fields from the same mapping (amt fields and rep fields) that are multivalued, you can just include them all in a single normalize step.  
+You might think you are done, but not yet.  Notice that each of the Rep fields are *multivalued*, this is similar to what you saw with the Amount fields.  We had to normalize them.  Is most cases where you have fields from the same mapping (amt fields and rep fields) that are multivalued, you can just include them all in a single normalize step.  
 
 **BUT Not here!** 
 
@@ -245,7 +253,14 @@ And in our Flow steps, you will have two normalize steps:
 
 ![image-20220202145749418](images/informer_mapping_adinternetorders-reps-004.png)
 
-Lastly, if you have Lines with multiple reps assigned to them, with different percentage allotments, then you will need to create a calculated field or Powerscript to calculate the reps amount:
+Lastly, you will need to account for Lines with multiple reps assigned to them, with different percentage allotments.  This can be done either:
+
+- Using a Powerscript step manually calculating the rep amount - This will run **AFTER** the second normalize step 
+- Using the saved function [calculateRepAmounts](informer-saved-functions#calculaterepamount---usage) - must run **BEFORE** the second normalize step.  
+
+
+
+**Manual Rep Amount Calculation - AFTER Second Normalize**
 
 ```javascript
 // Calculated the Net Revenue Amount field
@@ -265,11 +280,25 @@ $record.RepAmount =  $record['currentRepIds'] ? $record.NetAmount * ($record.cur
 
 ```
 
+**calculateRepAmount Calculation - BEFORE Second Normalize**
+
+```javascript
+$record.netRepAmount = naviga.calculateRepAmounts($record['currentRepPcts'], $record.netAmount);
+```
+
+**REMEMBER** After the above calculation, you will have an array in the **$record.repNetAmount** field and you will want to normalize it along with your other Rep fields.
+
 ### Keeping Month Actual/Est Amounts with Rep Amounts
+
+
+
+<Accordion title="Older Way to Not Duplicate Amounts">
+
+
 
 Many times you will want to have a single dataset contain both the Rep amounts and the Month Amounts, however, as stated above, this can be problematic because multiple reps may be assigned to a Month line.
 
-When you normalize for reps, this duplicates the monthActualAmount and monthEstAmount fields, thus you cannot use them for aggregating in any of your reports.  Most of the time you would be OK using the Rep Amounts, unless your reps can total more than 100% of an Ad.  For example two reps, each "getting" 100% of an Ads revenue.
+When you normalize for reps, this duplicates the **monthActualAmount** and **monthEstAmount** fields, thus you cannot use them for aggregating in any of your reports.  Most of the time you would be OK using the Rep Amounts, unless your reps can total more than 100% of an Ad.  For example two reps, each "getting" 100% of an Ads revenue.
 
 The solution for this is to zero out the Month amounts when normalizing for Reps creates a new row.
 
@@ -384,6 +413,8 @@ function calcNetAmount (campaignType, monthActualAmt, monthEstAmt) {
 **5 - Remove Month Actual and Est amount fields**
 
 I would recommend removing the `monthActualAmt` and `monthEstAmt `fields as they will not be usable in any aggregations.
+
+</Accordion>
 
 ## Foreign Currency and Exchange Rates
 

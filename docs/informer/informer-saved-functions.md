@@ -1255,6 +1255,8 @@ You will need to call the function and send it an object with, at the very least
 - **campaignType** - (Required) - This will be the  AD Internet Campaigns **CAMPAIGN.TYPE**<8> field.
 - *exchangeRate* - (Optional, default=1)  - This will be the AD Internet Campaigns **CURR.RATE** <226> field.
 - *agencyCommMethod* - (Optional, default=1)  - Pass "1" to calculate agency commissions based on the passed "actCommAmount" and "estCommAmount" fields.  Pass "2" to calculate the agency commission based on the "noAgencyCommFlag" and "agencyCommissionPct" fields.
+
+  > NOTE: Version 2 of the agencyCommMethod is the recommended method to use.
 - *actCommAmount* - (Optional, default=0)  - This will be the AD Internet Orders **MONTH.ACTUAL.COMM.AMT** <202> field.
 - *estCommAmount* - (Optional, default=0)  - This will be the AD Internet Orders **MONTH.ACTUAL.EST.AMT** <201> field.
 - *noAgencyCommFlag* - (Optional, default="Y")  -  AD Internet Orders **NO.AGY.COMM.IND** <68> field.
@@ -1296,12 +1298,11 @@ The return object contains the following keys
 ```javascript
 // == Setup The Input Obejct and Call the function
 // Create the input object to pass to the naviga.calculateLineAmounts function
+// ** The below inputs use the recommended version 2 of the Agency Commission calculation
  lineAmtInputs = {
    actAmount: naviga.returnANumber($record['monthActualAmt']), 
    estAmount: naviga.returnANumber($record['monthEstAmt']), 
-   agencyCommMethod: 1,
-   actCommAmount: $record['monthActualCommAmt'], 
-   estCommAmount: $record['monthEstCommAmt'],
+   agencyCommMethod: 2,
    exchangeRate: $record['a_d_internet_campaigns_assoc_currRate'],
    campaignType: $record['a_d_internet_campaigns_assoc_campaignType'],
    noAgencyCommFlag: $record['noAgyCommInd'],
@@ -1327,4 +1328,82 @@ $record.estLineForeignAmount = returnAmounts.estForeign
 $record.grossLineForeignAmount = returnAmounts.grossForeign
 $record.netLineForeignAmount = returnAmounts.netForeign
 ```
+
+**Input object for Version 1 of Agency Commission Calculates**
+
+```javascript
+ lineAmtInputs = {
+   actAmount: naviga.returnANumber($record['monthActualAmt']), 
+   estAmount: naviga.returnANumber($record['monthEstAmt']), 
+   agencyCommMethod: 1,
+   actCommAmount: $record['monthActualCommAmt'], 
+   estCommAmount: $record['monthEstCommAmt'],
+   exchangeRate: $record['a_d_internet_campaigns_assoc_currRate'],
+   campaignType: $record['a_d_internet_campaigns_assoc_campaignType']
+ }
+```
+
+## calculateRepAmount- Create Function
+
+- **Function name:** calculateRepAmount
+
+- **Namespace:** naviga
+
+- **Description:** Calculate the rep amounts based on the rep percentages passed and the amount.
+
+- **Parameters:**
+
+  | Data Type        | Variable name | Label   | Sample |
+  | ---------------- | ------------- | ------- | ------ |
+  | array of numbers | repPcts       | repPcts |        |
+  | amount           | amount        | amount  |        |
+
+**Function Body**
+
+```javascript
+// Return array of calculated rep amounts
+let repAmounts = []
+// Loop through the rep pcts and calc the rep amounts
+// based on the passed in amount field
+for (const pct of repPcts) {
+    // If pct is empty default to 100%
+    const pctValidated = returnANumber(pct)/100
+    repAmounts.push(returnANumber(amount) * pctValidated)
+}
+return repAmounts
+
+// Helper function
+function returnANumber(numberIn) {
+	numberIn = Object.prototype.toString.call(numberIn) === "[object Date]" ? 0 : numberIn;
+	const parsedNumber = Number(numberIn);
+	if (isNaN(parsedNumber)) {
+  		return 0;
+	}
+	return parsedNumber;
+}
+```
+
+
+
+## calculateRepAmount - Usage
+
+This function is for use explicitly with the the MV Current Rep fields in AD Internet Orders.  It accepts two parameters, the first `repPcts` being a MV (array) of percent values coming from the AD Internet Orders field **CURRENT.REP.PCTS <264>**.
+
+You also pass in an amount field.  This can be whatever amount you are using for your reps.  Most likely it will be the Net Amount of a line. 
+
+The return value is an Array, which means that you then **must** normalize the return value along with the other Rep Fields.
+
+```javascript
+$record.netRepAmount = naviga.calculateRepAmounts($record['currentRepPcts'], $record.netAmount);
+```
+
+
+
+:::tip
+
+If you need foreign amounts and amounts net of agency commission, see the **calculateLineAmounts** saved function.
+
+You can then pass each amount that you need rep amounts for into a separate call to the **calculateRepAmount** function.
+
+:::
 

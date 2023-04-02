@@ -4,6 +4,10 @@ title: Informer Miscellaneous
 sidebar_label: Informer Miscellaneous
 ---
 
+import { Highlight } from '@site/src/components/Highlight';
+
+import { Accordion } from '@site/src/components/UIHelpers';
+
 This document contains information that has not yet been proofed or decided where in the main documentation that it should live.
 
 ## Row Level Security Filter
@@ -355,3 +359,10 @@ It looks like we are missing some links to do this but that’s an easy fix.  I 
 
 
 
+
+
+<Accordion title="Test The Accordion">
+
+This is a test
+
+</Accordion>
