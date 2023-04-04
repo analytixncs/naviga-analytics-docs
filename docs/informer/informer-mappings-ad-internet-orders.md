@@ -418,7 +418,21 @@ I would recommend removing the `monthActualAmt` and `monthEstAmt `fields as they
 
 ## Foreign Currency and Exchange Rates
 
-When an ad is placed using a foreign currency, certain fields will show up in the foreign currency and some in the local currency.
+When an ad is placed using a foreign currency, you will need to be very precise about where you are getting your amount fields so that you know if the stored amount is in the foreign currency or local (home) currency.  Certain fields in the **AD Internet Campaigns** will show up in the foreign currency and some in the local currency.  You can see the list in the **AD Internet Campaigns mapping** section below.
+
+
+
+:::tip **Foreign Currency in AD Internet Campaigns**
+
+If a Campaign is placed in a currency other than the 'home' currency, it is considered a **foreign currency** and will be stored as such in the AD Internet Orders MONTH amount fields. 
+
+Orders placed in a foreign currency are stored in the AD Internet Orders mapping MONTH revenue fields in the foreign currency.  This means that the foreign amount will be stored in the Month Act Amt and Month Est Amt fields.  
+
+This is important to remember because you will be using a formula to convert the Foreign currency amount back to the Local currency amount.
+
+NOTE: Use the [calculateLineAmounts](informer-saved-functions#calculateLineAmounts---Usage) saved function to automate the conversion.
+
+:::
 
 The other important item to understand is that when the ad is placed, the exchange rate at that point in time is stored and used to calculate the currency values for the **AD Internet Orders** and **AD Internet Campaigns** mappings and they will not change.  However, once the campaign is invoiced, the system will reach out for the exchange rate at the time of invoicing.  That exchange rate is not stored, but instead a variance value is stored.  This is the difference between the initial foreign currency value and the "new" value given the exchange rate at the time of invoicing.  This "difference" field is in the **AR Invoices** mapping and is called **Exchange Revaluation Amount** (99)
 

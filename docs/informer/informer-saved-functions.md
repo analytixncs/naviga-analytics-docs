@@ -1306,7 +1306,7 @@ The return object contains the following keys
    exchangeRate: $record['a_d_internet_campaigns_assoc_currRate'],
    campaignType: $record['a_d_internet_campaigns_assoc_campaignType'],
    noAgencyCommFlag: $record['noAgyCommInd'],
-   agencyCommissionPctIn: $record['aDInternetCampaigns_assoc_commissionPct']
+   agencyCommissionPctIn: $record['a_d_internet_campaigns_assoc_commissionPct']
  }
 
 // Call the function
