@@ -83,6 +83,31 @@ https://xxx.navigahub.com/EW/XXX/general/setup/name_maint_general
 
 
 
+## Various Emails / Contact fields
+
+### General Emails Field
+
+The Email field seen below is found in the **GEN Company/Individual Names** mapping.  There are two fields that make this up:
+
+- EMAIL.ADDRESSES <21> - This is the email address field.
+- EMAIL.IDS <143> - This is the Type field seen below.
+
+> Note that both of the above fields are Mulitvalued.  This means that there can be more than one email address stored per Client Name.
+
+![Email Fields General](images/informerMapping_gen_client_emailfields_001-5.png)
+
+### Employees
+
+
+
+![Employees](images/informerMapping_gen_client_emailfields_002.png)
+
+
+
+From Informer
+
+![Employees From Informer](images/informerMapping_gen_client_emailfields_002-5.png)
+
 ## Statement Email Address
 
 In GEN Clients, there is a **Statement Email ID**, this ID is a link into the **GEN Company/Individual Names**, however it is not mapped in the Informer system as of June 2022.  You can add a manual link to remedy this.

@@ -123,3 +123,13 @@ Please note, that the Month Credit Id mapping will hold credit that only apply t
 ### Reversing Credits
 
 Reversing Credits are stored in **AD Internet Campaigns** for both Performance and Flexible Campaigns in attribute **UNBILLED.CREDIT.IDS <252>** with related information in F251 through F255.
+
+
+
+## AR Cash
+
+The **AR Cash** mapping holds your received payments.  Depending on the information you need, you may start a report from **AR Invoices** and pull some payment information from **AR Cash** OR you may start from **AR Cash** and pull some invoice information from **AR Invoices**.
+
+It will depend on your report's needs.  The relationship between the two mappings is a many to many.
+
+This means that one Invoice could have multiple payments being used to pay it down OR one payment could be used to pay multiple invoices.
