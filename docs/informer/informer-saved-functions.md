@@ -1343,9 +1343,9 @@ $record.netLineForeignAmount = returnAmounts.netForeign
  }
 ```
 
-## calculateRepAmount- Create Function
+## calculateRepAmounts - Create Function
 
-- **Function name:** calculateRepAmount
+- **Function name:** calculateRepAmounts
 
 - **Namespace:** naviga
 
@@ -1385,7 +1385,7 @@ function returnANumber(numberIn) {
 
 
 
-## calculateRepAmount - Usage
+## calculateRepAmounts - Usage
 
 This function is for use explicitly with the the MV Current Rep fields in AD Internet Orders.  It accepts two parameters, the first `repPcts` being a MV (array) of percent values coming from the AD Internet Orders field **CURRENT.REP.PCTS <264>**.
 

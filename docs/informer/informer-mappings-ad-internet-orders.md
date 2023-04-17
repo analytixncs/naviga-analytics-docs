@@ -603,7 +603,7 @@ Each Product will have a default Revenue GL Id and this field will hold it.  In 
 
 :::caution
 
-However, most sites will have GL Overrides, which means that an order line won't be associated with the default Revenue ID (**IN Revenue GL ID**).  This is almost always the case, so never just use the **IN Revenue GL ID**. 
+However, most sites will have GL Overrides, which means that an order line may not be associated with the default Revenue ID (**IN Revenue GL ID**).  This is almost always the case, so never just use the **IN Revenue GL ID**. 
 
 This makes things a bit more tricky, but following the steps below will get you the correct GL.
 
@@ -623,13 +623,15 @@ AD Publications (Web Site) -> GL Type ID (317)
 
 AD Publications (Web Site) -> GL Type Revenue ID (318)
 
+AD Publications (Web Site) -> IN Revenue GL ID (114)
+
 With the above three fields you will see something like this:
 
 ![image-20220211144622274](images/informer_mapping_adinternetorders-GL-002.png)
 
 The first GL Type is from AD Internet Orders and is the "correct" GL Type.  The other fields are from AD Publications and show all GL Types associated with the given publication.
 
-Our Powerscript needs to match the GL Type ID from AD Internet Orders to the correct on from AD Publications and then get the correct GL Code (GL Type Revenue ID).
+Our Powerscript needs to match the GL Type ID from AD Internet Orders to the correct on from AD Publications and then get the correct GL Code (GL Type Revenue ID).  However, if a match is not found, we will use the IN Revenue GL ID <114> on the AD Publications mapping
 
 Here is that code:
 
@@ -640,6 +642,9 @@ Here is that code:
 productGLTypes = $record['web_site_id_assoc_glTypes'];
 productGLRevCodes = $record['web_site_id_assoc_glTypeRevenue'];
 lineGLType = $record['glTypeId']
+
+// Default if match is not found
+$record.RealGLCode = $record['web_site_id_assoc_inetRevCode']
 
 for(let i = 0; productGLTypes.length>i; i++) {
   let el = productGLTypes[i]
