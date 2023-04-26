@@ -6,7 +6,7 @@ sidebar_label: MDX Testing
 
 import { Accordion } from '@site/src/components/UIHelpers';
 
-import LookupFunction from '@site/src/components/LookupFunction';
+import LookupFunction from '@site/src/components/lookupFunction/';
 
 ## Lookup Function
 
