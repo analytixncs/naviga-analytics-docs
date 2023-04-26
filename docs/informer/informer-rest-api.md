@@ -445,9 +445,86 @@ Issue a GET request against that URL.
 
 This is the the route of the temporary Dataset behind the Ad hoc results, and you should can now use the [Dataset Exporter Route](#get---exporters-json/csv/etc) to build a call to export the data the way you would export any other Dataset.
 
+## Saved Functions
+
+The average user will never need these routes, I have added them here in case anyone is interested.
+
+### GET - Saved Functions List
+
+**/api/functions**
+
+This route will take either a token or Basic Auth and will return a list of Saved Function found in the Administration area.
+
+The output format will be an array of the follow objects:
+
+```json
+{
+        "id": "a48b6a10-5323-4cbf-ad33-f8e9a52fc46b",
+        "name": "calculateLineAmounts",
+        "namespace": "naviga",
+        "description": "Calculate Line foreign, local, gross and net amounts",
+        "script": " const { actAmount, estAmount, \n         campaignType, exchangeRate = 1, \n         agencyCommMethod = 1, \n return returnANumber(grossAmt * agencyCommissionPct);\n}\n\n",
+        "params": [
+            {
+                "id": "inputObj",
+                "label": "inputObj",
+                "sample": "",
+                "dataType": "any"
+            }
+        ],
+        "createdAt": "2023-02-27T19:24:25.359Z",
+        "updatedAt": "2023-03-21T15:02:05.624Z"
+    }
+```
+
+### POST - Create a Saved Function
+
+**/api/functions**
+
+This is the same route, but will contain a body of JSON data that defines the function
+
+:::tip
+
+Before creating a new function, it is good practice to get a list of existing functions using the GET verb and if the name you are trying to create exists in the same Namespace, then don't create it.  I would go as far to say, if the name exists in ANY namespace, don't create it.
+
+It looks like the POST call itself does some checking on uniqueness of the **name** within the **namespace**.
+
+:::
+
+The `body` of this route contains all the data for the new function. Here is the format:
+
+```json
+{
+    "name": "nameOfFunction",
+    "namespace": "Namespace",
+    "description": "Description of Function",
+    "script": "Stringified code.  Make sure to run the code through JSON.stringify()",
+    "params": [
+        {
+            "id": "inputObj",
+            "label": "inputObj",
+            "sample": "",
+            "dataType": "any"
+        }
+    ]
+}
+```
+
+Also, be aware that if you **script** code has any errors, it will not be created, but your response will be:
+
+```json
+{
+    "statusCode": 400,
+    "error": "Bad Request",
+    "message": "Function invalid: xbox is not defined"
+}
+```
+
+
+
 ## Other Information
 
-### q examples
+q examples
 
 You can filter on a single field using the `q` parameter. If you need multiple values, separate them by a space
 
@@ -459,7 +536,7 @@ q=repName="Rep Name"
 
 Here is an example:
 
-...&**q=repName:"Donna Beasley" "Kelly Smith"**
+...&**q=repName:"Tina Turner" "Dwayne Johnson"**
 
 ### filter examples
 

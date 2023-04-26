@@ -14,7 +14,20 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
     favicon: "img/favicon.png",
     organizationName: "Naviga Inc", // Usually your GitHub org/user name.
     projectName: "naviga-analytics-docs", // Usually your repo name.
-    plugins: [require.resolve("@cmfcmf/docusaurus-search-local")],
+    plugins: [
+      require.resolve("@cmfcmf/docusaurus-search-local"),
+      async function myPlugin(context, options) {
+        return {
+          name: "docusaurus-tailwindcss",
+          configurePostCss(postcssOptions) {
+            // Appends TailwindCSS and AutoPrefixer.
+            postcssOptions.plugins.push(require("tailwindcss"));
+            postcssOptions.plugins.push(require("autoprefixer"));
+            return postcssOptions;
+          },
+        };
+      },
+    ],
     presets: [
       [
         "@docusaurus/preset-classic",
