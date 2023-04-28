@@ -5,7 +5,7 @@ function LookupItem({ codeIn, valueIn, onEdit, onDelete }) {
   const [value, setValue] = useState(valueIn);
   console.log("CODE IN", codeIn, code);
   return (
-    <div className="flex flex-row space-x-2 items-end  mb-2">
+    <div className="flex flex-row space-x-2 items-end justify-start mb-2">
       <div className="flex flex-col">
         {/* <label htmlFor="code">code</label> */}
         <input
@@ -23,7 +23,11 @@ function LookupItem({ codeIn, valueIn, onEdit, onDelete }) {
           type="text"
           id="value"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+            if (!e.target.value.endsWith('"')) {
+              setValue(e.target.value);
+            }
+          }}
         />
       </div>
       <button
