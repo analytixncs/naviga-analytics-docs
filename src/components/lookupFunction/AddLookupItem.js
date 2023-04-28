@@ -18,7 +18,11 @@ function AddLookupItem({ onAdd }) {
           type="text"
           id="code"
           value={code}
-          onChange={(e) => setCode(e.target.value)}
+          onChange={(e) => {
+            if (!e.target.value.endsWith('"')) {
+              setCode(e.target.value);
+            }
+          }}
         />
       </div>
       <div className="flex flex-col">
@@ -30,7 +34,11 @@ function AddLookupItem({ onAdd }) {
           type="text"
           id="value"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+            if (!e.target.value.endsWith('"')) {
+              setValue(e.target.value);
+            }
+          }}
         />
       </div>
       <div
