@@ -497,6 +497,8 @@ I have seen times where if steps are not followed, that the target Datasource ma
 
 BUT WAIT, what if you have embedded Datasets in your Flow steps?  Then things get a bit more complicated.  Here is are the steps to follow if you run into that scenario:
 
+
+
 ![image-20230126153539511](images/informer_basics-copydatasetwithembeds.png)
 
 :::

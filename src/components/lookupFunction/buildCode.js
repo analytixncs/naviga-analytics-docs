@@ -60,7 +60,7 @@ const buildCurlStatment = (postCall) => {
   const curlStmt = `curl --location 'https://devbi.navigahub.com/api/functions' \\
 --header 'Content-Type: application/json' \\
 --header 'Authorization: Basic YOU_NEED_TO_FILL_THIS_IN' \\
---data ${postCall}`;
+--data '${postCall}'`;
 
   return curlStmt;
 };
