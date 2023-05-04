@@ -183,16 +183,14 @@ function LookupFunction() {
                 <div className="flex flex-row justify-between items-start col-span-3 w-full">
                   <textarea
                     className="w-full textarea textarea-primary leading-4"
-                    value={JSON.stringify(postBody)}
+                    value={JSON.stringify({ ...postBody })}
                     readOnly
                     rows={5}
                   />
                   <div
                     className="ml-1 border-solid border border-blue-800 rounded-md pt-1 px-1 hover:bg-blue-800 hover:text-white"
                     onClick={() =>
-                      copyToClipboard(
-                        JSON.stringify(createPostCall({ lookupObj: lookups }))
-                      )
+                      copyToClipboard(JSON.stringify({ ...postBody }))
                     }
                   >
                     <MdFileCopy />
