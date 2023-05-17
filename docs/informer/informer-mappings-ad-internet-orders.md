@@ -10,9 +10,15 @@ import { Accordion } from '@site/src/components/UIHelpers';
 
 The AD Internet Orders mapping is the detail level of a campaign. It will hold the individual line items.
 
-**AD Internet Campaigns** hold the summary data and then links to the **AD Internet Orders** mapping for the detail about the lines and reps.
+[**AD Internet Campaigns**](informer-mappings-ad-internet-campaigns) hold the summary data and then links to the **AD Internet Orders** mapping for the detail about the lines and reps.
 
 Given that most of the reports that you write that pull data for Orders will want the detail level information found in **Ad Internet Orders**, it is recommended that you start with the AD Internet Orders mapping.
+
+## Last Changed Date
+
+If you change or edit a line (AD Internet Orders), it will update the line Last Change Date/Time/User in AD Internet Orders, but NOT the Last Change Date fields in the AD Internet Campaigns mapping, **unless** you are adding/deleting a line because only a line addition/removal would change the data on the campaign as well.
+
+If something changes in the campaign header record then it will update the AD Internet Campaigns Last Change Date/Time/User but NOT the Last Change Date fields in the AD Internet Orders mapping.
 
 ## Filtering
 
@@ -603,9 +609,11 @@ Each Product will have a default Revenue GL Id and this field will hold it.  In 
 
 :::caution
 
-However, most sites will have GL Overrides, which means that an order line may not be associated with the default Revenue ID (**IN Revenue GL ID**).  This is almost always the case, so never just use the **IN Revenue GL ID**. 
+However, most sites will have GL Overrides, which means that an order line may not be associated with the default Revenue ID (**IN Revenue GL ID**).  This is almost always the case, so never just use the **AD Publication -> IN Revenue GL ID**. 
 
 This makes things a bit more tricky, but following the steps below will get you the correct GL.
+
+In the code you will see that we still use the **AD Publication -> IN Revenue GL ID <114>** as the *default* GL.  This is because there may not be a match between the GL Type ID from AD Internet Orders and one of the fields in **AD Publication -> GL Type Revenue ID <318>** and if this is the case, we will default to the IN **Revenue GL ID <114>**.
 
 :::
 
@@ -668,7 +676,88 @@ This dataset is name **[NAVIGA]-GL To External GL**
 
 :::
 
+### Adding Level Descriptions for your Real GL Code information
+
+Each GL Code is in the mapping **GL Chart of Accounts** and in that table, the GL Code can be broken out into 6 different "levels".  If you have done this and want to also pull in specific Level description, you have some extra work to do.
+
+The **AD Publication -> GL Type Revenue ID <318>** does not have a relationship to its GL Chart of Accounts, so that must first be added.
+
+Go to the Datasources area and double click on the Datasource that you want to add this link to.  Then click on the Links icon and click **NEW LINK**.
+
+![image-20230510131746937](images/informer_mapping_adinternetorders-GL-Levels000.png)
+
+
+
+On the screen that is displayed, enter the following information.  
+
+> NOTE:  Change the SITEID to your Site's three letter Identifier.
+
+![image-20230510131413137](images/informer_mapping_adinternetorders-GL-Levels001.png)
+
+You will then need to add all of the Level Descriptions that you need.  In the diagram below, you will see that I am adding the Desc for Level 1.  You would then repeat the process for any other Level Descriptions that you need.
+
+![image-20230510132158698](images/informer_mapping_adinternetorders-GL-Levels003.png)
+
+Now that we have added the Override GLs Level information, we next add the default  GL Level information.
+
+That will be found in the **Inet Revenue GL** associated mapping.  Again, grab each of the Level Descriptions that you need.
+
+![image-20230510132446782](images/informer_mapping_adinternetorders-GL-Levels004.png)
+
+The next step is to process these fields in our Powerscript.  The below Powerscript does the same things as the first Powerscript  you encountered in this section, except that we are now adding the Level descriptions into the mix.
+
+I am just adding the first four, if you need more, you can add them.
+
+```javascript
+// Loop through the all the GL Types on a product
+// and match it to the GL Type on the Order Line
+// Return the matching GL code for the GL Type
+productGLTypes = $record['web_site_id_assoc_glTypes'];
+productGLRevCodes = $record['web_site_id_assoc_glTypeRevenue'];
+productGLRevDescriptions = $record['web_site_id_assoc_gl_type_rev_gl_chart_of_accounts_mgh_glDesc']
+lineGLType = $record['glTypeId']
+level1Desc = $record['web_site_id_assoc_gl_type_rev_gl_chart_of_accounts_mgh_g_lkeyslevel_1_assoc_desc']
+level2Desc = $record['web_site_id_assoc_gl_type_rev_gl_chart_of_accounts_mgh_g_lkeyslevel_2_assoc_desc']
+level3Desc = $record['web_site_id_assoc_gl_type_rev_gl_chart_of_accounts_mgh_g_lkeyslevel_3_assoc_desc']
+level4Desc = $record['web_site_id_assoc_gl_type_rev_gl_chart_of_accounts_mgh_g_lkeyslevel_4_assoc_desc']
+
+//--Default values if there is no match found with the GL Type from AD Internet Orders
+$record.RealGLCode = $record['web_site_id_assoc_inetRevCode']
+$record.RealGLDesc = $record['web_site_id_assoc_inet_revenue_gl_assoc_glDesc']
+$record.RealLevel1Desc = $record['web_site_id_assoc_inet_revenue_gl_assoc_g_lkeyslevel_1_assoc_desc']
+$record.RealLevel2Desc = $record['web_site_id_assoc_inet_revenue_gl_assoc_g_lkeyslevel_2_assoc_desc']
+$record.RealLevel3Desc = $record['web_site_id_assoc_inet_revenue_gl_assoc_g_lkeyslevel_3_assoc_desc']
+$record.RealLevel4Desc = $record['web_site_id_assoc_inet_revenue_gl_assoc_g_lkeyslevel_4_assoc_desc']
+
+for(let i = 0; productGLTypes.length>i; i++) { 
+  let el = productGLTypes[i]
+  if (el === lineGLType) {
+    $record.RealGLCode = productGLRevCodes[i]
+      $record.RealGLDesc = productGLRevDescriptions[i]
+      $record.RealLevel1Desc = level1Desc[i]
+      $record.RealLevel2Desc = level2Desc[i]
+	  $record.RealLevel3Desc = level3Desc[i]
+	  $record.RealLevel4Desc = level4Desc[i]
+    // Only needed if you "need" the external gl code (changeCode)
+    // $record.RealExternalGLCode = $record['changeCode'][i]
+    break;
+  }
+} 
+
+glParts = $record.RealGLCode.split("*")
+$record.ReaclLevel1 = glParts[0]
+$record.ReaclLevel2 = glParts[1]
+$record.ReaclLevel3 = glParts[2]
+$record.ReaclLevel4 = glParts[3]
+```
+
+
+
+---
+
 Lastly, you will want to remove the Web Site GL Type ID and Web Site GL Type Revenue ID field from you report so that you don't get the multivalued fields showing.
+
+> NOTE: if you chose to add Level Descriptions, those fields should also be included in the remove step.
 
 > Download a sample Dataset:
 > **<a  target="_blank"  href="/downloads/naviga-ad-internet-orders-with-gl.tgz"> [NAVIGA]-AD Internet Orders With GL</a>**
