@@ -181,3 +181,13 @@ For example "**19736** *43200000*" would be interpreted as:
  **19736** = 1/12/2022 - 12/31/1967
 
 *43200000* = 12:00:00:000 PM
+
+## Number Field Formats
+
+
+
+### AD Internet Orders
+
+**X Value <157>** and **Y Value <158>**
+
+![image-20230516084128935](images/informer_mapping_othermappings_sizes_001.png)

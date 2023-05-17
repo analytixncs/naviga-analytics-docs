@@ -4,16 +4,41 @@ title: Hearst Implementation
 sidebar_label: H-I
 ---
 
-## Flexible Revenue Dataset
+## Rules for Preprint Distribution
 
-**Main Dataset - HNP Dev version**
+In both the Performance and Flexible Campaign Datasets, we need to use some logic to extract the **Preprint Distribution** number.
 
-- [**DEV_HNP-AD Internet Orders With GL FLEXIBLE**](https://hnpbi.navigahub.com/datasets/STASI.MOFFRE@HEARSTNP.COM:dev_hnp-ad-internet-orders-with-gl-flexible)
+It starts with the **AD Internet Orders** -> **AD.TYPE.ID <3>** field.
 
-**Dependencies - HNP DEV version**
+- IF the first **five characters = PPCPM** THEN  **AD Internet Orders -> MONTH.EST.QTY<72>** is the Preprint Distribution number
+- If the first **four characters =  PPFF**  THEN **AD Internet Orders -> UDF_TEXT_2** is the Preprint Distribution number
 
-- [**DEV_HNP-JOIN-GL To External GL**](https://hnpbi.navigahub.com/datasets/STASI.MOFFRE@HEARSTNP.COM:dev_hnp-join-gl-to-external-gl) - Joins on the **GL Code** and returns the External GL Code
-- [**DEV_HNP-JOIN-Campaigns Journal Entries**](https://hnpbi.navigahub.com/datasets/STASI.MOFFRE@HEARSTNP.COM:dev_hnp-join-campaigns-journal-entries) - Joins on the **Campaign Id**, **Line Id**, and **Month Start Date** and returns revenue side of the journal entry.
+## Performance Campaign Dataset
+
+[Preprint Distribution Field Rules](#rules_for_preprint_distribution)
+
+**Revenue Recognition Date** Logic
+
+**BOOKED Lines**
+
+Get the **Sunday** AFTER the **AD Internet Orders -> MONTH.START.DATE <70>**
+
+**BILLED Lines**
+
+Use the **AD Internet Orders -> Month Invoice Id -> INVOICE.DATE <3>** field.
+
+
+
+## Flexible Campaign Dataset
+
+**Main Dataset - HNP TEST version**
+
+- [**AAD STG_FLEXIBLE**](https://hnptestbi.navigahub.com/datasets/hnp_it_advertising@chron.com:aad-stg_flexible)
+
+**Dependencies - HNP TEST version**
+
+- [**AAD [JOIN]-GL To External GL**](https://hnptestbi.navigahub.com/datasets/admin:aad-join-gl-to-external-gl) - Joins on the **GL Code** and returns the External GL Code
+- [**AAD STG_FLEXIBLE [JOIN]- Journal Entries**](https://hnptestbi.navigahub.com/datasets/STASI.MOFFRE@HEARSTNP.COM:aad-stg_flexible-join-journal-entries) - Joins on the **Campaign Id**, **Line Id**, and **Month Start Date** and returns revenue side of the journal entry.
 
 :::info
 
@@ -21,7 +46,19 @@ Be sure to include the above dependencies in the refresh job for the Main datase
 
 :::
 
-The **JOIN Campaigns Journal Entries**
+[Preprint Distribution Field Rules](#rules_for_preprint_distribution)
+
+**Revenue Recognition Date** Logic
+
+**BOOKED Lines**
+
+Get the **Sunday** AFTER the **AD Internet Orders -> MONTH.START.DATE <70>**
+
+**BILLED Lines**
+
+Get the Sunday **BEFORE** the **Journal Posted Date** from the `AAD STG_FLEXIBLE [JOIN]- Journal Entries` joined mapping.
+
+
 
 ## GEN Security Mapping
 

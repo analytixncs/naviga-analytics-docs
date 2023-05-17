@@ -10,9 +10,16 @@ When pulling back records from AD Internet Campaigns, you can filter on the Stat
 
 - **IS** - Invoicing Started
 - **CO** - Confirmed
-- **R%** - 
+- **R%** - Reserved 
+- **Q%** - Quoted
 
 > NOTE: This is the status at the **Campaign** level. So, it will be filtering on campaign level status's. If you are pulling data in from AD Internet Orders also, you will need to also filter on the **Line Cancel Status ID (LINE.CANCEL.STATUS.ID #26)**
+
+## Last Changed Date
+
+If something changes in the campaign header record then it will update the AD Internet Campaigns Last Change Date/Time/User but NOT the Last Change Date fields in the AD Internet Orders mapping.
+
+If you change or edit a line (AD Internet Orders), it will update the line Last Change Date/Time/User in AD Internet Orders, but NOT the Last Change Date fields in the AD Internet Campaigns mapping, **unless** you are adding/deleting a line because only a line addition/removal would change the data on the campaign as well.
 
 ## Amount Fields
 
