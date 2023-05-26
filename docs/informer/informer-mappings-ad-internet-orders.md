@@ -611,9 +611,22 @@ To access these fields in Informer, you will need to pull in the following field
 - **Classified Questions Desc (0)**
 - **Class Answers (269)** 
 
+![image-20230526134039749](images/informer_mapping_adinternetorders-classified_002.png)
+
 The above fields are Multivalued and you may want to Normalize them depending on your needs.
 
-![image-20230526134039749](images/informer_mapping_adinternetorders-classified_002.png)
+However, if you would prefer to have each Class Questions Desc be its own column, you can do this with the below Powerscript:
+
+```javascript
+// Loop through the question descriptions and create a new field 
+// for each question with the column name being Q-"Question Desc", with
+// its value being the Answer.
+for (const [index, question] of $record['classQuestionsDescs'].entries()) {
+    $record[`Q-${question}`] = $record['classAnswers'][index]
+}
+```
+
+You will then want to use a **Remove** flow step to remove the original `$record['classQuestionsDescs']` and `$record['classAnswers']` fields.
 
 ## GL Codes in AD Internet Orders
 
