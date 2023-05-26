@@ -75,6 +75,8 @@ In the User Reports mapping you can use:
 
 ### Classified Category Tree and Classified Category
 
+>  **NOTE:** If you are accessing this information from the AD Internet Orders mapping, go here ->  [Classified Category Tree and Classified Category](informer-mappings-ad-internet-orders#classified-category-tree-and-category)
+
 These fields exist in the **AD Internet Classified** mapping but are NOT linked to anything. However, the individual fields _Category Tree_ and _Category_ exist on the **AD Internet Orders** mapping. You can pull these fields in from this mapping and in from the **User Reports** mapping you would get to it by going to the **Internet Order (newer Elan releases)**, which is just the **AD Internet Orders** mapping renamed for this link.
 
 ![image-20210525153827370](images/informer-mapping-userreports-002.png)
