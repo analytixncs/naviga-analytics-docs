@@ -586,9 +586,23 @@ The last thing we need to do is remove the `monthActualAmt` and `monthEstAmt` fi
 
 ---
 
-## Metadata Fields
+## Classified Category Tree and Category
 
-The Metadata fields are found on the Category MetaData tab in the Naviga system:
+In Naviga Ad, on certain Ad Types Lines, you have the Category Tree and Category as seen below.
+
+![image-20210525154031808](images/informer-mapping-userreports-003.png)
+
+To get these fields from the **AD Internet Orders** mapping, you can use three different links
+
+- **CLASS.TREE.ID <267>** - This field links to the Classified Tree ID relationship.  To get the Desc, go the the **Classified Tree ID** and choose **CATEGORY.DESC <1>**.
+- **CATEGORY.ID<0>** - This field links to the Category ID relationship. To get the Desc, go the the **Category ID** and choose **CATEGORY.DESC <1>**.
+- **INET.CLASSIFIEDS.KEY<0>** - This field links to the Classified Category Detail relationship. It will result in the same information as the CATEGORY.ID linkage. To get the Desc, go the the **Category ID** and choose **CATEGORY.DESC <1>**.
+
+![image-20230526105630848](images/informer_mapping_adinternetorders-classified_001.png)
+
+## Classifieds Metadata Fields
+
+The Metadata fields are found on the Category Metadata tab in the Naviga system:
 
 ![image-20211102124100426](images/informer_mapping_metadata-001.png)
 
@@ -597,7 +611,9 @@ To access these fields in Informer, you will need to pull in the following field
 - **Classified Questions Desc (0)**
 - **Class Answers (269)** 
 
-The above fields are Multivalued and you will most likely want to Normalize them.
+The above fields are Multivalued and you may want to Normalize them depending on your needs.
+
+![image-20230526134039749](images/informer_mapping_adinternetorders-classified_002.png)
 
 ## GL Codes in AD Internet Orders
 
