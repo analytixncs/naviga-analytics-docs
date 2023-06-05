@@ -605,7 +605,59 @@ Breaking this apart:
 - \* - every month
 - 1-5 - only on Mon - Fri
 
+### Useful CRON Information
 
+**Run Job on the Last Day of Every Month**
+
+`45 22 L * ?`
+
+| Minute | Hour | Day Of Month | Day of Week | Month | Year |
+| ------ | ---- | ------------ | ----------- | ----- | ---- |
+| 45     | 22   | L            | *           | ?     |      |
+
+- **Minute (45):** The job will be triggered when the clock reaches 45 minutes past the hour. In this case, the job will run at 22:45.
+
+- **Hour (22):** The job will run at 22:45 (10:45 PM) in the specified time zone.
+
+- **Day of the month (L):** The letter "L" represents the last day of the month. Therefore, the job will run on the last day of each month.
+- **Day of the week ():** The asterisk "" indicates that the job will run on any day of the week. It is not limited to a particular day.
+
+- **Month (?):** The question mark "?" is used as a placeholder, indicating that the job is not restricted to a specific month. It will run regardless of the month.
+
+- **Year (empty):** Since the year part is left empty, the job will run every year.
+
+To summarize, this CRON job is scheduled to run at 22:45 (10:45 PM) on the last day of every month, regardless of the day of the week or the year.
+
+#### Day Of Month Position
+
+| Minute | Hour | Day Of Month | Day of Week | Month | Year |
+| ------ | ---- | ------------ | ----------- | ----- | ---- |
+|        |      | L            |             |       |      |
+
+The **Day of the Month** portion of the CRON expression is very versatile.  Here are some ways you can use it.
+
+In the day of the month field of a CRON expression (3rd position), besides the "L" that represents the last day of the month, you can use the following conventions to get the exact days you need your Job to run.
+
+1. **Specific Day of the Month**: You can specify a particular day of the month using a numeric value between 1 and 31. For example, "1" represents the first day of the month, "15" represents the fifteenth day, and so on.
+2. **Multiple Specific Days**: If you want to schedule the job on specific multiple days of the month, you can separate the values with commas. For example, "1,15" will schedule the job on both the first and fifteenth days of the month.
+3. **Range of Days**: You can specify a range of days using a hyphen (-). For example, "10-15" will schedule the job on the days 10, 11, 12, 13, 14, and 15 of the month.
+4. **Step Values**: Step values allow you to specify intervals within a range. For example, "*/2" in the day of the month field will schedule the job every two days. Similarly, "3-15/2" will schedule the job every second day between the 3rd and 15th of the month.
+
+
+
+#### Day of Week Position
+
+| Minute | Hour | Day Of Month | Day of Week | Month | Year |
+| ------ | ---- | ------------ | ----------- | ----- | ---- |
+|        |      |              | *           |       |      |
+
+Here are some options to customize the **Day of Week** that the Job will run:
+
+1. **Numeric Values:** You can use numeric values ranging from 0 to 7, where both 0 and 7 represent Sunday, 1 represents Monday, and so on, up to 7 representing Saturday.
+2. Names of Days: Instead of numeric values, you can also use the names of the days of the week, such as "Sun" for Sunday, "Mon" for Monday, and so on. The specific names may vary depending on the CRON implementation or software you are using.
+3. **Asterisk (*):** The asterisk "*" is a wildcard character that indicates the job should run on any day of the week.
+4. **Multiple Days:** If you want to schedule the job on specific multiple days of the week, you can separate the values with commas. For example, "Mon,Wed,Fri" will schedule the job on Mondays, Wednesdays, and Fridays.
+5. **Range of Days**: You can specify a range of days using a hyphen (-). For example, "Mon-Fri" will schedule the job from Monday to Friday.
 
 ### Send an Encrypted Email Attachment
 

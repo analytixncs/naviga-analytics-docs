@@ -621,8 +621,18 @@ However, if you would prefer to have each Class Questions Desc be its own column
 // Loop through the question descriptions and create a new field 
 // for each question with the column name being Q-"Question Desc", with
 // its value being the Answer.
-for (const [index, question] of $record['classQuestionsDescs'].entries()) {
-    $record[`Q-${question}`] = $record['classAnswers'][index]
+// NOTE: We are "cleaning" the questions desc to remove special character.
+//   This isn't really needed, but it makes the fields names more consistent.
+//   You may remove it if you want.
+if ($record['classQuestionsDescs'].length > 0) {
+    pattern = /[^a-zA-Z0-9.-]/g;
+    replacement = "";
+
+
+    for (const [index, question] of $record['classQuestionsDescs'].entries()) {
+        cleanQuestion = question.replace(pattern, replacement);
+        $record[`Q-${cleanQuestion}`] = $record['classAnswers'][index]
+    }
 }
 ```
 
