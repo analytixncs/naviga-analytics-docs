@@ -112,9 +112,12 @@ function LookupFunction() {
             })}
           </div>
           <div className="flex flex-col justify-end items-end w-full my-2">
-            <div className="ml-1 self-start font-bold">
+            <div className="ml-1 self-start font-semibold">
               Enter comma or tab delimited lookup pairs. Each pair on a new
               line.
+            </div>
+            <div className="text-lg font-bold self-start">
+              DO NOT INCLUDE QUOTES AROUND TEXT
             </div>
             <textarea
               className="textarea textarea-primary w-full mb-2 leading-4"
