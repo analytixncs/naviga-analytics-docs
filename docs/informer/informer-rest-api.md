@@ -445,6 +445,46 @@ Issue a GET request against that URL.
 
 This is the the route of the temporary Dataset behind the Ad hoc results, and you should can now use the [Dataset Exporter Route](#get---exporters-json/csv/etc) to build a call to export the data the way you would export any other Dataset.
 
+## Live Excel 
+
+Live Excel uses a special POST query to get the data into Excel.  This query, when pointed to an Ad Hoc Query, first runs the query and the sends the data formatted specifically for Excel.  For Datasets, it does the same except it does NOT refresh the dataset.
+
+If you open an `iqy` file in Notepad, you will see the query.  We will look at the raw query and also how to format it to run in a `curl` statement.
+
+**Ad Hoc Report Live Excel Raw Query**
+
+```
+https://baybi.navigahub.com/api/live-excel/token?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiI5Njk1NGM5Yi1jMDY5LTQwOGMtYjU1Zi1kNjFhYjZlYjFhMDUiLCJpYXQiOjE2ODYyNTYzNDMuNDk4fQ.ivCggj_YEkohufd7o1o8JhHiXrNA9n5xXdGwHSvsNJU
+query=99d6424a-c732-4109-ac7e-05bcb2f7c502&delimiter=,&mvHandling=customDelimit&showColumnHeaders=true
+```
+
+Converted to a Curl Statement
+
+```bash
+curl -X POST "https://baybi.navigahub.com/api/live-excel/token?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiI5Njk1NGM5Yi1jMDY5LTQwOGMtYjU1Zi1kNjFhYjZlYjFhMDUiLCJpYXQiOjE2ODYyNTYzNDMuNDk4fQ.ivCggj_YEkohufd7o1o8JhHiXrNA9n5xXdGwHSvsNJU" -d "query=99d6424a-c732-4109-ac7e-05bcb2f7c502&delimiter=,&mvHandling=customDelimit&showColumnHeaders=true"
+```
+
+**Dataset Live Excel Raw Query**
+
+```
+https://baybi.navigahub.com/api/live-excel/token?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiI1ZmVjNmJiYi0yM2Q5LTRlNGMtYTE3NC03YTE0ZDRjNGFhZDkiLCJpYXQiOjE2ODYyNTc2MjMuMzIzfQ.ozraeFIh6IeLia4sC8-SoPRd4hU5nLYoVx80AAsnRDk
+dataset=e0e99154-ff65-404f-ab1c-44c1ef6b0d75&delimiter=,&mvHandling=customDelimit&showColumnHeaders=true
+```
+
+Converted to a Curl Statment
+
+```bash
+curl -X POST "https://baybi.navigahub.com/api/live-excel/token?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiI1ZmVjNmJiYi0yM2Q5LTRlNGMtYTE3NC03YTE0ZDRjNGFhZDkiLCJpYXQiOjE2ODYyNTc2MjMuMzIzfQ.ozraeFIh6IeLia4sC8-SoPRd4hU5nLYoVx80AAsnRDk" -d "dataset=e0e99154-ff65-404f-ab1c-44c1ef6b0d75&delimiter=,&mvHandling=customDelimit&showColumnHeaders=true"
+```
+
+If you have an issue with CURL in Powershell, it may be aliased as something else.  Just run the following in your Powershell
+
+```
+$ remove-item alias:curl
+```
+
+
+
 ## Saved Functions
 
 The average user will never need these routes, I have added them here in case anyone is interested.

@@ -9,6 +9,7 @@ function ManualEntry({ lookups, functionName }) {
     [lookups, functionName]
   );
   console.log("POST", postBody);
+
   return (
     <div className="border-solid border-2 border-[#ee3b3f] rounded-lg p-2 w-full">
       {/* ROW 1 */}
@@ -33,11 +34,7 @@ function ManualEntry({ lookups, functionName }) {
       </div>
       {/* ROW 4  */}
       <div className="flex flex-row justify-start items-center w-full">
-        <LabeledInput
-          label="Script"
-          value={JSON.stringify(postBody)}
-          type="textarea"
-        />
+        <LabeledInput label="Script" value={postBody.script} type="textarea" />
       </div>
     </div>
   );
