@@ -56,6 +56,16 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
     themeConfig:
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
+        admonitions: {
+          disableTailwind: true,
+          styles: {
+            base: {
+              color: "red",
+              borderRadius: `var(--border-radius-md)`,
+              padding: `var(--padding-md)`,
+            },
+          },
+        },
         navbar: {
           title: "Naviga Analytics",
           logo: {

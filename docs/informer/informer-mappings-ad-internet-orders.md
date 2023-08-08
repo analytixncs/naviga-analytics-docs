@@ -16,9 +16,50 @@ Given that most of the reports that you write that pull data for Orders will wan
 
 ## Last Changed Date
 
-If you change or edit a line (AD Internet Orders), it will update the line Last Change Date/Time/User in AD Internet Orders, but NOT the Last Change Date fields in the AD Internet Campaigns mapping, **unless** you are adding/deleting a line because only a line addition/removal would change the data on the campaign as well.
+If you change or edit a line (**AD Internet Orders**), it will update the line Last Change Date/Time/User in AD Internet Orders, **but NOT** the Last Change Date fields in the **AD Internet Campaigns** mapping, **unless** you are adding/deleting a line because only a line addition/removal would change the data on the campaign as well.
 
-If something changes in the campaign header record then it will update the AD Internet Campaigns Last Change Date/Time/User but NOT the Last Change Date fields in the AD Internet Orders mapping.
+If something changes in the campaign header record then it will update the **AD Internet Campaigns** Last Change Date/Time/User **AND** the Last Change Date fields in the **AD Internet Orders** mapping.
+
+Here is a list of items being tracked for changes:
+
+ - Expense Budgets
+ - Revenue Budgets
+ - Pre-payment
+ - Exhibition Orders
+ - Override Billing Contact
+ - Override Address
+ - Co-op Details
+ - Billing Schedule
+ - Tearsheet Contacts
+ - Production Contacts
+ - Order Reps
+ - Original Reps
+ - Advertiser Id
+ - Brand Id
+ - Start Date
+ - End Date
+ - Industry Code
+ - Status Code
+ - Agency
+ - Agency Pct%
+ - P.O. Number
+ - Marketing Campaign
+ - Order Contact
+ - Production Controller
+ - Terms Code
+ - Discount Pct%
+ - Contract Id
+ - Run untl Cancel Ind.
+ - Internal Notes
+ - Confimation Comments
+ - Invoice Comments
+ - Journal Entries
+ - Confirmed Date
+ - Self Service Approval Ind.
+ - Self Service Email
+ - Self Service Phone
+ - Linked Jobs
+ - Override Territory
 
 ## Filtering
 
