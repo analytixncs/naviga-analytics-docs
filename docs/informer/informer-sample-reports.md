@@ -4,6 +4,27 @@ title: Informer Sample Reports
 sidebar_label: Informer Sample Reports
 ---
 
+## AD Internet Orders - Base Revenue Report
+
+This is a great starter for Revenue reports based on the AD Internet Orders mapping. 
+
+It includes 
+
+- Net Revenue - Both local and foreign amounts
+- Rep Revenue - Both local and foreign amounts
+- GL Codes - Based on the overrides in your product setup
+- Other needed fields
+
+
+
+:::note Download Bundle
+
+starter
+
+**<a  target="_blank"  href="/downloads/naviga-ad-internet-orders-starter.tgz">AD Internet Orders Starter</a>**
+
+:::
+
 ## GEN Security File Report
 
 This section has the sample files and explains in detail how to build a report that takes the fields from the **GEN Security File** mapping in Informer and transforms it into a more readable and usable format.  Steps 1-10 will get you a report that has the following format.

@@ -6,7 +6,7 @@
 
 /* You can override the default Infima variables here. */
 @tailwind base;
-@tailwind components;
+/* @tailwind components; */
 @tailwind utilities;
 
 :root {
@@ -40,3 +40,10 @@
 html[data-theme="dark"] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
+
+/* .theme-admonition {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+} */
+ @tailwind components; 

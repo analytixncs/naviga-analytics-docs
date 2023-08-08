@@ -17,9 +17,7 @@ When pulling back records from AD Internet Campaigns, you can filter on the Stat
 
 ## Last Changed Date
 
-If something changes in the campaign header record then it will update the AD Internet Campaigns Last Change Date/Time/User but NOT the Last Change Date fields in the AD Internet Orders mapping.
-
-If you change or edit a line (AD Internet Orders), it will update the line Last Change Date/Time/User in AD Internet Orders, but NOT the Last Change Date fields in the AD Internet Campaigns mapping, **unless** you are adding/deleting a line because only a line addition/removal would change the data on the campaign as well.
+[Docs in AD Internet Orders](informer-mappings-ad-internet-orders#last-changed-date) 
 
 ## Amount Fields
 
