@@ -46,7 +46,8 @@ function LabeledInput({ label, value, type = "input" }) {
   const [state, copyToClipboard] = useCopyToClipboard();
   let inputVal = (
     <input
-      className="input-sm input input-bordered input-accent w-full"
+      className="form-input w-full"
+      // className="input-sm input input-bordered input-accent w-full"
       value={value}
       readOnlhy
     />
