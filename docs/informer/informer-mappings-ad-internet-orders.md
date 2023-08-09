@@ -14,6 +14,8 @@ The AD Internet Orders mapping is the detail level of a campaign. It will hold t
 
 Given that most of the reports that you write that pull data for Orders will want the detail level information found in **Ad Internet Orders**, it is recommended that you start with the AD Internet Orders mapping.
 
+If you need a Dataset to get started check out the [AD Internet Orders Starter dataset](informer-sample-reports#ad-internet-orders-base-revenue-report)
+
 ## Last Changed Date
 
 If you change or edit a line (**AD Internet Orders**), it will update the line Last Change Date/Time/User in AD Internet Orders, **but NOT** the Last Change Date fields in the **AD Internet Campaigns** mapping, **unless** you are adding/deleting a line because only a line addition/removal would change the data on the campaign as well.

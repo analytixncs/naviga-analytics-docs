@@ -125,7 +125,10 @@ function LookupFunction() {
               onChange={(e) => setCommaData(e.target.value)}
               rows={15}
             />
-            <button className="btn btn-primary" onClick={parseCommaData}>
+            <button
+              className="py-2 px-2 bg-purple-300 items-center rounded-md font-bold border-solid border-purple-950"
+              onClick={parseCommaData}
+            >
               Parse Lookup Pairs
             </button>
           </div>

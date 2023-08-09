@@ -42,7 +42,7 @@ function AddLookupItem({ onAdd }) {
         />
       </div>
       <div
-        className="btn-sm btn btn-primary"
+        className="py-1 px-2 bg-purple-300 items-center rounded-md font-bold border-solid border border-purple-950"
         onClick={() => {
           onAdd(code, value);
           setCode("");

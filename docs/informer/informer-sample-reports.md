@@ -4,26 +4,30 @@ title: Informer Sample Reports
 sidebar_label: Informer Sample Reports
 ---
 
-## AD Internet Orders - Base Revenue Report
+## AD Internet Orders Base Revenue Report
 
 This is a great starter for Revenue reports based on the AD Internet Orders mapping. 
 
-It includes 
+:::info Download Bundle
 
-- Net Revenue - Both local and foreign amounts
-- Rep Revenue - Both local and foreign amounts
-- GL Codes - Based on the overrides in your product setup
-- Other needed fields
-
-
-
-:::note Download Bundle
-
-starter
+This is a "starter" dataset that is great for most revenue reports. 
 
 **<a  target="_blank"  href="/downloads/naviga-ad-internet-orders-starter.tgz">AD Internet Orders Starter</a>**
 
 :::
+
+It includes 
+
+- Net/Gross Revenue - Both local and foreign amounts
+- Rep/Gross Revenue - Both local and foreign amounts
+- GL Codes - Based on the overrides in your product setup
+- Other needed fields
+
+To calculate the Revenue Amounts it uses the [calculateLineAmounts](informer-saved-functions#calculatelineamounts---usage) saved function.
+
+To calculate the Rep Revenue Amounts it uses the [calculateRepAmounts](informer-saved-functions#calculaterepamounts---usage) saved function.
+
+The GL codes uses the logic detailed in the documentation -> [GL Code Logic](informer-mappings-ad-internet-orders#gl-codes-in-ad-internet-orders)
 
 ## GEN Security File Report
 
