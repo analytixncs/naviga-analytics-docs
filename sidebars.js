@@ -31,6 +31,7 @@ module.exports = {
       type: "category",
       label: "Informer Mappings",
       items: [
+        "informer/informer-mappings-ad-internet-campaigns",
         "informer/informer-mappings-ad-internet-orders",
         "informer/informer-mappings-ar-invoices",
         "informer/informer-mappings-gen-clients",
