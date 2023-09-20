@@ -29,6 +29,17 @@ To calculate the Rep Revenue Amounts it uses the [calculateRepAmounts](informer-
 
 The GL codes uses the logic detailed in the documentation -> [GL Code Logic](informer-mappings-ad-internet-orders#gl-codes-in-ad-internet-orders)
 
+### Adding Fields to the Starter Dataset
+
+You can add fields to augment the data in the dataset, but you do need to be aware of certain steps if you add certain Multivalued fields.
+
+1. **Month prefixed fields** - If you add any field from AD Internet Orders with the prefix of Month, like MONTH.START.DATE, you will need to make sure that you also add that field to the FIRST normalize flow step.
+2. **Line Detail Level Amount Fields** - Since this started dataset is calculating Rep Revenue amounts, we need to take special steps to make sure to not overstate Line Detail Revenue.  For example, if you had two reps on an order, each getting 50%, then that line would become two separate lines.  The second Flow step includes ANY Revenue field that we do not want duplicated across multiple reps.  So, if you add a value field that you are going to aggregate, make sure to add it to the second Flow step.
+
+![Order Starter 01](images/informer-sample-reports_orderstarter_001.PNG)
+
+
+
 ## GEN Security File Report
 
 This section has the sample files and explains in detail how to build a report that takes the fields from the **GEN Security File** mapping in Informer and transforms it into a more readable and usable format.  Steps 1-10 will get you a report that has the following format.

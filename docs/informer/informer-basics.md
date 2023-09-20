@@ -513,7 +513,7 @@ Then any users who are Data Wizards or above on the Team the Dataset is owned by
 
 There two other very important steps:
 
-1. You must give access to the Datasource used by the Dataset.
+1. You must share the Datasource with the Team that the Dataset is owned by.
    ![image-20230329104701695](images/informer_basics-sharedatasource.png)
 
    
@@ -522,6 +522,10 @@ There two other very important steps:
    ![image-20230329104450259](images/informer_basics-rowfilterpluginOFF.png)
 
 :::
+
+**Jobs Owned by Teams**
+
+If you want a Job to also have a Team for an Owner, the dataset that is in the Job must also be owned by the Team.
 
 ## Jobs & Emails
 
@@ -984,6 +988,32 @@ The dialog that you see when you press **ADD USER OR TEAM** is where the magic h
 You can, and will, add multiple teams. They important part is that for each team, you select **Fitered access** and choose the filters that you want to be applied when any user of the team view the dataset OR a report that uses the dataset.
 
 This becomes a very powerful tool, but again, though needs to be put into the team structure and how the filters are to be constructed to make sure the proper outcome is achieved.
+
+### Limiting Data with User Fields
+
+User Fields can be created by Super Users in the Informer system.  You can create as many as you need, but it is best to discuss with other people who might need to use them so that they can be used across different reports.
+
+**What is a User Field**
+
+User Fields are "buckets" that once created will show up for every user.  Once you have created at leas on User Field you will see a User Fields section on every User:
+
+![UserField 001](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_basics-userfields-001.png)
+
+If you did not specify a default value, the User Field will be empty initially.  
+
+To update the User Field values for each you user, you must manually go into each user and set the value that you want.  In the above example, the **Reps** User Field is intended to hold the Rep ID or an Array of Rep IDs.  Simply click the Edit Fields link and add the Rep ID(s) for the User.
+
+**How to Use**
+
+The power in User Fields comes when you use them in your Filter criteria for reports.  When you create filter criteria, one of the options is **User Fields**
+
+![UserFields_002](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_basics-userfields-002.png)
+
+Now, when a User looks at a Dashboard or Dataset report with this filter set, the filter will look into the User Field you selected for that user and filter based on the value for that User.
+
+For example, if I had a **Reps** User Field for my User, when I logged into Informer and opened the Dashboard report using that filter, it would grab the RepID in the User Field associated with my User and only return value that matched those value.
+
+
 
 ## Questions When Converting from v4 to v5
 

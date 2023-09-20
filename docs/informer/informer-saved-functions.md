@@ -1407,3 +1407,56 @@ You can then pass each amount that you need rep amounts for into a separate call
 
 :::
 
+
+
+## getTopProduct- Create Function
+
+This function will take an array of Products along with their Revenue amounts and return the Product with the greatest amount.  This is intended to be used with Order Lines to determine which product in a campaign is brining in the most revenue.
+
+This will only work if your AD Internet Campaigns mapping is above the AD Internet Orders mapping.  This way you will get a top product for each campaign.
+
+## getTopProduct - Usage
+
+- **Function name:** getTopProduct 
+
+- **Namespace:** naviga
+
+- **Description:** 
+
+- **Parameers:** Object - { productIds: string[], linePrices: number[], digitalFormats?: string[] }
+
+  | Data Type | Variable name | Label                                      | Sample |
+  | --------- | ------------- | ------------------------------------------ | ------ |
+  | inputObj  | inputObj      | { productIds, linePrices, digitalFormats } |        |
+
+
+
+```javascript
+bucket = {}
+productIds = inputObj.productIds || []
+linePrices = inputObj.linePrices || []
+digitalFormats = inputObj.digitalFormats || [""]
+// Initialize bucket object
+productIds.forEach(productId => {
+    bucket = {...bucket, [productId]: 0}
+})
+
+// Total amounts for products in lines
+productIds.forEach((productId, index) => {
+    bucket[productId] =  bucket[productId] + linePrices[index]
+})
+
+// Returns an array of products with the first element being the product
+// with the greatest value
+const sortedBucket = Object.keys(bucket).sort((a, b) => bucket[b] - bucket[a]);
+
+// Get the product with the greatest amount
+topProduct = sortedBucket[0]
+// Get the Digital Format associated 
+topDigitalFormat = digitalFormats[[productIds.findIndex(el => el === topProduct)]]
+
+return { topProduct, topDigitalFormat }
+```
+
+
+
