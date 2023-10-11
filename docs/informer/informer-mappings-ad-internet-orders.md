@@ -681,6 +681,21 @@ if ($record['classQuestionsDescs'].length > 0) {
 
 You will then want to use a **Remove** flow step to remove the original `$record['classQuestionsDescs']` and `$record['classAnswers']` fields.
 
+## Packages in AD Internet Orders
+
+You will find the following field in AD Internet Orders.
+
+- **PACKAGE.ID <167>** - The Package ID associated with the Order
+- **PACKAGE.DESC <274>** - This one is a bit tricky.  It is the Package Description associated with the Package ID in field 167 UNLESS the Package Description for the line has been overwritten in Naviga Ad.  If that is the case, then the Package ID will be empty, BUT the Package Description will have the user entered package description.
+
+:::info AD Internet Price Templates
+
+If you need more detail about the package, you can join to the **AD Internet Price Templates** mapping on the **Package ID <167>** field in **AD Internet Orders**.
+
+:::
+
+
+
 ## GL Codes in AD Internet Orders
 
 In the most basic scenario, you can get the GL Code string from the AD Publications mapping grabbing the **IN Revenue GL ID**. 

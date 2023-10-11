@@ -922,6 +922,40 @@ For system administrator users, you will change their permission from **Normal U
 
 Very few users should have **Super User** access.
 
+#### Disabling or Deleting a User
+
+If a User is no longer with your company and you do not want them to access Informer anymore, you have two options.  You can either **Delete** or **Disable** the user.
+
+**Disable a User**
+
+Since each user can own Datasets and Reports that they built, it usually makes more sense to disable the user instead of deleting them. This will give you time to review the reports the user owns before actually deleting the user.
+
+To Disable a user, go to the Users are and select the user to disable.  Then click on the **Actions** menu in the lower right hand corner and choose **Disable User** from the menu choices.
+
+The user will no longer be able to log into Informer.
+
+![image-20231011101438441](images/informer_basics-userremove-003.png)
+
+
+
+
+
+**Deleting a User**
+
+To delete a user, you first must have Super User privileges.  Also, you must be aware that when you delete a user, if they have any Reports or Datasets that they created, those object will need to either be moved to a new owner or they will be deleted.
+
+Navigate to the Users area and select the User that you want to delete.  In the right side panel you will see a list of the objects the user owns.
+
+![image-20231011100203229](images/informer_basics-userremove-001.png)
+
+Click on the Actions link in the lower right hand corner and choose **Delete** 
+
+You will be given three options.  Unless you are VERY sure that the objects they own are not used, DO NOT "Delete everything they own".  Instead reassign to another User or Team.  If you delete everything, there is no way to retrieve the objects!!
+
+![image-20231011100857620](images/informer_basics-userremove-002.png)
+
+
+
 ### Teams
 
 A team is simply a container for a group of users. Many sites set up teams to mimic divisions within their company.
