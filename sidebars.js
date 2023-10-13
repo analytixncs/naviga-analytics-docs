@@ -57,7 +57,7 @@ module.exports = {
     {
       type: "category",
       label: "Informer API",
-      items: ["informer/informer-rest-api"],
+      items: ["informer/informer-rest-api", "informer/informer-rest-api-builder"],
     },
   ],
 };

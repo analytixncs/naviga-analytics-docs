@@ -1,0 +1,35 @@
+{
+  "apiRoutes":
+  [
+      {
+          "id": 1,
+          "type": "dataset",
+          "name": "export",
+          "HTTPMethod": "get",
+          "route": "/api/datasets/{id}/export/json"
+      },
+      {
+          "id": 2,
+          "type": "dataset",
+          "name": "reload",
+          "HTTPMethod": "post",
+          "route": "/api/datasets/{id}/_refresh"
+      },
+      {
+          "id": 3,
+          "type": "dataset",
+          "name": "info",
+          "HTTPMethod": "get",
+          "route": "/api/datasets/{id}"
+      },
+      {
+          "id": 4,
+          "type": "report",
+          "name": "execute",
+          "HTTPMethod": "post",
+          "route": "/api/queries/{id}/_execute"
+      }
+  ]
+}
+
+
