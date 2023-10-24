@@ -108,6 +108,15 @@ From Informer
 
 ![Employees From Informer](images/informerMapping_gen_client_emailfields_002-5.png)
 
+## Client Terms fields
+
+There are two terms fields:
+
+- A/R Setup Terms - **GEN Clients** **TERMS.CODE** <10> 
+- Advertising Setup - **GEN Clients** **PRINT.TERMS.CODE** <271>
+
+![image-20231023134704610](images/informerMapping_gen_clients-010.jpg)
+
 ## Statement Email Address
 
 In GEN Clients, there is a **Statement Email ID**, this ID is a link into the **GEN Company/Individual Names**, however it is not mapped in the Informer system as of June 2022.  You can add a manual link to remedy this.
