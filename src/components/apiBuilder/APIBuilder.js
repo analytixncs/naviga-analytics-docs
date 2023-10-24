@@ -9,7 +9,7 @@ function APIBuilder() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const baseURL = `http://${company}bi.navigahub.com`;
+  const baseURL = `https://${company}bi.navigahub.com`;
 
   const routeArray = routes.apiRoutes;
 
