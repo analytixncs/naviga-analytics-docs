@@ -20,7 +20,13 @@ If you need a Dataset to get started check out the [AD Internet Orders Starter d
 
 If you change or edit a line (**AD Internet Orders**), it will update the line Last Change Date/Time/User in AD Internet Orders, **but NOT** the Last Change Date fields in the **AD Internet Campaigns** mapping, **unless** you are adding/deleting a line because only a line addition/removal would change the data on the campaign as well.
 
-If something changes in the campaign header record then it will update the **AD Internet Campaigns** Last Change Date/Time/User **AND** the Last Change Date fields in the **AD Internet Orders** mapping.
+If something changes in the campaign header record then it will update the **AD Internet Campaigns** Last Change Date/Time/User **and usually NOT** the Last Change Date fields in the **AD Internet Orders** mapping.  There are some fields that when updated, will update both the Campaign and the Order last changed dates, these include:
+
+- Salesreps
+- Billing Changes
+- Pricing Changes
+
+
 
 Here is a list of items being tracked for changes:
 
