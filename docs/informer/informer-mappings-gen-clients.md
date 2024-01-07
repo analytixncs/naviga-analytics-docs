@@ -230,3 +230,14 @@ In GEN Clients the field AR.AUTH.CC.TO.CHARGE <438> will either be empty, indica
 The value itself is not helpful for your report, however, it allows a join to the **AR Auth CC To Charge** associated mapping (See below), which will have the card details for the selected auto-clear card.
 
 ![image-20230117132205253](images/informer_mapping_genclients-autoclear-balance-002.png)
+
+## Sales CRM Other Contacts
+
+![image-20240105112524618](images/informerMapping_gen_clients_crmothercontact_01.png)
+
+All of the contacts of a customer exist on **GEN Company/Individual Names** mapping in field EMPLOYEES <10>.  These are IDs that will show all of the contacts for the customer.  However, you will not be able to determine if it falls under the My Contacts tab or the Other Contacts tab.
+
+The reason we cannot determine this within Informer is because of how the data is stored.  The CM.PROSPECTS mapping stores this information by NAME.ID*REP.ID, where the REP.ID would be the Rep you are looking for, meaning it is dynamic and not stored in a table per se. The NAME.ID is the customer we are looking for.
+
+If you had that information you would need to join to the CM.PROSPECTS mapping on its KEY, which is NAME.ID*REP.ID.  Then IF the Contact Id (EMPLOYEES) is in the CM.PROSPECTS CONTACT ID <7>, it goes in that REP.ID "My Contacts", if not, then "Other Contacts"
+
