@@ -126,3 +126,18 @@ Within Naviga Ad you can find this association in the User Setup Area.
 
 ![loginuservsreps_001](images/informer-mapping-cmopportunities-uservsrep-001.png)
 
+## Prospect Interests
+
+![image-20240116180434188](images/cm-opportunities-prospect-interests-001.png)
+
+Prospect Interests are found in the CM Prospects mapping in Informer.  They are tricky to work with because the Prospects mapping's key is `Client Id * Rep Id`.  
+
+This means that each rep could have their own Interests for a given Client/Prospect.
+
+Meaning the best we can do is create a report that shows all reps Interest settings for a given client.
+
+The `Interest` data is stored in three fields: 
+
+- PUB.LIST <22>
+- CATEGORY.LIST <23>
+- EXHIBITION.LIST <24>
