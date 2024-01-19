@@ -40,6 +40,76 @@ You can add fields to augment the data in the dataset, but you do need to be awa
 
 
 
+## AR Invoices Performance Applied
+
+> **NOTE**: This is a custom report that may be bugging.  Test and refine to make sure it works for you.
+
+**Download Report Sample**
+
+**<a  target="_blank"  href="/downloads/naviga-ar-invoices-performance-applied_ADHOC.tgz"> AR Invoices Performance Applied Ad Hoc Report - [NAVIGA]-AR Invoices Performance - Applied</a>**
+
+**<a  target="_blank"  href="/downloads/naviga-ar-invoices-applied-by-rep_ADHOC.tgz"> AR Invoices Performance Applied by Rep Ad Hoc Report - [NAVIGA]-AR Invoices Performance - Applied By Rep</a>**
+
+:::info
+
+Be aware that in the second Report (By Rep), that I have modified the sort from Campaign Id, Line Id, Month Start Date to JUST Campaign Id and Line ID.
+
+This had to be done because of how the sorting "explodes" the MV fields to get the Month Start Date sorted.  
+
+This should not be a problem unless you have Lines where the Month start dates are not ascending.  
+
+:::
+
+
+
+This report attempts to show applied amounts for each line's associated invoices and checks how much of the invoice is has been paid.  It then takes this "Applied Amount" and distributes it across the Lines that the invoice is assigned to.  
+
+Many times it is one invoice per line, but if there are multiple Line Details (Month Start Dates), this would distribute the applied amount across those dates.
+
+In cases where the invoice is applied to multiple Line Ids, the code attempts to do the same thing.
+
+
+
+Here is the final Power Script that handles the above:
+```js
+//var netRevenue = $record.netLineLocalAmount
+// Use the rep Net amount for our calculation
+var netRevenue = $record['netRepAmount']
+
+// IF amountAppliedLeft is NOT defined for invoice Initialize it
+if (!$local.amountAppliedLeft[$record['monthInvoiceId']]) {
+    $local.amountAppliedLeft[$record['monthInvoiceId']] = $record['month_invoice_id_assoc_invAmount'] - $record['month_invoice_id_assoc_invBalance']
+}
+
+// If the amountApplied Left is greater than this lines amount, that becomes the applied amount for the line
+// Then we must subtract the line revenue from the amountAppliedLeft reducing it for future lines that may 
+// use the invoice
+
+if ($local.amountAppliedLeft[$record['monthInvoiceId']] >= netRevenue) {
+    $record.lineAmountApplied = netRevenue;
+    $local.amountAppliedLeft[$record['monthInvoiceId']] = $local.amountAppliedLeft[$record['monthInvoiceId']] - netRevenue
+} else {
+    // If amount left is less than the line amount, then we make the line applied amount equal
+    // to the amountAppliedLeft and set the amountAppliedLeft to zero.
+    $record.lineAmountApplied = $local.amountAppliedLeft[$record['monthInvoiceId']]
+    $local.amountAppliedLeft[$record['monthInvoiceId']] = 0
+}
+
+if ($record['monthCreditId'][0]) {
+    $record.lineAmountApplied = 0
+}
+
+// keep the credit from being show twice if applied to two lines
+// NOTE: only looking at first credit if more than one applied to a line
+if ($local.credits[$record['monthCreditId'][0]]) {
+    $record['month_credit_id_assoc_invAmount'][0] = 0
+}
+$local.credits = { ...$local.credits, [$record['monthCreditId'][0]]: true }
+
+```
+
+
+
 ## GEN Security File Report
 
 This section has the sample files and explains in detail how to build a report that takes the fields from the **GEN Security File** mapping in Informer and transforms it into a more readable and usable format.  Steps 1-10 will get you a report that has the following format.
