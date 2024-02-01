@@ -43,6 +43,22 @@ The field that you will use is on the **AR Invoices** mapping.
   - **D** - Debit
   - **W** - Writeoff
 
+### Client vs Advertiser
+
+The **CLIENT_NO <1>** field in **AR Invoices** is the *Bill To / Owner*  of the Invoice.  If there is an Agency involved then it will show up in this field.
+
+The **ADV_ID** (Advertiser Id) field in **AR Invoices** is the *receiver of the service*.
+
+An Invoice from the Ad Module may be issued to an Agency or directly to the Advertiser. If it went to an Agency, then the **Client ID** would be for the Agency (owner of the Invoice/debt) and the **Advertiser ID** would be for the Client that placed the Ad (receiver of the service). If the Invoice was directly to the Advertiser, then both should be the same value.
+
+**BE AWARE**, there are some exceptions to the above rules.  If they have a Remit-To Invoice (bill the Advertiser directly and then when paid send their cut to the Agency). It is also possible to have an Override Bill-To and they could theoretically put the Advertiser there, thus hiding the Agency.
+
+If you need to work around the above exceptions, you can get Advertiser and Agency information directly from the campaign.
+
+**NOTE: this will only work for Invoices linked to campaigns.**  
+
+![image-20240201160347999](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_mapping_ARInvoices_clients_001.png)
+
 ### AR Invoices From AD Internet Orders and Campaigns
 
 Many times you will want to be able to access information from AR Invoices when the starting point for your Dataset is from AD Internet Orders or AD Internet Campaigns.
