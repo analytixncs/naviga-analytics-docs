@@ -108,6 +108,390 @@ $local.credits = { ...$local.credits, [$record['monthCreditId'][0]]: true }
 
 ```
 
+## Budget Reports
+
+**<a  target="_blank"  href="/downloads/naviga-ad-internet-rep-format-budgets.tgz"> Sample Rep Format Budget Report</a>**
+
+Budgets can be stored in three different mappings, `AD Internet Budgets`, `AD Internet Rep Budgets` or `AD Internet Rep Format Budgets`.  Depending on how you want to track your Budgets, your data may appear in one or more of the above mappings.
+
+Each work in a similar manner, so the example below will be for the `AD internet Rep Format Budgets` mapping.
+
+The data is stored WITHOUT an implicit date field.  Instead the information for the Year is embedded in the ID field and the Month information is stored positionally in the Budget field.  
+
+![image-20240220093459050](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-sample-reports_budgets_001.PNG)
+
+The attached report manipulates the data using the following Powerscript:
+
+```javascript
+// The budget amounts are stored in a MV field and they are in month order
+// Index 0 = Jan, 1 = Feb, etc.  We add one to the index to get the correct month numbers
+$record.month = $record.budget.map((el, index) => index + 1)
+// String of the above to be used in joins if needed
+$record.monthString = $record.month.map(el => el.toString().padStart(2, "0"))
+
+// The Year and the Format is stored in the ID field
+// We split that field and take what we need
+$record.budgetYear = $record.id.split("*")[0]
+$record.printOrDigital = $record.id.split("*")[1]
+```
+
+The report then adds a Normalize flow step on the MV fields to get the final output.
+
+### Adding Budget data to another Dataset
+
+Most likely you will want to join the budget data to another dataset so that you can compare the budget data to the actual revenue being earned.
+
+To do this, you will first need to convert the Ad Hoc Budget report into a dataset.  This is easily done by:
+
+- Run the Ad Hoc report
+- From the Actions menu choose "Create Dataset"
+  ![image-20240220094353740](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-sample-reports_budgets_002.PNG)
+
+You can now join this dataset to another dataset, however, be aware that when you join the budget data to another dataset that have its revenue data at a different granularity, you will need to make sure to "fix" the budget data so that it is not duplicated to the target datasets granularity.
+
+For example, our budget data is showing budgets by **Month-Year-Rep-Format**, but our Revenue data may be displayed down to the Line detail level.  Which means our budget data will be duplicated for every line that a **Month-Year-Rep-Format** exists for.
+
+To make sure we only see one budget amount per **Month-Year-Rep-Format**, we need to use the [calculateAggregates Saved Function](informer-saved-functions#calculateaggregates---when-to-use) to  get the budgets showing the way that is needed.
+
+Here is an example that can be used if you add budgets to a dataset getting data from AD Internet Orders.
+
+**Step 1**
+
+Get data from your budget dataset.  
+
+![image-20240220164156632](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-sample-reports_budgets_003.PNG)
+
+**Step 2**
+
+Aggregate Calculation Powerscript
+
+```js
+// Based on PrintPubInd create new field with "Print" or "Digital"
+$record.printOrDigitalJoin = $record['web_site_id_assoc_printPubInd'] === "Y" ? "PRINT" : "DIGITAL"
+// Define your group keys on the $record object so that
+// you can reuse them in the Post Aggregation function
+$record.groupKey1 = `${$record['currentRepIds']}-${$record['printOrDigitalJoin']}-${$record['monthPeriod']}`;
+groupKeys = [
+  {
+    name: "Year",
+    groupKey: $record.groupKey1,
+  }
+];
+
+groupAggr = [
+  {
+    name: "budget",
+    initValue: 0,
+    value: $record['budget'],
+    type: "replace"
+  },
+];
+
+// Calling the calculate aggregates in a Powerscript
+naviga.calculateAggregates({ $local, groupKeys, groupAggr });
+```
+
+**Step 3** ADD A Flush Flow Step
+
+**Step 4**
+
+Post Aggr Powerscript.
+
+```js
+// Get the group keys you defined in your Calc aggregations Powerscript
+groupKey1 = $record.groupKey1
+$record.budget = 0
+
+// GROUP KEY 1
+if (!$local[groupKey1].GroupSet) {
+  $record.budget = $local[groupKey1].budget;
+  $local[groupKey1].GroupSet = true; //Setting to true means we will not excute this code again during the load.
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+## New Business Flag
+
+> IN PROCESS FEATURE - Create a lapsed customer option.  This would check a customers **last order date** against **today's date** and if it was greater than x months, we would mark the customer as lapsed.  Most likely you will want Lapsed Months to be Greater than the INACTIVE months.
+
+**<a  target="_blank"  href="/downloads/naviga-new-business-flag.tgz"> Sample New Business Flag Dataset - [NAVIGA]-New Business Flag</a>**
+
+Many times there is a need to declare a customer as a new customer after a defined length of inactivity.  That is where this code can help.
+
+The code below is based on the **AD Internet Campaigns** mapping and uses the campaigns Start and End dates to determine inactivity between campaigns.
+
+The fields needed from **AD Internet Campaigns** are:
+
+- **Advertiser ID <1>**
+- **Start Date <4>**
+- **End Date <5>**
+
+:::info **Important**
+
+We MUST set the **Order By** in the Query to sort Ascending by **Advertiser ID** AND **Start Date**.  This will group the records by advertiser and also order each advertisers campaign in order of when the campaigns started.
+
+:::
+
+The basic logic will be that as we go through the records, we will compare the previous record to the current record for an advertiser and calculate how much time has passed between the **End Date** of the previous record and the **Start Date** of the current record.  
+
+:::note
+
+The date calculations are based on the first of the month.  For example, if the end date is 01/15/2022, the code will use 01/01/2022 for the comparison.
+
+Many Advertisers will have overlapping campaigns, where the end date of one is **After** the start date of the previous:
+
+ *camp 1, startDate 01/01/2020 End Date 01/01/2021*
+ *camp 2, startDate 05/02/2020 End Date 07/01/2020*
+
+This is OK, as in the calculations the result will be negative and is handled.
+
+:::
+
+There are some constants that you will set in the first part of the script that will define how the application sets the New Business status.
+
+- **INACTIVE_MONTHS_LIMIT** - How many months of inactivity must a client have before being designated as "New" business
+- **PROBATION_MONTHS** - Many times you also want to know how long a customer has been identified as "New" business.  For example, if a customer starts doing business with your company, you would want them to retain that new status for a certain amount of time.  This is referred to as the **Probationary Period** in the code.  It is defined in months.
+- **INACTIVE_MONTHS_LIMIT** - How many months of no orders before we mark this customer as "Inactive".  
+- **NEW_STATUS_TEXT** - Text to use in the **finalSalesStatus** field  when the client is "New"
+- **EXISTING_STATUS_TEXT** - Text to use in the **finalSalesStatus** field when the client is not "New"
+- **INACTIVE_STATUS_TEXT** - Text to use in the **finalInactiveStatus** field when the client is considered "Inactive"
+- **ACTIVE_STATUS_TEXT** - Text to use in the **finalInactiveStatus** field when the client is considered "Active"
+
+Here is the code for the Constants.
+
+```javascript
+//=====================
+//-- Constants - All checks are Exclusive (months between < LIMIT value)             
+//-- This is the number of months of inactivty between current and last ad before we call the customer new
+TIMETONEW_MONTHS_LIMIT = 12;
+//-- Number of months AFTER a customer is declared "new" that we keep their status as "New"
+PROBATION_MONTHS = 3;
+//-- Number of months without an order to have customer's "finalInactiveStatus" set to the Inactive Text
+INACTIVE_MONTHS_LIMIT = 4
+
+// Status Text
+NEW_STATUS_TEXT = 'New';
+EXISTING_STATUS_TEXT = 'Existing';
+INACTIVE_STATUS_TEXT = 'Inactive'
+ACTIVE_STATUS_TEXT = 'Active'
+//=====================
+```
+
+### Visual Overview of a Couple of Scenarios
+
+![image-20221012112121128](images/informer_javascript-newbusinessflag-overview.png)
+
+:::tip
+
+If a customer's last transaction gave them a Sales Status of "New" and it has been more than the "INACTIVE_MONTHS_LIMIT", you will see that customer listed as "New" and "Inactive".  This just means that they never had a transaction after the probationary period.  
+
+:::
+
+**Definitions of some Variables**
+
+- **lastActivityDate** - the previous record's "last activity" date.  Maybe the Month End Date of Campaign
+      At the start of the Powerscript, this date will be pulled from $local.previousValues object
+      At the end of the Powerscript, whatever field is deemed to be the lastActivityDate, will be pulled
+      from the current record and stored as the lastActivityDate in the $local.previousValues object
+- **currentActivityDate** - the current record's "current activity" date. Maybe the Month Start Date of Campaign
+- **startDateOfNewStatus** - gets set to the lastActivityDate of the current record when there has been no activity for 12 months
+  This date does not get reset until there is another 12 month period of inactivity.
+  This is because a "new" advertiser, stays new for 12 months after becoming new.  After 12 months of activity, status
+  will change to "existing"
+
+**Persistent Objects** - These object will persist over every row processed
+
+- **$local.previousValues** - This object will contain the "advertiserId" and "lastActivityDateMoment" from
+  the PREVIOUS record.
+  If this is the first record (meaning this variable is `undefined`) we initialize to: 
+    { advertiserId: null, lastActivityDateMoment: moment(null) }
+  One of the **final** steps of the Powerscript is to update this Object with the current records
+  advertiser id and "lastActivityDate", which will then be the next records "PREVIOUS" values.
+- **$local[advId]** - Since we are using the record's advertiser id as a key on the $local object, all the 
+  values stored will be overwritten as we progress through the Advertisers campaign records.
+
+### Main Script
+
+```javascript
+//=====================
+//-- Constants
+//-- This is the number of months of inactivty between current and last ad before we call the customer new
+TIMETONEW_MONTHS_LIMIT = 12;
+//-- Number of months AFTER a customer is declared "new" that we keep there status as "New"
+PROBATION_MONTHS = 3;
+//-- Number of months without an order to have customer's "finalInactiveStatus" set to the Inactive Text
+INACTIVE_MONTHS_LIMIT = 4
+
+// Status Text
+NEW_STATUS_TEXT = 'New';
+EXISTING_STATUS_TEXT = 'Existing';
+INACTIVE_STATUS_TEXT = 'Inactive'
+ACTIVE_STATUS_TEXT = 'Active'
+//=====================
+
+// get $local object and initialize if they don't yet exist
+previousValues = $local.previousValues
+  ? $local.previousValues
+  : { advertiserId: null, lastActivityDateMoment: moment(null) };
+
+// Get Info for setting $local Adv Bucket
+AdvId = $record['advId'];
+//!! This is the date of activity for the current record.  It will be compared to
+//!!    the previous records "lastActivityDateMoment" field.
+currentActivityDateMoment = moment($record['startDate']).startOf('month');
+
+// Initialize AdvId bucket in $local var
+$local[AdvId] = $local[AdvId]
+  ? $local[AdvId]
+  : {
+      SalesStatusWorking: {
+        salesStatus: NEW_STATUS_TEXT,
+        startDateOfNewStatus: currentActivityDateMoment,
+        inactiveStatus: ACTIVE_STATUS_TEXT,
+        isLastRecord: false,
+        counter: 0,
+      },
+    };
+
+//--- Setup Variables
+// Pull previous values into vars
+lastActivityDateMoment = previousValues.lastActivityDateMoment;
+startDateOfNewStatus = $local[AdvId].SalesStatusWorking.startDateOfNewStatus;
+
+currMinusPrevDate = currentActivityDateMoment.diff(
+  lastActivityDateMoment,
+  'months'
+);
+currDateMinusCurrStartDOfNS = currentActivityDateMoment.diff(
+  startDateOfNewStatus,
+  'months'
+);
+
+// Months since last order from todays date
+// We will use this to determine if we should use Active Text or Inactive Text 
+inactiveCheckMonths = moment().diff(currentActivityDateMoment, 'months')
+inactiveText = inactiveCheckMonths > INACTIVE_MONTHS_LIMIT ? INACTIVE_STATUS_TEXT : ACTIVE_STATUS_TEXT;
+
+isNewAdvertiser = previousValues.advertiserId !== $record['advId'];
+
+// If the previous record was the final one for the previous advertiser, then set the
+//     $local[previousAdvertiserid]"isLastRecord" flag to true.
+// Used in the final script to determine the correct sales status.
+if (isNewAdvertiser && previousValues.advertiserId) {
+  $local[previousValues.advertiserId].isLastRecord = true;
+}
+
+// boolean - if true, cust marked as new with startDateOfNewStatus reset to currentActivityDateMoment
+isOver12MonthsSinceLastOrder = currMinusPrevDate > TIMETONEW_MONTHS_LIMIT;
+isPastProbationPeriod = currDateMinusCurrStartDOfNS > PROBATION_MONTHS;
+
+// ------ DEBUGS Start -----
+// $record.DEBUG_prevAdvertiser = previousValues.advertiserId;
+// $record.DEBUG_lastActivityDateMoment =
+//   previousValues.lastActivityDateMoment.format('MM-DD-YYYY');
+// $record.DEBUG_startDateOfNewStatus = startDateOfNewStatus;
+// $record.DEBUG_dateTestCurrMinusPrev = currMinusPrevDate;
+// $record.DEBUG_currDateMinusCurrStartDOfNS = currDateMinusCurrStartDOfNS;
+// $record.DEBUG_isPastProbationPeriod = isPastProbationPeriod;
+// $record.DEBUG_isOver12MonthsSinceLastOrder = isOver12MonthsSinceLastOrder;
+// ------ DEBUGS End -----
+
+// Do some logic to figure out what we should make the sales status and "StartDateOfNewStatus"
+if (isNewAdvertiser || isOver12MonthsSinceLastOrder) {
+  // This object will persist between records
+  // Stores advertiser's current status and the date of when they "acquired" that status
+  // Whenever we start on a new advertiser, they are assumed "New"
+  $local[AdvId].SalesStatusWorking = {
+    salesStatus: NEW_STATUS_TEXT,
+    startDateOfNewStatus: currentActivityDateMoment,
+    counter: $local[AdvId].SalesStatusWorking.counter + 1,
+  };
+} else {
+  // Setting counter.  Maybe use to determine last salesStatus
+  $local[AdvId].SalesStatusWorking.counter =
+    $local[AdvId].SalesStatusWorking.counter + 1;
+  
+
+  // Check if out of probationary period, if so, then set Existing status text
+  if (isPastProbationPeriod) {
+    $local[AdvId].SalesStatusWorking.salesStatus = EXISTING_STATUS_TEXT;
+  }
+}
+  // Setting counter.  Maybe use to determine last salesStatus
+  $local[AdvId].SalesStatusWorking.counter =
+    $local[AdvId].SalesStatusWorking.counter + 1;
+  $local[AdvId].SalesStatusWorking.inactiveStatus = inactiveText;
+//Before going on to the next record, store the "previous" values
+$local.previousValues = {
+  advertiserId: $record['advId'],
+  lastActivityDateMoment: moment($record['startDate']).startOf('month'), // This will be a moment Object
+};
+
+// Expose the current info from our SalesStatusWorking object as records for this transaction
+// The $record.counter is very important for the post flush powerscript
+// It lets us know and compare last record's counter to it, so that we know
+// which transaction was the last record for the given advertiser.
+$record.workingSalesStatus = $local[AdvId].SalesStatusWorking.salesStatus;
+$record.counter = $local[AdvId].SalesStatusWorking.counter;
+```
+
+**FLUSH Flow Step**
+
+```javascript
+// Put a Flush Flow Step here
+```
+
+**Set the Last Record Flag**
+
+```javascript
+//!!!!--- Finalize Script - Set Last Record ---!!!!//
+advId = $record["advId"];
+$record.isLastRecord = false;
+$record.workingcounter = $local[advId].SalesStatusWorking.counter
+
+if ($local[advId].SalesStatusWorking.counter == $record.counter
+) {
+  // We need to move the last record flag out of the $local variable and onto the record itself.
+  $record.isLastRecord = $local[advId].isLastRecord || true;
+  $record.finalSalesStatus =  $local[advId].SalesStatusWorking.salesStatus;
+  $record.finalInactiveStatus = $local[advId].SalesStatusWorking.inactiveStatus
+} 
+```
+
+**FLUSH Flow Step**
+
+```javascript
+// Put a Flush Flow Step here
+```
+
+**Remove Non Final Status**
+
+```javascript
+// Uncomment to only show FINAL Sales Status
+// This make it so that you have only a single row per customer.
+if (!$record.isLastRecord) $omit()
+```
+
+**Remove Fields**
+
+You can also add a *Remove Fields* flow step to remove the following fields:
+
+- Campaign ID
+- Working Sales Status
+- Counter
+- Start Date
+- End Date 
+- Is Last Record
+
 
 
 ## GEN Security File Report
@@ -220,8 +604,11 @@ Once refreshed, you can export it to excel for reference.  The fields of interes
 - **Final Condense Multi Valued Expression** - Used in the HNP Security dataset to convert multivalued fields to a string of values.  
 
   > NOTE: There may be some MV fields that need additional processing and this will take place in the Flow step during the final report build.
+
 - **Final Alias Array** - Used in the HNP Security dataset to the field array will tell us the fields in the mapping to process.
+
 - **Final Field Label Expression** - **NOT USED** in the final dataset, but for informational purposes, you could use this code to **update the label of fields** with descriptions.
+
 - **Final Object Map Pair** - --**NOT USED**-- The key/value pairs will be extracted and used to create a lookup object in the **naviga.securityMapLookup** saved function
 
 #### Build the Final Dataset
@@ -579,281 +966,6 @@ You will want to select all the field that end with `VIEWFINAL`.
 **Step 17 Choose Columns**
 
 The final step is to choose the columns to display.  The easiest way to do this, is to click on the Columns and, the same way you chose the fields in the Normalize step, search for `VIEWFINAL` and choose those fields.
-
-
-
-## New Business Flag
-
-> IN PROCESS FEATURE - Create a lapsed customer option.  This would check a customers **last order date** against **today's date** and if it was greater than x months, we would mark the customer as lapsed.  Most likely you will want Lapsed Months to be Greater than the INACTIVE months.
-
-**<a  target="_blank"  href="/downloads/naviga-new-business-flag.tgz"> Sample New Business Flag Dataset - [NAVIGA]-New Business Flag</a>**
-
-Many times there is a need to declare a customer as a new customer after a defined length of inactivity.  That is where this code can help.
-
-The code below is based on the **AD Internet Campaigns** mapping and uses the campaigns Start and End dates to determine inactivity between campaigns.
-
-The fields needed from **AD Internet Campaigns** are:
-
-- **Advertiser ID <1>**
-- **Start Date <4>**
-- **End Date <5>**
-
-:::info **Important**
-
-We MUST set the **Order By** in the Query to sort Ascending by **Advertiser ID** AND **Start Date**.  This will group the records by advertiser and also order each advertisers campaign in order of when the campaigns started.
-
-:::
-
-The basic logic will be that as we go through the records, we will compare the previous record to the current record for an advertiser and calculate how much time has passed between the **End Date** of the previous record and the **Start Date** of the current record.  
-
-:::note
-
-The date calculations are based on the first of the month.  For example, if the end date is 01/15/2022, the code will use 01/01/2022 for the comparison.
-
-Many Advertisers will have overlapping campaigns, where the end date of one is **After** the start date of the previous:
-
- *camp 1, startDate 01/01/2020 End Date 01/01/2021*
- *camp 2, startDate 05/02/2020 End Date 07/01/2020*
-
-This is OK, as in the calculations the result will be negative and is handled.
-
-:::
-
-There are some constants that you will set in the first part of the script that will define how the application sets the New Business status.
-
-- **INACTIVE_MONTHS_LIMIT** - How many months of inactivity must a client have before being designated as "New" business
-- **PROBATION_MONTHS** - Many times you also want to know how long a customer has been identified as "New" business.  For example, if a customer starts doing business with your company, you would want them to retain that new status for a certain amount of time.  This is referred to as the **Probationary Period** in the code.  It is defined in months.
-- **INACTIVE_MONTHS_LIMIT** - How many months of no orders before we mark this customer as "Inactive".  
-- **NEW_STATUS_TEXT** - Text to use in the **finalSalesStatus** field  when the client is "New"
-- **EXISTING_STATUS_TEXT** - Text to use in the **finalSalesStatus** field when the client is not "New"
-- **INACTIVE_STATUS_TEXT** - Text to use in the **finalInactiveStatus** field when the client is considered "Inactive"
-- **ACTIVE_STATUS_TEXT** - Text to use in the **finalInactiveStatus** field when the client is considered "Active"
-
-Here is the code for the Constants.
-
-```javascript
-//=====================
-//-- Constants - All checks are Exclusive (months between < LIMIT value)             
-//-- This is the number of months of inactivty between current and last ad before we call the customer new
-TIMETONEW_MONTHS_LIMIT = 12;
-//-- Number of months AFTER a customer is declared "new" that we keep their status as "New"
-PROBATION_MONTHS = 3;
-//-- Number of months without an order to have customer's "finalInactiveStatus" set to the Inactive Text
-INACTIVE_MONTHS_LIMIT = 4
-
-// Status Text
-NEW_STATUS_TEXT = 'New';
-EXISTING_STATUS_TEXT = 'Existing';
-INACTIVE_STATUS_TEXT = 'Inactive'
-ACTIVE_STATUS_TEXT = 'Active'
-//=====================
-```
-
-### Visual Overview of a Couple of Scenarios
-
-![image-20221012112121128](images/informer_javascript-newbusinessflag-overview.png)
-
-:::tip
-
-If a customer's last transaction gave them a Sales Status of "New" and it has been more than the "INACTIVE_MONTHS_LIMIT", you will see that customer listed as "New" and "Inactive".  This just means that they never had a transaction after the probationary period.  
-
-:::
-
-**Definitions of some Variables**
-
-- **lastActivityDate** - the previous record's "last activity" date.  Maybe the Month End Date of Campaign
-      At the start of the Powerscript, this date will be pulled from $local.previousValues object
-      At the end of the Powerscript, whatever field is deemed to be the lastActivityDate, will be pulled
-      from the current record and stored as the lastActivityDate in the $local.previousValues object
-- **currentActivityDate** - the current record's "current activity" date. Maybe the Month Start Date of Campaign
-- **startDateOfNewStatus** - gets set to the lastActivityDate of the current record when there has been no activity for 12 months
-  This date does not get reset until there is another 12 month period of inactivity.
-  This is because a "new" advertiser, stays new for 12 months after becoming new.  After 12 months of activity, status
-  will change to "existing"
-
-**Persistent Objects** - These object will persist over every row processed
-
-- **$local.previousValues** - This object will contain the "advertiserId" and "lastActivityDateMoment" from
-  the PREVIOUS record.
-  If this is the first record (meaning this variable is `undefined`) we initialize to: 
-    { advertiserId: null, lastActivityDateMoment: moment(null) }
-  One of the **final** steps of the Powerscript is to update this Object with the current records
-  advertiser id and "lastActivityDate", which will then be the next records "PREVIOUS" values.
-- **$local[advId]** - Since we are using the record's advertiser id as a key on the $local object, all the 
-  values stored will be overwritten as we progress through the Advertisers campaign records.
-
-### Main Script
-
-```javascript
-//=====================
-//-- Constants
-//-- This is the number of months of inactivty between current and last ad before we call the customer new
-TIMETONEW_MONTHS_LIMIT = 12;
-//-- Number of months AFTER a customer is declared "new" that we keep there status as "New"
-PROBATION_MONTHS = 3;
-//-- Number of months without an order to have customer's "finalInactiveStatus" set to the Inactive Text
-INACTIVE_MONTHS_LIMIT = 4
-
-// Status Text
-NEW_STATUS_TEXT = 'New';
-EXISTING_STATUS_TEXT = 'Existing';
-INACTIVE_STATUS_TEXT = 'Inactive'
-ACTIVE_STATUS_TEXT = 'Active'
-//=====================
-
-// get $local object and initialize if they don't yet exist
-previousValues = $local.previousValues
-  ? $local.previousValues
-  : { advertiserId: null, lastActivityDateMoment: moment(null) };
-
-// Get Info for setting $local Adv Bucket
-AdvId = $record['advId'];
-//!! This is the date of activity for the current record.  It will be compared to
-//!!    the previous records "lastActivityDateMoment" field.
-currentActivityDateMoment = moment($record['startDate']).startOf('month');
-
-// Initialize AdvId bucket in $local var
-$local[AdvId] = $local[AdvId]
-  ? $local[AdvId]
-  : {
-      SalesStatusWorking: {
-        salesStatus: NEW_STATUS_TEXT,
-        startDateOfNewStatus: currentActivityDateMoment,
-        inactiveStatus: ACTIVE_STATUS_TEXT,
-        isLastRecord: false,
-        counter: 0,
-      },
-    };
-
-//--- Setup Variables
-// Pull previous values into vars
-lastActivityDateMoment = previousValues.lastActivityDateMoment;
-startDateOfNewStatus = $local[AdvId].SalesStatusWorking.startDateOfNewStatus;
-
-currMinusPrevDate = currentActivityDateMoment.diff(
-  lastActivityDateMoment,
-  'months'
-);
-currDateMinusCurrStartDOfNS = currentActivityDateMoment.diff(
-  startDateOfNewStatus,
-  'months'
-);
-
-// Months since last order from todays date
-// We will use this to determine if we should use Active Text or Inactive Text 
-inactiveCheckMonths = moment().diff(currentActivityDateMoment, 'months')
-inactiveText = inactiveCheckMonths > INACTIVE_MONTHS_LIMIT ? INACTIVE_STATUS_TEXT : ACTIVE_STATUS_TEXT;
-
-isNewAdvertiser = previousValues.advertiserId !== $record['advId'];
-
-// If the previous record was the final one for the previous advertiser, then set the
-//     $local[previousAdvertiserid]"isLastRecord" flag to true.
-// Used in the final script to determine the correct sales status.
-if (isNewAdvertiser && previousValues.advertiserId) {
-  $local[previousValues.advertiserId].isLastRecord = true;
-}
-
-// boolean - if true, cust marked as new with startDateOfNewStatus reset to currentActivityDateMoment
-isOver12MonthsSinceLastOrder = currMinusPrevDate > TIMETONEW_MONTHS_LIMIT;
-isPastProbationPeriod = currDateMinusCurrStartDOfNS > PROBATION_MONTHS;
-
-// ------ DEBUGS Start -----
-// $record.DEBUG_prevAdvertiser = previousValues.advertiserId;
-// $record.DEBUG_lastActivityDateMoment =
-//   previousValues.lastActivityDateMoment.format('MM-DD-YYYY');
-// $record.DEBUG_startDateOfNewStatus = startDateOfNewStatus;
-// $record.DEBUG_dateTestCurrMinusPrev = currMinusPrevDate;
-// $record.DEBUG_currDateMinusCurrStartDOfNS = currDateMinusCurrStartDOfNS;
-// $record.DEBUG_isPastProbationPeriod = isPastProbationPeriod;
-// $record.DEBUG_isOver12MonthsSinceLastOrder = isOver12MonthsSinceLastOrder;
-// ------ DEBUGS End -----
-
-// Do some logic to figure out what we should make the sales status and "StartDateOfNewStatus"
-if (isNewAdvertiser || isOver12MonthsSinceLastOrder) {
-  // This object will persist between records
-  // Stores advertiser's current status and the date of when they "acquired" that status
-  // Whenever we start on a new advertiser, they are assumed "New"
-  $local[AdvId].SalesStatusWorking = {
-    salesStatus: NEW_STATUS_TEXT,
-    startDateOfNewStatus: currentActivityDateMoment,
-    counter: $local[AdvId].SalesStatusWorking.counter + 1,
-  };
-} else {
-  // Setting counter.  Maybe use to determine last salesStatus
-  $local[AdvId].SalesStatusWorking.counter =
-    $local[AdvId].SalesStatusWorking.counter + 1;
-  
-
-  // Check if out of probationary period, if so, then set Existing status text
-  if (isPastProbationPeriod) {
-    $local[AdvId].SalesStatusWorking.salesStatus = EXISTING_STATUS_TEXT;
-  }
-}
-  // Setting counter.  Maybe use to determine last salesStatus
-  $local[AdvId].SalesStatusWorking.counter =
-    $local[AdvId].SalesStatusWorking.counter + 1;
-  $local[AdvId].SalesStatusWorking.inactiveStatus = inactiveText;
-//Before going on to the next record, store the "previous" values
-$local.previousValues = {
-  advertiserId: $record['advId'],
-  lastActivityDateMoment: moment($record['startDate']).startOf('month'), // This will be a moment Object
-};
-
-// Expose the current info from our SalesStatusWorking object as records for this transaction
-// The $record.counter is very important for the post flush powerscript
-// It lets us know and compare last record's counter to it, so that we know
-// which transaction was the last record for the given advertiser.
-$record.workingSalesStatus = $local[AdvId].SalesStatusWorking.salesStatus;
-$record.counter = $local[AdvId].SalesStatusWorking.counter;
-```
-
-**FLUSH Flow Step**
-
-```javascript
-// Put a Flush Flow Step here
-```
-
-**Set the Last Record Flag**
-
-```javascript
-//!!!!--- Finalize Script - Set Last Record ---!!!!//
-advId = $record["advId"];
-$record.isLastRecord = false;
-$record.workingcounter = $local[advId].SalesStatusWorking.counter
-
-if ($local[advId].SalesStatusWorking.counter == $record.counter
-) {
-  // We need to move the last record flag out of the $local variable and onto the record itself.
-  $record.isLastRecord = $local[advId].isLastRecord || true;
-  $record.finalSalesStatus =  $local[advId].SalesStatusWorking.salesStatus;
-  $record.finalInactiveStatus = $local[advId].SalesStatusWorking.inactiveStatus
-} 
-```
-
-**FLUSH Flow Step**
-
-```javascript
-// Put a Flush Flow Step here
-```
-
-**Remove Non Final Status**
-
-```javascript
-// Uncomment to only show FINAL Sales Status
-// This make it so that you have only a single row per customer.
-if (!$record.isLastRecord) $omit()
-```
-
-**Remove Fields**
-
-You can also add a *Remove Fields* flow step to remove the following fields:
-
-- Campaign ID
-- Working Sales Status
-- Counter
-- Start Date
-- End Date 
-- Is Last Record
 
 ## Lookup Function Generator
 
