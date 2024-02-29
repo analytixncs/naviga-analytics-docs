@@ -1,5 +1,5 @@
 ---
-id: informer-newui
+id: informer-new-ui
 title: Informer New UI
 sidebar_label: Informer New UI
 ---
