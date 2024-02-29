@@ -26,6 +26,7 @@ module.exports = {
       type: "category",
       label: "Informer",
       items: [
+        "informer/informer-new-ui",
         "informer/informer-video-training",
         "informer/informer-basics",
         "informer/informer-sample-reports",
