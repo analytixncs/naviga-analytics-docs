@@ -10,11 +10,11 @@ Informer version 5.7 got a UI overhaul!  The main thing that might "shock" users
 
 When you log into Informer, here is the screen you are used to seeing:
 
-![image-20240226145140426](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-upgrades-homescreen-001.png)
+![image-20240226145140426](images/informer-upgrades-homescreen-001.png)
 
 The latest version of Informer has made some changes.  You will now see something like this:
 
-![image-20240226145524855](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-upgrades-homescreen-002.png)
+![image-20240226145524855](images/informer-upgrades-homescreen-002.png)
 
 To review some of the changes:
 
@@ -32,7 +32,7 @@ To review some of the changes:
 
 The **Global Search Bar** is found at the top of your Informer screen.  It is very powerful, allowing you to start typing any item name and then narrowing the search by Object type:
 
-![image-20240226152206851](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-upgrades-globalsearch-001.png)
+![image-20240226152206851](images/informer-upgrades-globalsearch-001.png)
 
 :::tip
 
@@ -48,7 +48,7 @@ For the most part the Report and Dataset areas will be familiar, however there w
 
 The export data option has been moved out of the action menu and now has its own dedicated icon.
 
-![image-20240229104749403](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-upgrades-reportdataset-001.png)
+![image-20240229104749403](images/informer-upgrades-reportdataset-001.png)
 
 
 
@@ -62,4 +62,4 @@ The actions menu has had a reorganization.  Here are some notable changes:
 
 
 
-![image-20240229105355052](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-upgrades-reportdataset-002.png)
+![image-20240229105355052](images/informer-upgrades-reportdataset-002.png)
