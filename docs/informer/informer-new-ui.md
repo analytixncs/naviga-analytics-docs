@@ -60,6 +60,4 @@ The actions menu has had a reorganization.  Here are some notable changes:
 2. To rename your report, you will now choose **Edit Name/Description**
 3. The old Clear User Settings is now called **Reset View**.  This will reset your column position back to the default viewed saved in the report.
 
-
-
 ![image-20240229105355052](images/informer-upgrades-reportdataset-002.png)
