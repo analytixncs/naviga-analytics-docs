@@ -4,13 +4,46 @@ title: Informer System Stuff
 sidebar_label: Informer System Stuff
 ---
 
-## Setting up Informer Postgres Database as Datasource
+## Setting Up Informer Metadata Database as Datasource v5.8.6 forward
+
+The `Informer Metadata` database has details about all of the inner workings of your Informer system.   Not only does it hold the Metadata for your system, it also holds the Audit logs if you have them turned on in the system settings.
+
+If your Informer Metadata database is not yet created, you can create one by simply going to the **New** button, navigating to **Datasource** and then choosing **Informer**.  To check if you have this datasource already, simply go to your Datasource area and look for a datasource with the type **`Informer`**.  If it exists, you do not need to create one.
+
+You will be asked to name the database.  It can be anything, but I use **Informer Metadata**
+
+![image-20240328095113625](images/informer-system-001.png)
+
+You are almost done.  Now you need to `scan` the new datasource.
+
+Navigate to `Datasources -> InformerMetadata` and click on the Mappings link in the Left Menu.
+
+Then click on **Scan Datasource** and in the next dialog make sure to change to a **Full Scan** and then click on **Scan**
+
+<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+  <img src="./images/informer-system-002.png" width="50%" alt="Image description" style={{margin: '10px'}}/>
+  <img src="./images/informer-system-003.png" width="40%" alt="Image description" style={{margin: '10px'}}/>
+</div>
+
+:::info
+
+Download a Bundle of Sample Datasets using the Informer Metadata datasource.
+
+**<a target="_blank" href="/downloads/Informer 5.8.4-MetadataDatasetSamples.tgz">Informer 5.8.4-MetadataDatasetSamples.tgz</a>**
+
+:::
+
+## Setting up Informer Postgres Database as Datasource (Only in v5.6.5 and Before)
 
 This Datasource will provide you with metadata about the Reports, Datasets and Jobs that you have created within Informer.  
 
 One common use for this data is to track Jobs and if they are successful.  You can setup a dataset (in a job) to run every day and send you an email when a job fails or hangs. [Here is a sample](#job-status-dataset)
 
-> NOTE: The information below is for **Informer 5.1.2 or greater only**
+:::danger IMPORTANT
+
+The information below is for **Informer v5.1.2 to v5.6.5**
+
+:::
 
 Download the following TGZ file to your hard drive:
 

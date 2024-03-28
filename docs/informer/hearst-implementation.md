@@ -1,7 +1,7 @@
 ---
-id: hearst-implementation
-title: Hearst Implementation
-sidebar_label: H-I
+id: informer-update
+title: Informer Upgrade
+sidebar_label: IU
 ---
 
 ## Rules for Preprint Distribution
