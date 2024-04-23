@@ -118,7 +118,13 @@ Each work in a similar manner, so the example below will be for the `AD internet
 
 The data is stored WITHOUT an implicit date field.  Instead the information for the Year is embedded in the ID field and the Month information is stored positionally in the Budget field.  
 
-![image-20240220093459050](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-sample-reports_budgets_001.PNG)
+<img src="/images/informer-sample-reports_budgets_001.PNG" alt="Image Description" width="500" style="float:right;"/>    
+
+We need to take the `@id` field and extract the Year and Format from it.  The Rep ID is the last item of the ID, but we already have that as a separate field.
+
+We will then infer the month based on the position of the budget amount in the array.  Since arrays are zero based, we will need to add +1 to each element's position.
+
+
 
 The attached report manipulates the data using the following Powerscript:
 
@@ -143,9 +149,24 @@ Most likely you will want to join the budget data to another dataset so that you
 
 To do this, you will first need to convert the Ad Hoc Budget report into a dataset.  This is easily done by:
 
+<img src="images/informer-sample-reports_budgets_002.PNG" alt="Image Description" width="250" style="float:right; margin-right: 150px"> 
+
 - Run the Ad Hoc report
 - From the Actions menu choose "Create Dataset"
-  ![image-20240220094353740](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-sample-reports_budgets_002.PNG)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 You can now join this dataset to another dataset, however, be aware that when you join the budget data to another dataset that have its revenue data at a different granularity, you will need to make sure to "fix" the budget data so that it is not duplicated to the target datasets granularity.
 
@@ -159,7 +180,7 @@ Here is an example that can be used if you add budgets to a dataset getting data
 
 Get data from your budget dataset.  
 
-![image-20240220164156632](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-sample-reports_budgets_003.PNG)
+![image-20240220164156632](images/informer-sample-reports_budgets_003.PNG)
 
 **Step 2**
 
@@ -209,13 +230,34 @@ if (!$local[groupKey1].GroupSet) {
 }
 ```
 
+## Material Production Status
 
+To get the Material Production status, we need to first create a dataset that reads the **AD Production Workflow Header** mapping and pulls the Product ID out of the ID.
 
+**<a target="_blank" href="/downloads/naviga-production-status-mapping">Download -> naviga-production-status-mapping</a>**
 
+This dataset is then joined to other datasets that have the Material Status and Product values to join to this dataset.
 
+If you are getting the Material status from **AD Internet Orders**, you will need to include some Powerscript code to make sure you get the correct Material status as depending on the type of Order the Material status could be in the *Month Material Status* field or in the *Material Status* field, both of these are in **AD Internet Orders**.
 
+The below example will also create the **[NAVIGA]-Product Status Mapping** dataset.
 
+**<a target="_blank" href="/downloads/naviga-production-status-on-orders.tgz">Download naviga-production-status-on-orders.tgz</a>**
 
+When joining to the **[NAVIGA]-Product Status Mapping** dataset, you can do so as follows:
+
+<img src="images/informer-sample-reports_materialstatus_001.PNG" width="800px" />
+
+The *statusidnumber* above is calculated in the Powerscript below.  This takes into account that sometime the Material status is in Month Material Status field and sometimes in the Material status field:
+
+```js
+// Look for status id in MonthMaterialStatus and if that doesn't exist use the MaterialStatus
+// field.
+// This will be used to join to the Product Status Mapping dataset along with Product ID to get 
+//the Material Status Description
+finalMaterialStatus = !$record['monthMaterialStatus'] || $record['monthMaterialStatus'].length === 0 ? $record['materialStatus'] : $record['monthMaterialStatus']
+$record.statusidnumber = parseInt(finalMaterialStatus)
+```
 
 
 
