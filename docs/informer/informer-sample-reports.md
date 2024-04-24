@@ -228,7 +228,7 @@ if (!$local[groupKey1].GroupSet) {
 
 To get the Material Production status, we need to first create a dataset that reads the **AD Production Workflow Header** mapping and pulls the Product ID out of the ID.
 
-**<a  target="_blank"  href="/downloads/naviga-production-status-mapping">Download -> naviga-production-status-mapping</a>**
+**<a  target="_blank"  href="/downloads/naviga-production-status-mapping.tgz">Download -> naviga-production-status-mapping</a>**
 
 This dataset is then joined to other datasets that have the Material Status and Product values to join to this dataset.
 
