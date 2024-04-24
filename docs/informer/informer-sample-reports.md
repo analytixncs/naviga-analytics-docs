@@ -118,11 +118,19 @@ Each work in a similar manner, so the example below will be for the `AD internet
 
 The data is stored WITHOUT an implicit date field.  Instead the information for the Year is embedded in the ID field and the Month information is stored positionally in the Budget field.  
 
-<img src="/images/informer-sample-reports_budgets_001.PNG" alt="Image Description" width="500" style="float:right;"/>    
-
-We need to take the `@id` field and extract the Year and Format from it.  The Rep ID is the last item of the ID, but we already have that as a separate field.
-
+<div>
+  <div>
+ <img src={require('./images/informer-sample-reports_budgets_001.PNG').default} alt="Budgets 1" width="500px" style={{float: "right", marginLeft: "10px"}} />  
+    <div>
+      <p>
+      We need to take the `@id` field and extract the Year and Format from it.  The Rep ID is the last item of the ID, but we already have that as a separate field.</p>
+<p><br />
 We will then infer the month based on the position of the budget amount in the array.  Since arrays are zero based, we will need to add +1 to each element's position.
+  </p>
+    </div>
+ </div>
+  <div style={{clear: "both"}} ><br /></div>
+</div>
 
 
 
@@ -149,24 +157,10 @@ Most likely you will want to join the budget data to another dataset so that you
 
 To do this, you will first need to convert the Ad Hoc Budget report into a dataset.  This is easily done by:
 
-<img src="images/informer-sample-reports_budgets_002.PNG" alt="Image Description" width="250" style="float:right; margin-right: 150px"> 
-
 - Run the Ad Hoc report
 - From the Actions menu choose "Create Dataset"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+![createdataset](images/informer-sample-reports_budgets_002.PNG) 
 
 You can now join this dataset to another dataset, however, be aware that when you join the budget data to another dataset that have its revenue data at a different granularity, you will need to make sure to "fix" the budget data so that it is not duplicated to the target datasets granularity.
 
@@ -234,7 +228,7 @@ if (!$local[groupKey1].GroupSet) {
 
 To get the Material Production status, we need to first create a dataset that reads the **AD Production Workflow Header** mapping and pulls the Product ID out of the ID.
 
-**<a target="_blank" href="/downloads/naviga-production-status-mapping">Download -> naviga-production-status-mapping</a>**
+**<a  target="_blank"  href="/downloads/naviga-production-status-mapping">Download -> naviga-production-status-mapping</a>**
 
 This dataset is then joined to other datasets that have the Material Status and Product values to join to this dataset.
 
@@ -242,11 +236,15 @@ If you are getting the Material status from **AD Internet Orders**, you will nee
 
 The below example will also create the **[NAVIGA]-Product Status Mapping** dataset.
 
-**<a target="_blank" href="/downloads/naviga-production-status-on-orders.tgz">Download naviga-production-status-on-orders.tgz</a>**
+**<a  target="_blank"  href="/downloads/naviga-production-status-on-orders.tgz">Download naviga-production-status-on-orders.tgz</a>**
 
 When joining to the **[NAVIGA]-Product Status Mapping** dataset, you can do so as follows:
 
-<img src="images/informer-sample-reports_materialstatus_001.PNG" width="800px" />
+<div>
+	<img src={require("./images/informer-sample-reports_materialstatus_001.PNG").default} alt="material status" width="800px" />  
+</div>
+
+
 
 The *statusidnumber* above is calculated in the Powerscript below.  This takes into account that sometime the Material status is in Month Material Status field and sometimes in the Material status field:
 
