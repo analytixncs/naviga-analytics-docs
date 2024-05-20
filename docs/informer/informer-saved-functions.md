@@ -617,7 +617,7 @@ Along with the field, you can pass the delimiter that you want as well as a flag
 
 - **Namespace:** naviga
 
-- **Description:** Returns the days between the passed Dates (start - end).  If start date is greater than end date, then result will be negative days.  If invalid or non date fields are passed, a zero will be returned.
+- **Description:** Returns the days between the passed Dates (start - end).  If start date is greater than end date, then result will be negative days.  If fields passed cannot be converted to a valid date, undefined will be returned.
 
 - **Parameters:**
 
@@ -628,43 +628,55 @@ Along with the field, you can pass the delimiter that you want as well as a flag
 
 **Function Body**
 
-```javascript
-// Make sure both passed values are Javascript dates, if NOT, then return 0
-if (!(Object.prototype.toString.call(startDate) === "[object Date]") || !(Object.prototype.toString.call(endDate) === "[object Date]")) {
-	return 0
+```js
+// Make sure both inputs have values
+if (!startDate || !endDate) return undefined;
+
+startDate = moment(startDate)
+endDate = moment(endDate)
+  // Check if the input dates can be converted to valid dates
+const validStartDate = startDate.isValid();
+const validEndDate = endDate.isValid();
+
+if (!validStartDate || !validEndDate) {
+  return undefined; // Return undefined if either date is invalid
 }
     
 start = moment(startDate)
 end = moment(endDate)
 //Difference in number of days
-return end.diff(start, 'days');
+const duration = moment.duration(moment(endDate).diff(moment(startDate)));
+const daysDifference = duration.asDays();
+// Round the result
+return Math.round(daysDifference);
 ```
+
+
 
 ## getDaysBetween - Usage
 
-This function will accept two dates and return the number of days between them inclusively.
+This function will accept two dates (or string that can be converted to dates) and return the number of days between them inclusively.
 
-If only a single parameter is passed or if any passed value is not a JavaScript date, then 0 will be returned.
-
-> Be aware that if you cannot pass a Moment converted date directly.  You will have to use the `momentDate.toDate()` function.  BUT, also be aware that if you pass a `undefined` to moment, it WILL create a date for you.  It will be the current date.
+If only a single parameter is passed or if any passed value cannot be converted to a JavaScript date, then `undefined` will be returned.
 
 **Function Syntax**
 
 ```javascript
 naviga.getDaysBetween($record.startDate, $record.endDate)
+naviga.getDaysBetween('01-01-2024', $record.endDate)
 ```
 
 
 
 **Sample Input and Output**
 
-| startDate  | EndDate    | Output |
-| ---------- | ---------- | ------ |
-| 01/01/2022 | 01/31/2022 | 30     |
-| 12/01/2020 | null       | 0      |
-| null       | null       | 0      |
-| null       | 12/15/2020 | 0      |
-| 01/31/2022 | 01/01/2022 | -30    |
+| startDate  | EndDate    | Output    |
+| ---------- | ---------- | --------- |
+| 01/01/2022 | 01/31/2022 | 30        |
+| 12/01/2020 | null       | undefined |
+| null       | null       | undefined |
+| null       | 12/15/2020 | undefined |
+| 01/31/2022 | 01/01/2022 | -30       |
 
 ## getMonthsBetween - Create Function
 
@@ -684,44 +696,51 @@ naviga.getDaysBetween($record.startDate, $record.endDate)
 **Function Body**
 
 ```javascript
-// Make sure both values were sent and are dates, otherwise return 1
-if (!startDate || !endDate || !startDate.getMonth || !endDate.getMonth) {
-  return 1
+// Make sure both inputs have values
+if (!startDate || !endDate) return undefined;
+
+startDate = moment(startDate).startOf('month')
+endDate = moment(endDate).startOf('month')
+// Check if the input dates can be converted to valid dates
+const validStartDate = startDate.isValid();
+const validEndDate = endDate.isValid();
+if (!validStartDate || !validEndDate) {
+  return undefined; // Return undefined if either date is invalid
 }
 
 // Calculate a Start and End Date format that be used
-startMonth = Number(startDate.getMonth()) + (Number(startDate.getFullYear()) * 12)
-endMonth = Number(endDate.getMonth()) + (Number(endDate.getFullYear()) * 12)
-
+const duration = moment.duration(endDate.diff(startDate));
+const monthsDifference = duration.asMonths()
 // Need to add 1 to get the number of months including the first and the last 
-return endMonth - startMonth + 1
+return Math.floor(monthsDifference)
 ```
 
 ## getMonthsBetween - Usage
 
-This function will accept two dates and return the number of months between them inclusively.
+This function will accept two dates (or string that can be converted to dates) and return the number of months between them.  
 
-If only a single month is passed or if any passed value is not a JavaScript date, then 1 will be returned.
+This function does not look at the days, but simply the month.  For example, 10/15/2024 to 11/25/2024 will return **1**.
 
-> Be aware that if you cannot pass a Moment converted date directly.  You will have to use the `momentDate.toDate()` function.  BUT, also be aware that if you pass a `undefined` to moment, it WILL create a date for you.  It will be the current date.
+If only a single parameter is passed or if any passed value cannot be converted to a JavaScript date, then `undefined` will be returned.
 
 **Function Syntax**
 
 ```javascript
 naviga.getMonthsBetween($record.startDate, $record.endDate)
+naviga.getMonthsBetween('01-01-2024', $record.endDate)
 ```
 
 
 
 **Sample Input and Output**
 
-| startDate  | EndDate    | Output |
-| ---------- | ---------- | ------ |
-| 10/31/2020 | 01/01/2021 | 4      |
-| 12/01/2020 | null       | 1      |
-| null       | null       | 1      |
-| null       | 12/15/2020 | 1      |
-| 05/01/2021 | 03/01/2020 | -13    |
+| startDate  | EndDate    | Output    |
+| ---------- | ---------- | --------- |
+| 10/31/2024 | 11/01/2024 | 1         |
+| 10/31/2024 | 11/01/2025 | 13        |
+| null       | null       | undefined |
+| null       | 12/15/2020 | undefined |
+| 11/01/2025 | 10/31/2024 | -11       |
 
 ---
 
