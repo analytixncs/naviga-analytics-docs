@@ -684,7 +684,7 @@ naviga.getDaysBetween('01-01-2024', $record.endDate)
 
 - **Namespace:** naviga
 
-- **Description:** Get the absolute months between two dates.  If only one value provided or if either values are not dates, then 1 will be returned.
+- **Description:** Get the absolute months between two dates.  If only one value provided or if either values are not dates, then `undefined` will be returned.
 
 - **Parameters:**
 

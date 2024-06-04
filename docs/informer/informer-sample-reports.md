@@ -1046,3 +1046,22 @@ If you build your pairs in excel, just copy and paste into the input box:
 The below generator cannot create the saved function for you, but it gives you all of the pieces to be able to do it yourself.
 
 <LookupFunction />
+
+# Informer Metadata Reports
+
+The following reports are built using the Metadata datasource in Informer.  This datasource may not exist in your Informer system yet.  If you do not see an **Informer Metadata** datasource, enter a Salesforce case asking for it to be created for you.
+
+## Job Status Check
+
+:::info Download Dataset
+
+**<a  target="_blank"  href="/downloads/naviga-job-status-check.tgz">Job Status Check</a>**
+
+:::
+
+This report will return any jobs that have had an error in the past *n* days that you enter.  You can also enter a Job Name to target a specific Job.
+
+![image-20240604134600434](images/informer-sample-reports_metadata-jobstatus_001.PNG)
+
+
+
