@@ -37,7 +37,7 @@ This is a change from Informer 4, so you will see that all of the base reports a
 
 Find the report you want to covert to a Dataset, open it and run it.
 
-![image-20200227150927583](images/informer_tips_dataset_001.png)
+![image-20240610104130608](images/\informer_tips_dataset_001.png)
 
 This is very important, as the report must have data in it for you to get the "Create Dataset" option.
 
@@ -50,8 +50,6 @@ Click on the vertical 3 dots in the right corner and choose "Create Dataset"
 This will bring up a dialog where you can name your Dataset and give it a description.
 
 Once done with that you will be taken to the Dataset view of the report you converted.
-
-![image-20200227151858789](images/informer_tips_dataset_003.png)
 
 ## Informer Tips
 
@@ -71,7 +69,7 @@ Next, add criteria and choose the date field you want to filter on. The first cr
 
 To make this dynamic, so that you do not need to change the criteria every month, you can use informer _keywords_ to populate our between values. You can access a list of the keywords from within Informer as well:
 
-![1573243161315](images/informer_tips_003.png)
+<img src="images/informer_tips_003.png" alt="1573243161315" style="zoom:80%;" />
 
 You will populate the two values with **MONTH_BEGIN** and **MONTH_END**. This will instruct informer to look at today's date to determine what is the starting and ending of the month.
 
@@ -172,7 +170,7 @@ The end goal is to link the spreadsheet to the dataset on **Agency Name**.
 To do this, you first must create a dataset from your external spreadsheet. You can accomplish this in a number of ways, here are two:
 
 1. Go to the **Datasets page** in Informer and drag and drop your Excel file
-   ![1574192288686](images/informer_tips_006.png)
+   <img src="images/informer_tips_006.png" alt="1574192288686" style="zoom:80%; margin-left: 10%" />
 
    You will the dialog above, simply drop the file here.
 
@@ -180,7 +178,7 @@ To do this, you first must create a dataset from your external spreadsheet. You 
 
    Give the dataset a name and choose the sheet (this is an excel file) that the data is located on.
 
-2. **OR,** Click on the New Dataset button and choose upload a file:
+2. **OR,** Click on the New button and choose Dataset then upload a file:
 
    ![1574192719800](images/informer_tips_009.png)
 
@@ -495,7 +493,9 @@ I have seen times where if steps are not followed, that the target Datasource ma
 
 :::caution
 
-BUT WAIT, what if you have embedded Datasets in your Flow steps?  Then things get a bit more complicated.  Here is are the steps to follow if you run into that scenario:
+BUT WAIT, what if you have **embedded Datasets** in your Flow steps?  Then things get a bit more complicated.  Below is a visual to describe the steps.  
+
+The key to remember is that ALL of the datasets NEED to be pointing to the same **Datasource**, otherwise when importing you will see an input for multiple datasources and your import will fail.
 
 
 
