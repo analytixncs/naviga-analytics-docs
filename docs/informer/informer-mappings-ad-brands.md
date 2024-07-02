@@ -4,87 +4,136 @@ title: AD Brands
 sidebar_label: AD Brands
 ---
 
-Most of the time you will want to access Brand information in the context of a Client.  When writing a report that has the **GEN Clients** mapping in it, you will see that one of the relationships is **AD Brands**, however, when you want to pull "setup" information about a Brand and its related Client, you will need to start from the AD Brands mapping.
+Most of the time you will want to access Brand information in the context of a Campaign. 
+
+However, when going to the **AD Brands** mapping from **GEN Clients** , you will have access to "setup" information about a Brand and its related Client.  Each Client can have multiple Brands associated with it, whereas when coming from a campaign, you will be presented with the Brand appropriate to the campaign.
 
 :::info
 
-If you are wanting Setup Information about Brands, you will want to have your base mapping be **AD Brands**
+If you are wanting Setup Information about Brands, having your base mapping a **AD Brands** will make things a bit easier to understand.
 
 :::
 
 ## Rep Assignments
 
-**Default Sales Reps Assignments for this Brand**
+**Default Sales Reps Assignments for a Brand**
 
-The following fields from the AD Brands mapping are the default sales reps assignments for the selected brand.
+![image-20240626100936453](images/informerMapping_adbrands_defaultrep-001.png)
 
-- **DIGITAL.REP.IDS <138>** - The Rep ID
-- **DIGITAL.REP.PCTS <139>** - The Rep's percentage
+There is no "Default Rep" field in the **AD Brands** mapping.  The default rep is stored in the **AD Internet Brand Product Reps** mapping with a `Brand Product ID` of 
 
-To get the Sales Rep name and other details on the rep, go to the **Digital Salesrep** associated mapping.
+- Client ID (Name ID)
+- Brand ID
+- `Default`
 
-![img](images/informerMapping_repassignments_adbrand_011.png)
+A default rep for Client 123 with a Brand XX would be `123*XX*Default` and exist only in the **AD Internet Brand Product Reps**.
+
+There is NO relationship between **AD Brands** and **AD Internet Brand Product Reps** for the default rep.  To get this information in a report you will need to create a separate **dataset** that only pulls the default reps from **AD Internet Brand Product Reps** and then join that to your report needing the default rep information for a brand.
+
+Here is a sample template for a dataset that will return the default rep for a Brand Key.  Since there may be multiple groups of default reps based on date (as of date), the dataset has code to only return the most recent one based on Today's date. 
+
+::: Download
+
+**<a  target="_blank"  href="/downloads/join-default-brand-rep.tgzsomething.tgz">Download [JOIN]-Default Brand Rep</a>**
+
+:::
+
+
+
+Here is an example:
+
+| asOfDate   | asOfRep                 | asOfRepPct         |
+| ---------- | ----------------------- | ------------------ |
+| 2024-01-01 | REP-1, REP-2<br />REP-3 | 50%, 50%<br />100% |
+| 2024-06-15 | REP-2                   | 100%               |
+| 2024-06-25 | REP-3                   | 100%               |
+| 2024-06-30 | REP-2                   | 100%               |
+
+If today was *06/26/2024* The **[JOIN]Default Brand Rep** dataset would return **REP-3** from the asOfDate 2024-06-25.
+
+Also note that the `asOfRep` and `asOfRepPct` fields are not only multivalued but also subvalued, in essence arrays of arrays.
+
+
 
 ---
 
+
+
 **Sales Rep Overrides by Product Group**
+
+The details for the *Rep overrides by Product Group* are linked to **AD Brands** by the **BRAND.REP.KEY**.  This key is a virtual field that is the `Client ID*Brand ID*Product Group ID`.  To get the actual override reps, you will need to use the **AD Internet Brand Reps** mapping.
+
+![image-20240626140144506](images/informerMapping_adbrands_productgrouprep-001.png)
+
+:::danger
+
+Given that you have the ability to "schedule" reps, the table structure is a bit complex.  Given that, the easiest way to get Ad Brand Product Group reps is to create a separate dataset.
+
+:::
 
 :::caution
 
-Note that the relationship between the Digital Web Group ID and the Digital Web Rep ID is multivalued.  You can have multiple Product Groups in this override area **AND EACH** Product Group can have up to four Reps assigned to it!  This is why you see the **MS** next to the DIGITAL.WEB.REP.IDS <147> field.  It is indicating that it is Multivalued/subvalued.  
+Note that you can have multiple Product Groups in this override area **AND EACH** Product Group can have up to four Reps assigned to it!  
 
-Since you know that each Product Group can have only 4 reps, you could create a separate column for each using the code below in a Powerscript.
+![image-20240626141035592](images/informerMapping_adbrands_productgrouprep-002.png)
+
+Since you know that each Product Group can have only 4 reps, you could create a separate column for each using similar code from below in a Powerscript.
 
 ```javascript
-if ($record['digitalWebRepIds']) {
-	$record['digitalWebRepIds'].forEach((el, index) => {
+if ($record['GroupReps<replace with actual field>']) {
+	$record['GroupReps<replace with actual field>'].forEach((el, index) => {
 	    $record[`GroupRep${index+1}`] = el
-        $record[`GroupRepPercent${index+1}`] = $record['digitalWebRepPcts'][index]
+        $record[`GroupRepPercent${index+1}`] = $record['GroupReps<replace with actual field>'][index]
 	})
 }
 ```
 
->  Remember to add a Remove flow step to remove the **digitalWebRepIds** and **digitalWebRepIds** fields after you have converted them to columns.
-
 :::
-
-The following fields have the same granularity and are associated.
-
-- **DIGITAL.WEB.GROUPS <146>** - The Pub Group ID
-- **DIGITAL.WEB.REP.IDS <147>** - Rep IDs assigned to the Pub Group 
-- **DIGITAL.WEB.REP.PCTS <148>** - Rep %'s for each rep.
-
-Rep Detail information can be pulled from the **Digital Web Salesrep** associated mapping
-
-![img](images/informerMapping_gen_clients_repass_adbrand_001.png)
-
-If you need the Product Group detail information, you will need to either get that from a joined dataset OR you can manually create a link to the **AD Pub Groups** mapping.  Here are the details for a Manual Link:
-
-**From Mapping**: ODBC_PRODCAMP (this is the AD Brands mapping)
-
-**To Mapping**: ODBC_PUB_GROUPS
-
-**Link Name**: Can be whatever you want, but it should be descriptive and indicate that it was created by the site
-
-**AD Brands**: DIGITAL.WEB.GROUPS - this is the link field from AD Brands to AD Pub Groups.
-
-![image-20220616104628165](images/informerMapping_gen_clients_repass_adbrand_002.png)
 
 ---
 
 **Sales Rep Overrides by Product**
 
-In the AD Brands mapping, you will only have access to the Product IDs, but **not** the reps associated with each product.  This is stored in another mapping called **AD Internet Brand Product Reps**.
+In the AD Brands mapping, the **BRAND.PRODUCT.REP.KEY**  will link to the **AD Internet Brand Product Reps** mapping.  This mapping will hold the information about the Product Rep overrides for a brand.
 
-The Field is in the AD Brands mapping
+:::caution
 
-- **PRODUCT.IDS<185>** - The Pub Group ID
+The **AD Internet Brand Product Reps** mapping will hold all of the "Dates" for the override reps.  In Naviga you can schedule when reps are the active rep.  This means that you will need to extract the rep you are looking for.  If you are looking for the active rep based on today's date, you can use a function.  [Most Recent Date Function](#most-recent-date-function)
 
-![img](images/informerMapping_gen_adbrands_010.png)
+:::
 
-This the above will get you the Product Ids.  To get the associated reps, you will need to access the **AD Internet Brand Product Reps** mapping.
 
-![img](images/informerMapping_gen_clients_adbrand_004.png)
+
+![image-20240626134242189](images/informerMapping_adbrands_productrep-001.png)
+
+### Most Recent Date Function
+
+```js
+//------------------------------------------------------------
+// Pass in an array of dates and get the INDEX returned
+// of the date the is closest to but not greater than today
+//------------------------------------------------------------
+function getMostRecentDateIndex(asOfDates) {
+    if (!Array.isArray(asOfDates)) return 0
+    const today = moment();
+    let mostRecentIndex = -1;
+    let mostRecentDate = null;
+    
+    asOfDates.forEach((date, index) => {
+        const momentDate = moment(date);
+        if (momentDate.isSameOrBefore(today)) {
+            if (!mostRecentDate || momentDate.isAfter(mostRecentDate)) {
+                mostRecentDate = momentDate;
+                mostRecentIndex = index;
+            }
+        }
+    });
+    
+    return mostRecentIndex;
+}
+```
+
+
 
 ## Billing Overrides
 

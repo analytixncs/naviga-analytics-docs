@@ -582,6 +582,8 @@ Here is an example:
 
 The filter param must be a valid JSON string. The filter is actually an query built using the [ElasticSearch Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl.html).
 
+These filters are a good way to extract certain data from a dataset instead of pulling all the data.
+
 The Query DSL is complicated in its own right, so I will just give you a few simple examples, but do explore the documentation above for more details.
 
 Below you will find the DSL that I was able to test.  The `match` keyword is supposed to be a fuzzy match, but I have found that it does not work and so I am only using the `terms` keyword, which gives us exact matching.
@@ -632,6 +634,10 @@ If you need to filter data on multiple fields, you will put them in a filter blo
     ]
   }
 }
+
+// Without formatting
+{"bool":{"filter":[{"range":{"a_d_internet_campaigns_assoc_dateEntered":{"gte":"2023-01-01","lte":"2023-03-01"}}},{"terms":{"webSiteId":["DEMO11"]}},{"terms":{"a_d_internet_campaigns_assoc_advName":["FAY DRIVE BREWERY"]}}]}}
+
 ```
 
 

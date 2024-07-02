@@ -357,12 +357,52 @@ It looks like we are missing some links to do this but that’s an easy fix.  I 
 
 ![image-20221121200931932](images/informer-misc-001.png)
 
+## AR Cash and Prepayments
+
+In AR Cash, we have a the following fields and what I “think” they mean.
+
+ 
+
+- **Check Amount** – Total amount of the Payment received.
+- **Check Balance** – Amount that has not yet been applied – Thinking this is COA.
+- **Prepayment Amount** – *I think ->* amount of check amount that is to be a prepayment. This is a MV field, whereas the other amount fields are not.
+- **Prepayment Order Number** – This is the campaign the prepayment is to be applied to.
+
+**Check Balance** is the amount that has not yet been applied *to Invoices*. Yes, this is what COA technically means. A *subset* of COA is Prepayments; the compliment of that is uncommitted/available COA. 
+
+ Yes, a single Check can be used as a Prepayment against multiple Campaigns. In fact, there is a Group Security setting that allows each COA dollar to be allocated as a Prepayment multiple times. As a result, the sum of **Prepayment Amounts** could be more than the **Check Amount**. Also, **Prepayment Amount** can therefore creep into the difference between **Check Amount** and **Check Balance**. For example, a $100 check Prepays a $100 Campaign, but then is used to Pay a $50 Invoice – **Check Balance** is $50, **Prepayment Amount** is $100 – less than **Check Amount** but more than **Check Balance**.
+
+![img](images/informer-misc-arcash-001.png)
+
+ 
+
+Yes, the **Check Balance** can be composed of **Prepayment Amounts** and available **Cash on Account**. Yes, this is a difficulty in AR Aging – it only looks at the Prepayment flag which applies Y/N to the entire transaction.
+
+To calculate the unapplied **Prepayment Amount**, and therefore the available **Cash on Account**, requires looking up the Campaigns that are referenced on the Check, but only the (MV) position relevant to that Check ID.
+
+[https://dev.navigahub.com/ew/devdigital/ad/campaign_summary?ID=15376](https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fdev.navigahub.com%2Few%2Fdevdigital%2Fad%2Fcampaign_summary%3FID%3D15376&data=05|02|Mark.McCoid@navigaglobal.com|ecf789e0e0d94245ec3508dc8a5c0464|648867724322451bb3f5240270eb4e86|0|0|638537375032865239|Unknown|TWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D|0|||&sdata=Su9csl%2B%2FmJqibd96cQLI%2FgcLlJZlg%2Fz23%2FlSLWQCG5Q%3D&reserved=0)
+
+![img](images/informer-misc-arcash-002.png)
+
+ 
+
+Above data stored in INET.CAMPAIGNS… difference between Prepay Amount (F71) and Allocation Amount (F105) is unapplied **Prepayment Amount.**
+
+![img](images/informer-misc-arcash-003.png)
+
+![img](file:///C:/Users/Markm.000/AppData/Local/Temp/msohtmlclip1/01/clip_image008.gif)
+
+ 
+
+Here, RB030422A is a Check for $6047.98 total that, in addition to Prepaying $480 on Campaign 15376 above (already applied to Invoices), also has Prepaid Campaign 9524 for the full Check Amount (thus overallocated).
+
+![img](images/informer-misc-arcash-004.png)
+
+ 
 
 
 
+ 
 
-<Accordion title="Test The Accordion">
+ 
 
-This is a test
-
-</Accordion>
