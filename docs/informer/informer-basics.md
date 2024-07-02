@@ -69,7 +69,7 @@ Next, add criteria and choose the date field you want to filter on. The first cr
 
 To make this dynamic, so that you do not need to change the criteria every month, you can use informer _keywords_ to populate our between values. You can access a list of the keywords from within Informer as well:
 
-<img src="images/informer_tips_003.png" alt="1573243161315" style="zoom:80%;" />
+![](images/informer_tips_003.png)
 
 You will populate the two values with **MONTH_BEGIN** and **MONTH_END**. This will instruct informer to look at today's date to determine what is the starting and ending of the month.
 
@@ -170,14 +170,15 @@ The end goal is to link the spreadsheet to the dataset on **Agency Name**.
 To do this, you first must create a dataset from your external spreadsheet. You can accomplish this in a number of ways, here are two:
 
 1. Go to the **Datasets page** in Informer and drag and drop your Excel file
-   <img src="images/informer_tips_006.png" alt="1574192288686" style="zoom:80%; margin-left: 10%" />
-
+   
+   ![informer](images/informer_tips_006.png)
+   
    You will the dialog above, simply drop the file here.
-
+   
    ![1574192477192](images/informer_tips_007.png)
-
+   
    Give the dataset a name and choose the sheet (this is an excel file) that the data is located on.
-
+   
 2. **OR,** Click on the New button and choose Dataset then upload a file:
 
    ![1574192719800](images/informer_tips_009.png)
@@ -1031,7 +1032,7 @@ User Fields can be created by Super Users in the Informer system.  You can creat
 
 User Fields are "buckets" that once created will show up for every user.  Once you have created at leas on User Field you will see a User Fields section on every User:
 
-![UserField 001](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_basics-userfields-001.png)
+![UserField 001](images/informer_basics-userfields-001.png)
 
 If you did not specify a default value, the User Field will be empty initially.  
 
@@ -1041,7 +1042,7 @@ To update the User Field values for each you user, you must manually go into eac
 
 The power in User Fields comes when you use them in your Filter criteria for reports.  When you create filter criteria, one of the options is **User Fields**
 
-![UserFields_002](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_basics-userfields-002.png)
+![UserFields_002](images/informer_basics-userfields-002.png)
 
 Now, when a User looks at a Dashboard or Dataset report with this filter set, the filter will look into the User Field you selected for that user and filter based on the value for that User.
 
