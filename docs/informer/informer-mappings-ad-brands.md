@@ -34,7 +34,7 @@ Here is a sample template for a dataset that will return the default rep for a B
 
 ::: Download
 
-**<a  target="_blank"  href="/downloads/join-default-brand-rep.tgzsomething.tgz">Download [JOIN]-Default Brand Rep</a>**
+**<a  target="_blank"  href="/downloads/join-default-brand-rep.tgz">[JOIN]-Default Brand Rep</a>**
 
 :::
 
@@ -67,7 +67,11 @@ The details for the *Rep overrides by Product Group* are linked to **AD Brands**
 
 :::danger
 
-Given that you have the ability to "schedule" reps, the table structure is a bit complex.  Given that, the easiest way to get Ad Brand Product Group reps is to create a separate dataset.
+Given that you have the ability to "schedule" reps, the table structure is a bit complex.  Given that, you will need to create a separate dataset to get Ad Brand Product Group reps.
+
+Here is a template that will return the "Current" rep based on the date the report was run.
+
+**<a  target="_blank"  href="/downloads/join-ad-brand-product-groups.tgz">[JOIN]-Ad Brand Product Groups</a>**
 
 :::
 
