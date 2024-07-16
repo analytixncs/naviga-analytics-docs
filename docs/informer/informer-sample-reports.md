@@ -1051,6 +1051,10 @@ The below generator cannot create the saved function for you, but it gives you a
 
 The following reports are built using the Metadata datasource in Informer.  This datasource may not exist in your Informer system yet.  If you do not see an **Informer Metadata** datasource, enter a Salesforce case asking for it to be created for you.
 
+Here is how to create the Informer Metadata datasource/database -> [Informer Metadata Database Creation](informer-system#setting-up-informer-metadata-database-as-datasource-v586-forward)
+
+
+
 ## Job Status Check
 
 :::info Download Dataset
@@ -1062,6 +1066,8 @@ The following reports are built using the Metadata datasource in Informer.  This
 This report will return any jobs that have had an error in the past *n* days that you enter.  You can also enter a Job Name to target a specific Job.
 
 ![image-20240604134600434](images/informer-sample-reports_metadata-jobstatus_001.PNG)
+
+
 
 
 
