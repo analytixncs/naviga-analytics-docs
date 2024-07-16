@@ -35,6 +35,7 @@ Many of the Indicator fields can not only be Y or N, but sometimes they are empt
 | ACTIVE.IND <162>     | GEN Clients                  | Y              |
 | AD.PRE.PAY.IND <310> | GEN Clients                  | N              |
 | DO.NOT.USE.IND <150> | GEN Company/Individual Names | N              |
+| DEBT.LET.ID <59>     | GEN Clients                  | N              |
 
 >NOTE: You can test if a field is blank using the following:
 >
@@ -67,13 +68,15 @@ https://xxx.navigahub.com/EW/XXX/general/setup/name_maint_ad
 
 
 
-1. Do Not Use - GEN Clients -> DO.NOT.USE.IND <150> - When Blank assume "N"
+1. **Do Not Use** - GEN Clients -> DO.NOT.USE.IND <150> - When Blank assume "N"
 
 https://xxx.navigahub.com/EW/XXX/general/setup/name_maint_general
 
 ![image-20220811151730308](images/informer_basics_gen_clients_indicators-003.png)
 
+1. **Allow generation of collection letters** - GEN Clients -> DEBT.LET.ID <59> - When Blank assume "N"
 
+![image-20240716143914588](images/informer_basics_gen_clients_indicators-004.png)
 
 
 
@@ -107,6 +110,10 @@ The Email field seen below is found in the **GEN Company/Individual Names** mapp
 From Informer
 
 ![Employees From Informer](images/informerMapping_gen_client_emailfields_002-5.png)
+
+### Client Account Base Emails
+
+![image-20240716144800897](images/informerMapping_emails-001.png)
 
 ## Client Terms fields
 
@@ -155,7 +162,7 @@ We can still get at that email address information by using our understanding of
   ![img](images/informerMapping_gen_clients-stmtemail_001.png)
 - Notice that in the above relationships, **GEN Company/Individual Names** is self referencing from Client Name to Employees.
 
-What this relationship allows us, is to be able to get all of the employees for a particular company, "Big Company" in this case.  However, we only need the **Name Id** and **Email Addresses** fields from the **Employee** mapping.  Those along with the *Stmt Email Contact Id* (this field IS the Name Id) field from **GEN Clients**, we can create a powerscript to grab the email addresses.
+What this relationship allows us to do is to get all of the employees for a particular company, "Big Company" in this case.  However, we only need the **Name Id** and **Email Addresses** fields from the **Employee** mapping.  Those along with the *Stmt Email Contact Id* (this field IS the Name Id) field from **GEN Clients**, we can create a powerscript to grab the email addresses.
 
 ```javascript
 // Since we don't have a link to users from GEN Clients -> Client Name . stmtEmailContactId to 
@@ -178,6 +185,16 @@ $record.StmtContactEmails = $record['stmtEmailContactId'].map(contactId => emplo
 You will also want a flow step to **Remove** the Employee fields, as they were only used to help us get the information we needed.
 
 You will then be left with an array of *StmtContactEmails*.
+
+## Advertising Setup - Contacts
+
+In Advertising Setup ->  "Email Invoices to These Contacts" information.
+
+![image-20240705101652744](images/informer_mapping_genclients-advcontacts-001.png)
+
+To access the "Email Invoices to These Contacts" information in Informer.
+
+![image-20240705102008006](images/informer_mapping_genclients-advcontacts-002.png)
 
 ## Delivery Methods
 
