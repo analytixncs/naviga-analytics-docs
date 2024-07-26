@@ -19,6 +19,48 @@ First, UDF fields come in different types, **Text, Date, Numeric, Picklist**.  A
 
 > All UDFs EXCEPT for Picklists hold a single value, however, Picklists are multivalued fields and can hold multiple values.
 
+
+
+## UDF Descriptions
+
+Currently, the UDF Codes are the only items stored in the various mapping that hold the UDFs.  If you need a particular UDF description, you will need to create a separate dataset that you can then join to to get this information.
+
+The mapping the holds the UDF Descriptions is **GEN UDFs**.  
+
+The **@ID** field is the field that you will need to join to.  It is a Unidata key and is structured as follows:
+
+`<UDF Identifier>*<UDF Type>*<UDF Position>`
+
+- **UDF Identifier** - This will align with one of the sections below.  For example CRM UDFs will have `CRM` as the UDF Identifier, Order Line UDFs will have `INET.LINE`.  You can inspect the table for more details.
+- **UDF Type** - This will be PICKLIST or TEXT
+- **UDF Position** - This will be a number based on which position the UDF is in given its Identifier and Type.
+
+Here is a sample Dataset that you can use for the UDF Lookup:
+
+**<a  target="_blank"  href="/downloads/lookup-udf-descriptions.tgz">[LOOKUP]-UDF Descriptions</a>**
+
+You will **NOT** find a field in AD Internet Orders or any other table containing the UDF codes with a field ready to join to the @ID in **GEN UDFs**, so you will have to build that field yourself in a Powerscript flow step.  It can be a simple hardcoded field:
+
+`$record.udfText2Join = "INET*TEXT*1"`
+
+### Picklist Joins
+
+Picklist are a bit more difficult because the are MultiValued/SubValued fields.  This means that each Picklist UDF can have Multiple
+
+
+
+```js
+$record.picklistDescs = []
+
+// $record['picklistUdfCodes'] - This is the 
+for (let picklistCode of $record['picklistUdfCodes'][0]) {
+    index = $record['join-picklistUdfCode'].findIndex(el => el === picklistCode)
+    $record.picklistDescs.push($record['join-picklistUdfCodeDes'][index])
+}
+```
+
+
+
 ## Client AR UDF
 
 You can define the UDFs here - https://XXX.navigahub.com/ew/XXX/accounting/setup/ar_udf_codes?t=TEXT
