@@ -32,7 +32,9 @@ There is NO relationship between **AD Brands** and **AD Internet Brand Product R
 
 Here is a sample template for a dataset that will return the default rep for a Brand Key.  Since there may be multiple groups of default reps based on date (as of date), the dataset has code to only return the most recent one based on Today's date. 
 
-::: Download
+### Download [JOIN]-Default Brand Rep
+
+:::tip Download
 
 **<a  target="_blank"  href="/downloads/join-default-brand-rep.tgz">[JOIN]-Default Brand Rep</a>**
 

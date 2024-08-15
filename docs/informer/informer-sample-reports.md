@@ -40,6 +40,28 @@ You can add fields to augment the data in the dataset, but you do need to be awa
 
 
 
+## Simple AR Aging Summary
+
+The simple AR Aging summary report will summarize invoices on a per client basis and drop into pre-defined buckets.
+
+The report has two dependencies **which will be created** when importing the main report below.
+
+::::::tip Download
+
+**<a  target="_blank"  href="/downloads/simpleAging/naviga-simple-aging-summary.tgz"> [NAVIGA]-Simple Aging Summary</a>**
+
+:::note Dependencies You DO NOT need to import these
+
+**<a  target="_blank"  href="/downloads/simpleAging/join-cash-on-account-for-aging.tgz"> [JOIN]-Cash on Account For Aging</a>** - This dataset aggregates Cash On Account per Client Id.  Base mapping is `AR Cash`
+
+**[[JOIN]-Default Brand Rep](informer-mappings-ad-brands#download-[join]-default-brand-rep)** - This dataset returns the default brand reps defined for each customer.
+
+:::
+
+::::::
+
+
+
 ## AR Invoices Performance Applied
 
 > **NOTE**: This is a custom report that may be bugging.  Test and refine to make sure it works for you.
