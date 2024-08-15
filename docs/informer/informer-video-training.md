@@ -4,32 +4,27 @@ title: Informer Video Training
 sidebar_label: Informer Video Training
 ---
 
+import VideoPlayer from '@site/src/components/VideoPlayer';
+
+import VideoPlayerWSeek from '@site/src/components/VideoPlayerWSeek';
+
+import { InformerIntro01_08 } from '@site/src/components/VideoSeekToData';
+
+export const videoOne = require('./videos/v586/InformerIntro01_08.mp4').default;
+
+
+
 On this page are a series of videos to help get you acquainted with Informer and its use with the Naviga system.
 
-If you are using Google Chrome to view this page I would suggest that you install a video speed plugin so that you can speed up the videos as needed. I recommend the following:
 
-- **Video Speed Controller Extension**
-
-  - [Chrome Plugin](https://chrome.google.com/webstore/detail/video-speed-controller/nffaoalbilbmmfgbnbgppjihopabppdk)
-  - [Firefox Plugin](https://addons.mozilla.org/en-US/firefox/addon/videospeed/)
-  - [Edge Plugin](https://microsoftedge.microsoft.com/addons/detail/video-speed-control/mfoipakdadgplilpebhnebgafaoofblh)
-
-- **Global Speed**
-  - [Chrome Plugin](https://chrome.google.com/webstore/detail/global-speed-youtube-netf/jpbjcnkcffbooppibceonlgknpkniiff)
-  - [Firefox Plugin](https://addons.mozilla.org/firefox/addon/global-speed/)
-  - [Edge Plugin](https://microsoftedge.microsoft.com/addons/detail/mjhlabbcmjflkpjknnicihkfnmbdfced)
 
 ## Informer Overview
 
-A quick overview that shows how to access Informer from the Naviga system. Then an overview of the key parts of the Informer application.
+This is a good place to start if you would like a 30 minute tour of Informer.
 
 ---
 
-<div>
-  <video width="800px" controls>
-  <source src={require('./videos/001-Informer-Introduction.mp4').default}/>
-</video>
-</div>
+<VideoPlayerWSeek url={videoOne} seekStops={InformerIntro01_08}/>
 
 
 
