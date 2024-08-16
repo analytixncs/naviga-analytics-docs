@@ -30,6 +30,7 @@ module.exports = {
         "informer/informer-video-training",
         "informer/informer-basics",
         "informer/informer-sample-reports",
+        "informer/informer-lookup-generator",
         "informer/informer-templates",
         "informer/informer-system",
       ],

@@ -4,8 +4,6 @@ title: AD Internet Orders
 sidebar_label: AD Internet Orders
 ---
 
-import { Accordion } from '@site/src/components/UIHelpers';
-
 # AD Internet Orders mapping
 
 The AD Internet Orders mapping is the detail level of a campaign. It will hold the individual line items.
@@ -345,11 +343,7 @@ $record.netRepAmount = naviga.calculateRepAmounts($record['currentRepPcts'], $re
 
 ### Keeping Month Actual/Est Amounts with Rep Amounts
 
-
-
-<Accordion title="Older Way to Not Duplicate Amounts">
-
-
+### Old Way to Not Duplicate Amounts
 
 Many times you will want to have a single dataset contain both the Rep amounts and the Month Amounts, however, as stated above, this can be problematic because multiple reps may be assigned to a Month line.
 
@@ -468,8 +462,6 @@ function calcNetAmount (campaignType, monthActualAmt, monthEstAmt) {
 **5 - Remove Month Actual and Est amount fields**
 
 I would recommend removing the `monthActualAmt` and `monthEstAmt `fields as they will not be usable in any aggregations.
-
-</Accordion>
 
 ## Foreign Currency and Exchange Rates
 
