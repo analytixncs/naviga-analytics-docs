@@ -4,10 +4,6 @@ title: Informer Miscellaneous
 sidebar_label: Informer Miscellaneous
 ---
 
-import { Highlight } from '@site/src/components/Highlight';
-
-import { Accordion } from '@site/src/components/UIHelpers';
-
 This document contains information that has not yet been proofed or decided where in the main documentation that it should live.
 
 ## Row Level Security Filter
