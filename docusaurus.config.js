@@ -6,6 +6,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 (
   module.exports = {
     title: "Naviga Informer Analytics",
+    markdown: { format: "detect" },
     tagline: "",
     url: "https://naviga-informer-docs.netlify.app",
     baseUrl: "/",

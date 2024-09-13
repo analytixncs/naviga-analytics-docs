@@ -1430,17 +1430,11 @@ You can then pass each amount that you need rep amounts for into a separate call
 
 ## getTopProduct- Create Function
 
-This function will take an array of Products along with their Revenue amounts and return the Product with the greatest amount.  This is intended to be used with Order Lines to determine which product in a campaign is brining in the most revenue.
-
-This will only work if your AD Internet Campaigns mapping is above the AD Internet Orders mapping.  This way you will get a top product for each campaign.
-
-## getTopProduct - Usage
-
 - **Function name:** getTopProduct 
 
 - **Namespace:** naviga
 
-- **Description:** 
+- **Description:** This function will take an array of Products along with their Revenue amounts and return the Product with the greatest amount
 
 - **Parameers:** Object - { productIds: string[], linePrices: number[], digitalFormats?: string[] }
 
@@ -1448,7 +1442,7 @@ This will only work if your AD Internet Campaigns mapping is above the AD Intern
   | --------- | ------------- | ------------------------------------------ | ------ |
   | inputObj  | inputObj      | { productIds, linePrices, digitalFormats } |        |
 
-
+**Function Body**
 
 ```javascript
 bucket = {}
@@ -1478,4 +1472,70 @@ return { topProduct, topDigitalFormat }
 ```
 
 
+
+## getTopProduct - Usage
+
+This function will take an array of Products along with their Revenue amounts and return the Product with the greatest amount.  This is intended to be used with Order Lines to determine which product in a campaign is brining in the most revenue.
+
+This will only work if your AD Internet Campaigns mapping is above the AD Internet Orders mapping.  This way you will get a top product for each campaign.
+
+```js
+// { productIds: string[], linePrices: number[], digitalFormats?: string[] }
+topProductResult = naviga.getTopProduct($record.productIds, $record.linePrices, $record.digitalFormats)
+
+$record.topProduct = topProductResult.topProduct
+$record.topDigitalFormat = topProductResult.topDigitalFormat
+```
+
+
+
+## mapCodesToDesc - Create Function
+
+- **Function name:** mapCodesToDesc 
+
+- **Namespace:** naviga
+
+- **Description:** This function will take three arrays.  The first is an array of codes that you want to lookup. The second array is the codes to lookup and the third are the descriptions to return.
+
+- **Parameters:** codesToMap, lookupCodes, lookupDescs
+
+  | Data Type | Variable name | Label       | Sample |
+  | --------- | ------------- | ----------- | ------ |
+  | Array     | codesToMap    | codesToMap  |        |
+  | Array     | lookupCodes   | lookupCodes |        |
+  | Array     | lookupDescs   | lookupDescs |        |
+
+
+
+**Function Body**
+
+```js
+const resultDescs = []
+const inputsAllArrays = Array.isArray(codesToMap) && Array.isArray(lookupCodes) && Array.isArray(lookupDescs)
+
+if (!inputsAllArrays) return "All Inputs must be Arrays"
+
+codesToMap = codesToMap || []
+codesToMap.forEach((el, index) => {
+	const x = lookupCodes.findIndex(val => val === el)
+	resultDescs.push(lookupDescs[x])
+})
+return resultDescs
+```
+
+## mapCodesToDesc - Usage
+
+This function will take three arrays.  The first is an array of codes that you want to lookup. The second array is the codes to lookup and the third are the descriptions to return.
+
+For example, we have a **Print Editions** field in AD Internet Orders.  These are only the codes.  Inside of the AD Publications mapping we have ALL of the Edition codes for a given product in **Inet Edition Codes** and **Inet Edition Descs**.
+
+What this function will facilitate is taking the Print Edition values, looking them up in Inet Edition Codes and returning an array of matching Inet Edition Descs.
+
+```js
+printEditionCodes = $record['internet_order_linknewer_elan_releases_assoc_printEditionIds']
+lookupEditionCodes = $record['internet_order_linknewer_elan_releases_assoc_web_site_id_assoc_inetEditionCodes']
+lookupEditionDescs = $record['internet_order_linknewer_elan_releases_assoc_web_site_id_assoc_inetEditionDescs']
+
+$record.printEditionDescs = naviga.mapCodesToDesc(printEditionCodes, lookupEditionCodes, lookupEditionDescs)
+```
 
