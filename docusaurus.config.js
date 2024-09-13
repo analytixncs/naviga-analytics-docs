@@ -16,7 +16,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
     organizationName: "Naviga Inc", // Usually your GitHub org/user name.
     projectName: "naviga-analytics-docs", // Usually your repo name.
     plugins: [
-      require.resolve("@cmfcmf/docusaurus-search-local"),
+      require.resolve("@easyops-cn/docusaurus-search-local"),
       async function myPlugin(context, options) {
         return {
           name: "docusaurus-tailwindcss",
