@@ -8,7 +8,7 @@ export const buildCode = (lookupObj) => {
   return mapObj[inputKey] || inputKey;
   `;
 
-  console.log("BASE CODE", baseCode);
+  // console.log("BASE CODE", baseCode);
   return baseCode;
 };
 
