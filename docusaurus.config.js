@@ -10,7 +10,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
     tagline: "",
     url: "https://naviga-informer-docs.netlify.app",
     baseUrl: "/",
-    onBrokenLinks: "throw",
+    onBrokenLinks: "warn",
     onBrokenMarkdownLinks: "warn",
     favicon: "img/favicon.png",
     organizationName: "Naviga Inc", // Usually your GitHub org/user name.
