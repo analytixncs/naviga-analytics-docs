@@ -1,3 +1,9 @@
+---
+id: new-business-flag-original-code
+title: New Business Flag Original code
+sidebar_label: New Business Flag Original code
+---
+
 # New Business Flag - ORIGINAL CODE
 
 > IN PROCESS FEATURE - Create a lapsed customer option.  This would check a customers **last order date** against **today's date** and if it was greater than x months, we would mark the customer as lapsed.  Most likely you will want Lapsed Months to be Greater than the INACTIVE months.

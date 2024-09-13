@@ -2,6 +2,7 @@
 id: informer-basics
 title: Informer Basics
 sidebar_label: Informer Basics
+format: md
 ---
 
 ## Informer Support Links
