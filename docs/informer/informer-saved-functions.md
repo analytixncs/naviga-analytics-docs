@@ -1516,9 +1516,9 @@ const inputsAllArrays = Array.isArray(codesToMap) && Array.isArray(lookupCodes) 
 if (!inputsAllArrays) return "All Inputs must be Arrays"
 
 codesToMap = codesToMap || []
-codesToMap.forEach((el, index) => {
-	const x = lookupCodes.findIndex(val => val === el)
-	resultDescs.push(lookupDescs[x])
+codesToMap.forEach((el) => {
+	const foundIndex = lookupCodes.findIndex(val => val === el)
+	resultDescs.push(lookupDescs[foundIndex] || el)
 })
 return resultDescs
 ```
@@ -1537,5 +1537,21 @@ lookupEditionCodes = $record['internet_order_linknewer_elan_releases_assoc_web_s
 lookupEditionDescs = $record['internet_order_linknewer_elan_releases_assoc_web_site_id_assoc_inetEditionDescs']
 
 $record.printEditionDescs = naviga.mapCodesToDesc(printEditionCodes, lookupEditionCodes, lookupEditionDescs)
+```
+
+Here is a way to visualize what we are doing.
+
+```js
+// This is the field that hold the codes we want to decode
+PrintEdition = ["C"]
+// This is the field that holds all of the codes for the above
+LookupCodes = ["A", "B", "C", "D"]
+// This is the field that holds the decoded values
+// NOTE: The lookupDescs element indexes match up with the LookupCodes index
+// This means that LookupCodes[0] = "A" has a description of LookupDescs[0] = "One"
+LookupDescs = ["One", "Two", "Three", "Four"]
+
+// Result will be "Three"
+printEditionDescs = naviga.mapCodesToDesc(PrintEdition, LookupCodes, LookupDescs)
 ```
 
