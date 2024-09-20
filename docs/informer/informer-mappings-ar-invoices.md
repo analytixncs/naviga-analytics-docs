@@ -149,3 +149,13 @@ The **AR Cash** mapping holds your received payments.  Depending on the informat
 It will depend on your report's needs.  The relationship between the two mappings is a many to many.
 
 This means that one Invoice could have multiple payments being used to pay it down OR one payment could be used to pay multiple invoices.
+
+
+
+### Prepayment Tracking in AD Internet Campaigns
+
+**AD Internet Campaigns** tracks Prepayment Amount (F71) and Prepayment Applied Amount (F460) for each Prepayment ID (F69). F460 starts at zero and as the Campaign gets billed, increases up to full value of F71.
+
+How much is left to *Prepay* on a Campaign is a complex calc: I believe it is (Campaign Amount – Billed Amount) – (Prepayment Amount – Applied Amount) In other words, Unbilled Campaign Amount less Unapplied Prepayment Amount. This is because if an amount has been billed, then one cannot *prepay* against it, even if the Invoice has not been paid. This can happen when billing is done before the first Prepayment is added.
+
+Relying on AR Cash would leave out Prepayments by Credit Memo (including Trade Contracts). Also one Cash Receipt can pay for multiple Campaigns, plus have leftover COA, so “PP” as an indicator is loosely defined (but it does mean prepayment).

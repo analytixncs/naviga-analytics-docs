@@ -884,6 +884,33 @@ The fields listed below are multivalued and are at the SAME grain (i.e. associat
 
 ![img](images/informer_mapping_adinternetorders-pp-001.png)
 
+### Additional Preprint fields
+
+![image-20240920134455875](images/informer_mapping_adinternetorders-preprints-002.png)
+
+The above fields are found in the **AD Internet Preprint Groups** mapping
+
+1. PRODUCT.ID <1>
+2. AD.TYPE.ID <2>
+3. PAGE.TYPE.ID <3>
+4. PAGES <50>
+5. WEIGHT <51>
+6. OVERRUN.QTY <72> + PRINT.QTY.B4.OVRN <55>
+7. TOTAL.DIST <54>
+8. SPOILAGE.QTY <53>
+9. OVERRUN.QTY <72>
+10. OVRD.BILL.QTY <130>
+11. QTY.RATE.TYPE <131>
+12. RATECARD.RATE <132>  
+13. RATE.ADJ <133>
+14. EFFECTIVE.RATE <134>
+15. OVERRUN.PRICE <73>
+16. SUBTOTAL.AMT <136>
+17. POST.RATE.ADJ <137>
+18. OVERRUN.PRICE <73> + SUBTOTAL.AMT <136> + POST.RATE.ADJ <137>
+
+
+
 ## Impressions
 
 The below image shows how the Estimated and Actual impressions map from Naviga to Informer.
