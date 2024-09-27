@@ -16,7 +16,7 @@ If you are wanting Setup Information about Brands, having your base mapping a **
 
 ## Rep Assignments
 
-**Default Sales Reps Assignments for a Brand**
+### **Default Sales Reps Assignments for a Brand**
 
 ![image-20240626100936453](images/informerMapping_adbrands_defaultrep-001.png)
 
@@ -32,7 +32,7 @@ There is NO relationship between **AD Brands** and **AD Internet Brand Product R
 
 Here is a sample template for a dataset that will return the default rep for a Brand Key.  Since there may be multiple groups of default reps based on date (as of date), the dataset has code to only return the most recent one based on Today's date. 
 
-### Download [JOIN]-Default Brand Rep
+#### Download [JOIN]-Default Brand Rep
 
 :::tip Download
 
@@ -105,6 +105,16 @@ In the AD Brands mapping, the **BRAND.PRODUCT.REP.KEY**  will link to the **AD I
 :::caution
 
 The **AD Internet Brand Product Reps** mapping will hold all of the "Dates" for the override reps.  In Naviga you can schedule when reps are the active rep.  This means that you will need to extract the rep you are looking for.  If you are looking for the active rep based on today's date, you can use a function.  [Most Recent Date Function](#most-recent-date-function)
+
+This is what the below dataset does to return just the "active" reps that are overrides for a Product on a Brand
+
+:::
+
+#### Download [JOIN]-Ad Brand Product Reps
+
+:::tip Download
+
+**<a  target="_blank"  href="/downloads/join-ad-brand-product-reps.tgz">[JOIN]-Ad Brand Product Reps</a>**
 
 :::
 

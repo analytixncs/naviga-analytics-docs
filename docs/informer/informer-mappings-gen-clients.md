@@ -258,3 +258,10 @@ The reason we cannot determine this within Informer is because of how the data i
 
 If you had that information you would need to join to the CM.PROSPECTS mapping on its KEY, which is NAME.ID*REP.ID.  Then IF the Contact Id (EMPLOYEES) is in the CM.PROSPECTS CONTACT ID <7>, it goes in that REP.ID "My Contacts", if not, then "Other Contacts"
 
+## Portal Users
+
+Information for Portal users is located on the **GEN Clients** mapping.  You will see some of the information with the prefix **Portal** and other info with **User**
+
+![image-20240927145856470](images/informerMapping_gen_clients-Portal-001.png)
+
+There is also a **GEN Portal Audit** file which has information about the Portal users logins.
