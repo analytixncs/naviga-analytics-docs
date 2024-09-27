@@ -34,4 +34,26 @@ The Product type (first option under General Settings), can be one of four optio
 
 ![image-20220914145718853](images/informer_basics_ad_publications_indicators-002.png)
 
+## Positions and Sections
 
+Sections/Positions can be complicated outside of the orders.
+
+ You can define sections that are dependent on a Position or not.
+
+![img](file:///C:/Users/Markm.000/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg)
+
+ Either way the tables for the set up data are:
+
+ AD Internet Sections
+AD Internet Positions
+
+ Also, in AD Publications there is a flag.
+
+AD Publications -> **INVENTORY.NO.SECTIONS.IND <560>** - 
+
+- "Y" - Positions are Defined **Independent** of Section
+- "N" - Positions are Defined within each Section
+
+BUT, you cannot get to Positions or Sections from AD Publications. You need to start your report with either AD Internet Sections or AD Internet Positions.
+
+Both of these mappings have a link to the AD Publications table
