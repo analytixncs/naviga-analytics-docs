@@ -611,6 +611,53 @@ Along with the field, you can pass the delimiter that you want as well as a flag
 
 ---
 
+## sumFields - Create Function
+
+- **Function name:** sumFields
+
+- **Namespace:** naviga
+
+- **Description:** Returns the sum of the number passed.
+
+- **Parameters:**
+
+  | Data Type | Variable name  | Label          | Sample                 |
+  | --------- | -------------- | -------------- | ---------------------- |
+  | Array     | inputValsArray | inputValsArray | [field1, field2, ....] |
+
+**Function Body**
+
+```js
+const numbers = [...inputValsArray]
+return numbers.reduce((sum, num) => sum + returnANumber(num), 0);
+
+function returnANumber(numberIn){
+        // If a date is passed return 0 otherwise dates get converted to unix time value
+    numberIn = Object.prototype.toString.call(numberIn) === "[object Date]" ? 0 : numberIn;
+    const parsedNumber = Number(numberIn);
+    if (isNaN(parsedNumber)) {
+      return 0;
+    }
+    return parsedNumber;
+}
+```
+
+## sumFields - Usage
+
+This function will accept any number of fields that contain numbers and sum them up.
+
+> NOTE: You must pass these fields as an array.  All this means is that you need to pass your field names in square brackets:
+>
+> [ field1, field2,... ]
+
+**Function Syntax**
+
+```js
+$record.sumOfFields = naviga.sumFields([$record.field1, $record.field2, $record.fieldn])
+```
+
+
+
 ## getDaysBetween - Create Function
 
 - **Function name:** getDaysBetween

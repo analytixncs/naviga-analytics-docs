@@ -54,6 +54,48 @@ Once done with that you will be taken to the Dataset view of the report you conv
 
 ## Informer Tips
 
+## Saved Lists for Revenue Period Filtering
+
+In the Naviga Database there are fields (Period, Financial Period, etc) that are in the format of **YYYY-MM**.  
+
+What if you wanted to have a report run and have whatever the current period is run based on today's date?  There is no straightforward way to do this.
+
+However, there is a hack that we can implement to get this to work.
+
+**Step 1**
+
+Create a dataset that has a Powerscript that creates the Period that you need.  Since we cannot just create a dataset that has Powerscript fields, we need to have a "base" dataset to work with.  The easiest way to do this is to create an Excel file, drag it to Informer to create a dataset.  Then you would add the following code to create the Current Period field:
+
+```js
+$record.currPeriod = moment().format("YYYY-MM")
+```
+
+To make things easier, I have created this dataset that you can simply import.
+
+:::info Download Bundle
+
+**<a  target="_blank"  href="/downloads/saved-list-criteria.tgz">Saved List Criteria</a>**
+
+:::
+
+**Step 2**
+
+Now we need to create a job that will refresh the CurrentPeriod field every day AND the job has an Action that creates a U2 Saved List.  This Saved List is what we will use in our Criteria.
+
+![image-20241004094041352](images/informer_basics_saved_lists_job-001.png)
+
+1. **Source Dataset**  - This is the Saved List Criteria dataset that you created in Step 1
+2. **Saved List Name** - This is how you will reference the Saved List in your criteria.  It can be anything, but CurrentPeriod makes sense here.
+3. **Target U2 Datasource** - Where are we going to store the Saved List.  Could be in any of your datasources, but I like to keep them in the Production datasource.
+4. **Field** - This is the field that will be written to the Saved List.  In our case **currentPeriod**.
+5. **Schedule** - Make sure to schedule this dataset to run every day at 12:05 am.  This ensures that any reports that access it will be getting the correct Period for the current date.
+
+**Step 3**
+
+Go to your criteria and use your Saved List!
+
+![image-20241004095428618](images/informer_basics_saved_lists_job-002.png)
+
 ### Current Month - YOY Using Criteria
 
 To pull data for the current month from both this year and last year from a dataset, you can use the following **Criteria**
