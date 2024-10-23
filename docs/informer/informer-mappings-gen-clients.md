@@ -115,6 +115,22 @@ From Informer
 
 ![image-20240716144800897](images/informerMapping_emails-001.png)
 
+### Ad Billing Contact (Appears on Invoice)
+
+![image-20241021184009041](images/informer_mapping_gen_clients_billingcontact-001.png)
+
+You will find this Contact Id in the **GEN Clients** mapping as `AD.INVOICE.CONTACT.ID <278>`, however, there is no related mapping to give you the details.  In the screenshot you see the arrow pointing to the **AD Billing Contact** related mapping.  This will need to be setup on a site by site basis.  Below are the details.
+
+![image-20241021184119884](images/informer_mapping_gen_clients_billingcontact-002.png)
+
+
+
+To add this Link to your datasource, you will need to go to the datasource that you want to add it to and enter the following for a new link.  Feel free to enter a Salesforce case and Naviga will create this for you.
+
+![image-20241021183936487](images/informer_mapping_gen_clients_billingcontact-003.png)
+
+
+
 ## Client Terms fields
 
 There are two terms fields:
