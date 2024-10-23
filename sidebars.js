@@ -47,6 +47,7 @@ module.exports = {
         "informer/informer-mappings-ad-publications",
         "informer/informer-mappings-cm-opportunities",
         "informer/informer-mappings-udf-fields",
+        "informer/informer-mappings-ratecards",
         "informer/informer-mappings-other",
         "informer/informer-mappings-user-reports",
       ],

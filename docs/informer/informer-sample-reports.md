@@ -140,19 +140,12 @@ Each work in a similar manner, so the example below will be for the `AD internet
 
 The data is stored WITHOUT an implicit date field.  Instead the information for the Year is embedded in the ID field and the Month information is stored positionally in the Budget field.  
 
-<div>
-  <div>
- <img src={require('./images/informer-sample-reports_budgets_001.PNG').default} alt="Budgets 1" width="500px" style={{float: "right", marginLeft: "10px"}} />  
-    <div>
-      <p>
-      We need to take the `@id` field and extract the Year and Format from it.  The Rep ID is the last item of the ID, but we already have that as a separate field.</p>
-<p><br />
+We need to take the `@id` field and extract the Year and Format from it (See red arrows).  The Rep ID is the last item of the ID, but we already have that as a separate field.
+
 We will then infer the month based on the position of the budget amount in the array.  Since arrays are zero based, we will need to add +1 to each element's position.
-  </p>
-    </div>
- </div>
-  <div style={{clear: "both"}} ><br /></div>
-</div>
+
+![BudgetReports](images/informer-sample-reports_budgets_001.PNG)
+
 
 
 
