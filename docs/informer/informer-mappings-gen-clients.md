@@ -36,6 +36,8 @@ Many of the Indicator fields can not only be Y or N, but sometimes they are empt
 | AD.PRE.PAY.IND <310> | GEN Clients                  | N              |
 | DO.NOT.USE.IND <150> | GEN Company/Individual Names | N              |
 | DEBT.LET.ID <59>     | GEN Clients                  | N              |
+| AM.PO.REQD <126>     | GEN Clients                  | N              |
+| CC.APP.IND <248>     | GEN Clients                  | N              |
 
 >NOTE: You can test if a field is blank using the following:
 >
@@ -80,7 +82,10 @@ https://xxx.navigahub.com/EW/XXX/general/setup/name_maint_general
 
 
 
+1. **Charge Credit Card** - GEN Clients -> CC.APP.IND <248> - When Blank assume "N"
+1. **P.O. Required** - GEN Clients -> AM.PO.REQD <126> - When Blank assume "N"
 
+![image-20241030113532152](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informerMapping_gen_clients-advertisingfields-x001.png)
 
 ---
 
