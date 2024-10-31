@@ -85,7 +85,7 @@ https://xxx.navigahub.com/EW/XXX/general/setup/name_maint_general
 1. **Charge Credit Card** - GEN Clients -> CC.APP.IND <248> - When Blank assume "N"
 1. **P.O. Required** - GEN Clients -> AM.PO.REQD <126> - When Blank assume "N"
 
-![image-20241030113532152](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informerMapping_gen_clients-advertisingfields-x001.png)
+![image-20241030113532152](images/informerMapping_gen_clients-advertisingfields-x001.png)
 
 ---
 
