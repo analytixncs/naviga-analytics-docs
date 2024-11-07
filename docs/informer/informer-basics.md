@@ -1093,30 +1093,30 @@ For example, if I had a **Reps** User Field for my User, when I logged into Info
 
 
 
-## Questions When Converting from v4 to v5
+## Elasticsearch Script Fields in Datasets
 
-### Informer 4 allows for input parameters to be set on the schedule
+**Elasticsearch Script Fields** allow users to augment datasets by adding calculated fields without needing to re-index the data.  A common use is for date-based operations.
 
-I am assuming this means setting some sort of filtering criteria for what will be emailed/exported for a job.
+This means that instead of creating the needed field in a Powerscript and reloading the dataset, we simply add the field as an Elasticsearch script.
 
-If the Job's data is an **Ad Hoc Report** and it has query Inputs associated with it, when you create a Job with that report and click on run the Job editor window, you will be presented with the _Query Inputs_ dialog, where you can enter the inputs.
+![image-20241107153411818](images/informer_basics_elasticsearchscripts-001.png)
 
-![1586186067004](images/informer_tips_v4-v5_001.png)
+### Elasticsearch Field for Year and Month
 
-When you click on run, you will see the Inputs dialog:
+Many time we want to extract pieces of a date field to make it easier for users to filter on the data.  Here are some simple Elasticsearch Scripts to extract the Year and Month from a date field.
 
-![1586186135921](images/informer_tips_v4-v5_002.png)
+**Year**
 
-Whatever you enter as inputs will be used on all subsequent runs of the Job.
+```java
+(doc['monthStartDate'].size()==0 ? 0L : doc['monthStartDate'].value.getYear())
+```
 
-**Datasets**
+![image-20241107153609705](images/informer_basics_elasticsearchscripts-002.png)
 
-You can do the same with a Dataset, but the standard practice with a dataset will be to have one job that reloads it and the other jobs that use a **post filter**, to narrow the data and set to the appropriate users.
+**Month with leading Zeros**
 
-**Post Filter**
+```java
+(doc['monthStartDate'].size() == 0 ? "00" : (doc['monthStartDate'].value.getMonthValue() < 10 ? '0' + doc['monthStartDate'].value.getMonthValue() : doc['monthStartDate'].value.getMonthValue().toString()))
+```
 
-Many times, your need to only set a select set of data to users can be accomplished using a **Post Filter** or by using an action such as the "Sen an email burst".
-
-The post filter is located here:
-
-![1586191934643](images/informer_tips_v4-v5_003.png)
+![image-20241107153725970](images/informer_basics_elasticsearchscripts-003.png)
