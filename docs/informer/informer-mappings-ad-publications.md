@@ -38,16 +38,14 @@ The Product type (first option under General Settings), can be one of four optio
 
 Sections/Positions can be complicated outside of the orders.
 
- You can define sections that are dependent on a Position or not.
+You can define sections that are dependent on a Position or not.
 
-![img](file:///C:/Users/Markm.000/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg)
+Either way the tables for the set up data are:
 
- Either way the tables for the set up data are:
-
- AD Internet Sections
+AD Internet Sections
 AD Internet Positions
 
- Also, in AD Publications there is a flag.
+Also, in AD Publications there is a flag.
 
 AD Publications -> **INVENTORY.NO.SECTIONS.IND <560>** - 
 
