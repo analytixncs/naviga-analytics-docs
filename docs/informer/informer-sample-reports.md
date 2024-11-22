@@ -1030,7 +1030,53 @@ The following reports are built using the Metadata datasource in Informer.  This
 
 Here is how to create the Informer Metadata datasource/database -> [Informer Metadata Database Creation](informer-system#setting-up-informer-metadata-database-as-datasource-v586-forward)
 
+## Dependent Datasets
 
+When building a report, you often need to join another dataset to retrieve additional information. These datasets serve as dependencies for the reports that use them.
+
+It is crucial to track these dependencies to avoid deleting or making fundamental changes to them, as this could break the reports that rely on them.
+
+To retrieve this information, you will need the following dataset and ad hoc report. The dataset serves as a dependency for the report.
+
+:::info Download Dataset
+
+This Dataset provides metadata for all ad hoc reports and datasets, including their names and IDs.  This dataset should be set up in a Job to run every morning at 2am (or whatever time you choose).
+
+**<a  target="_blank"  href="/downloads/metadata-report-dataset-index.tgz">[METADATA]-Report-Dataset-Index</a>**
+
+This Ad Hoc Report will return all of the Reports/Datasets that have underlying dependencies.
+
+**<a  target="_blank"  href="/downloads/metadata-dataset-dependencies.tgz">[METADATA]-Dataset Dependencies</a>**
+
+:::
+
+### Enhance with Links
+
+There is a Powerscript after the *Pull Joins / Set Type* Powerscript called *Create Hyperlinks*.  **Make sure to update the Base URL to be your sites Informer URL.**
+
+```js
+baseURL = "https://YOURINFORMERbi.navigahub.com/"
+if ($record['type'] === "Ad Hoc Report") {
+    $record.LinkToReport = `<a target="_blank" href="${baseURL}reports/q/${$record['id']}">${baseURL}reports/q/${$record['id']}</a>`
+} else {
+    $record.LinkToReport = `<a target="_blank" href="${baseURL}datasets/${$record['id']}">${baseURL}datasets/${$record['id']}</a>`
+}
+
+$record.dependentDatasetLink = `<a target="_blank" href="${baseURL}datasets/${$record['joinedDatasetIds']}">${baseURL}datasets/${$record['joinedDatasetIds']}</a>`
+
+
+
+```
+
+## Job Details Report
+
+This report will give you a list of your jobs and the datasets or reports used in them.
+
+:::info Download Dataset
+
+**<a  target="_blank"  href="/downloads/metadata-job-details.tgz">[METADATA]-Job Details</a>**
+
+:::
 
 ## Job Status Check
 
