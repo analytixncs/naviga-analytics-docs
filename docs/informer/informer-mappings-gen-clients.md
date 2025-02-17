@@ -277,10 +277,10 @@ In Informer, you will find this field in the **GEN Clients** mapping in field ->
 
 You will need to decode the values in this field.  Here is the key:
 
-**E** = Use Estimates
-**V** = Use Ad Server Viewable Numbers
-**N** = Use Ad Server Numbers
-**Y** = Use Third Party Numbers
+- **E** = Use Estimates
+- **V** = Use Ad Server Viewable Numbers
+- **N** = Use Ad Server Numbers
+- **Y** = Use Third Party Numbers
 
 ![image-20250217112121966](./images/informer_mapping_genclients-account-recon_002.png)
 
