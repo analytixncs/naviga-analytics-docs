@@ -369,6 +369,12 @@ This route will return an integer with the count of rows in the dataset index.
 
 **/api/datasets/{id}/index/count**
 
+### DELETE - Remove Data from a Dataset
+
+This route will remove ALL data from a Dataset.  Be careful with this one because if you mistype anything after the {id}/, the dataset may be deleted.  Always have a Bundled backup of the dataset before testing.
+
+**/api/datasets/{id}/data?removeFields=false**
+
 ## Ad Hoc Query Report Routes
 
 ### POST - Execute Report
