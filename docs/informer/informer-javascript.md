@@ -571,17 +571,17 @@ Power Scripts are advanced scripts (JavaScript) that gives you complete control 
 
 Here are the predefined keywords you can use in your Power Script. [Informer Docs](https://informer5.zendesk.com/hc/en-us/articles/115005113823)
 
-| Keyword | Type            | Desc                                                               |
-| ------- | --------------- | ------------------------------------------------------------------ |
-| $record | object          | The current row. You may modify this row.                          |
-| $index  | number          | The current row number (row 1 = index 0)                           |
-| $omit() | function        | When called, removes the current row                               |
-| $fields | object          | Field metadata                                                     |
-| $field  | function        | Function to describe a field: $field('location').label('Loc')      |
-| $inputs | object          | User Inputs                                                        |
-| $local  | object          | Variable that is not cleared from on record to the next            |
-| \_      | object/function | Lodash v3 library. [lodash](https://lodash.com)                    |
-| moment  | function        | moment date manipulation library. [momentjs](https://momentjs.com) |
+| Keyword | Type            | Desc                                                         |
+| ------- | --------------- | ------------------------------------------------------------ |
+| $record | object          | The current row. You may modify this row.                    |
+| $index  | number          | The current row number (row 1 = index 0)                     |
+| $omit() | function        | When called, removes the current row                         |
+| $fields | object          | Field metadata                                               |
+| $field  | function        | Function to describe a field: $field('location').label('Loc') |
+| $inputs | object          | User Inputs                                                  |
+| $local  | object          | Variable that is not cleared from on record to the next      |
+| \_      | object/function | Lodash (v3.10) library. [lodash](https://lodash.com)         |
+| moment  | function        | moment date manipulation library (v2.29). [momentjs](https://momentjs.com) |
 
 To declare a variable use the `var` keyword. However, within the Powerscripts it seems you do not have to "declare" variables that you will be using.
 

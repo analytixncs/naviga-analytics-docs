@@ -1024,13 +1024,13 @@ The final step is to choose the columns to display.  The easiest way to do this,
 
 
 
-# Informer Metadata Reports
+## Informer Metadata Reports
 
 The following reports are built using the Metadata datasource in Informer.  This datasource may not exist in your Informer system yet.  If you do not see an **Informer Metadata** datasource, enter a Salesforce case asking for it to be created for you.
 
 Here is how to create the Informer Metadata datasource/database -> [Informer Metadata Database Creation](informer-system#setting-up-informer-metadata-database-as-datasource-v586-forward)
 
-## Dependent Datasets
+### Dependent Datasets
 
 When building a report, you often need to join another dataset to retrieve additional information. These datasets serve as dependencies for the reports that use them.
 
@@ -1050,7 +1050,7 @@ This Ad Hoc Report will return all of the Reports/Datasets that have underlying 
 
 :::
 
-### Enhance with Links
+#### Enhance with Links
 
 There is a Powerscript after the *Pull Joins / Set Type* Powerscript called *Create Hyperlinks*.  **Make sure to update the Base URL to be your sites Informer URL.**
 
@@ -1063,12 +1063,9 @@ if ($record['type'] === "Ad Hoc Report") {
 }
 
 $record.dependentDatasetLink = `<a target="_blank" href="${baseURL}datasets/${$record['joinedDatasetIds']}">${baseURL}datasets/${$record['joinedDatasetIds']}</a>`
-
-
-
 ```
 
-## Job Details Report
+### Job Details Report
 
 This report will give you a list of your jobs and the datasets or reports used in them.
 
@@ -1078,7 +1075,7 @@ This report will give you a list of your jobs and the datasets or reports used i
 
 :::
 
-## Job Status Check
+### Job Status Check
 
 :::info Download Dataset
 
@@ -1090,7 +1087,7 @@ This report will return any jobs that have had an error in the past *n* days tha
 
 ![image-20240604134600434](images/informer-sample-reports_metadata-jobstatus_001.PNG)
 
-# Lookup Function Generator
+## Lookup Function Generator
 
 [Go To Lookup Function Generator](informer-lookup-generator)
 

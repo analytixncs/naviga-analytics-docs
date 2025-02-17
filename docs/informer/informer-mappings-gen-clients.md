@@ -269,6 +269,23 @@ The value itself is not helpful for your report, however, it allows a join to th
 
 ![image-20230117132205253](images/informer_mapping_genclients-autoclear-balance-002.png)
 
+## Actuals Reconciliation field
+
+![image-20250217111829304](./images/informer_mapping_genclients-account-recon.png)
+
+In Informer, you will find this field in the **GEN Clients** mapping in field -> **DIGITAL.3RD.PARTY.ACTUALS <282>**
+
+You will need to decode the values in this field.  Here is the key:
+
+**E** = Use Estimates
+**V** = Use Ad Server Viewable Numbers
+**N** = Use Ad Server Numbers
+**Y** = Use Third Party Numbers
+
+![image-20250217112121966](./images/informer_mapping_genclients-account-recon_002.png)
+
+
+
 ## Sales CRM Other Contacts
 
 ![image-20240105112524618](images/informerMapping_gen_clients_crmothercontact_01.png)
