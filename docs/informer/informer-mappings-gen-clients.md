@@ -284,7 +284,19 @@ You will need to decode the values in this field.  Here is the key:
 
 ![image-20250217112121966](./images/informer_mapping_genclients-account-recon_002.png)
 
+## Credit Control Status field
 
+You can find the Code for the Credit Control Status field as seen below in **GEN Clients** -> CC.STATUS.CODE <290>.
+
+However, this is only the Code.  To decode, you will need to do a little work.
+
+![image-20250319145220674](images/informer_mapping_gen_clients_CCStatus-001.png)
+
+You will find the decoded information here -> https://**xxx**test.navigahub.com/ew/**xxx**/accounting/setup/collections_setup
+
+Scroll down to the Collection Status codes.  You will need to create a lookup function for these.  The [informer-lookup-generator](./informer-lookup-generator.mdx) can help you do this.
+
+![image-20250319145733498](images/informer_mapping_gen_clients_CCStatus-002.png)
 
 ## Sales CRM Other Contacts
 

@@ -909,6 +909,28 @@ The above fields are found in the **AD Internet Preprint Groups** mapping
 17. POST.RATE.ADJ <137>
 18. OVERRUN.PRICE <73> + SUBTOTAL.AMT <136> + POST.RATE.ADJ <137>
 
+### Ad Page Types
+
+The **AD Page Types** mapping holds some addition information for preprints.
+
+If you need to get the Field Descriptions and their associated Values, you would pull the values from the AD Internet Preprint Groups table from META.ANSWERS <61> field.
+
+But the Question Descriptions are in the AD Page Types table in the LABEL.QUESTION <13> field.
+
+Both of these are MV fields and their positions in the MV field are matched.
+
+
+
+![image-20250306163149443](images/informer_mapping_adinternetorders-preprintpagetypes-001.png)
+
+You could use a simple script like this to create a new column for each Label Question:
+
+```js
+$record['a_d_internet_preprint_groups_assoc_page_types_assoc_labelQuestion'].map((question, index) => {
+    $record[question] = $record['a_d_internet_preprint_groups_assoc_metaAnswers'][index]
+})
+```
+
 
 
 ## Impressions
