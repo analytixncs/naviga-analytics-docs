@@ -17,6 +17,7 @@
     "@cmfcmf/docusaurus-search-local": "^1.2.0",
     "@docusaurus/core": "^3.5.2",
     "@docusaurus/preset-classic": "^3.5.2",
+    "@docusaurus/theme-live-codeblock": "^3.5.2",
     "@easyops-cn/docusaurus-search-local": "^0.44.5",
     "@mdx-js/react": "^3.0.1",
     "@react-spring/web": "^9.7.1",

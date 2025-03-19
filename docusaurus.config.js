@@ -15,6 +15,18 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
     favicon: "img/favicon.png",
     organizationName: "Naviga Inc", // Usually your GitHub org/user name.
     projectName: "naviga-analytics-docs", // Usually your repo name.
+    stylesheets: [
+      {
+        href: "https://unpkg.com/@antonz/codapi@0.19.10/dist/snippet.css",
+      },
+    ],
+
+    scripts: [
+      {
+        src: "https://unpkg.com/@antonz/codapi@0.19.10/dist/snippet.js",
+        defer: true,
+      },
+    ],
     plugins: [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       async function myPlugin(context, options) {
@@ -29,6 +41,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
         };
       },
     ],
+    themes: ["@docusaurus/theme-live-codeblock"],
     presets: [
       [
         "@docusaurus/preset-classic",
@@ -57,6 +70,13 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
     themeConfig:
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
+        liveCodeBlock: {
+          /**
+           * The position of the live playground, above or under the editor
+           * Possible values: "top" | "bottom"
+           */
+          playgroundPosition: "bottom",
+        },
         navbar: {
           title: "Naviga Analytics",
           logo: {
