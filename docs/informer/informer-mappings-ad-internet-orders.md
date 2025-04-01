@@ -964,6 +964,17 @@ Lastly, there is sometimes size information in the **X Value <157>** and **Y Val
 
 [See AR Invoice section](informer-mappings-ar-invoices#ar-invoices)
 
+## GAM Fields (Google Ad Manager)
+
+Many of the fields for GAM will be in the **AD Internet Orders** mapping and preceded with `GAM`.
+
+Here are a few outliers:
+
+- **`Google Line Id`** - `AD.SERVER.ID <41>`
+- **`Custom Targeting`** - These fields all start with `Custom Targeting`
+
+<img src="images/informer_mapping_adinternetorders-GAM_001.png" alt="image-20250326112938361" style="zoom:80%;" />
+
 
 
 ## DEPRICATED FIELDS

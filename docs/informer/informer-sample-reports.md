@@ -255,9 +255,8 @@ The below example will also create the **[NAVIGA]-Product Status Mapping** datas
 
 When joining to the **[NAVIGA]-Product Status Mapping** dataset, you can do so as follows:
 
-<div>
-	<img src={require("./images/informer-sample-reports_materialstatus_001.PNG").default} alt="material status" width="800px" />  
-</div>
+![productstatuslink](./images/informer-sample-reports_materialstatus_001.PNG)
+
 
 
 
