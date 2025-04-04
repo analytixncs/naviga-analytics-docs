@@ -130,6 +130,30 @@ $local.credits = { ...$local.credits, [$record['monthCreditId'][0]]: true }
 
 ```
 
+## Deferral Report 
+
+:::danger
+
+Experimental report.  Test and verify before distribution.
+
+:::
+
+> NOTE: The one caveat of this report is that it will not report on Cancelled campaigns.
+
+This report is working to mimic the Deferred A/R Report in Naviga -> https://xxx.navigahub.com/EW/XXX/accounting/deferred_revenue_report
+
+::::::tip Download
+
+**<a  target="_blank"  href="/downloads/deferredReport/naviga-deferred-revenue.tgz"> [NAVIGA]-Deferred Revenue</a>** - This Ad Hoc report will pull in the deferred Journal entries to calculate the total deferred amount.  It then joins to the **[NAVIGA]-Deferred Receivables** dataset to get the billing information.  It then calculates the Deferred Balance by subtracting the Total Billed from the Total Deferred.
+
+:::note Dependencies You DO NOT need to import these
+
+**<a  target="_blank"  href="/downloads/deferredReport/naviga-deferred-receivables.tgz"> [NAVIGA]-Deferred Receivables</a>** - This dataset calculates the Total Billing and Billing this Period.  Base mapping is `AR Invoices`
+
+:::
+
+::::::
+
 ## Budget Reports
 
 **<a  target="_blank"  href="/downloads/naviga-ad-internet-rep-format-budgets.tgz"> Sample Rep Format Budget Report</a>**
