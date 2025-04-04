@@ -233,6 +233,22 @@ Example of a raw JSON body sending a date and a campaign ID to the refresh:
 }
 ```
 
+### PUT - Change Input Values
+
+**PUT /api/datasets/{id}**
+
+If you want to modify the Input value of a Dataset before it is run via a Job, you will use this PUT route with the following JSON Body.
+
+```json
+{
+  "params": {
+    "inputAlias": ...value...
+  }
+}
+```
+
+> NOTE: You will only see this change in Jobs that are going to refresh the Dataset.  If you open the dataset directly and got to "Change Inputs", you will see the default input value.
+
 ### GET - Request Params
 
 **/api/datasets/{id}/params**
