@@ -50,7 +50,6 @@ export default function YouTubePlayerWithChapters({
             controls: 1,
             disablekb: 0,
             enablejsapi: 1,
-            origin: window.location.origin,
           },
         }}
       />
