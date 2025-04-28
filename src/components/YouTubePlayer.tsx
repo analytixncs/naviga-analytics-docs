@@ -54,15 +54,16 @@ export default function YouTubePlayerWithChapters({
         }}
       />
       <div className="grid grid-cols-2 gap-2 mt-4">
-        {chapters.map((chapter) => (
-          <button
-            key={chapter.label}
-            onClick={() => jumpTo(chapter.time)}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
-          >
-            {chapter.label}
-          </button>
-        ))}
+        {chapters.length > 0 &&
+          chapters.map((chapter) => (
+            <button
+              key={chapter.label}
+              onClick={() => jumpTo(chapter.time)}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+            >
+              {chapter.label}
+            </button>
+          ))}
       </div>
     </div>
   );

@@ -475,6 +475,58 @@ In our example, filter by Nov and Dec of 2019 and 2020, you would need to add tw
 
 
 
+## Bundles
+
+A *bundle* in Informer is a specialized, portable package designed to facilitate the export (backup) and import of your Informer Ad Hoc reports and Datasets between different Informer environments. 
+
+You can use bundles to backup Ad Hoc report or Datasets to your local machine.  We also use bundles to "point" a report to a different datasource.  Lastly, you will find bundles within this documentation which allows you to import the report examples shown here.
+
+A bundle is exported to your device as a TGZ file (a special zip file).
+
+**How Bundles Work in Practice**
+
+- **[Creating/Exporting a Bundle:](#exporting-a-bundle)**
+  Users with appropriate permissions can select one or more resources (such as Datasets or Reports) and export them as a bundle. The system ensures that all necessary dependencies are included.
+- **[Importing a Bundle:](#importing-a-bundle)**
+  To import a bundle into Informer, users simply drag the bundle file and drops on the Informer interface. A dialog will pop up with options on the import process.
+
+### Exporting a Bundle
+
+While there are a number of ways to export/create a bundle, the focus here will be how to export a bundle from a Ad Hoc Report or Dataset.
+
+In an Ad Hoc Report or Dataset, simply click on the Actions menu on the right hand side of the screen and choose *Bundle/Bundle and Download*.  Be patient as if there are any dependencies, it may take a few minutes to build and download.
+
+Once done, you will have a `.tgz` downloaded to your computer.  This is the **Bundle**.
+
+![image-20250423102614388](images/informer_basics_bundles-001.png)
+
+### Importing a Bundle
+
+Importing a Bundle is very easy, however there are few key things to understand.
+
+Every Ad Hoc Report and Dataset has a Name, but this is not what uniquely identifies them, instead, it is the **Id** field.
+
+When you are in the Reports area, click on the report to select it, then in the right hand pane you will see some additional information.  The **Id** being one of them.  This is important to understand because it means that you can import reports with the same name but different Ids.  This can be confusing.
+
+It is also important to understand this when importing so that you don't overwrite a report that has had its named changed, but the report Id is the same.  This could happen if someone imports a bundle renames it and starts making changes to it.  Then six months down the line, they import the old bundle again and accidentally overwrite the report they have been working on for six months!
+
+We will see how to keep this from happening!
+
+![image-20250423125517135](images/informer_basics_bundles-002.png)
+
+On to importing your bundle.  
+
+Drag the `.tgz` file onto the Informer interface and drop it.  When you do this a Dialog will open.
+
+1. **`Optionally Import`** - Usually best to clear all checkboxes.  If you need teams, users, etc. add them after the import.
+2. **`Default Owner`** - Here you can choose who will own the Report after the import.  This can also easily be changed after the import is done.
+3. **`Update Rule...`** - I usually choose "Skip" to be safe.  As I said above, if you have a report with the same Id, you could accidentally overwrite if "Overwrite" was chosen.  Skip is a safe option.
+4. **`Datasources`** - This will allow you to choose which Datasource the report should pull its data from.  You should always choose "Merge" and then the Datasource you want.
+
+Lastly, click on **Save** and the report will be imported.
+
+![image-20250423135924804](images/informer_basics_bundles-003.png)
+
 ## Datasets
 
 The data in a Dataset will be persisted. Meaning that once loaded, it will be available for future use, while the Ad Hoc query's data is dumped after it is done being used.
