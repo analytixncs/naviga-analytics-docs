@@ -4,7 +4,7 @@ title: Informer Video Training
 sidebar_label: Informer Video Training
 ---
 
-import { chapters_InformerIntro, chapters_GenClientBasic } from "@site/src/components/VideoSeekToData";
+import { chapters_InformerIntro, chapters_GenClientBasic, chapters_MultivalueFields } from "@site/src/components/VideoSeekToData";
 import YouTubePlayerWithChapters from "@site/src/components/YouTubePlayer";
 
 
@@ -14,6 +14,8 @@ On this page are a series of videos to help get you acquainted with Informer and
 :::tip
 
 If the video seems fuzzy, click on the gear icon in the lower right of the video and change the "Quality" to 1080. 
+
+For information on importing the Bundle examples see [Importing a Bundle:](informer-basics#importing-a-bundle)
 
 :::
 
@@ -37,5 +39,45 @@ This is a good place to start if you would like a 30 minute tour of Informer.
   chapters={chapters_GenClientBasic}
 />
 
+:::info
 
+Here is a sample report from the Basic Client Report
 
+**<a  target="_blank"  href="/downloads/trainingreports/naviga-gen-clients-basic-report.tgz">[NAVIGA]-GEN Clients Basic Report</a>**
+
+:::
+
+## Understanding Multivalued Fields
+
+<YouTubePlayerWithChapters
+  videoId="3LTt_0QNe3M"
+  width="1080px"
+  height="640px"
+  chapters={chapters_MultivalueFields}
+/>
+
+### MV Fields Granularity
+
+Granularity, in the context of the multivalued fields, refers to the level of detail at which the multiple values within a field are related to each other. Think of it like different categories or groupings of information.
+
+**Same Granularity**: Order Line detail fields.  Each beginning with *Month*.  Things like`monthStartDate`, `monthActualAmount`, etc.
+
+Imagine a single line ID for an advertising campaign. This order might run for several months, and for each month, there's a specific start date and a certain amount of money spent.
+
+The "month start date," "month actual amount," "month estimated amount," and "month end date" are all at the same level of detail, which is the monthly detail level for that specific order line.
+
+*Think of it like this:* If the order ran for two months, the first value in the "month start date" field corresponds directly to the first value in the "month actual amount" field (and so on for the estimated amount and end date) – these all describe the details for the first month. Similarly, the second values in each of these fields describe the details for the second month...they are "in sync" with each other on a month-by-month basis. When you normalize these in Informer, each month's set of details gets its own row in the report.
+
+**Different Granularity Amount MV Fields** 
+
+You can have MV fields in your report that are at different granularities.  You will need to understand and handle these appropriately.
+
+An example is the Current Rep(s) assigned to an Campaign Line
+
+In the video we used the example of the "current rep ID" and "current rep percentage" fields. These relate to the current rep(s) who are responsible for the **entire** order line, not just the details for each individual (line detail) month.
+
+For example, if two sales reps are assigned to an order line, their IDs and their commission percentages are tied to the whole order line, regardless of how many line details exists in that order line. These values (the rep IDs and percentages) are at a different level of granularity (the order line level) compared to the monthly start dates and amounts, which are at the Line Detail level.
+
+As the video shows, if you try to normalize the "current rep ID" along with the monthly details, it incorrectly pairs the first rep with the first month's details and the second rep with the second month's details, which is not accurate. The reps are associated with the entire order line. To handle this correctly and show each rep's involvement, you would typically use a separate normalization step.
+
+The key takeaway is that multivalued fields with the same granularity have their multiple values directly correspond to each other within the same context (like each line detail of an order). Multivalued fields with different granularities have values that relate to the data at a different level (like the entire order line versus the line detail). Understanding this difference is crucial for correctly manipulating these fields in Informer to get the desired reporting results.
