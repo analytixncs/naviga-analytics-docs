@@ -22,12 +22,6 @@ $record.longerNote  = Buffer.from($record['other_notes_assoc_comment'], 'base64'
 
 ## GEN User Control
 
-:::info
-
-The GEN User Control is a new mapping as of June 2022.  If you don't see the mapping in your Informer instance, please enter a Salesforce case asking for it to be added.
-
-:::
-
 GEN User Control is a mapping that contains some simple information about the users in your Naviga database. The following example Dataset will flatten the information in the GEN user control mapping into something usable.  
 
 **<a  target="_blank"  href="/downloads/naviga-gen-user-control.tgz">GEN User Control Dataset</a>**
@@ -157,6 +151,15 @@ $fields.paramUserStatusCode.label = "User Status Code"
 
 
 ---
+
+## GEN Security File
+
+The **GEN Security File** holds much of the security data for Groups.
+
+1. **IN.PROPOSAL.APPROVAL.REQD <448>**
+2. **IN.PROPOSAL.APPROVAL.CAMP.PCT <444>**
+
+![image-20250502094931749](images/informer_mapping_other_sec-001.png)
 
 ## Miscellaneous Information
 

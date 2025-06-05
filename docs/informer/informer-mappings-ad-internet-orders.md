@@ -945,6 +945,14 @@ Be aware that the **Month Actual Imps** and **Month Est Qty** are both multivalu
 
 ![img](images/informer_mapping_impressions-001.png)
 
+### Ad Server Total / Viewable Impressions
+
+Note that the Ad Server Viewable Imps has two options in AD Internet Orders.  All of these are Multi-Valued fields and should be at the same granularity as the MONTH fields.  This means that you would normalize them with the MONTH fields.
+
+![image-20250508100325104](images/informer_mapping_impressions-002.png)
+
+
+
 ## Digital Size - Columns - Inches
 
 Size information is located in a couple of places based on the value in the **Dimensions <9>** field in **AD Internet Orders**.
