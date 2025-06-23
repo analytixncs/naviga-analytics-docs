@@ -66,20 +66,20 @@ We have options for **Aggregations** and **Calculations**.  Here is a list:
 
 **Aggregates:**
 
-- **sum:<number>** – Sum value of given Field
-- **avg:<number>** – Average value of given Field
-- **min:<number or date>** – Minimum value of given Field
-- **max:<number or date>** – Maximum value of given Field
-- **value\_count:<any>** – Non-null count for a given Field
-- **cardinality:<any>** – Distinct non-null count for a given Field
+- **sum:\<number\>** – Sum value of given Field
+- **avg:\<number\>** – Average value of given Field
+- **min:\<number or date\>** – Minimum value of given Field
+- **max:\<number or date\>** – Maximum value of given Field
+- **value\_count:<\any\>** – Non-null count for a given Field
+- **cardinality:<\any\>** – Distinct non-null count for a given Field
 - **count** – Count of each group
 
 **Calculations:**
 
-- **ratio(<first number>, <second number>)** – Divide the first number by the second number
-- **mult(<first number>, <second number>)** – Multiply the first number by the second number
-- **add(<first number>, <second number>)** – Add the first number and the second number
-- **sub(<first number>, <second number>)** – Subtract the second number from the first number
+- **ratio(\<first number\>, \<second number\>)** – Divide the first number by the second number
+- **mult(\<first number\>, \<second number\>)** – Multiply the first number by the second number
+- **add(\<first number\>, \<second number\>)** – Add the first number and the second number
+- **sub(\<first number\>, \<second number\>)** – Subtract the second number from the first number
 
 First, we need to decide what kind of **aggregation** we are going to do.  For our Gross minus Net Revenue calculation, we will use the **sum** aggregation.  But we don't just want to sum the values, we want the difference between them.  This means we will need to pass our **sum aggregations** to a *calculation function*.  From the list above, **sub** is the one we need.
 
