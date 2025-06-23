@@ -29,6 +29,7 @@ module.exports = {
         "informer/informer-new-ui",
         "informer/informer-video-training",
         "informer/informer-basics",
+        "informer/informer-visuals",
         "informer/informer-sample-reports",
         "informer/informer-lookup-generator",
         "informer/informer-templates",

@@ -972,6 +972,26 @@ Lastly, there is sometimes size information in the **X Value <157>** and **Y Val
 
 [See AR Invoice section](informer-mappings-ar-invoices#ar-invoices)
 
+## Ad Publications
+
+### Reporting Groups
+
+There is a feature in Naviga Ad that allows you to designate a Publication Group as a Reporting Group.  This is done in the **AD Pub Groups** mapping field `REPORTING.ONLY.IND <114>`
+
+If this field is "Y", then this is a reporting group.
+
+Since you can have a single product show up in multiple Reporting Groups, you will need to be careful how you use this in reporting as it can cause overstating of the revenue.
+
+To implement, you will need to create a separate "Reporting Groups" dataset that can be joined to other reports that need the reporting groups.  Here is a sample dataset.
+
+:::info Download Bundle
+
+This is a sample Reporting Groups dataset that can be joined to other datasets/reports.
+
+**<a  target="_blank"  href="/downloads/naviga-reporting-groups.tgz">[NAVIGA]-Reporting Groups</a>**
+
+:::
+
 ## GAM Fields (Google Ad Manager)
 
 Many of the fields for GAM will be in the **AD Internet Orders** mapping and preceded with `GAM`.
@@ -987,7 +1007,7 @@ Here are a few outliers:
 
 ## DEPRICATED FIELDS
 
-## Add Reps Using Month Rep fields
+## Month Rep fields
 
 The fields you will need will be either the Month Curr or Month Orig Rep fields, however we will focus only on the **Month Curr Rep** fields.
 
