@@ -16,6 +16,20 @@ If you are wanting Setup Information about Brands, having your base mapping a **
 
 ## Rep Assignments
 
+:::tip
+
+**Inactive Ind** - In both the **AD Internet Brand Reps** and **AD Internet Brand Product Reps** mappings there is a field **Inactive Ind** that indicates if a Rep has been disabled.  There are three options for this flag
+
+- **Y** - Rep is disabled
+- **N** - Rep is NOT disabled
+- "" - If Blank, assume **N**, Rep is NOT disabled
+
+NOTE that the 
+
+![image-20250624095303524](images/informerMapping_adbrands_reps-001.png)
+
+:::
+
 ### **Default Sales Reps Assignments for a Brand**
 
 ![image-20240626100936453](images/informerMapping_adbrands_defaultrep-001.png)

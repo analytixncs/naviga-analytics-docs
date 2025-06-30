@@ -284,6 +284,20 @@ You will need to decode the values in this field.  Here is the key:
 
 ![image-20250217112121966](./images/informer_mapping_genclients-account-recon_002.png)
 
+## Actuals Billing Method
+
+This is also under the **Advertising Setup** section 
+
+![image-20250625145053231](images/informer_mapping_genclients-account-recon_003.png)
+
+In Informer, you will find this field in the **GEN Clients** mapping in field -> **DIGITAL.CAP.ACTUALS <284>**
+
+You will need to decode the values in this field:
+
+- **N** = No Caps
+- **C** = Capped at Total Goal
+- **Y** = Capped at Individual Monthly Goals
+
 ## Credit Control Status field
 
 You can find the Code for the Credit Control Status field as seen below in **GEN Clients** -> CC.STATUS.CODE <290>.
