@@ -22,6 +22,11 @@ export const chapters_MultivalueFields = [
   { label: "4. Advanced Normalize Usage", time: 60 * 16 + 16 },
 ];
 
+export const chapters_IntroFlowSteps = [
+  { label: "1. Merge Duplicates", time: 0 },
+  { label: "2. Other useful flow steps", time: 60 * 10 + 39 },
+];
+
 // export const InformerIntro01_08 = [
 //   { seekToSeconds: 0, seekTitle: "Introduction" },
 //   { seekToSeconds: 58, seekTitle: "What Is Informer" },

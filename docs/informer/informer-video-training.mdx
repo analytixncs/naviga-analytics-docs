@@ -4,7 +4,7 @@ title: Informer Video Training
 sidebar_label: Informer Video Training
 ---
 
-import { chapters_InformerIntro, chapters_GenClientBasic, chapters_MultivalueFields } from "@site/src/components/VideoSeekToData";
+import { chapters_InformerIntro, chapters_GenClientBasic, chapters_MultivalueFields, chapters_IntroFlowSteps } from "@site/src/components/VideoSeekToData";
 import YouTubePlayerWithChapters from "@site/src/components/YouTubePlayer";
 
 
@@ -81,3 +81,15 @@ For example, if two sales reps are assigned to an order line, their IDs and thei
 As the video shows, if you try to normalize the "current rep ID" along with the monthly details, it incorrectly pairs the first rep with the first month's details and the second rep with the second month's details, which is not accurate. The reps are associated with the entire order line. To handle this correctly and show each rep's involvement, you would typically use a separate normalization step.
 
 The key takeaway is that multivalued fields with the same granularity have their multiple values directly correspond to each other within the same context (like each line detail of an order). Multivalued fields with different granularities have values that relate to the data at a different level (like the entire order line versus the line detail). Understanding this difference is crucial for correctly manipulating these fields in Informer to get the desired reporting results.
+
+## Introduction To Flow Steps
+
+Informer’s **flow steps** are powerful actions you can apply to your data after running a query and before finalizing your dataset. These steps let you transform, clean, and enhance your data, making it ready for analysis and reporting.
+
+<YouTubePlayerWithChapters
+  videoId="_iDwjDRIe4I"
+  width="1080px"
+  height="640px"
+  chapters={chapters_IntroFlowSteps}
+/>
+
