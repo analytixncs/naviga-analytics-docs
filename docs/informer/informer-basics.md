@@ -1018,6 +1018,18 @@ For system administrator users, you will change their permission from **Normal U
 
 Very few users should have **Super User** access.
 
+#### Changing Ownership and Access to Reports
+
+Many times you will want to change who owns and/or has access to a report.  This can be done from the reports screen by selecting the **Action** menu to the right of a report and choosing to "Change Owner"
+
+![image-20250717085449843](images/informer_users_basics-102.png)
+
+You can also do this from within a report by clicking on the **Access** option in the left menu and then clicking on the **Owner**.  You will be presented with options to change the owner to a new Team or Users.
+
+Also note that you can turn on the Share access for the report in this area also.
+
+![image-20250717085719912](images/informer_users_basics-101.png)
+
 #### Disabling or Deleting a User
 
 If a User is no longer with your company and you do not want them to access Informer anymore, you have two options.  You can either **Delete** or **Disable** the user.
