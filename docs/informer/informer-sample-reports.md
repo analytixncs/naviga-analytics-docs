@@ -1065,11 +1065,11 @@ To retrieve this information, you will need the following dataset and ad hoc rep
 
 This Dataset provides metadata for all ad hoc reports and datasets, including their names and IDs.  This dataset should be set up in a Job to run every morning at 2am (or whatever time you choose).
 
-**<a  target="_blank"  href="/downloads/metadata-report-dataset-index.tgz">[METADATA]-Report-Dataset-Index</a>**
+**<a  target="_blank"  href="/downloads/MetadataReports/metadata-report-dataset-index.tgz">[METADATA]-Report-Dataset-Index</a>**
 
 This Ad Hoc Report will return all of the Reports/Datasets that have underlying dependencies.
 
-**<a  target="_blank"  href="/downloads/metadata-dataset-dependencies.tgz">[METADATA]-Dataset Dependencies</a>**
+**<a  target="_blank"  href="/downloads/MetadataReports/metadata-dataset-dependencies.tgz">[METADATA]-Dataset Dependencies</a>**
 
 :::
 
@@ -1088,13 +1088,23 @@ if ($record['type'] === "Ad Hoc Report") {
 $record.dependentDatasetLink = `<a target="_blank" href="${baseURL}datasets/${$record['joinedDatasetIds']}">${baseURL}datasets/${$record['joinedDatasetIds']}</a>`
 ```
 
+### Job Average Run Times
+
+This report will show a list of jobs and their average run time based on their historical runs.
+
+:::info Download Dataset
+
+**<a  target="_blank"  href="/downloads/MetadataReports/metadata-jobs-average-run-time.tgz">[METADATA]-Jobs Average Run Time</a>**
+
+:::
+
 ### Job Details Report
 
 This report will give you a list of your jobs and the datasets or reports used in them.
 
 :::info Download Dataset
 
-**<a  target="_blank"  href="/downloads/metadata-job-details.tgz">[METADATA]-Job Details</a>**
+**<a  target="_blank"  href="/downloads/MetadataReports/metadata-job-details.tgz">[METADATA]-Job Details</a>**
 
 :::
 
@@ -1102,7 +1112,7 @@ This report will give you a list of your jobs and the datasets or reports used i
 
 :::info Download Dataset
 
-**<a  target="_blank"  href="/downloads/naviga-job-status-check.tgz">Job Status Check</a>**
+**<a  target="_blank"  href="/downloads/MetadataReports/naviga-job-status-check.tgz">Job Status Check</a>**
 
 :::
 
