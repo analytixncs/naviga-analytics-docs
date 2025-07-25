@@ -26,6 +26,13 @@ export const chapters_IntroFlowSteps = [
   { label: "1. Merge Duplicates", time: 0 },
   { label: "2. Other useful flow steps", time: 60 * 10 + 39 },
 ];
+export const chapters_IntroPowerscripts = [
+  { label: "1. Introduction", time: 0 },
+  { label: "2. JavaScript Objects and $record", time: 60 * 2 + 5 },
+  { label: "3. Accessing $record Fields", time: 60 * 8 + 39 },
+  { label: "4. $local for Persisting Data", time: 60 * 12 + 29 },
+  { label: "5. Counting Campaigns Example", time: 60 * 15 + 15 },
+];
 
 // export const InformerIntro01_08 = [
 //   { seekToSeconds: 0, seekTitle: "Introduction" },

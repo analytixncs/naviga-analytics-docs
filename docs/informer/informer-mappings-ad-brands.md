@@ -69,7 +69,10 @@ If today was *06/26/2024* The **[JOIN]Default Brand Rep** dataset would return *
 
 Also note that the `asOfRep` and `asOfRepPct` fields are not only multivalued but also subvalued, in essence arrays of arrays.
 
+The last step is to join this data to a report that needs the default brand rep.  The Join will be from the **Brand Key**.  
+For example, if you had an Order report that used the **AD Internet Orders** as the base mapping, you would need to get the **Brand Key** from the **AD Internet Campaigns** mapping and make the join as follows:
 
+![image-20250725145823416](images/informerMapping_adbrands_defaultrep-002.png)
 
 ---
 
