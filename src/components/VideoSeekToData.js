@@ -34,6 +34,14 @@ export const chapters_IntroPowerscripts = [
   { label: "5. Counting Campaigns Example", time: 60 * 15 + 15 },
 ];
 
+export const chapters_UsefulJavascript = [
+  { label: "1. Introduction To Arrays", time: 0 },
+  { label: "2. The Map Higher Order Function", time: 60 * 7 + 33 },
+  { label: "3. The Reduce Higher Order Function", time: 60 * 11 + 23 },
+  { label: "4. Template Strings", time: 60 * 12 + 40 },
+  { label: "5. The Includes Statement", time: 60 * 18 + 35 },
+  { label: "6. Mimic the SQL IN Statement", time: 60 * 21 + 28 },
+];
 // export const InformerIntro01_08 = [
 //   { seekToSeconds: 0, seekTitle: "Introduction" },
 //   { seekToSeconds: 58, seekTitle: "What Is Informer" },
