@@ -130,7 +130,7 @@ $local.credits = { ...$local.credits, [$record['monthCreditId'][0]]: true }
 
 ```
 
-## Deferral Report 
+## Deferral Report
 
 :::danger
 
@@ -153,6 +153,78 @@ This report is working to mimic the Deferred A/R Report in Naviga -> https://xxx
 :::
 
 ::::::
+
+## COA Report
+
+The Cash on Account (COA) report provides a breakdown of customer payment balances to distinguish between funds that are truly available and those already committed to orders. By isolating **Whole COA**, **Prepayment Amount**, and **True COA**, the report shows unallocated cash versus committed prepayments. 
+
+::::::tip Download
+
+**<a  target="_blank"  href="/downloads/naviga-coa-calculation.tgz"> [NAVIGA]-COA Calculation</a>** 
+
+::::::
+
+### Analysis
+
+This analysis aims to distinguish between different types of customer cash balances to provide accurate reporting of available funds. We need to separate total cash balances from committed prepayments to determine the true amount of uncommitted cash available. This involves calculating three key metrics: Whole COA (total unallocated payments), Prepayment Amount (cash committed to orders), and True COA (genuinely available uncommitted cash).
+
+How do we distinguish between different types of customer cash balances to understand how customer payments are being used. 
+This involves calculating three key metrics:
+
+**Whole COA** represents all unallocated payment balances - money that customers have paid but hasn't been applied to specific invoices yet. 
+**True COA** is the portion of that money that's completely free to use - not committed to any orders or invoices. 
+**Prepayments** represent money that's been earmarked for specific orders but hasn't been applied to invoices for those orders yet. The key insight is that Whole COA includes both truly available cash and cash that's already committed to orders, so you need to subtract the committed amounts to get the True COA.
+
+## Key Formulas and Calculations
+
+### Whole COA
+
+Total payment balances that have not yet been applied to invoices. This represents all cash received from customers that remains unallocated.
+
+``````
+SUM of all CHECK_BAL <4> values WHERE CHECK_BAL > 0
+``````
+
+### Prepayment Amount
+
+Cash that has been committed to specific orders but not yet applied to invoices. This calculation determines the remaining uncommitted portion of prepayments by subtracting what has already been applied from the original prepayment amount.
+
+> Multiple records may exist for a single payment transaction, so all applicable amounts must be summed.
+
+```
+SUM of (PP.AMOUNT <71> - PP.APPLIED.AMT <460>)
+FROM AD Internet Campaigns
+WHERE AR Cash -> ID = AD Internet Campaigns -> PP.TRANS.ID <69>
+```
+
+### True COA
+
+Genuinely uncommitted cash available for use. This represents customer funds that are not tied to any specific orders or commitments.
+
+> If the calculation results in a negative value, return zero. This can occur when prepayment commitments have been partially refunded, leaving the committed amount higher than the actual available balance.
+
+```
+True COA = Whole COA - Prepayment Amount
+IF result < 0, THEN True COA = 0
+```
+
+**Key Data Sources:**
+
+- CHECK_BAL <4> from AR Cash records
+- PP.AMOUNT <71> and PP.APPLIED.AMT <460> from AD Internet Campaigns
+- PP.TRANS.ID <69> from AD Internet Campaigns for linking records from AR Cash -> ID 
+
+## Summary
+
+- **Whole COA** = Total unallocated payment balances
+- **Prepayment Amount** = Committed but unapplied order funds  
+- **True COA** = max(0, Whole COA - Prepayment Amount)
+
+
+
+
+
+
 
 ## Budget Reports
 
