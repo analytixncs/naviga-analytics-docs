@@ -62,6 +62,30 @@ The filter will look like this:
 
 ![image-20210401095638103](images/informer-mapping-userreports-001.png)
 
+## User Reports Page Equivalency 
+
+The Page Equivalency field is a derived field and is found in the User Reports mapping.  If you need the *Page Equivalency* field in a report where you are pulling data from **AD Internet Orders**, you will need to join this dataset below, [JOIN]-User Reports, to your report using the flow step "Field From another Dataset".  
+
+![image-20250818105950554](images/Informer_User_Reports_pageeq-001.png)
+
+Make sure that the data types for each join field is a string.  We are using the Month Start date to join and you will need to convert this to a string in the format of **`YYYY-MM-DD`**.  You can do this with the following code in a Powerscript flow step.
+
+```js
+$record.startDateJoin = moment($record['monthStartDate']).format("YYYY-MM-DD")
+```
+
+The new field is **"Order Page Eq"**
+
+:::info Download Bundle
+
+This is a dataset that loads the **Order Page Eq** field
+
+**<a  target="_blank"  href="/downloads/join-user-reports.tgz">[JOIN]-User Reports</a>**
+
+:::
+
+---
+
 ## User Report Other Fields
 
 ### Product or Website Field

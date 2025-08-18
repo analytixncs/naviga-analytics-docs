@@ -175,7 +175,7 @@ This involves calculating three key metrics:
 **True COA** is the portion of that money that's completely free to use - not committed to any orders or invoices. 
 **Prepayments** represent money that's been earmarked for specific orders but hasn't been applied to invoices for those orders yet. The key insight is that Whole COA includes both truly available cash and cash that's already committed to orders, so you need to subtract the committed amounts to get the True COA.
 
-## Key Formulas and Calculations
+### Key Formulas and Calculations
 
 ### Whole COA
 
@@ -214,7 +214,7 @@ IF result < 0, THEN True COA = 0
 - PP.AMOUNT <71> and PP.APPLIED.AMT <460> from AD Internet Campaigns
 - PP.TRANS.ID <69> from AD Internet Campaigns for linking records from AR Cash -> ID 
 
-## Summary
+### Summary
 
 - **Whole COA** = Total unallocated payment balances
 - **Prepayment Amount** = Committed but unapplied order funds  
