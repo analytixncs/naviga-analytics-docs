@@ -10,8 +10,6 @@ Informer uses a templating language called [Nunjucks](https://mozilla.github.io/
 
 Templates can be viewed as a webpage or exported to PDFs for easy sharing.
 
-> NOTE: In version 5.4 of Informer, Templates are still an **Experimental** feature. Use at your own risk!
-
 ## Parts of a Template
 
 As with any HTML file, there are a number of other files that can play a role in the formatting and building of the template file.
@@ -20,27 +18,51 @@ Here is a view of these parts within the Informer Template Editor:
 
 ![image-20210908130731972](images/informer_templates_001.PNG)
 
+### template.njk
+
 The core file is the `template.njk` file. This contains the main HTML for the the template.
 
-The `helpers.js` file is always included from Entrinsik. It allows you to create functions, etc to enhance your template.
+### helpers.js
+
+The `helpers.js` file is always included from Entrinsik. It allows you to create functions, etc to enhance your template.  The functions inside of the `helpers.js` file can be used inside your Nunjucks templates.  For example, if we had an array of numbers, we could create a function in the helpers file that would return the sum.
+
+**mySum** in helper.js
+
+```js
+function mySum(arr) {
+    if (Array.isArray(arr) && arr?.length > 0) {
+        return parseFloat(arr.reduce((final, el) => final + el))
+    }
+}
+```
+
+**Calling from Nunjucks**
+
+```html
+{% for item in templateArrayTest.records %}
+  <br />
+    Revenue: {{ mySum(item['monthActualAmt']) | number('en-US', false)}}
+  <br/>
+{% endfor %}
+```
 
 > NOTE: The functions in the helpers.js file can accept and return values, but cannot run `console.log` or `alert` functions.
 
-**Assets**
+### Assets
 
 The **Assets** section contain any additional files that you want to include in your template file. The `style.css` file is created and included by default.
 
-The `testScript.js` is a sample that I created. In contract to the helpers.js file, you CAN run `console.log` and `alert` functions from asset JS files.
+The `testScript.js` is a sample that I created. In contrast to the helpers.js file, you CAN run `console.log` and `alert` functions from asset JS files.
 
 If you have a JavaScript file you want include in your template, you add the following line to your \<head\> section:
 
 `<script type="text/javascript" src="{{ url('testScript.js')}}"></script>`
 
-**Inputs**
+### **Inputs**
 
 The **Inputs** section will allow you to create prompts for any of the Processors that accept inputs.
 
-**Processors**
+### **Processors**
 
 The **Processors** section is where you declare the Ad Hoc Reports and/or Datasets that will be used in the template.
 
@@ -364,11 +386,13 @@ Another way to style your template is to use the [Tailwind CSS library](https://
 
 To use this library, you will need to use their CDN and add it to your `head` section of the template file.
 
+[Tailwind CDN Docs](https://tailwindcss.com/docs/installation/play-cdn)
+
 ```html
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url('style.css')}} ">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 ```
 

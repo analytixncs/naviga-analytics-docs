@@ -4,6 +4,32 @@ title: Informer System Stuff
 sidebar_label: Informer System Stuff
 ---
 
+## Clearing the Job Queue
+
+If you find that you have Jobs that are in the queued state and/or Jobs that have been running for hours (or longer than they should).  Your first line of defense will be clearing the existing queue and stopping any "hung" jobs.
+
+**Step 1**
+
+Open one browser tab showing your Jobs.  Open another browser tab showing the Administration panel.
+
+In the Administration panel, go to Settings and then scroll to the Jobs section and find the Enabled switch.  Turn this switch OFF.  It will be Gray instead of Green.
+
+![image-20250904144952543](images/informer-system-Jobs-001.png)
+
+**Step 2**
+
+Go to the browser tab that has the Jobs screen open. Find all jobs that are "hung", these jobs will have a running time shown in the Running Time column.  Click on the Action menu by the Job and choose Stop.  Do this for all hung jobs.
+
+![image-20250904145412841](images/informer-system-Jobs-002.png)
+
+**Step 3**
+
+Go back to the Administration tab and reenable the Jobs.
+
+If you still experience issues, enter a Salesforce case as we may need to restart services on your Informer Server.
+
+
+
 ## Setting Up Informer Metadata Database as Datasource v5.8.6 forward
 
 The `Informer Metadata` database has details about all of the inner workings of your Informer system.   Not only does it hold the Metadata for your system, it also holds the Audit logs if you have them turned on in the system settings.
