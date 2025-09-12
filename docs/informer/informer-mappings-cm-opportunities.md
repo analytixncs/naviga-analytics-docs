@@ -126,6 +126,105 @@ Within Naviga Ad you can find this association in the User Setup Area.
 
 ![loginuservsreps_001](images/informer-mapping-cmopportunities-uservsrep-001.png)
 
+## Simple Pipeline Starter
+
+:::info Download Bundle
+
+This is a sample Pipeline report using CM Opportunities mapping.
+
+**<a  target="_blank"  href="/downloads/naviga-crm-action-item-report.tgz">CRM Action Item Report</a>**
+
+:::
+
+## Action Items and Notes
+
+:::info Download Bundle
+
+This is a sample Action Item report.
+
+**<a  target="_blank"  href="/downloads/naviga-crm-action-item-report.tgz">CRM Action Item Report</a>**
+
+:::
+
+The above sample report does create some fields so that you can aggregate data on items that are Open and Closed for This Week, Last Week and The Last 30 Days.
+
+> NOTE: There is a saved function `naviga.actionTypeDecode([$record['actionCode']])` that you will need to create.  The Action Type IDs (Codes) do not have a decoded value in Informer, so we create a decode function that will handle this.  Enter a support case if you need help building this function.
+
+```js
+
+$record.actionCompleted = $record['completedDate'] ? "Closed" : "Open"
+// Initialize Buckets
+//**NOTE if you add buckets to function update with initializer here
+$record[`Closed-This Week`] = 0
+$record[`Open-This Week`] = 0
+$record[`Closed-Last Week`] = 0
+$record[`Open-Last Week`] = 0
+$record[`Closed-Last 30 Days`] = 0
+$record[`Open-Last 30 Days`] = 0
+
+// Create buckets based on Completed Dates.  These buckets will hold the counts
+// for items that were closed in the three bucket periods.
+// This week / Last Week / Last 30 days
+categorizeDatePeriod($record['completedDate']).forEach(bucket => {
+    $record[`Closed-${bucket}`] = 1
+})
+
+// Create buckets based on Created Dates.  These buckets will hold the counts
+// for items that were created in the three bucket periods. 
+// NOTE: These buckets will also count actions that were closed in these periods if
+//    they were also created in these periods.  So a bit of double dipping, that is how Naviga report shows data too.
+// This week / Last Week / Last 30 days
+categorizeDatePeriod($record['createdDate']).forEach(bucket => {
+    $record[`Open-${bucket}`] = 1
+})
+
+// Setup action type decode
+$record.actionTypeDesc = naviga.actionTypeDecode([$record['actionCode']])
+
+//$record.actionCompleted = 
+
+
+//--- HELPER FUNCTION ------------
+//NOTE: We need to return an array as and item that is in the This or Last week
+//   bucket will ALSO show up in the last 30 days bucket.
+function categorizeDatePeriod(inDate) {
+  const now = moment();
+  const created = moment(inDate);
+  
+  // Get start/end of current week (Sunday-Saturday)
+  const startOfThisWeek = moment().startOf('week');
+  const endOfThisWeek = moment().endOf('week');
+  
+  // Get start/end of last week
+  const startOfLastWeek = moment().subtract(1, 'weeks').startOf('week');
+  const endOfLastWeek = moment().subtract(1, 'weeks').endOf('week');
+  
+  let buckets = []
+  // Check if date is in this week
+  if (created.isBetween(startOfThisWeek, endOfThisWeek, 'day', '[]')) {
+    buckets.push("This Week");
+  }
+  
+  // Check if date is in last week
+  if (created.isBetween(startOfLastWeek, endOfLastWeek, 'day', '[]')) {
+    buckets.push("Last Week");
+  }
+  
+  // Check if date is within last 30 days
+  const thirtyDaysAgo = moment().subtract(30, 'days');
+  // isBetween docs -> https://momentjs.com/docs/#/query/is-between/
+  if (created.isBetween(thirtyDaysAgo, now, 'day', '[]')) {
+    // If it's in the last 30 days but not in this/last week, return array
+    buckets.push("Last 30 Days");
+  }
+  
+  // If none of the above, return a string indicating it's older
+  return buckets
+};
+```
+
+
+
 ## Prospect Interests
 
 ![image-20240116180434188](images/cm-opportunities-prospect-interests-001.png)
