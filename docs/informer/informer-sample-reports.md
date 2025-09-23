@@ -642,6 +642,148 @@ You can also add a *Remove Fields* flow step to remove the following fields:
 - End Date 
 - Is Last Record
 
+---
+
+## Union Two Datasets
+
+This guide shows you how to combine data from multiple Informer datasets into a single result using Web Query and Informer's REST API.
+
+### What You're Doing
+
+You'll create a Web Query that pulls data from Informer's own API to combine multiple datasets. Think of it as having Informer report on its own data from different sources.
+
+### Before You Start
+
+### 1. Set Up API Access
+
+- Create a Web Datasource for Informer's API (if you don't have one)
+  ![image-20250923160343974](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-sample-reports_union_001.PNG)
+- You can either create a **Read-only Full API Key** with **Bearer Token Authorization** OR use **Basic Auth** and login using a username and password.
+
+### 2. Choose Your Datasets
+
+- Identify 2 or more datasets you want to combine
+- **Important**: If you have fields that have the same data (Client ID, Campaign ID, etc) that you want to show up in the same field, make sure the field aliases are identical for these fields.
+- Fields that don't match will show as blank in some records.  Meaning, if you have Client ID in Dataset 1, but not in Dataset 2, when loading Dataset 2, the Client ID field will be blank.
+
+### 3. Get Dataset IDs
+
+- Go to your Home page or Dataset listing
+- Click the **info (i) icon** next to each dataset
+- Copy the Dataset ID (it looks like: `09d20fb8-6ee4-4883-bb1a-6306159afdfb`)
+
+### Creating the Union Query
+
+Now we need to create a Web Query dataset that will Union our datasets together.
+
+### Step 1: Create the Web Query
+
+1. Create a new **Web Query** using your Informer API datasource
+   ![image-20250923160843323](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-sample-reports_union_002.PNG)
+2. Set the **Method** to `GET`
+3. Set the **URL** to: `api/datasets/{first-dataset-id}/data`
+   - Replace `{first-dataset-id}` with your actual first dataset ID
+   - Example: `api/datasets/c7626adf-0456-4f13-8712-b3c18b06156d/data`
+   - ![image-20250923161012306](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-sample-reports_union_003.PNG)
+
+### Step 2: Add the Response Parser Script
+
+1. In the Response Parser section, select **Custom Script**
+2. Paste the union script (provided below)
+3. **Important**: Update the `datasets` array in the script with your additional dataset IDs
+
+**COPY/PASTE this Script**
+
+```js
+/**
+ * Dataset Union Query Script for Informer Web Query
+ * 
+ * This script unions multiple datasets together by sequentially processing each one.
+ * The first dataset should be configured in the Method & URL tab of the query interface.
+ * Additional datasets are specified in the array below and will be processed in order.
+ */
+
+// Configuration: List of additional dataset IDs to union with the primary dataset
+// The first dataset is configured in the Method & URL tab, so only specify additional ones here
+var datasets = [
+    'your-second-dataset-id-here',
+    'your-third-dataset-id-here-if-needed',
+    // add more as needed
+];
+
+//======DO NOT EDIT BELOW THIS LINE-Unless you know what you want========
+
+// Extract the current dataset ID from the response URL
+var currDatasetId = response.config.url.split('/')[2];
+
+// Determine the next dataset to process
+// Find the current dataset's position in the array and increment by 1
+var nextDatasetIndex = datasets.indexOf(currDatasetId) + 1;
+
+// Check if there are more datasets to process after the current one
+var hasMoreDatasets = nextDatasetIndex < datasets.length;
+
+// Add the current dataset ID to each record for tracking purposes
+var recordsWithDatasetId = response.data.items.map(record => ({
+    ...record, 
+    id: currDatasetId
+}));
+
+// Add the processed records to the result set
+push(recordsWithDatasetId);
+
+// Determine next action based on pagination and dataset availability
+if ((response.data.start + response.data.count) < response.data.total) {
+    // More pages available in current dataset - fetch next page
+    next({
+        ...response.config,
+        params: {
+            ...response.config.params,
+            start: response.data.start + response.data.count
+        }
+    });
+} else if (hasMoreDatasets) {
+    // Current dataset complete, move to next dataset in the union
+    next({
+        ...response.config,
+        url: `api/datasets/${datasets[nextDatasetIndex]}/data`,
+        params: {
+            ...response.config.params,
+            start: 0  // Reset pagination for new dataset
+        }
+    });
+}
+// If no more pages and no more datasets, the union operation completes automatically
+```
+
+
+
+### Step 3: Test and Run
+
+1. Save your Web Query
+2. Run it to test the union
+3. The query will automatically:
+   - Process all records from the first dataset
+   - Move to the second dataset
+   - Continue until all datasets are processed
+   - Handle pagination automatically
+
+## How It Works
+
+- The script processes datasets one at a time
+- It handles pagination within each dataset automatically
+- Each record gets tagged with its source dataset ID
+- The final result combines all datasets into one unified output
+
+**Code Overview**
+This JavaScript script is designed for use within the Informer Web Query platform to create a union of multiple datasets. The script implements a sequential data processing approach that combines records from multiple datasets into a single result set.
+
+The script works by first processing the primary dataset (configured in the query interface), then automatically moving through additional datasets specified in the `datasets` array. It handles pagination within each dataset by fetching all available pages before moving to the next dataset. Each record is tagged with its originating dataset ID for traceability. The union operation continues until all datasets have been fully processed, creating a comprehensive combined dataset that maintains the structure and integrity of the original data while providing a unified view across multiple data sources.
+
+The key feature of this implementation is its ability to handle large datasets through automatic pagination management and its sequential processing approach that ensures all data is captured without overwhelming system resources.
+
+---
+
 
 
 ## GEN Security File Report
