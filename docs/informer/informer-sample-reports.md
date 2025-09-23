@@ -657,7 +657,7 @@ You'll create a Web Query that pulls data from Informer's own API to combine mul
 ### 1. Set Up API Access
 
 - Create a Web Datasource for Informer's API (if you don't have one)
-  ![image-20250923160343974](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-sample-reports_union_001.PNG)
+  ![image-20250923160343974](images/informer-sample-reports_union_001.PNG)
 - You can either create a **Read-only Full API Key** with **Bearer Token Authorization** OR use **Basic Auth** and login using a username and password.
 
 ### 2. Choose Your Datasets
@@ -679,12 +679,12 @@ Now we need to create a Web Query dataset that will Union our datasets together.
 ### Step 1: Create the Web Query
 
 1. Create a new **Web Query** using your Informer API datasource
-   ![image-20250923160843323](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-sample-reports_union_002.PNG)
+   ![image-20250923160843323](images/informer-sample-reports_union_002.PNG)
 2. Set the **Method** to `GET`
 3. Set the **URL** to: `api/datasets/{first-dataset-id}/data`
    - Replace `{first-dataset-id}` with your actual first dataset ID
    - Example: `api/datasets/c7626adf-0456-4f13-8712-b3c18b06156d/data`
-   - ![image-20250923161012306](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-sample-reports_union_003.PNG)
+   - ![image-20250923161012306](images/informer-sample-reports_union_003.PNG)
 
 ### Step 2: Add the Response Parser Script
 
