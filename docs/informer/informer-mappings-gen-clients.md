@@ -322,6 +322,19 @@ The reason we cannot determine this within Informer is because of how the data i
 
 If you had that information you would need to join to the CM.PROSPECTS mapping on its KEY, which is NAME.ID*REP.ID.  Then IF the Contact Id (EMPLOYEES) is in the CM.PROSPECTS CONTACT ID <7>, it goes in that REP.ID "My Contacts", if not, then "Other Contacts"
 
+## CM Interests
+
+The Interest of type Category are linked to the the **GEN Clients** mapping via the **CM Prospects Control** mapping and then finally to the **CM Categories** mapping where the Category descriptions exist.
+
+**Naviga Ad View**
+https://dev.navigahub.com/ew/devdigital/crm/default_new?ID=241485
+
+![image-20250924140203191](images/informer_mapping_genclients-interests_001.png)
+
+**GEN Clients View**
+
+![image-20250924142458249](images/informer_mapping_genclients-interests_002.png)
+
 ## Portal Users
 
 Information for Portal users is located on the **GEN Clients** mapping.  You will see some of the information with the prefix **Portal** and other info with **User**
