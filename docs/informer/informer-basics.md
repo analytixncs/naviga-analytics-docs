@@ -707,32 +707,36 @@ Breaking this apart:
 
 ### Useful CRON Information
 
+:::tip
+
+Informer uses **Vixie-style (POSIX) cron**
+
+`minute hour day-of-month month day-of-week year`
+
+:::
+
 **Run Job on the Last Day of Every Month**
 
 `45 22 L * ?`
 
-| Minute | Hour | Day Of Month | Day of Week | Month | Year |
-| ------ | ---- | ------------ | ----------- | ----- | ---- |
-| 45     | 22   | L            | *           | ?     |      |
+| Minute | Hour | Day Of Month | Month | Day of Week | Year |
+| ------ | ---- | ------------ | ----- | ----------- | ---- |
+| 45     | 22   | L            | *     | *           |      |
 
 - **Minute (45):** The job will be triggered when the clock reaches 45 minutes past the hour. In this case, the job will run at 22:45.
-
 - **Hour (22):** The job will run at 22:45 (10:45 PM) in the specified time zone.
-
 - **Day of the month (L):** The letter "L" represents the last day of the month. Therefore, the job will run on the last day of each month.
-- **Day of the week ():** The asterisk "" indicates that the job will run on any day of the week. It is not limited to a particular day.
-
-- **Month (?):** The question mark "?" is used as a placeholder, indicating that the job is not restricted to a specific month. It will run regardless of the month.
-
+- **Month (*):** The question mark "*" is used as a placeholder, indicating that the job is not restricted to a specific month. It will run regardless of the month.
+- **Day of the week (*):** The asterisk "*" indicates that the job will run on any day of the week. It is not limited to a particular day.
 - **Year (empty):** Since the year part is left empty, the job will run every year.
 
 To summarize, this CRON job is scheduled to run at 22:45 (10:45 PM) on the last day of every month, regardless of the day of the week or the year.
 
 #### Day Of Month Position
 
-| Minute | Hour | Day Of Month | Day of Week | Month | Year |
-| ------ | ---- | ------------ | ----------- | ----- | ---- |
-|        |      | L            |             |       |      |
+| Minute | Hour | Day Of Month | Month | Day of Week | Year |
+| ------ | ---- | ------------ | ----- | ----------- | ---- |
+|        |      | L            |       |             |      |
 
 The **Day of the Month** portion of the CRON expression is very versatile.  Here are some ways you can use it.
 
@@ -747,9 +751,9 @@ In the day of the month field of a CRON expression (3rd position), besides the "
 
 #### Day of Week Position
 
-| Minute | Hour | Day Of Month | Day of Week | Month | Year |
-| ------ | ---- | ------------ | ----------- | ----- | ---- |
-|        |      |              | *           |       |      |
+| Minute | Hour | Day Of Month | Month | Day of Week | Year |
+| ------ | ---- | ------------ | ----- | ----------- | ---- |
+|        |      |              |       | *           |      |
 
 Here are some options to customize the **Day of Week** that the Job will run:
 
