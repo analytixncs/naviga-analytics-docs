@@ -1344,6 +1344,62 @@ if (!$local[groupKey1].GroupSet) {
 
 
 
+## Utility Libraries
+
+### Lodash
+
+[Lodash 3.10.1](https://lodash.com/docs/3.10.1)  makes JavaScript easier by taking the hassle out of working with arrays, numbers, objects, strings, etc.
+
+Lodash’s modular methods are great for:
+
+- Iterating arrays, objects, & strings
+- Manipulating & testing values
+- Creating composite functions
+
+:::tip
+
+Use **`_.`** to access lodash within your scripts.
+
+```js
+var users = [
+  { 'user': 'fred' },
+  { 'user': 'pebbles' },
+  { 'user': 'barney' }
+];
+ 
+// using the `_.property` callback shorthand
+_.pluck(_.sortBy(users, 'user'), 'user');
+// => ['barney', 'fred', 'pebbles']
+```
+
+:::
+
+### Inflected Utility
+
+[**inflected**](https://github.com/martinandert/inflected) gives you a suite of string/word transformation utilities (especially around pluralization, casing, URLs) in JS that mirror Rails’ inflector behavior.
+
+**Core features:**
+
+- `pluralize` / `singularize` — convert words between singular and plural (English by default, with locale support) [GitHub](https://github.com/martinandert/inflected)
+- `camelize` / `underscore` — convert between `snake_case` and `CamelCase` (or lowerCamelCase) [GitHub](https://github.com/martinandert/inflected)
+- `humanize`, `titleize` — prettify underscored strings, capitalize words, etc. [GitHub](https://github.com/martinandert/inflected)
+- `tableize`, `classify` — map model class names to table names, and vice versa [GitHub](https://github.com/martinandert/inflected)
+- `transliterate` — convert non-ASCII characters to ASCII approximations [GitHub](https://github.com/martinandert/inflected)
+- `parameterize` — produce URL-friendly strings (slug generation) [GitHub](https://github.com/martinandert/inflected)
+- `constantify` — convert words into `CONSTANT_CASE` [GitHub](https://github.com/martinandert/inflected)
+
+:::tip
+
+Access Inflected using **`inflect.`**
+
+```js
+$record.inflect = inflect.pluralize("Category") // => 'Categories'
+```
+
+:::
+
+### Logger
+
 ## Using the momentjs Date Library
 
 I will try to show you the most common uses of **momentjs** within Informer, however, you can get more information from the **momentjs** website.
