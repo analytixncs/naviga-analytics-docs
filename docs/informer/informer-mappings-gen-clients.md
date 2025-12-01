@@ -31,7 +31,7 @@ Many of the Indicator fields can not only be Y or N, but sometimes they are empt
 | -------------------- | ---------------------------- | -------------- |
 | STATEMENT.IND <68>   | GEN Clients                  | Y              |
 | AGENCY<277>          | GEN Clients                  | N              |
-| CREDIT.STOP <45>     | GEN Clients                  | Y              |
+| CREDIT.STOP <45>     | GEN Clients                  | N              |
 | ACTIVE.IND <162>     | GEN Clients                  | Y              |
 | AD.PRE.PAY.IND <310> | GEN Clients                  | N              |
 | DO.NOT.USE.IND <150> | GEN Company/Individual Names | N              |
