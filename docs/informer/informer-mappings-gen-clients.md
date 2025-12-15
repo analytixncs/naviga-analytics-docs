@@ -29,7 +29,7 @@ Many of the Indicator fields can not only be Y or N, but sometimes they are empt
 
 | Field Name /Number   | Mapping                      | Value If Blank |
 | -------------------- | ---------------------------- | -------------- |
-| STATEMENT.IND <68>   | GEN Clients                  | Y              |
+| STATEMENT.IND <68>   | GEN Clients                  | N              |
 | AGENCY<277>          | GEN Clients                  | N              |
 | CREDIT.STOP <45>     | GEN Clients                  | N              |
 | ACTIVE.IND <162>     | GEN Clients                  | Y              |
@@ -145,11 +145,20 @@ There are two terms fields:
 
 ![image-20231023134704610](images/informerMapping_gen_clients-010.jpg)
 
-## Statement Email Address
+## Statement Details
 
-In GEN Clients, there is a **Statement Email ID**, this ID is a link into the **GEN Company/Individual Names**, however it is not mapped in the Informer system as of June 2022.  You can add a manual link to remedy this.
+![image-statementDetails](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_mapping_genclients-statementdetails_001.png)
 
+1. **Delivery Method** - *GEN Clients* → **STMT.DEL.METHOD <259>**
+2. **Statement Contacts** - *GEN Clients* → **STMT.EMAIL.CONTACT.ID <260>**
 
+### Statement Contact Details
+
+The STMT.EMAIL.CONTACT.ID above does not have a default related mapping defined.  You will need to create this yourself. 
+
+The STMT.EMAIL.CONTACT.ID is a link into the **GEN Company/Individual Names**.
+
+You can add a manual link.
 
 ![image-20220613145404623](images/informerMapping_gen_clients_stmt_001.png)
 
