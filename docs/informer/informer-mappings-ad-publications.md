@@ -51,7 +51,37 @@ AD Publications -> **INVENTORY.NO.SECTIONS.IND <560>** -
 
 - "Y" - Positions are Defined **Independent** of Section
 - "N" - Positions are Defined within each Section
+- Blank - Positions are Defined within each Section
+
+**`https://nnn.navigahub.com/EW/DEVDIGITAL/ad/setup/website_details?ID=PRODID`****
+
+![image-20260108123936382](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_adpublications_positions_002.jpg)
 
 BUT, you cannot get to Positions or Sections from AD Publications. You need to start your report with either AD Internet Sections or AD Internet Positions.
 
-Both of these mappings have a link to the AD Publications table
+Both of these mappings have a link to the AD Publications table.
+
+## Material Lead / Closing / etc
+
+If you are looking for Material Lead Time and Closing Days and Overrides by Ad Type, you will want to look in the **AD Publications** mappings.
+
+| #    | Field Label                 | File Name                   | Value | Multivalued? |
+| ---- | --------------------------- | --------------------------- | ----- | ------------ |
+| 1    | In Mat Due Days             | IN.MAT.DUE.DAYS             | 412   | —            |
+| 2    | Dflt Mat Closing Time       | DFLT.MAT.CLOSING.TIME       | 234   | —            |
+| 3    | Close Date Mat              | CLOSE.DATE                  | 17    | M            |
+| 4    | Close Time                  | CLOSE.TIME                  | 590   | M            |
+| 5    | Artwork Type Date Overrides | ARTWORK.TYPE.DATE.OVERRIDES | 678   | MS           |
+| 6    | Ad Type Override ID         | AD.TYPE.OVERRIDE.ID         | 632   | MS           |
+| 7    | Ad Type Override Sections   | AD.TYPE.OVERRIDE.SECTIONS   | 657   | MS           |
+| 8    | Ad Type Override Tree       | AD.TYPE.OVERRIDE.TREE       | 640   | M            |
+| 9    | Ad Type Override Day Nos    | AD.TYPE.OVERRIDE.DAY.NOS    | 641   | MS           |
+| 10   | Ad Type Override Mat Days   | AD.TYPE.OVERRIDE.MAT.DAYS   | 635   | M            |
+| 11   | Ad Type Overrides Days      | AD.TYPE.OVERRIDE.DAYS       | 633   | M            |
+| 11   | Ad Type Override Time       | AD.TYPE.OVERRIDE.TIME       | 634   | M            |
+
+
+
+![image-20260128110022246](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_adpublications_materials_001.png)
+
+![image-20260128110030342](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_adpublications_materials_002.png)
