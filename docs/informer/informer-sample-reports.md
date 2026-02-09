@@ -62,6 +62,26 @@ The report has two dependencies **which will be created** when importing the mai
 
 
 
+## Simple Aging with As Of Date
+
+This report is a starting point for you own development of an Aging report that allows the user to enter a "As Of" date.
+
+The other sample aging reports use the current date when calculating the aging.  This report will allow a user to enter a date and then the report will look at the payments made on invoices and only sum those payments that are less than or equal to the entered date.
+
+It will use the input "As Of" date as a the date used to calculate the buckets.
+
+For example, if you enter your As Of date as 12/01/2024, the report will only pull invoices from 12/01/2024 and before.  It will then only sum payments applied to the invoices from 12/01/2024 and before.  
+
+When calculating the buckets, it will take difference between the input "As Of" date versus the invoice date to get the aging days.
+
+:::info Download Bundle
+
+This is a "starter" dataset that is great for most revenue reports. 
+
+**<a  target="_blank"  href="/downloads/simpleAging/naviga-aging-with-as-of-date.tgz">Aging with As Of Date</a>**
+
+:::
+
 ## AR Invoices Performance Applied
 
 > **NOTE**: This is a custom report that may be bugging.  Test and refine to make sure it works for you.
@@ -1301,6 +1321,36 @@ if ($record['type'] === "Ad Hoc Report") {
 
 $record.dependentDatasetLink = `<a target="_blank" href="${baseURL}datasets/${$record['joinedDatasetIds']}">${baseURL}datasets/${$record['joinedDatasetIds']}</a>`
 ```
+
+### User Login Report
+
+This report uses the `Request Log` mapping.  
+
+ ::: note
+
+You must enable request logging in Informer before this information will be stored.  
+
+Go to Administration -> Settings -> Audit Requests
+
+Make sure the Audit Requests switch is "on".
+
+![image-userlogin](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer-samplereports-metadata-001.png)
+
+:::
+
+:::info Download Dataset
+
+**<a  target="_blank"  href="/downloads/MetadataReports/login-audio.tgz">[METADATA] - Login Audit </a>**
+
+:::
+
+You can also go to **Administration -> Sessions** to see a list of current user sessions.
+
+### User Report Access
+
+This report gives you a view of the Ad Hoc reports that a user has run and the Datasets that they have refreshed.
+
+
 
 ### Job Average Run Times
 

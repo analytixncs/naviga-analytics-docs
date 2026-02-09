@@ -147,7 +147,7 @@ There are two terms fields:
 
 ## Statement Details
 
-![image-statementDetails](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_mapping_genclients-statementdetails_001.png)
+![image-statementDetails](.\images\informer_mapping_genclients-statementdetails_001.png)
 
 1. **Delivery Method** - *GEN Clients* → **STMT.DEL.METHOD <259>**
 2. **Statement Contacts** - *GEN Clients* → **STMT.EMAIL.CONTACT.ID <260>**
