@@ -166,7 +166,12 @@ function getMostRecentDateIndex(asOfDates) {
 }
 ```
 
+## Disabled Brand Reps
 
+In **AD Internet Brand Product Reps** and **AD Internet Brand Reps** there is a field named **INACTIVE.IND**.  If this field has a **Y** in it, then the reps associated with that row are **Disabled**, if it is blank or has a N then it is active.
+
+- **AD Internet Brand Product Reps** - **INACTIVE.IND <20>**
+- **AD Internet Brand Reps**  - **INACTIVE.IND <20>**
 
 ## Billing Overrides
 
