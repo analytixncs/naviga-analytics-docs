@@ -389,6 +389,23 @@ $record.statusidnumber = parseInt(finalMaterialStatus)
 
 
 
+## Period Revenue Allocation
+
+This report is designed to allocate line-level revenue across financial periods. In Naviga, we allocate revenue based on calendar months.  If a customer has financial periods that do not follow calendar months, this report will help to show the revenue distribution based on their Financial periods. 
+
+> NOTE: You will need to import your Financial Period Spreads into an Informer Workspace.
+>
+> Export your data from 
+> `https://xxxtest.navigahub.com/EW/XXX/accounting/setup/period_maint`
+>
+> Then create a csv file `FinancialPeriodSpreads.csv` using the same fields as found in this sample: <a  target="_blank"  href="/downloads/PeriodRevenueAllocation/FinancialPeriodSpreads.csv"> FinancialPeriodSpreads.csv</a>
+
+**<a  target="_blank"  href="/downloads/PeriodRevenueAllocation/naviga-period-revenue-allocation.tgz"> NAVIGA - Period Revenue Allocation</a>**
+
+For full details on how the report works please see -> [Period Revenue Accolation Details](informer-samplereport-period-revenue-allocation)
+
+
+
 ## New Business Flag
 
 > IN PROCESS FEATURE - Create a lapsed customer option.  This would check a customers **last order date** against **today's date** and if it was greater than x months, we would mark the customer as lapsed.  Most likely you will want Lapsed Months to be Greater than the INACTIVE months.
