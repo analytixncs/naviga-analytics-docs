@@ -402,7 +402,7 @@ This report is designed to allocate line-level revenue across financial periods.
 
 **<a  target="_blank"  href="/downloads/PeriodRevenueAllocation/naviga-period-revenue-allocation.tgz"> NAVIGA - Period Revenue Allocation</a>**
 
-For full details on how the report works please see -> [Period Revenue Accolation Details](informer-samplereport-period-revenue-allocation)
+For full details on how the report works please see -> <a href="informer-samplereport-period-revenue-allocation.md" target="_blank">Period Revenue Accolation Details</a>
 
 
 
