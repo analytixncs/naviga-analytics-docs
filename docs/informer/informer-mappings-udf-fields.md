@@ -70,6 +70,10 @@ Once you set up the UDF, you can applyit in the Account Maintenance module:
 
 ![img](images/informer_mapping_UDF_Client03.png)
 
+**INFORMER**
+
+To find these UDF in Informer, you will look in the **GEN Clients** mapping.
+
 ---
 
 ## Opportunity UDF
