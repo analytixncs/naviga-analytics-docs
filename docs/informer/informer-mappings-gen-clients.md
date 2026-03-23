@@ -226,6 +226,13 @@ To access the "Email Invoices to These Contacts" information in Informer.
 
 ![image-20240705102008006](images/informer_mapping_genclients-advcontacts-002.png)
 
+### Overview of Advertising Contacts
+
+> Email Invoices to these Contacts
+> Emailed Confirmations Contacts
+
+![image-20260323135005668](images/informer_mapping_gen_clients_advcontacts-001.png)
+
 ## Delivery Methods
 
 Here are the mappings of the various delivery methods.  
@@ -246,7 +253,15 @@ Here are the mappings of the various delivery methods.
 
 ![img](images/informerMapping_gen_clients-001.jpg)
 
-**Advertising Setup for Digital First Naviga Users**
+### Overview of A/R Client Contacts
+
+> Misc Billing Details Contacts
+> Statement Details Contacts
+> Statement Delivery Method
+
+![image-20260323140455403](images/informer_mapping_gen_clients_arcontacts-001.png)
+
+## **Advertising Setup for Digital First Naviga Users**
 
 > Digital First is the latest version of the Naviga software
 
