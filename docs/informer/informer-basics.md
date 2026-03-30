@@ -879,9 +879,9 @@ If you set up a job, it is as simple as putting the Dataset in a job and then se
 
 ### Exporting To File System-FTP
 
-When creating actions for a job, you may want to send your data to an FTP site and you will see an option "Send to FTP". However, this option does NOT work because of security restrictions.
+When creating actions for a job, you may want to send your data to an FTP site and you will see an option "Send to FTP".  Use this option if you have an FTP or SFTP to send data to.
 
-What you can do is instead choose to "Send to file system". This option will send to an FTP site that you will have access to.
+You can also choose to "Send to file system". This option will send to the Naviga FTP site that has been set up for your company.
 
 In the image below, you will see that you need to the directory where you want the file to be located. You will replace the "XXX"'s with your company's three character company code.
 
