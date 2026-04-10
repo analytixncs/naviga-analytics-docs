@@ -214,3 +214,23 @@ In the **AD Brands** mapping you will find the PIB Code in the **PIB_CODE <4>** 
 You may also see a **PIB_CODE <101>** field in the **GEN Clients** mapping.  DO NOT USE this fields as it is not maintained. 
 
 :::
+
+## Brand Details Fields
+
+![image-20260408105537838](images/informer_mapping_ad_brands_branddetails_001.png)
+
+### 1.  DISALLOW.REMNANT.IND <165>
+
+![image-20260408110052982](images/informer_mapping_ad_brands_branddetails_003.png) - If the Field is "N" or Blank
+
+### 2.  USE.ADV.TAX.CODE.IND <211>
+
+![image-20260408105904444](images/informer_mapping_ad_brands_branddetails_002.png) - If the field is "N" or Blank
+
+### 3.  THIRD.PARTY.ACTUALS <167>
+
+- **Use Company Defaults** = "" OR the letter for the default setting
+-  **Use Third Party Number** = "Y"
+-  **Use Estimates** = "E"
+-  **Use Ad Server Numbers** = "N"
+-  **Use Ad Server Viewable Numbers** = "V"
