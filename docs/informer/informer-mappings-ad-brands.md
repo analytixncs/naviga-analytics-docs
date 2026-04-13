@@ -221,13 +221,25 @@ You may also see a **PIB_CODE <101>** field in the **GEN Clients** mapping.  DO 
 
 ### 1.  DISALLOW.REMNANT.IND <165>
 
+The DISALLOW.REMNANT.IND <165> field in AD Brands maps to the `Allow use on Portal` checkbox in the Naviga Ad Brand Maintenance screen `https://xxx.navigahub.com/EW/XXX/ad/setup/brand_detail`.
+
+> This field is a bit confusing since the database field is **DIS**allow, but the checkbox is checking for Allowing the use.  This means that a "N" or Blank in the database would show as a checked "YES" in Naviga.
+>
+> And a "Y" in the database would show as a "No"/Unchecked box in Naviga
+
 ![image-20260408110052982](images/informer_mapping_ad_brands_branddetails_003.png) - If the Field is "N" or Blank
 
 ### 2.  USE.ADV.TAX.CODE.IND <211>
 
+The USE.ADV.TAX.CODE.IND <211> field in AD Brands maps to the `Use Advertiser Tax Code` checkbox in the Naviga Ad Brand Maintenance screen `https://xxx.navigahub.com/EW/XXX/ad/setup/brand_detail`.
+
 ![image-20260408105904444](images/informer_mapping_ad_brands_branddetails_002.png) - If the field is "N" or Blank
 
 ### 3.  THIRD.PARTY.ACTUALS <167>
+
+The THIRD.PARTY.ACTUALS <167> field in AD Brands maps to the `Third Party Actuals` checkbox in the Naviga Ad Brand Maintenance screen `https://xxx.navigahub.com/EW/XXX/ad/setup/brand_detail`.
+
+> NOTE: You will want to test and verify that your values for the below items match what you expect.  TEST!
 
 - **Use Company Defaults** = "" OR the letter for the default setting
 -  **Use Third Party Number** = "Y"
