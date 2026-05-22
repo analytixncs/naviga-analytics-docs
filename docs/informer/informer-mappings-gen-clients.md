@@ -233,6 +233,12 @@ To access the "Email Invoices to These Contacts" information in Informer.
 
 ![image-20260323135005668](images/informer_mapping_gen_clients_advcontacts-001.png)
 
+## Charge Credit Card
+
+**Advertising Setup / More Information** - *Charge Credit Card* field.  is located in **GEN Clients -> CC.APP.IND <248>** 
+
+![image-20260423151552218](.\images\informerMapping_gen_clients-cccfield-001.jpg)
+
 ## Delivery Methods
 
 Here are the mappings of the various delivery methods.  

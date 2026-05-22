@@ -467,7 +467,29 @@ Issue a GET request against that URL.
 
 This is the the route of the temporary Dataset behind the Ad hoc results, and you should can now use the [Dataset Exporter Route](#get---exporters-json/csv/etc) to build a call to export the data the way you would export any other Dataset.
 
-## Live Excel 
+## Cancel Dataset Refresh
+
+If you need to cancel a Dataset Refresh that you initiate via the [Dataset Refresh API call](#post---refresh-dataset), you can do so via the `monitors` API route.
+
+To be able to use the `monitors` route, you will need to modify how you call the Dataset Refresh via the API.
+
+In the `POST /api/datasets/{id}/_refresh` you will need to add the following JSON Body
+
+```apl
+{
+  "progress": "...some unique identifier..."
+}
+```
+
+You can then use this `progress` identified in the following `monitors` route.  The `{id}` is the `progress` identifier that you added in the Dataset Refresh API call.
+
+```api
+POST /api/monitors/{id}/_cancel
+```
+
+
+
+## Live Excel
 
 Live Excel uses a special POST query to get the data into Excel.  This query, when pointed to an Ad Hoc Query, first runs the query and the sends the data formatted specifically for Excel.  For Datasets, it does the same except it does NOT refresh the dataset.
 
