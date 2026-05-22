@@ -1393,13 +1393,31 @@ This report will give you a list of your jobs and the datasets or reports used i
 
 :::info Download Dataset
 
-**<a  target="_blank"  href="/downloads/MetadataReports/naviga-job-status-check.tgz">Job Status Check</a>**
+**<a  target="_blank"  href="/downloads/MetadataReports/metadata-job-status-v2.tgz">Job Status Check</a>**
 
 :::
 
-This report will return any jobs that have had an error in the past *n* days that you enter.  You can also enter a Job Name to target a specific Job.
+This dataset can be run at any time. It will ask for a **Update At Date**. This date will be when it will start looking for Jobs that started on that day going forward.  You can also use the keyword **LAST_QUERIED_AT** to run based on the last time the dataset was refreshed.
 
-![image-20240604134600434](images/informer-sample-reports_metadata-jobstatus_001.PNG)
+The key fields you are looking for are the *Job History Success* field and the *Duration* field.  If the *Job History Success* is **false**, it means that the job failed.  You can then look at the *Job History Progress* JSON object for more details into why it failed.
+
+You can also look at the *Duration* field to determine if a job is hung.  For example, if you know that none of you jobs should run longer than 2 hour, then find jobs with a duration greater than 120 (Duration is in minutes).
+
+### Setting Up a Job
+
+Even better is to set up a Job that will only email you if it detects a **failure** or "**hung**" job.
+
+Create a Job and filter the output by the items seen in the image.
+
+Also make sure the the **Update At Date** is set to **LAST_QUERIED_AT** as well.
+
+![image-20260522134348651](images/informer_samplereports_jobstatus_001.png)
+
+You can then set it up to send you an email IF more than one row is returned.  That way, if there are no errors, you won't get an email.
+
+I also like to attached the output as a JSON file.  It makes reading the **job history progress** easier.
+
+
 
 ## Lookup Function Generator
 
