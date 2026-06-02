@@ -48,3 +48,12 @@ Lastly, there is sometimes size information in the **X Value <157>** and **Y Val
 
 [See AR Invoice section](informer-mappings-ar-invoices#ar-invoices)
 
+## Campaigns Pending Approval
+
+To determine if a campaign is *Pending Approval* or is *Approved*, you will use the **APPROVAL.REQD.IND <185>** field in **AD Internet Campaigns**.
+
+**R** = Required
+**N** = Not Approved
+**A** = Approved
+
+So you would want to pull all with either **R or N** to get campaigns “Pending approval”.
