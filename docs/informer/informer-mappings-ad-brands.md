@@ -48,13 +48,13 @@ Here is a sample template for a dataset that will return the default rep for a B
 
 #### Download [JOIN]-Default Brand Rep
 
+[Download JOIN-Default Brand Rep](informer-starter-reports#ad-brand-default-reps) - Latest version 6/2026 Needs latest mappings.
+
 :::tip Download
 
 **<a  target="_blank"  href="/downloads/join-default-brand-rep.tgz">[JOIN]-Default Brand Rep</a>**
 
 :::
-
-
 
 Here is an example:
 
@@ -83,6 +83,8 @@ For example, if you had an Order report that used the **AD Internet Orders** as 
 The details for the *Rep overrides by Product Group* are linked to **AD Brands** by the **BRAND.REP.KEY**.  This key is a virtual field that is the `Client ID*Brand ID*Product Group ID`.  To get the actual override reps, you will need to use the **AD Internet Brand Reps** mapping.
 
 ![image-20240626140144506](images/informerMapping_adbrands_productgrouprep-001.png)
+
+[Download JOIN-AD Brand Product Group Reps](informer-starter-reports#ad-brand-product-group-reps) - Latest version 6/2026 Needs latest mappings.
 
 :::danger
 

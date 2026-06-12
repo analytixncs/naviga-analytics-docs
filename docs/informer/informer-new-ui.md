@@ -4,7 +4,7 @@ title: Informer New UI
 sidebar_label: Informer New UI
 ---
 
-## Informer Home Screen Changes
+## Informer New UI
 
 Informer version 5.7 got a UI overhaul!  The main thing that might "shock" users who log into Informer is the new look of the Home screen.  Once you understand how to navigate from the Home screen, things are essentially the same.
 

@@ -809,6 +809,14 @@ The format string above `('YYYY-MM-DD')`, is a Moment JS formatting string. You 
 
 [Official Moment JS Docs on Formatting](https://momentjs.com/docs/#/parsing/string-format/)
 
+::: info
+
+In version **2025.2.13+** , you will have more options for Dynamic naming.  See this Entrinsik Article [Dyanmic File Naming](https://informer5.zendesk.com/hc/en-us/articles/360032537252-How-to-Export-a-File-using-Custom-Naming-Convention?input_string=dynamic+filename+on+job+email)
+
+:::
+
+
+
 ### Alerts for Failed Jobs
 
 There is no direct way to get an email or other notification that a job has failed, however, you can create a new Datasource in Informer that points to the _metadata_ database that informer maintains.

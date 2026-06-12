@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-06-09T19:22:13.108Z",
+  "sourceType": "dataset",
+  "sourceId": "119dadbb-202d-4a05-a1d7-6f49f6f822cc",
+  "sourceName": "JOIN-Ad Brand Product Groups",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "be9295c7-c10e-4d20-930d-d63d74c040a0",
+      "label": "Brand Product Group Key",
+      "alias": "id",
+      "description": "Key composed of\nClientId*BrandId*ProductGroupID\nThis is the field that you will join to other queries to get product group brand reps",
+      "status": "active"
+    },
+    {
+      "fieldId": "f0b5a2d7-e93a-498f-aab5-6c4b296e8845",
+      "label": "Brand Key",
+      "alias": "brandKey",
+      "description": "Key composed of ClientID*Brand ID",
+      "status": "active"
+    },
+    {
+      "fieldId": "cf9ceb12-31df-4967-b4a8-bc4fa93abaae",
+      "label": "Brand Product Group Inactive Ind",
+      "alias": "brandProductGroupInactiveInd",
+      "description": "\t\"Y\" = Inactive Brand",
+      "status": "active"
+    },
+    {
+      "fieldId": "7f0ef1c1-87d4-4c67-a783-8f0e9d83f53a",
+      "label": "Brand Product Group Date",
+      "alias": "brandProductGroupDate",
+      "description": "The date that this group of reps became active",
+      "status": "active"
+    },
+    {
+      "fieldId": "c9f4c7cb-7235-4fdd-a8aa-e04ec3d022dd",
+      "label": "Brand Product Group Rep Ids",
+      "alias": "brandProductGroupRepIds",
+      "description": "An array of rep ids for the the reps that are currently active",
+      "status": "active"
+    },
+    {
+      "fieldId": "0021836c-72ab-4afd-8d7b-1c389dc554b0",
+      "label": "Brand Product Group Rep Pcts",
+      "alias": "brandProductGroupRepPcts",
+      "description": "An array of rep pcts for the the reps that are currently active",
+      "status": "active"
+    },
+    {
+      "fieldId": "2e156df0-f21f-411a-ba22-df698ee266fc",
+      "label": "Brand Product Group Rep Groups",
+      "alias": "brandProductGroupRepGroups",
+      "description": "An array of rep group ids for the the reps that are currently active",
+      "status": "active"
+    },
+    {
+      "fieldId": "e0342aec-8a74-4a91-a477-79e5e7f4c27e",
+      "label": "Brand Product Group Rep Names",
+      "alias": "brandProductGroupRepNames",
+      "description": "An array of rep names for the the reps that are currently active",
+      "status": "active"
+    },
+    {
+      "fieldId": "d57cb309-3744-452c-8c33-1777d19311ee",
+      "label": "Brand Product Group Rep Id 1",
+      "alias": "brandProductGroupRepId 1",
+      "description": "Current active Rep 1 id",
+      "status": "active"
+    },
+    {
+      "fieldId": "e92bbe2b-6f53-48d7-870a-38f603596b28",
+      "label": "Brand Product Group Rep Pct 1",
+      "alias": "brandProductGroupRepPct 1",
+      "description": "Current active Rep 1 pct",
+      "status": "active"
+    },
+    {
+      "fieldId": "51e65b84-516c-41bf-8705-379c54924083",
+      "label": "Brand Product Group Rep Group 1",
+      "alias": "brandProductGroupRepGroup 1",
+      "description": "Current active Rep 1 group",
+      "status": "active"
+    },
+    {
+      "fieldId": "71341134-83ca-437d-bec6-fc2739bfe4b8",
+      "label": "Brand Product Group Rep Name 1",
+      "alias": "brandProductGroupRepName 1",
+      "description": "Current active Rep 1 name",
+      "status": "active"
+    },
+    {
+      "fieldId": "dd720aca-6ad1-45d3-9822-012841d5b9aa",
+      "label": "Brand Product Group Rep Id 2",
+      "alias": "brandProductGroupRepId 2",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "a50ee528-0097-4615-b4f9-2ba3710a4df5",
+      "label": "Brand Product Group Rep Pct 2",
+      "alias": "brandProductGroupRepPct 2",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "049b9652-5b76-4c0a-90b8-d223a235b92d",
+      "label": "Brand Product Group Rep Group 2",
+      "alias": "brandProductGroupRepGroup 2",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "0553c299-5380-4fce-a01f-3978fe32c5e4",
+      "label": "Brand Product Group Rep Name 2",
+      "alias": "brandProductGroupRepName 2",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "9e42f53d-5c3a-401c-ae62-f46dc02c8307",
+      "label": "Brand Product Group Rep Id 3",
+      "alias": "brandProductGroupRepId 3",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "035bd9d6-3968-42b4-bd2b-ffee0ed95ab4",
+      "label": "Brand Product Group Rep Pct 3",
+      "alias": "brandProductGroupRepPct 3",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "5e57c028-9a76-4a9a-8867-4ddf6211092b",
+      "label": "Brand Product Group Rep Group 3",
+      "alias": "brandProductGroupRepGroup 3",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "d3ba232a-1a97-45a4-bb07-6aa2dce1b590",
+      "label": "Brand Product Group Rep Name 3",
+      "alias": "brandProductGroupRepName 3",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "53f92540-0e01-4085-8411-bba0759219bc",
+      "label": "Brand Product Group Rep Id 4",
+      "alias": "brandProductGroupRepId 4",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "b7f0c30b-c62b-44d9-b6e5-94375aaa966f",
+      "label": "Brand Product Group Rep Pct 4",
+      "alias": "brandProductGroupRepPct 4",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "9bddf446-e483-4a75-bd68-83e1f00fa057",
+      "label": "Brand Product Group Rep Group 4",
+      "alias": "brandProductGroupRepGroup 4",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "e8301e0e-290a-4d77-9c06-c54ef4b206da",
+      "label": "Brand Product Group Rep Name 4",
+      "alias": "brandProductGroupRepName 4",
+      "description": "",
+      "status": "active"
+    }
+  ]
+}

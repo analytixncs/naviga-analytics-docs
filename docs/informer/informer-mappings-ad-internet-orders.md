@@ -127,6 +127,20 @@ If you have created a report using the AD Internet Orders mapping, you would fin
 
 ![image-20220131123541539](images/informerMapping_adinternetorders-printdigital001.jpg)
 
+## Notes and Comments
+
+**Production Notes** seen on the Line Detail page are found in:
+
+**AD Internet Orders** -> **PROD.NOTE <59>** - This is a MV field at the granularity of the Line ID, NOT at the granularity of the MONTH fields.
+
+![image-20260602085055942](images/informer_mapping_adinternetorders-prodnotes-001.png)
+
+**Internal Comment** - is found in the Line Detail / Other Options
+
+**AD Internet Orders** -> **LINE.COMMENT <30>** 
+
+![image-20260602090029652](images/informer_mapping_adinternetorders-linecomment-001.png)
+
 ## Amount Fields
 
 There are a lot of Amount fields in the **AD Internet Orders** mapping. We will focus on the Month Actual/Est Amt fields and the **Line Price Amt** fields in this document.

@@ -61,12 +61,13 @@ https://xxx.navigahub.com/EW/XXX/general/setup/name_maint_ar
 
 1. **Is this an Agency** - GEN Clients -> AGENCY.IND <277> - When Blank assume "N"
 1. **Pre-Payment Required** - GEN Clients -> AD.PRE.PAY.IND <310> - When Blank assume "N"
+1. **Charge Credit Card** - GEN Clients -> CC.APP.IND <248> - When Blank assume "N"
 
 https://xxx.navigahub.com/EW/XXX/general/setup/name_maint_ad
 
 ![image-20220812085829314](images/informer_basics_gen_clients_indicators-002.png)
 
-
+![image-20260611110759003](images/informerMapping_gen_clients-chargeccfield-001.jpg)
 
 
 

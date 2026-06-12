@@ -19,6 +19,14 @@ When pulling back records from AD Internet Campaigns, you can filter on the Stat
 
 [Docs in AD Internet Orders](informer-mappings-ad-internet-orders#last-changed-date) 
 
+## Notes and Comments
+
+1. **Confirmation Comments** - **AD Internet Campaigns** -> **CONF.COMMENTS <158>**
+2. **Invoice Comments** - **AD Internet Campaigns** -> **MONTHLY.BILLING.COMMENTS <198>**
+3. **Internal Comments** - **AD Internet Campaigns** -> **COMMENTS <23>**
+
+![image-20260602091238263](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_mapping_adinternetcampaigns-notes-001.png)
+
 ## Amount Fields
 
 Since you are pulling data at the Campaign level, you probably want a single revenue amount for the campaign.  The fields to look at begin with **Tot**
