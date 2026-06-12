@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-06-09T19:22:24.361Z",
+  "sourceType": "dataset",
+  "sourceId": "2bad4556-1ddf-4aaf-b01d-eba6f9ea1aee",
+  "sourceName": "JOIN-Default Brand Rep",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "ef4b7373-d109-480d-b8c8-06fcb7fc285b",
+      "label": "Brand Key",
+      "alias": "brandId",
+      "description": "Key composed of\nClientID*Brand ID\nThis is the field that you will join to other queries to get default brand reps.",
+      "status": "active"
+    },
+    {
+      "fieldId": "a9eb3b11-5798-4c56-869d-2b62e373a555",
+      "label": "Default Date",
+      "alias": "defaultDate",
+      "description": "The date that this group of reps became active",
+      "status": "active"
+    },
+    {
+      "fieldId": "fee3eed2-11c0-4060-a333-d284e8d0321a",
+      "label": "Brand Product ID",
+      "alias": "id",
+      "description": "Key composed of\nClient ID*Brand ID*Product ID\nIn this case the product id will always be \"Default\"",
+      "status": "active"
+    },
+    {
+      "fieldId": "f48baf7e-9c3d-4932-88a8-55f4937787bf",
+      "label": "Default Assign In Oe",
+      "alias": "defaultAssignInOE",
+      "description": "\"Y\" if Assign In O.E. is set\n\"N\" if not.",
+      "status": "active"
+    },
+    {
+      "fieldId": "32311ade-f946-4c9b-9e8e-765594178d3f",
+      "label": "Inactive Ind",
+      "alias": "inactiveInd",
+      "description": "\"Y\" = Inactive Brand",
+      "status": "active"
+    },
+    {
+      "fieldId": "6fa957b3-f6ac-46dd-b2d1-2c266b3b36c0",
+      "label": "Default Rep Ids",
+      "alias": "defaultRepIds",
+      "description": "An array of rep ids that are currently active",
+      "status": "active"
+    },
+    {
+      "fieldId": "6ab1e76b-57bb-4ee9-9b39-db050a0a9e7f",
+      "label": "Default Rep Names",
+      "alias": "defaultRepNames",
+      "description": "An array of rep names for the the reps that are currently active",
+      "status": "active"
+    },
+    {
+      "fieldId": "cbfebb83-fa42-4524-9704-67a0db2d57c0",
+      "label": "Default Rep Pcts",
+      "alias": "defaultRepPcts",
+      "description": "An array of rep percentages for the current default reps",
+      "status": "active"
+    },
+    {
+      "fieldId": "a2a64e80-3343-4b5d-bc49-6802341fe628",
+      "label": "Default Rep Groups",
+      "alias": "defaultRepGroups",
+      "description": "An array of rep group ids for the the reps that are currently active",
+      "status": "active"
+    },
+    {
+      "fieldId": "aabb592c-eec1-4162-b1c2-ead574e0f0dd",
+      "label": "Default Rep Id 1",
+      "alias": "defaultRepId 1",
+      "description": "Current active Rep 1 id",
+      "status": "active"
+    },
+    {
+      "fieldId": "3b244b4a-d16b-4a7b-ae5e-876d3cd5c5a5",
+      "label": "Default Rep Pct 1",
+      "alias": "defaultRepPct 1",
+      "description": "Current active Rep 1 pct",
+      "status": "active"
+    },
+    {
+      "fieldId": "e22fffee-06f3-40e7-bd0a-7ddea6871ed4",
+      "label": "Default Rep Group 1",
+      "alias": "defaultRepGroup 1",
+      "description": "Current active Rep 1 group",
+      "status": "active"
+    },
+    {
+      "fieldId": "038e73c7-48fe-49f7-8d0c-d67d6ae7dd18",
+      "label": "Default Rep Name 1",
+      "alias": "defaultRepName 1",
+      "description": "Current active Rep 1 name",
+      "status": "active"
+    },
+    {
+      "fieldId": "d2c32dcb-2efd-4f15-ba4b-5397327c2137",
+      "label": "Default Rep Id 2",
+      "alias": "defaultRepId 2",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "0235fe98-af7e-4472-93a9-92c1277b610b",
+      "label": "Default Rep Pct 2",
+      "alias": "defaultRepPct 2",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "5a7cf53e-e101-4e4f-bb4b-abfbe2d83113",
+      "label": "Default Rep Group 2",
+      "alias": "defaultRepGroup 2",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "73934cc0-ca11-4ad0-b499-50299f55059c",
+      "label": "Default Rep Name 2",
+      "alias": "defaultRepName 2",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "2cc7cf89-0b9a-4308-869b-869a63187028",
+      "label": "Default Rep Id 3",
+      "alias": "defaultRepId 3",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "0e8cc902-c1c6-408d-a676-2d9238b634fe",
+      "label": "Default Rep Pct 3",
+      "alias": "defaultRepPct 3",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "d4aa044e-20d0-47ef-8386-4e936b7e988e",
+      "label": "Default Rep Group 3",
+      "alias": "defaultRepGroup 3",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "a1c286b8-31fe-4944-9c1a-7f62b79d9921",
+      "label": "Default Rep Name 3",
+      "alias": "defaultRepName 3",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "d11db8e5-d185-45fa-a075-73caade83313",
+      "label": "Default Rep Id 4",
+      "alias": "defaultRepId 4",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "29b9bb1b-caf1-4a0a-a651-72e739f6e6a9",
+      "label": "Default Rep Pct 4",
+      "alias": "defaultRepPct 4",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "77aa32dd-c8f0-46f4-9201-7e03dcf08718",
+      "label": "Default Rep Group 4",
+      "alias": "defaultRepGroup 4",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "4de43e8a-dac9-4360-a6c4-13d23a5d19f8",
+      "label": "Default Rep Name 4",
+      "alias": "defaultRepName 4",
+      "description": "",
+      "status": "active"
+    }
+  ]
+}
