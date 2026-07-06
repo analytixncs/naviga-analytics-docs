@@ -25,7 +25,7 @@ When pulling back records from AD Internet Campaigns, you can filter on the Stat
 2. **Invoice Comments** - **AD Internet Campaigns** -> **MONTHLY.BILLING.COMMENTS <198>**
 3. **Internal Comments** - **AD Internet Campaigns** -> **COMMENTS <23>**
 
-![image-20260602091238263](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_mapping_adinternetcampaigns-notes-001.png)
+![image-20260602091238263](images/informer_mapping_adinternetcampaigns-notes-001.png)
 
 ## Amount Fields
 
