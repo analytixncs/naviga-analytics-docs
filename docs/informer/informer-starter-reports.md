@@ -12,7 +12,7 @@ Each dataset is also prepared for use with AI tools. These datasets include a sp
 
 A corresponding JSON download is also available on this page. It combines the dataset field descriptions into a structured format that can be easily ingested by an AI tool.
 
-## AD Brand Default Reps
+## JOIN-Default Brand Rep
 
 :::info Download Dataset
 
@@ -24,7 +24,7 @@ A corresponding JSON download is also available on this page. It combines the da
     className="button button--primary"
     style="margin-bottom: 25px;"
   \>
-    Download AD Brand Default Reps JSON
+    Download JOIN-Default Brand Rep JSON
   </a>
   <br />
   <a
@@ -32,13 +32,14 @@ A corresponding JSON download is also available on this page. It combines the da
     target="_blank"
     className="button button--primary"
   \>
-    Download AD Brand Default Reps TGZ
+    Download JOIN-Default Brand Rep TGZ
   </a>
 </div>
 
+
 :::
 
-## AD Brand Product Group Reps
+## JOIN-Ad Brand Product Groups Reps
 
 :::info Download Dataset
 
@@ -48,7 +49,7 @@ A corresponding JSON download is also available on this page. It combines the da
     target="_blank"
     className="button button--primary"
   \>
-    Download AD Brand Product Group Reps TGZ
+    Download JOIN-Ad Brand Product Groups Reps TGZ
   </a>
   <br />
   <a
@@ -58,13 +59,14 @@ A corresponding JSON download is also available on this page. It combines the da
     className="button button--primary"
     style="margin-bottom: 25px;"
   \>
-    Download AD Brand Product Group Reps JSON
+    Download JOIN-Ad Brand Product Groups Reps JSON
   </a>
 </div>
 
+
 :::
 
-## AD Brand Product Reps
+## **JOIN-Ad Brand Product Reps**
 
 :::info Download Dataset
 
@@ -86,6 +88,34 @@ A corresponding JSON download is also available on this page. It combines the da
   \>
     Download AD Brand Product Reps JSON
   </a>
+
+</div>
+
+:::
+
+## NAVIGA - Client Brand Reps
+
+:::info Download Dataset
+
+<div className="">
+    <a
+    href="/downloads/ai-ready/naviga-client-brand-reps.tgz"
+    target="_blank"
+    className="button button--primary"
+  \>
+    Download NAVIGA - Client Brand Reps TGZ
+  </a>
+  <br />
+  <a
+    href="/downloads/ai-ready/naviga-client-brand-reps.json"
+    target="_blank"
+    download
+    className="button button--primary"
+    style="margin-bottom: 25px;"
+  \>
+    Download NAVIGA - Client Brand Reps JSON
+  </a>
+
 
 </div>
 

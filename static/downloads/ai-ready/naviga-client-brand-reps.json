@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-06-17T18:19:57.490Z",
+  "sourceType": "dataset",
+  "sourceId": "5eb5dd1f-34d7-45d6-8ac5-afbc0e43f060",
+  "sourceName": "NAVIGA - Client Brand Reps",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "a9e7e12e-abbc-40b1-a054-3b8c67ccbf1e",
+      "label": "Advertiser ID",
+      "alias": "clientId",
+      "description": "Client ID from AD Brands",
+      "status": "active"
+    },
+    {
+      "fieldId": "5f67cda6-4386-4838-b2c9-78c3ab9a4785",
+      "label": "Brand ID",
+      "alias": "brandCode",
+      "description": "The Brand Identifier",
+      "status": "active"
+    },
+    {
+      "fieldId": "73a96efb-d891-4f87-801b-8be004e95439",
+      "label": "Brand Name",
+      "alias": "brandName",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "f5e55767-5ddf-4877-9e1f-217a5f671295",
+      "label": "Brand Product Rep Key",
+      "alias": "brandProductRepKey",
+      "description": "Calculated Brand Key for Joins\nClientID*BrandID*ProductId",
+      "status": "active"
+    },
+    {
+      "fieldId": "692d00c1-17ad-46f7-9501-f4b7e3a1927d",
+      "label": "Brand Product Group Key",
+      "alias": "brandRepKey",
+      "description": "Calculated Brand Key for Joins\nClientID*BrandID*ProductGroupId",
+      "status": "active"
+    },
+    {
+      "fieldId": "d646cb9e-8360-43da-8aca-a3e1bc76de5f",
+      "label": "Advertiser Name Id",
+      "alias": "advertiser_assoc_nameId",
+      "description": "Name ID from GEN Clients",
+      "status": "active"
+    },
+    {
+      "fieldId": "e49c2372-b289-42ed-8b65-b55d1e1a0ca4",
+      "label": "Calced Brand Key",
+      "alias": "calcedBrandKey",
+      "description": "Calculated Brand Key for Joins\nClientID*BrandID",
+      "status": "active"
+    },
+    {
+      "fieldId": "2b38a6c3-af29-4250-8e42-e30b90c45b65",
+      "label": "Default Assign In Oe",
+      "alias": "defaultAssignInOE",
+      "description": "Brand Default Reps Assign in OE setting.  If this is \"Y\" then all reps are assigned in Order Entry",
+      "status": "active"
+    },
+    {
+      "fieldId": "239fda06-c9e1-4008-9357-0bc088fb0ada",
+      "label": "Default Inactive Ind",
+      "alias": "defaultInactiveInd",
+      "description": "Indicates this set of reps is disabled",
+      "status": "active"
+    },
+    {
+      "fieldId": "3a5516bb-0ec5-4a17-98d9-05cb56ce7760",
+      "label": "Default Rep Group 1",
+      "alias": "defaultRepGroup 1",
+      "description": "First Default Rep Group.  There can be up to 4. We just pull the first one",
+      "status": "active"
+    },
+    {
+      "fieldId": "94c3528f-0df1-4d12-aefc-bb7346c8cc3c",
+      "label": "Default Rep Id 1",
+      "alias": "defaultRepId 1",
+      "description": "First Default Rep Id.  There can be up to 4. We just pull the first one",
+      "status": "active"
+    },
+    {
+      "fieldId": "60e57938-d326-4524-a4b7-2c01b795abde",
+      "label": "Default Rep Name 1",
+      "alias": "defaultRepName 1",
+      "description": "First Default Rep Name.  There can be up to 4. We just pull the first one",
+      "status": "active"
+    },
+    {
+      "fieldId": "14189239-f100-4d6e-a5bb-85fa943e15af",
+      "label": "Default Rep Pct 1",
+      "alias": "defaultRepPct 1",
+      "description": "First Default Rep Pct.  There can be up to 4. We just pull the first one",
+      "status": "active"
+    },
+    {
+      "fieldId": "298b9b57-f981-4d0a-84f7-6d946cc1152e",
+      "label": "Brand Product Assign In Oe",
+      "alias": "brandProductAssignInOE",
+      "description": "Brand Product Reps Assign in OE setting.  If this is \"Y\" then all reps are assigned in Order Entry",
+      "status": "active"
+    },
+    {
+      "fieldId": "781bbe08-aae6-4dfc-a255-a905e65e4e40",
+      "label": "Brand Product Inactive Ind",
+      "alias": "brandProductInactiveInd",
+      "description": "Indicates this set of brand product reps is disabled",
+      "status": "active"
+    },
+    {
+      "fieldId": "17d6eec9-7f47-435f-a8aa-efe3fbb2c81e",
+      "label": "Brand Product Rep Group 1",
+      "alias": "brandProductRepGroup 1",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "f50944be-906e-4344-a4ac-73211fc0fcd4",
+      "label": "Brand Product Rep Id 1",
+      "alias": "brandProductRepId 1",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "9b4eec02-7151-4841-a37d-b180d873b7de",
+      "label": "Brand Product Rep Name 1",
+      "alias": "brandProductRepName 1",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "5d121e02-a9ad-40cc-9123-6354f18bcc91",
+      "label": "Brand Product Rep Pct 1",
+      "alias": "brandProductRepPct 1",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "4886bc9b-b93e-4983-ba7c-adf5b93f3fd5",
+      "label": "Brand Product Group Inactive Ind",
+      "alias": "brandProductGroupInactiveInd",
+      "description": "Brand Product Group Reps Assign in OE setting.  If this is \"Y\" then all reps are assigned in Order Entry",
+      "status": "active"
+    },
+    {
+      "fieldId": "c6697cb3-7709-4251-aacb-16a5dbef7bb2",
+      "label": "Brand Product Group Rep Group 1",
+      "alias": "brandProductGroupRepGroup 1",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "84f050f1-be35-44d0-860e-d0cc6607ead8",
+      "label": "Brand Product Group Rep Id 1",
+      "alias": "brandProductGroupRepId 1",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "2a924f35-f30c-4f2d-8772-99d092ad8f70",
+      "label": "Brand Product Group Rep Name 1",
+      "alias": "brandProductGroupRepName 1",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "903372f5-37d1-4227-9835-310772539857",
+      "label": "Brand Product Group Rep Pct 1",
+      "alias": "brandProductGroupRepPct 1",
+      "description": "",
+      "status": "active"
+    }
+  ]
+}
