@@ -22,7 +22,7 @@ When pulling back records from AD Internet Campaigns, you can filter on the Stat
 ## Notes and Comments
 
 1. **Confirmation Comments** - **AD Internet Campaigns** -> **CONF.COMMENTS <158>**
-2. **Invoice Comments** - **AD Internet Campaigns** -> **MONTHLY.BILLING.COMMENTS <198>**
+2. **Invoice Comments** - **AD Internet Campaigns** -> **MONTHLY.BILLING.COMMENT <198>**
 3. **Internal Comments** - **AD Internet Campaigns** -> **COMMENTS <23>**
 
 ![image-20260602091238263](images/informer_mapping_adinternetcampaigns-notes-001.png)
