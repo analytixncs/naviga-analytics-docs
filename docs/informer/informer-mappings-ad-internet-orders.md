@@ -706,6 +706,33 @@ If you need more detail about the package, you can join to the **AD Internet Pri
 
 :::
 
+## Page Position, Quadrant, Page Priority
+
+Some Campaign Lines have Page Position, Quadrant, Page Priority listed on the **Other Options** tab when viewing Line details.
+
+These drop downs contain text values, but in Informer, these are expressed as numbers referencing an Array position.  To *decode* these values, we use a Powerscript to convert the Array index to the actual value.
+
+![image-20260716094540145](images/informer_mapping_adinternetorders-pagearrays-001.png)
+
+First you must add the fields.
+
+- **Page Position** - **AD Internet Orders - PAGE.POSITION <293>**
+- **Quadrant** - **AD Internet Orders - PAGE.QUADRANT <292>**
+- **Page Priority** - **AD Internet Orders - PAGE.PRIORITY <290>**
+
+```javascript
+// Create arrays holding the values of each fields in the proper order
+pagePriorityMap = ["Any Page", "Absolute Page", "Relative Page", "Early", "Front Half", "BackHalf"]
+pagePositionMap = ["Don't Care", "Left Hand Page", "Right Hand Page"]
+pageQuadrantMap = ["Anywhere", "Top", "Left", "Bottom", "Right", "Top Left", "Top Right", "Bottom Left", "Bottom Right",]
+
+// If there is an index value look it up in the array maps
+$record['pagePositionDesc'] = !$record['pagePosition'] ? "" : pagePositionMap[$record['pagePosition']]
+$record['pageQuadrantDesc'] = !$record['pageQuadrant'] ? "" : pageQuadrantMap[$record['pageQuadrant']]
+$record['pagePriorityDesc'] = !$record['pagePriority'] ? "" : pagePriorityMap[$record['pagePriority']]
+
+```
+
 
 
 ## GL Codes in AD Internet Orders
