@@ -194,3 +194,9 @@ For example "**19736** *43200000*" would be interpreted as:
 **X Value <157>** and **Y Value <158>**
 
 ![image-20230516084128935](images/informer_mapping_othermappings_sizes_001.png)
+
+
+
+## GEN Bank File
+
+![Gen BankFile 01](C:\Users\Markm.000\Documents\GitHub\naviga-analytics-docs\docs\informer\images\informer_mapping_other_bankfile-001.png)
