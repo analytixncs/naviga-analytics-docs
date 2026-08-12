@@ -4,6 +4,22 @@
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
+## Report Library (generated)
+
+The **Report Library** docs section (`docs/report-library/` +
+`static/downloads/report-library/`) is generated from the Obsidian vault
+`informer-report-library-obsidian` via:
+
+```bash
+# from the vault repo
+$env:INFORMER_DOCS_ROOT = "<path-to-this-repo>"
+npm run publish-docs
+```
+
+Do not hand-edit those folders or `reportLibrarySidebar.js` — they are wiped and
+rewritten on every publish. `sidebars.js` imports the generated sidebar fragment
+once. See the vault’s `docs/publishing-report-library.md` for the full process.
+
 ## Assets in Docs
 
 Anything you store in the **docs** directory can be accessed either by using markdown syntax or html.  This means that you can create an images directory to store your images in and a videos directory to store videos in.  For downloadable files you will want to use the Static method of storage.
