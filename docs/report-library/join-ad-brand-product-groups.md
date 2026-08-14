@@ -20,7 +20,13 @@ Brand reps by Product group overrides
 
 ## Summary
 
-Loads all the override brand reps defined for Product Groups into a dataset so that it can be joined to other datasets.
+Loads all the override brand reps defined for Product Groups into a dataset so that it can be joined to other datasets. 
+
+For more information on how Brand Reps work and how to use these datasets see -> [Brand Rep Assignment Docs](../informer/informer-mappings-ad-brands#rep-assignments)
+
+## Notes
+
+This should be set up to reload via a Job every day.
 
 ## Description
 Only returns the last active Product Group Reps on a Brand.  Each Brand Product Group Key can have up to four default reps.  We return a set of fields that return information about the array of reps that are currently active. 
@@ -39,7 +45,7 @@ etc.
 
 | Label | Alias | Type | Hidden | Description |
 |-------|-------|------|--------|-------------|
-| Brand Product Group Key | id | keyword_text |  | Key composed of<br>ClientId*BrandId*ProductGroupID<br>This is the field that you will join to other queries to get product group brand reps |
+| Brand Product Group Key | id | keyword_text |  | Key composed of<br />ClientId*BrandId*ProductGroupID<br />This is the field that you will join to other queries to get product group brand reps |
 | Brand Key | brandKey | keyword_text |  | Key composed of ClientID*Brand ID |
 | Brand Product Group Inactive Ind | brandProductGroupInactiveInd | keyword_text |  | 	"Y" = Inactive Brand |
 | Brand Product Group Date | brandProductGroupDate | keyword_text |  | The date that this group of reps became active |
