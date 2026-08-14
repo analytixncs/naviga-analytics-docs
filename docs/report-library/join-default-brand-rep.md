@@ -22,7 +22,11 @@ Loads all the default brand reps into a dataset so that it can be joined to othe
 
 Loads all the default brand reps into a dataset so that it can be joined to other datasets. 
 
-For details on how this dataset is built go to [Ad Brands Docs](https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-ad-brands)
+For more information on how Brand Reps work and how to use these datasets see -> [Brand Rep Assignment Docs](../informer/informer-mappings-ad-brands#rep-assignments)
+
+## Notes
+
+This should be set up to reload via a Job every day.
 
 ## Description
 Only returns the last active Default Reps on a Brand.  Each Brand Key can have up to four default reps.  We return a set of fields that return information about the array of reps that are currently active. 
@@ -41,10 +45,10 @@ etc.
 
 | Label | Alias | Type | Hidden | Description |
 |-------|-------|------|--------|-------------|
-| Brand Key | brandId | keyword_text |  | Key composed of<br>ClientID*Brand ID<br>This is the field that you will join to other queries to get default brand reps. |
+| Brand Key | brandId | keyword_text |  | Key composed of<br />ClientID*Brand ID<br />This is the field that you will join to other queries to get default brand reps. |
 | Default Date | defaultDate | date |  | The date that this group of reps became active |
-| Brand Product ID | id | keyword_text |  | Key composed of<br>Client ID*Brand ID*Product ID<br>In this case the product id will always be "Default" |
-| Default Assign In Oe | defaultAssignInOE | keyword_text |  | "Y" if Assign In O.E. is set<br>"N" if not. |
+| Brand Product ID | id | keyword_text |  | Key composed of<br />Client ID*Brand ID*Product ID<br />In this case the product id will always be "Default" |
+| Default Assign In Oe | defaultAssignInOE | keyword_text |  | "Y" if Assign In O.E. is set<br />"N" if not. |
 | Default Rep Ids | defaultRepIds | keyword_text |  | An array of rep ids that are currently active |
 | Default Rep Names | defaultRepNames | keyword_text |  | An array of rep names for the the reps that are currently active |
 | Default Rep Pcts | defaultRepPcts | double |  | An array of rep percentages for the current default reps |

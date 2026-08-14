@@ -7,10 +7,19 @@ module.exports = {
     "report-library/index",
     {
       "type": "category",
+      "label": "Campaigns",
+      "items": [
+        "report-library/naviga-ad-internet-orders-starter"
+      ]
+    },
+    {
+      "type": "category",
       "label": "Clients",
       "items": [
         "report-library/join-ad-brand-product-groups",
-        "report-library/join-default-brand-rep"
+        "report-library/join-default-brand-rep",
+        "report-library/naviga-client-brand-reps",
+        "report-library/naviga-gen-clients"
       ]
     }
   ]
