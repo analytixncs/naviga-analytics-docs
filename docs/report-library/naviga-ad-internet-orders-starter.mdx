@@ -12,11 +12,12 @@ import informer_sample_reports_orderstarter_001 from './images/informer-sample-r
 
 Basic campaign revenue report with Sales Reps
 
-:::info NAVIGA-AD Internet Orders Starter Bundle
+:::info NAVIGA-AD Internet Orders Starter Downloads
 
 Basic campaign revenue report with Sales Reps
 
-**<a target="_blank" href="/downloads/report-library/naviga-ad-internet-orders-starter.tgz">NAVIGA-AD Internet Orders Starter</a>**
+**Bundle (TGZ):** <a target="_blank" href="/downloads/report-library/naviga-ad-internet-orders-starter.tgz">NAVIGA-AD Internet Orders Starter</a><br />
+**Definition JSON:** <a target="_blank" href="/downloads/report-library/naviga-ad-internet-orders-starter.json">naviga-ad-internet-orders-starter.json</a>
 
 :::
 
@@ -55,36 +56,36 @@ Similar output to Order by Product report from Naviga Ad.
 
 ## Fields
 
-| Label                     | Alias                                                         | Type         | Hidden | Description                                                                                                                                  |
-| ------------------------- | ------------------------------------------------------------- | ------------ | ------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| Campaign ID               | campaignId                                                    | keyword_text |        | Campaign Identifier                                                                                                                          |
-| Line ID                   | id                                                            | keyword_text |        | Line Identifier.  Campaigns will have multiple lines and lines will have multiple line details                                               |
-| Advertiser Id             | a_d_internet_campaigns_assoc_advId                            | keyword_text |        |                                                                                                                                              |
-| Advertiser Name           | a_d_internet_campaigns_assoc_advName                          | keyword_text |        |                                                                                                                                              |
-| Ad Type ID                | adTypeId                                                      | keyword_text |        |                                                                                                                                              |
-| Current Rep ID            | currentRepIds                                                 | keyword_text |        | Current Rep Identifier                                                                                                                       |
-| Cur Rep Name              | curr_ad_salesreps_assoc_repName                               | keyword_text |        | Current Rep Name                                                                                                                             |
-| Current Rep Pct           | currentRepPcts                                                | double       |        | Current Rep Percentage.  There can be multiple reps on an order with each earning a different percent of the order towards commission.       |
-| Month Actual Amt          | monthActualAmt                                                | double       |        | Used to calculate the Net/Gross amounts                                                                                                      |
-| Month Est Amt             | monthEstAmt                                                   | double       |        | Used to calculate the Net/Gross amounts.                                                                                                     |
-| Month Start Date          | monthStartDate                                                | date         |        | The starting date of the Order details record.                                                                                               |
-| Month End Date            | monthEndDate                                                  | date         |        | The ending date of the Order details record.                                                                                                 |
-| Product ID                | webSiteId                                                     | keyword_text |        | Product Identifier<br />For a digital ad, this can be considered a Web Site ID.  The location of the detail is in the AD Publications mapping. |
-| Product                   | web_site_id_assoc_webPubName                                  | keyword_text |        | Product Name                                                                                                                                 |
-| Print Pub Ind             | web_site_id_assoc_printPubInd                                 | keyword_text |        | Y = Print publication<br />N = Digital Publication                                                                                             |
-| Campaign Date Entered     | a_d_internet_campaigns_assoc_dateEntered                      | date         |        | Date that the campaign was entered into the system.                                                                                          |
-| Campaign Type             | a_d_internet_campaigns_assoc_campaignType                     | keyword_text |        | M = Performance Campaign<br />F = Flexible Campaign                                                                                            |
-| Campaign Status Code      | a_d_internet_campaigns_assoc_statusCode                       | keyword_text |        | Only these status' are included in results<br />IS = Invoice Started<br />CO = Confirmed<br />R* = Reserved (can have multiple codes R1, R2, etc)  |
-| Gross Line Local Amount   | grossLineLocalAmount                                          | double       |        | Total Gross Revenue (including Agency Commission) in local currency                                                                          |
-| Gross Line Foreign Amount | grossLineForeignAmount                                        | double       |        | Total Gross Foreign Revenue (including Agency Commission) in foreign currency                                                                |
-| Net Line Local Amount     | netLineLocalAmount                                            | double       |        | Total Net Revenue (excluding Agency Commission) in local currency                                                                            |
-| Net Line Foreign Amount   | netLineForeignAmount                                          | double       |        | Total Net Foreign Revenue (excluding Agency Commission) in foreign currency                                                                  |
-| Net Rep Local Amount      | netRepLocalAmount                                             | double       |        | Total Net Revenue (excluding Agency Commission) in local currency and multiplied by the rep percentage                                       |
-| Net Rep Foreign Amount    | netRepForeignAmount                                           | double       |        | Total Net Foreign Revenue (excluding Agency Commission) in foreign currency and multiplied by the rep percentage                             |
-| Campaign Desc             | a_d_internet_campaigns_assoc_campaignDescConv                 | keyword_text |        |                                                                                                                                              |
-| GL Type ID                | glTypeId                                                      | keyword_text |        |                                                                                                                                              |
-| Advertiser Type ID        | a_d_internet_campaigns_assoc_advertiser_id_assoc_clientTypeId | keyword_text |        |                                                                                                                                              |
-| Agency Commission Percent | a_d_internet_campaigns_assoc_commissionPct                    | double       |        | Used to calculate Net and Gross Revenue.  Indicates the agency commission percent                                                            |
-| Currency Code             | a_d_internet_campaigns_assoc_currCode                         | keyword_text |        | What the foreign currency code is.                                                                                                           |
-| Currency Exchange Rate    | a_d_internet_campaigns_assoc_currRate                         | double       |        | Exchange rate for the foreign currency stored on the AD Internet Campaign mapping.                                                           |
-| No Agy Comm Ind           | noAgyCommInd                                                  | keyword_text |        | Can be considered the Issue date for a Print publication. <br />The starting date of the Order details record.                                 |
+| Label | Alias | Type | Hidden | Description |
+|-------|-------|------|--------|-------------|
+| Campaign ID | campaignId | keyword_text |  | Campaign Identifier |
+| Line ID | id | keyword_text |  | Line Identifier.  Campaigns will have multiple lines and lines will have multiple line details |
+| Advertiser Id | a_d_internet_campaigns_assoc_advId | keyword_text |  |  |
+| Advertiser Name | a_d_internet_campaigns_assoc_advName | keyword_text |  |  |
+| Ad Type ID | adTypeId | keyword_text |  |  |
+| Current Rep ID | currentRepIds | keyword_text |  | Current Rep Identifier |
+| Cur Rep Name | curr_ad_salesreps_assoc_repName | keyword_text |  | Current Rep Name |
+| Current Rep Pct | currentRepPcts | double |  | Current Rep Percentage.  There can be multiple reps on an order with each earning a different percent of the order towards commission. |
+| Month Actual Amt | monthActualAmt | double |  | Used to calculate the Net/Gross amounts |
+| Month Est Amt | monthEstAmt | double |  | Used to calculate the Net/Gross amounts. |
+| Month Start Date | monthStartDate | date |  | The starting date of the Order details record. |
+| Month End Date | monthEndDate | date |  | The ending date of the Order details record. |
+| Product ID | webSiteId | keyword_text |  | Product Identifier<br />For a digital ad, this can be considered a Web Site ID.  The location of the detail is in the AD Publications mapping. |
+| Product | web_site_id_assoc_webPubName | keyword_text |  | Product Name |
+| Print Pub Ind | web_site_id_assoc_printPubInd | keyword_text |  | Y = Print publication<br />N = Digital Publication |
+| Campaign Date Entered | a_d_internet_campaigns_assoc_dateEntered | date |  | Date that the campaign was entered into the system. |
+| Campaign Type | a_d_internet_campaigns_assoc_campaignType | keyword_text |  | M = Performance Campaign<br />F = Flexible Campaign |
+| Campaign Status Code | a_d_internet_campaigns_assoc_statusCode | keyword_text |  | Only these status' are included in results<br />IS = Invoice Started<br />CO = Confirmed<br />R* = Reserved (can have multiple codes R1, R2, etc) |
+| Gross Line Local Amount | grossLineLocalAmount | double |  | Total Gross Revenue (including Agency Commission) in local currency |
+| Gross Line Foreign Amount | grossLineForeignAmount | double |  | Total Gross Foreign Revenue (including Agency Commission) in foreign currency |
+| Net Line Local Amount | netLineLocalAmount | double |  | Total Net Revenue (excluding Agency Commission) in local currency |
+| Net Line Foreign Amount | netLineForeignAmount | double |  | Total Net Foreign Revenue (excluding Agency Commission) in foreign currency |
+| Net Rep Local Amount | netRepLocalAmount | double |  | Total Net Revenue (excluding Agency Commission) in local currency and multiplied by the rep percentage |
+| Net Rep Foreign Amount | netRepForeignAmount | double |  | Total Net Foreign Revenue (excluding Agency Commission) in foreign currency and multiplied by the rep percentage |
+| Campaign Desc | a_d_internet_campaigns_assoc_campaignDescConv | keyword_text |  |  |
+| GL Type ID | glTypeId | keyword_text |  |  |
+| Advertiser Type ID | a_d_internet_campaigns_assoc_advertiser_id_assoc_clientTypeId | keyword_text |  |  |
+| Agency Commission Percent | a_d_internet_campaigns_assoc_commissionPct | double |  | Used to calculate Net and Gross Revenue.  Indicates the agency commission percent |
+| Currency Code | a_d_internet_campaigns_assoc_currCode | keyword_text |  | What the foreign currency code is. |
+| Currency Exchange Rate | a_d_internet_campaigns_assoc_currRate | double |  | Exchange rate for the foreign currency stored on the AD Internet Campaign mapping. |
+| No Agy Comm Ind | noAgyCommInd | keyword_text |  | Can be considered the Issue date for a Print publication. <br />The starting date of the Order details record. |

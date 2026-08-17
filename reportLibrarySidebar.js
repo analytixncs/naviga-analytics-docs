@@ -17,9 +17,18 @@ module.exports = {
       "label": "Clients",
       "items": [
         "report-library/join-ad-brand-product-groups",
+        "report-library/join-ad-brand-product-reps",
         "report-library/join-default-brand-rep",
         "report-library/naviga-client-brand-reps",
         "report-library/naviga-gen-clients"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Informer Metadata",
+      "items": [
+        "report-library/metadata-dataset-dependencies",
+        "report-library/metadata-reports-dataset-ids-names"
       ]
     }
   ]

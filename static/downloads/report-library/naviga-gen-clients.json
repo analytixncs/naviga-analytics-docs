@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-08-14T14:58:24.765Z",
+  "sourceType": "adHocReport",
+  "sourceId": "1d25553b-9ea3-4b14-a35e-9708acfd721a",
+  "sourceName": "NAVIGA-Gen Clients",
+  "documentationStatus": "complete",
+  "version": "1.0.0",
+  "completedAt": "2026-08-10T18:20:31.532Z",
+  "vaultReportType": "Clients",
+  "vaultSummary": "Basic Client report",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:NAME.ID",
+      "label": "Client Id",
+      "alias": "nameId",
+      "description": "Client Identifier.  In database this is called the \"Name ID\" and is found in both the GEN Clients and GEN Company/Individual Names",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:GEN_NAMES:FULL.NAME",
+      "label": "Client Name",
+      "alias": "new_name_assoc_fullName",
+      "description": "Name of Client.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:GEN_ADDRESSES:ADDRESS.LINE.1",
+      "label": "Address Line 1",
+      "alias": "new_name_assoc_a_d_preferred_address_assoc_addressLine1",
+      "description": "Ad Preferred Address Line 1",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:GEN_ADDRESSES:ADDRESS.LINE.2",
+      "label": "Address Line 2",
+      "alias": "new_name_assoc_a_d_preferred_address_assoc_addressLine2",
+      "description": "Ad Preferred Address Line 2",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:GEN_ADDRESSES:ADDRESS.LINE.3",
+      "label": "Address Line 3",
+      "alias": "new_name_assoc_a_d_preferred_address_assoc_addressLine3",
+      "description": "Ad Preferred Address Line 3",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:GEN_ADDRESSES:STATE",
+      "label": "State",
+      "alias": "new_name_assoc_a_d_preferred_address_assoc_state",
+      "description": "Ad Preferred State",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:GEN_ADDRESSES:CITY",
+      "label": "City",
+      "alias": "new_name_assoc_a_d_preferred_address_assoc_city",
+      "description": "Ad Preferred City",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:GEN_ADDRESSES:ZIP.CODE",
+      "label": "Zip Code",
+      "alias": "new_name_assoc_a_d_preferred_address_assoc_zipCode",
+      "description": "Ad Preferred Zipcode",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:ACCT.OPENED",
+      "label": "Account Date Opened",
+      "alias": "acctOpened",
+      "description": "Date the Client account was opened.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:AGENCY.IND",
+      "label": "Agency Ind",
+      "alias": "agencyInd",
+      "description": "Y = This client is an Agency\nN = Not an Agency",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:ACTIVE",
+      "label": "Active Ind",
+      "alias": "active",
+      "description": "Active Indicator on the GEN Clients mapping\nY = This client is active\nN = Not active",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:GEN_NAMES:DO.NOT.USE.IND",
+      "label": "Client Name Do Not Use Ind",
+      "alias": "new_name_assoc_doNotUseInd",
+      "description": "Do Not Use Indicator on the GEN Company/Individual Names mapping\nY = Do NOT Use\nN = Can be Used",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:BRANDS",
+      "label": "Brands",
+      "alias": "brands",
+      "description": "Multivalued fields showing all brands associated with this client.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:CREDIT.STOP",
+      "label": "Credit Stop Indicator",
+      "alias": "creditStop",
+      "description": "Indicates if this clients credit is stopped\nY = This client has credit stopped\nN = Credit is not stopped",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:CR.STOP.DATE",
+      "label": "Credit Stop Date",
+      "alias": "crStopDate",
+      "description": "Date the the credit was stopped",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:CR.LIMIT",
+      "label": "Credit Limit",
+      "alias": "crLimit",
+      "description": "Client credit limit",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:GEN_NAMES:SPECIFIC.JOB.TITLE",
+      "label": "Client Name Specific Job Title",
+      "alias": "new_name_assoc_specificJobTitle",
+      "description": "Clients Job Title if applicable.  These will only show up on Individual (Name Type = I) records.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:CLIENT.TYPE.DESC",
+      "label": "Client Type Desc",
+      "alias": "clientTypeDesc",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:AD.INVOICE.CONTACT.ID",
+      "label": "AD Invoice Contact ID",
+      "alias": "adInvoiceContactId",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:LAST.PAY.AMT",
+      "label": "Last Pay Amt",
+      "alias": "lastPayAmt",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:STMT.EMAIL.CONTACT.ID",
+      "label": "Stmt Email Contact ID",
+      "alias": "stmtEmailContactId",
+      "description": "Contact ID for contact email on Statement Details.  See docs -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#advertising-setup-for-digital-first-naviga-users",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:INV.EMAIL.CONTACT.ID",
+      "label": "Inv Email Contact ID",
+      "alias": "invEmailContactId",
+      "description": "Contact ID for contact email on Misc. Billing Details.  \nSee docs -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#delivery-methods",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:CONF.EMAIL.CONTACT.ID",
+      "label": "Confirmation Email Contact ID",
+      "alias": "confEmailContactId",
+      "description": "Contact ID for contact email on Contacts Emailed Confirmations.  \nSee docs -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#overview-of-advertising-contacts",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:GEN_NAMES:NAME.TYPE..ID",
+      "label": "Client Name Type Id",
+      "alias": "client_name_assoc_nameTypeId",
+      "description": "C = Advertiser\nI = Individual / Contact / Employee",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:CLIENT.TYPE",
+      "label": "Client Name Client Type",
+      "alias": "client_name_assoc_client_assoc_clientType",
+      "description": "",
+      "status": "active"
+    }
+  ]
+}

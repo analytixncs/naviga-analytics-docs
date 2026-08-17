@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-08-14T14:58:21.008Z",
+  "sourceType": "adHocReport",
+  "sourceId": "de2bd484-5fab-4e1b-a52c-397c21a7de1c",
+  "sourceName": "METADATA-Dataset Dependencies",
+  "documentationStatus": "complete",
+  "version": "1.0.0",
+  "completedAt": "2026-08-07T18:45:23.938Z",
+  "vaultReportType": "Informer Metadata",
+  "vaultSummary": "Reveal Datasets and Ad Hoc Queries that are dependent on other Datasets or Datasources.",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "3e45f040-043e-40af-bf3c-42e8d1219a7d:public+query:id",
+      "label": "Id",
+      "alias": "id",
+      "description": "Source Dataset or Ad Hoc Query UUID.",
+      "status": "active"
+    },
+    {
+      "fieldId": "3e45f040-043e-40af-bf3c-42e8d1219a7d:public+query:flow",
+      "label": "Flow",
+      "alias": "flow",
+      "description": "Array of Flow steps.  Each flow step in the array is stored as an Object.",
+      "status": "active"
+    },
+    {
+      "fieldId": "3e45f040-043e-40af-bf3c-42e8d1219a7d:public+query:name",
+      "label": "Name",
+      "alias": "name",
+      "description": "Source Dataset or Ad Hoc Query Name.",
+      "status": "active"
+    },
+    {
+      "fieldId": "joinedDatasetIds",
+      "label": "Dependent Dataset Id",
+      "alias": "joinedDatasetIds",
+      "description": "The Dataset UUID that the source query is dependent upon.  Each source query can have more than one dependency.",
+      "status": "active"
+    },
+    {
+      "fieldId": "type",
+      "label": "Type",
+      "alias": "type",
+      "description": "Dataset or Ad Hoc Report",
+      "status": "active"
+    },
+    {
+      "fieldId": "3e45f040-043e-40af-bf3c-42e8d1219a7d:public+query:name",
+      "label": "Dependent Dataset Name",
+      "alias": "dependentDatasetName",
+      "description": "The Dataset Name that the source query is dependent upon.  Each source query can have more than one dependency.  This is the information pulled from the \"METADATA-Reports-Dataset Ids Names\" joined dataset.",
+      "status": "active"
+    },
+    {
+      "fieldId": "LinkToReport",
+      "label": "Link To Report",
+      "alias": "LinkToReport",
+      "description": "Clickable link to the source Dataset or Ad Hoc  Report.",
+      "status": "active"
+    },
+    {
+      "fieldId": "dependentDatasetLink",
+      "label": "Dependent Dataset Link",
+      "alias": "dependentDatasetLink",
+      "description": "Clickable link to the dependent Dataset.",
+      "status": "active"
+    },
+    {
+      "fieldId": "dependentDatasourceNames",
+      "label": "Dependent Datasource Names",
+      "alias": "dependentDatasourceNames",
+      "description": "Dependent Datasource Name",
+      "status": "active"
+    },
+    {
+      "fieldId": "numOfDependentDatasets",
+      "label": "Num Of Dependent Datasets",
+      "alias": "numOfDependentDatasets",
+      "description": "Number of dependent Datasets that the source query is dependent upon.",
+      "status": "active"
+    },
+    {
+      "fieldId": "numOfDependentDatasources",
+      "label": "Num Of Dependent Datasources",
+      "alias": "numOfDependentDatasources",
+      "description": "Number of dependent Datasources that the source query is dependent upon.",
+      "status": "active"
+    }
+  ]
+}

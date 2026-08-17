@@ -10,11 +10,12 @@ sidebar_label: NAVIGA-Gen Clients
 
 Basic Client report
 
-:::info NAVIGA-Gen Clients Bundle
+:::info NAVIGA-Gen Clients Downloads
 
 Basic Client report
 
-**<a target="_blank" href="/downloads/report-library/naviga-gen-clients.tgz">NAVIGA-Gen Clients</a>**
+**Bundle (TGZ):** <a target="_blank" href="/downloads/report-library/naviga-gen-clients.tgz">NAVIGA-Gen Clients</a><br />
+**Definition JSON:** <a target="_blank" href="/downloads/report-library/naviga-gen-clients.json">naviga-gen-clients.json</a>
 
 :::
 

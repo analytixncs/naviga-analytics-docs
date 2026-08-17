@@ -167,6 +167,10 @@ If you are using the `next` or `prev`, you can add the `&sort=_doc`.
 
 This is a great route if you don't need to page through the data and you just need all of the records.
 
+> Be aware that this API route will return the "Grid" that your user has defined in Informer.  For example, if you have "unselected" columns so they do not show in the Grid, they will not be returned by this API route.  This holds true even if you are using an API Token.  Whichever user generated the Token, their Grid settings will be what is exported by this route.
+>
+> If you are sharing API Tokens with other users, the best way to keep them clean is to ask Naviga to create a special API User for your Informer instance.  Simply enter a JIRA case asking for an API User to be created for your site.
+
 **/api/datasets/{id}/export/{exporter}**
 
 The most common exporters are `json` and `csv`. If you want to see the other options, you can call this endpoint (GET):
