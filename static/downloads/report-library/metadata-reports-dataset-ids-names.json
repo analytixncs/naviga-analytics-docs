@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-08-14T14:58:22.410Z",
+  "sourceType": "dataset",
+  "sourceId": "52fb3cb6-1817-416f-8c13-7cb7885e672d",
+  "sourceName": "METADATA-Reports-Dataset Ids Names",
+  "documentationStatus": "complete",
+  "version": "1.0.0",
+  "completedAt": "2026-08-07T19:17:56.456Z",
+  "vaultReportType": "Informer Metadata",
+  "vaultSummary": "Lists all of the Dataset and Ad Hoc Queries in the system",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "173feaa3-fb17-42a1-9aa1-4d767a9e758d",
+      "label": "Id",
+      "alias": "id",
+      "description": "Dataset or Ad Hoc Query UUID",
+      "status": "active"
+    },
+    {
+      "fieldId": "30e1d740-e968-4652-8901-08457a101d3f",
+      "label": "Name",
+      "alias": "name",
+      "description": "Dataset or Ad Hoc Query Name",
+      "status": "active"
+    },
+    {
+      "fieldId": "a43be667-805e-4f3d-995a-2cfe0c17515a",
+      "label": "Type",
+      "alias": "type",
+      "description": "Ad hoc Query\nor\nDataset",
+      "status": "active"
+    },
+    {
+      "fieldId": "d595a682-2a84-4f50-aee2-a53b7eca05cd",
+      "label": "Owner",
+      "alias": "principal_id",
+      "description": "User who is marked as Owner",
+      "status": "active"
+    },
+    {
+      "fieldId": "f30d8cf9-2c0c-4390-96cf-d25701c5c516",
+      "label": "Created At",
+      "alias": "createdAt",
+      "description": "Date the object was created",
+      "status": "active"
+    },
+    {
+      "fieldId": "9a3c007a-3fb1-4c1c-ae58-a62266b00f27",
+      "label": "Definition Updated At",
+      "alias": "defnUpdatedAt",
+      "description": "Date the query definition was updated last",
+      "status": "active"
+    },
+    {
+      "fieldId": "f2a471c4-ac6d-45cf-bae3-aa53d2931274",
+      "label": "Data Updated At",
+      "alias": "dataset_dataUpdatedAt",
+      "description": "Last time the Dataset was refreshed or the last time the Ad Hoc Query was run.",
+      "status": "active"
+    },
+    {
+      "fieldId": "dc816e23-8721-4a03-aaff-1abd153a73ab",
+      "label": "Datasource Name",
+      "alias": "datasource_name",
+      "description": "The Datasource the object is using to get data.",
+      "status": "active"
+    }
+  ]
+}

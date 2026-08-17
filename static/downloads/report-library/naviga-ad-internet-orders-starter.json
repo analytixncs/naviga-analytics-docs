@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-08-14T14:58:23.415Z",
+  "sourceType": "adHocReport",
+  "sourceId": "19b90c45-31dc-4435-b7b0-e232b854c796",
+  "sourceName": "NAVIGA-AD Internet Orders Starter",
+  "documentationStatus": "complete",
+  "version": "1.0.0",
+  "completedAt": "2026-08-05T18:18:14.586Z",
+  "vaultReportType": "Campaigns",
+  "vaultSummary": "Basic campaign revenue report with Sales Reps",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:AD.TYPE.ID",
+      "label": "Ad Type ID",
+      "alias": "adTypeId",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:CAMPAIGN.ID",
+      "label": "Campaign ID",
+      "alias": "campaignId",
+      "description": "Campaign Identifier",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:CURRENT.REP.IDS",
+      "label": "Current Rep ID",
+      "alias": "currentRepIds",
+      "description": "Current Rep Identifier",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:CURRENT.REP.PCTS",
+      "label": "Current Rep Pct",
+      "alias": "currentRepPcts",
+      "description": "Current Rep Percentage.  There can be multiple reps on an order with each earning a different percent of the order towards commission.",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:GL.TYPE.ID",
+      "label": "GL Type ID",
+      "alias": "glTypeId",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:@ID",
+      "label": "Line ID",
+      "alias": "id",
+      "description": "Line Identifier.  Campaigns will have multiple lines and lines will have multiple line details",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:MONTH.ACTUAL.AMT",
+      "label": "Month Actual Amt",
+      "alias": "monthActualAmt",
+      "description": "Used to calculate the Net/Gross amounts",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:MONTH.EST.AMT",
+      "label": "Month Est Amt",
+      "alias": "monthEstAmt",
+      "description": "Used to calculate the Net/Gross amounts.",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:MONTH.END.DATE",
+      "label": "Month End Date",
+      "alias": "monthEndDate",
+      "description": "The ending date of the Order details record.",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:MONTH.START.DATE",
+      "label": "Month Start Date",
+      "alias": "monthStartDate",
+      "description": "The starting date of the Order details record.",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:NO.AGY.COMM.IND",
+      "label": "No Agy Comm Ind",
+      "alias": "noAgyCommInd",
+      "description": "Can be considered the Issue date for a Print publication. \nThe starting date of the Order details record.",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:WEB.SITE.ID",
+      "label": "Product ID",
+      "alias": "webSiteId",
+      "description": "Product Identifier\nFor a digital ad, this can be considered a Web Site ID.  The location of the detail is in the AD Publications mapping.",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_PUBS:PRINT.PUB.IND",
+      "label": "Print Pub Ind",
+      "alias": "web_site_id_assoc_printPubInd",
+      "description": "Y = Print publication\nN = Digital Publication",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_PUBS:WEB.PUB.NAME",
+      "label": "Product",
+      "alias": "web_site_id_assoc_webPubName",
+      "description": "Product Name",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INET.CAMPAIGNS:ADV.ID",
+      "label": "Advertiser Id",
+      "alias": "a_d_internet_campaigns_assoc_advId",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INET.CAMPAIGNS:DATE.ENTERED",
+      "label": "Campaign Date Entered",
+      "alias": "a_d_internet_campaigns_assoc_dateEntered",
+      "description": "Date that the campaign was entered into the system.",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INET.CAMPAIGNS:CAMPAIGN.TYPE",
+      "label": "Campaign Type",
+      "alias": "a_d_internet_campaigns_assoc_campaignType",
+      "description": "M = Performance Campaign\nF = Flexible Campaign",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INET.CAMPAIGNS:STATUS.CODE",
+      "label": "Campaign Status Code",
+      "alias": "a_d_internet_campaigns_assoc_statusCode",
+      "description": "Only these status' are included in results\nIS = Invoice Started\nCO = Confirmed\nR* = Reserved (can have multiple codes R1, R2, etc)",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_CLIENTS:CLIENT.TYPE.ID",
+      "label": "Advertiser Type ID",
+      "alias": "a_d_internet_campaigns_assoc_advertiser_id_assoc_clientTypeId",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INET.CAMPAIGNS:ADV.NAME",
+      "label": "Advertiser Name",
+      "alias": "a_d_internet_campaigns_assoc_advName",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "grossLineLocalAmount",
+      "label": "Gross Line Local Amount",
+      "alias": "grossLineLocalAmount",
+      "description": "Total Gross Revenue (including Agency Commission) in local currency",
+      "status": "active"
+    },
+    {
+      "fieldId": "grossLineForeignAmount",
+      "label": "Gross Line Foreign Amount",
+      "alias": "grossLineForeignAmount",
+      "description": "Total Gross Foreign Revenue (including Agency Commission) in foreign currency",
+      "status": "active"
+    },
+    {
+      "fieldId": "netLineForeignAmount",
+      "label": "Net Line Foreign Amount",
+      "alias": "netLineForeignAmount",
+      "description": "Total Net Foreign Revenue (excluding Agency Commission) in foreign currency",
+      "status": "active"
+    },
+    {
+      "fieldId": "netLineLocalAmount",
+      "label": "Net Line Local Amount",
+      "alias": "netLineLocalAmount",
+      "description": "Total Net Revenue (excluding Agency Commission) in local currency",
+      "status": "active"
+    },
+    {
+      "fieldId": "netRepForeignAmount",
+      "label": "Net Rep Foreign Amount",
+      "alias": "netRepForeignAmount",
+      "description": "Total Net Foreign Revenue (excluding Agency Commission) in foreign currency and multiplied by the rep percentage",
+      "status": "active"
+    },
+    {
+      "fieldId": "netRepLocalAmount",
+      "label": "Net Rep Local Amount",
+      "alias": "netRepLocalAmount",
+      "description": "Total Net Revenue (excluding Agency Commission) in local currency and multiplied by the rep percentage",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SALESREPS:REP_NAME",
+      "label": "Cur Rep Name",
+      "alias": "curr_ad_salesreps_assoc_repName",
+      "description": "Current Rep Name",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INET.CAMPAIGNS:CAMPAIGN.DESC.CONV",
+      "label": "Campaign Desc",
+      "alias": "a_d_internet_campaigns_assoc_campaignDescConv",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INET.CAMPAIGNS:COMMISSION.PCT",
+      "label": "Agency Commission Percent",
+      "alias": "a_d_internet_campaigns_assoc_commissionPct",
+      "description": "Used to calculate Net and Gross Revenue.  Indicates the agency commission percent",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INET.CAMPAIGNS:CURR.CODE",
+      "label": "Currency Code",
+      "alias": "a_d_internet_campaigns_assoc_currCode",
+      "description": "What the foreign currency code is.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INET.CAMPAIGNS:CURR.RATE",
+      "label": "Currency Exchange Rate",
+      "alias": "a_d_internet_campaigns_assoc_currRate",
+      "description": "Exchange rate for the foreign currency stored on the AD Internet Campaign mapping.",
+      "status": "active"
+    }
+  ]
+}

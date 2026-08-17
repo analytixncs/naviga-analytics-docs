@@ -10,11 +10,12 @@ sidebar_label: JOIN-Ad Brand Product Groups
 
 Brand reps by Product group overrides
 
-:::info JOIN-Ad Brand Product Groups Bundle
+:::info JOIN-Ad Brand Product Groups Downloads
 
 Brand reps by Product group overrides
 
-**<a target="_blank" href="/downloads/report-library/join-ad-brand-product-groups.tgz">JOIN-Ad Brand Product Groups</a>**
+**Bundle (TGZ):** <a target="_blank" href="/downloads/report-library/join-ad-brand-product-groups.tgz">JOIN-Ad Brand Product Groups</a><br />
+**Definition JSON:** <a target="_blank" href="/downloads/report-library/join-ad-brand-product-groups.json">join-ad-brand-product-groups.json</a>
 
 :::
 

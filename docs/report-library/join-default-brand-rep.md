@@ -10,11 +10,12 @@ sidebar_label: JOIN-Default Brand Rep
 
 Loads all the default brand reps into a dataset so that it can be joined to other datasets.
 
-:::info JOIN-Default Brand Rep Bundle
+:::info JOIN-Default Brand Rep Downloads
 
 Loads all the default brand reps into a dataset so that it can be joined to other datasets.
 
-**<a target="_blank" href="/downloads/report-library/join-default-brand-rep.tgz">JOIN-Default Brand Rep</a>**
+**Bundle (TGZ):** <a target="_blank" href="/downloads/report-library/join-default-brand-rep.tgz">JOIN-Default Brand Rep</a><br />
+**Definition JSON:** <a target="_blank" href="/downloads/report-library/join-default-brand-rep.json">join-default-brand-rep.json</a>
 
 :::
 
