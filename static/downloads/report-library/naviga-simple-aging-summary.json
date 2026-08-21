@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-08-17T18:14:07.039Z",
+  "sourceType": "adHocReport",
+  "sourceId": "434d5ad6-c7e0-448c-b7cc-9037d79b0eeb",
+  "sourceName": "NAVIGA-Simple Aging Summary",
+  "documentationStatus": "complete",
+  "version": "1.0.1",
+  "completedAt": "2026-08-17T18:14:00.463Z",
+  "vaultReportType": "AR and GL",
+  "vaultSummary": "Simple Summary by Client Id Aging report.",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:GEN_NAMES:NAME.ID",
+      "label": "Client Id",
+      "alias": "client_id_assoc_new_name_assoc_nameId",
+      "description": "Billing Client Id",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:GEN_NAMES:COMPANY.NAME",
+      "label": "Client Name",
+      "alias": "client_id_assoc_new_name_assoc_companyName",
+      "description": "Billing Client Name",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:CREDIT.STOP",
+      "label": "ON CREDIT STOP",
+      "alias": "client_id_assoc_creditStop",
+      "description": "Y = On Credit Stop\nN = NOT on Credit Stop",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SINV:SALESREPS",
+      "label": "Misc Inv Salesrep ID",
+      "alias": "salesreps",
+      "description": "Salesrep ID on the AR Invoices mapping.  Multivalued field that is not normalized",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SALESREPS:REP_NAME",
+      "label": "Misc Inv Salesrep Name",
+      "alias": "salesrep_id_assoc_repName",
+      "description": "Salesrep Name for the Misc Inv Salesrep ID",
+      "status": "active"
+    },
+    {
+      "fieldId": "InvoieAmountByClient_Total",
+      "label": "Beginning Invoice Total",
+      "alias": "InvoieAmountByClient_Total",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "a30_Total",
+      "label": "0-30",
+      "alias": "a30_Total",
+      "description": "30 day aging bucket",
+      "status": "active"
+    },
+    {
+      "fieldId": "a60_Total",
+      "label": "31-60",
+      "alias": "a60_Total",
+      "description": "60 day aging bucket",
+      "status": "active"
+    },
+    {
+      "fieldId": "a90_Total",
+      "label": "61-90",
+      "alias": "a90_Total",
+      "description": "90 day aging bucket",
+      "status": "active"
+    },
+    {
+      "fieldId": "a120_Total",
+      "label": "91-120",
+      "alias": "a120_Total",
+      "description": "120 day aging bucket",
+      "status": "active"
+    },
+    {
+      "fieldId": "anext_Total",
+      "label": "121+",
+      "alias": "anext_Total",
+      "description": ">120 day aging bucket",
+      "status": "active"
+    },
+    {
+      "fieldId": "ainvoiceBalance_Total",
+      "label": "Invoice Balance Total",
+      "alias": "ainvoiceBalance_Total",
+      "description": "Client's aggregated Invoice Balance total based on invoices that still have a balance",
+      "status": "active"
+    },
+    {
+      "fieldId": "aCOA_Total",
+      "label": "COA",
+      "alias": "aCOA_Total",
+      "description": "Cash On Account for the client, pulled from Naviga-COA Calculation dataset",
+      "status": "active"
+    },
+    {
+      "fieldId": "invoicedifference",
+      "label": "Difference",
+      "alias": "invoicedifference",
+      "description": "Dollar difference between total invoice amount and invoice balance",
+      "status": "active"
+    },
+    {
+      "fieldId": "invoicePercentdifference",
+      "label": "% Difference",
+      "alias": "invoicePercentdifference",
+      "description": "percentage difference between total invoice amount and invoice balance",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:DIGITAL.INV.DELIVERY",
+      "label": "Inv Del Method",
+      "alias": "client_id_assoc_digitalInvDelivery",
+      "description": "Invoice Delivery Method\nGEN Clients - Digital Inv Delivery <275>\nSee docs -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#advertising-setup-for-digital-first-naviga-users",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:CLIENT.TYPE.DESC",
+      "label": "Client Client Type Desc",
+      "alias": "client_id_assoc_clientTypeDesc",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SALESREPS:PRIMARY.REP.GROUP.ID",
+      "label": "Misc Inv Salesrep Primary Rep Group ID",
+      "alias": "salesrep_id_assoc_primaryRepGroupId",
+      "description": "Primary Rep Group associated with the Misc Inv Salesrep ",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:STATEMENT.IND",
+      "label": "Client Statement Ind",
+      "alias": "client_id_assoc_statementInd",
+      "description": "Flag on client under A/R Setup \"Generate Statements\".\nSee docs -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#field-locations-in-naviga",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:STMT.DEL.METHOD",
+      "label": "Client Stmt Delivery Method",
+      "alias": "client_id_assoc_stmtDelMethod",
+      "description": "GEN Clients STMT.DELIVERY.METHOD <259>\nSee docs -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#delivery-methods",
+      "status": "active"
+    }
+  ]
+}

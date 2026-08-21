@@ -19,6 +19,12 @@ Lists all of the Dataset and Ad Hoc Queries in the system
 
 :::
 
+## Summary
+
+This dataset lists all of your Ad Hoc reports and Datasets in your Informer instance.  It shows the UUI, Name, Owner, create data and last time the report was run or the dataset was refreshed.
+
+It can be useful in seeing what is being use and what is not being used in your system.
+
 ## Description
 Lists all of the Dataset and Ad Hoc Queries in the system.  Shows a created at and updated at date.  Also shows the last time the Dataset was refreshed or the last time the Ad Hoc Query was run.
 

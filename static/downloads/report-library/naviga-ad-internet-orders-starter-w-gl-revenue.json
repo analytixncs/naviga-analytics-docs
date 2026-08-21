@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-08-14T14:58:22.907Z",
+  "sourceType": "adHocReport",
+  "sourceId": "debb9e57-43f2-414b-b993-add92cad098a",
+  "sourceName": "NAVIGA-AD Internet Orders Starter W/ GL Revenue",
+  "documentationStatus": "complete",
+  "version": "1.0.0",
+  "completedAt": "2026-08-03T12:59:02.772Z",
+  "vaultReportType": "Campaigns",
+  "vaultSummary": "Report splitting revenue into GL buckets based on GL overrides.",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:AD.TYPE.ID",
+      "label": "Ad Type ID",
+      "alias": "adTypeId",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:CAMPAIGN.ID",
+      "label": "Campaign ID",
+      "alias": "campaignId",
+      "description": "Campaign Identifier",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:GL.TYPE.ID",
+      "label": "GL Type ID",
+      "alias": "glTypeId",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:@ID",
+      "label": "Line ID",
+      "alias": "id",
+      "description": "Line Identifier.  Campaigns will have multiple lines and lines will have multiple line details",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:MONTH.ACTUAL.AMT",
+      "label": "Month Actual Amt",
+      "alias": "monthActualAmt",
+      "description": "Used to calculate the GL Net/Gross amounts.  ",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:MONTH.EST.AMT",
+      "label": "Month Est Amt",
+      "alias": "monthEstAmt",
+      "description": "Used to calculate the GL Net/Gross amounts.  ",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:MONTH.END.DATE",
+      "label": "Month End Date",
+      "alias": "monthEndDate",
+      "description": "The ending date of the Order details record.",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:MONTH.START.DATE",
+      "label": "Month Start Date",
+      "alias": "monthStartDate",
+      "description": "Can be considered the Issue date for a Print publication. \nThe starting date of the Order details record.",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:NO.AGY.COMM.IND",
+      "label": "No Agy Comm Ind",
+      "alias": "noAgyCommInd",
+      "description": "Used to determine if Agency commission is to be applied.",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_INET.ORDERS:WEB.SITE.ID",
+      "label": "Product ID",
+      "alias": "webSiteId",
+      "description": "Product Identifier",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_PUBS:PRINT.PUB.IND",
+      "label": "Print Pub Ind",
+      "alias": "web_site_id_assoc_printPubInd",
+      "description": "Y = Print publication\nN = Digital Publication",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_PUBS:WEB.PUB.NAME",
+      "label": "Product",
+      "alias": "web_site_id_assoc_webPubName",
+      "description": "Product Name",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INET.CAMPAIGNS:ADV.ID",
+      "label": "Advertiser Id",
+      "alias": "a_d_internet_campaigns_assoc_advId",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INET.CAMPAIGNS:DATE.ENTERED",
+      "label": "Campaign Date Entered",
+      "alias": "a_d_internet_campaigns_assoc_dateEntered",
+      "description": "Date that the campaign was entered into the system.",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INET.CAMPAIGNS:CAMPAIGN.TYPE",
+      "label": "Campaign Type",
+      "alias": "a_d_internet_campaigns_assoc_campaignType",
+      "description": "M = Performance Campaign\nF = Flexible Campaign",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INET.CAMPAIGNS:STATUS.CODE",
+      "label": "Campaign Status Code",
+      "alias": "a_d_internet_campaigns_assoc_statusCode",
+      "description": "Only these status' are included in results\nIS = Invoice Started\nCO = Confirmed\nR* = Reserved (can have multiple codes R1, R2, etc)\n",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INF_CLIENTS:CLIENT.TYPE.ID",
+      "label": "Advertiser Type ID",
+      "alias": "a_d_internet_campaigns_assoc_advertiser_id_assoc_clientTypeId",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "6254df55-ed6e-4767-ae8d-b0045e240820:INET.CAMPAIGNS:ADV.NAME",
+      "label": "Advertiser Name",
+      "alias": "a_d_internet_campaigns_assoc_advName",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "grossLineLocalAmount",
+      "label": "Gross Line Local Amount",
+      "alias": "grossLineLocalAmount",
+      "description": "Total Gross Revenue (including Agency Commission) before GL percentage application.",
+      "status": "active"
+    },
+    {
+      "fieldId": "netLineLocalAmount",
+      "label": "Net Line Local Amount",
+      "alias": "netLineLocalAmount",
+      "description": "Total Net Revenue (excluding Agency Commission) before GL percentage application.",
+      "status": "active"
+    },
+    {
+      "fieldId": "RealGLCode",
+      "label": "Real Gl Code",
+      "alias": "RealGLCode",
+      "description": "GL Code this Revenue is assigned to.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INET.CAMPAIGNS:CAMPAIGN.DESC.CONV",
+      "label": "Campaign Desc",
+      "alias": "a_d_internet_campaigns_assoc_campaignDescConv",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "glPercent",
+      "label": "Gl Percent",
+      "alias": "glPercent",
+      "description": "If the Line detail revenue is split across GL's this designates the percent allocated to this particular GL Code.",
+      "status": "active"
+    },
+    {
+      "fieldId": "glNetRevenue",
+      "label": "Gl Net Revenue",
+      "alias": "glNetRevenue",
+      "description": "GL Revenue NOT including Agency commission.",
+      "status": "active"
+    },
+    {
+      "fieldId": "glGrossRevenue",
+      "label": "Gl Gross Revenue",
+      "alias": "glGrossRevenue",
+      "description": "GL Revenue including Agency commission.",
+      "status": "active"
+    },
+    {
+      "fieldId": "GLMatchType",
+      "label": "Gl Match Type",
+      "alias": "GLMatchType",
+      "description": "GLMatchType indicates how the GL configuration was selected:\n\nGL_TYPE_AND_CLIENT_TYPE = Both GL Type and Client Type matched.\nGL_TYPE_ONLY = GL Type matched and product Client Type was blank.\nNO_MATCH = No matching GL configuration was found.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:MONTH.UNIQUE.ID",
+      "label": "Month Unique ID",
+      "alias": "monthUniqueId",
+      "description": "Identifier using the Line Id with an appended .n \nThis is the order details identifier.  However be aware that it is not a record unique identifier as if the GL has a split, it will be duplicated across the splits.",
+      "status": "active"
+    }
+  ]
+}
