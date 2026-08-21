@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-08-21T18:37:44.920Z",
+  "sourceType": "adHocReport",
+  "sourceId": "e5af6bcd-ed28-4a8c-aa6f-59eb79252f27",
+  "sourceName": "NAVIGA-AD Internet Orders Actual GL Split",
+  "documentationStatus": "working",
+  "version": "",
+  "completedAt": "",
+  "vaultReportType": "Campaigns",
+  "vaultSummary": "Returns GL Revenue allocation values by Sub Orders",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:CAMPAIGN.ID",
+      "label": "Campaign ID",
+      "alias": "campaignId",
+      "description": "Campaign Identifier",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:GL.LINE.ID",
+      "label": "GL Line ID",
+      "alias": "glLineId",
+      "description": "Added for testing/debugging, same as Line ID, but different granularity",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:@ID",
+      "label": "Line ID",
+      "alias": "id",
+      "description": "Line Identifier",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:GL.COMM.AMT",
+      "label": "GL Comm Amt",
+      "alias": "glCommAmt",
+      "description": "(hidden) This is a MV/SV field that contains the breakouts of the total agency commission Line amount across the defined GLs.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:GL.COMM.CODES",
+      "label": "GL Comm Codes",
+      "alias": "glCommCodes",
+      "description": "(hidden) This is a MV/SV field that aligns with the GL Comm Amt to show the GL Code associated with the agency commission amount",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:GL.REV.CODES",
+      "label": "GL Rev Codes",
+      "alias": "glRevCodes",
+      "description": "(hidden) This is a MV/SV field that aligns with the GL RevAmt to show the GL Code associated with the gross amount",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:GL.REV.AMT",
+      "label": "GL Rev Amt",
+      "alias": "glRevAmt",
+      "description": "(hidden) This is a MV/SV field that contains the breakouts of the total gross Line amount across the defined GLs.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:MONTH.START.DATE",
+      "label": "Month Start Date",
+      "alias": "monthStartDate",
+      "description": "Month start date is the starting date for the sub order on a line.  Lines can have one or more sub orders.  For print ads, this is synonymous with Issue Date.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:MONTH.ACTUAL.AMT",
+      "label": "Month Actual Amt",
+      "alias": "monthActualAmt",
+      "description": "(hidden) used in calculating the proper split of the GL Rev Amt and the GL Comm Amt for each sub order",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:MONTH.EST.AMT",
+      "label": "Month Est Amt",
+      "alias": "monthEstAmt",
+      "description": "(hidden) used in calculating the proper split of the GL Rev Amt and the GL Comm Amt for each sub order",
+      "status": "active"
+    },
+    {
+      "fieldId": "proportionalSpread",
+      "label": "Proportional Spread",
+      "alias": "proportionalSpread",
+      "description": "(hidden) Used in calculating final GL Rev Amt values",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INET.CAMPAIGNS:CAMPAIGN.TYPE",
+      "label": "AD Internet Campaigns Internet Campaign Type",
+      "alias": "a_d_internet_campaigns_assoc_campaignType",
+      "description": "Type of campaign \nM = Performance\nF = Flexible",
+      "status": "active"
+    },
+    {
+      "fieldId": "grossLineLocalRevenue",
+      "label": "Gross Line Local Revenue",
+      "alias": "grossLineLocalRevenue",
+      "description": "(hidden) calculated Gross line local revenue used in calculating the proper split of the GL Rev Amt and the GL Comm Amt for each sub order",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:WEB.SITE.ID",
+      "label": "Product ID",
+      "alias": "webSiteId",
+      "description": "Product Id",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_PUBS:WEB.PUB.NAME",
+      "label": "Product",
+      "alias": "web_site_id_assoc_webPubName",
+      "description": "Product Name/description",
+      "status": "active"
+    },
+    {
+      "fieldId": "proportionGLCodes",
+      "label": "Proportion Gl Codes",
+      "alias": "proportionGLCodes",
+      "description": "Sub order GL Code",
+      "status": "active"
+    },
+    {
+      "fieldId": "proportionalCommSpread",
+      "label": "Proportional Comm Spread",
+      "alias": "proportionalCommSpread",
+      "description": "(hidden) Used in calculating final GL Comm Amt values",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:GL.COMM.SOURCE",
+      "label": "GL Comm Source",
+      "alias": "glCommSource",
+      "description": "(hidden) The rules that the GL Comm Split is using",
+      "status": "active"
+    },
+    {
+      "fieldId": "proportionGLCommCodes",
+      "label": "Proportion Gl Comm Codes",
+      "alias": "proportionGLCommCodes",
+      "description": "Sub Order Agency Commission GL Codes",
+      "status": "active"
+    },
+    {
+      "fieldId": "proportionGLAmounts",
+      "label": "Proportion Gl Amounts",
+      "alias": "proportionGLAmounts",
+      "description": "Sub Order GL Gross Amount.",
+      "status": "active"
+    },
+    {
+      "fieldId": "proportionGLCommAmounts",
+      "label": "Proportion Gl Comm Amounts",
+      "alias": "proportionGLCommAmounts",
+      "description": "Sub Order Agency Commission GL Amounts",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:GL.REV.SOURCE",
+      "label": "GL Rev Source",
+      "alias": "glRevSource",
+      "description": "(hidden) The rules that the GL Split is using",
+      "status": "active"
+    },
+    {
+      "fieldId": "proportionGLSource",
+      "label": "Proportion Gl Source",
+      "alias": "proportionGLSource",
+      "description": "GL Rev Source rule",
+      "status": "active"
+    },
+    {
+      "fieldId": "proportionGLCommSource",
+      "label": "Proportion Gl Comm Source",
+      "alias": "proportionGLCommSource",
+      "description": "GL Comm Source rule",
+      "status": "active"
+    }
+  ]
+}

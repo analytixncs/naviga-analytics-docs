@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-08-14T14:58:24.396Z",
+  "sourceType": "dataset",
+  "sourceId": "6a6490a0-b476-4e79-b597-7259cdbc7269",
+  "sourceName": "Naviga-COA Calculation",
+  "documentationStatus": "complete",
+  "version": "1.0.0",
+  "completedAt": "2026-08-11T16:00:36.184Z",
+  "vaultReportType": "AR and GL",
+  "vaultSummary": "Cash On Account (COA) grouped by Client",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "2437d0a1-a725-4b7f-970c-96cb8e0d0fac",
+      "label": "Client Id",
+      "alias": "clientId",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "138276c1-07b3-4e47-ab90-cecba2477988",
+      "label": "True Coa Total",
+      "alias": "trueCOA_Total",
+      "description": "Final Aggregated value for a customer:\nGenuinely uncommitted cash available for use. This represents customer funds that are not tied to any specific orders or commitments.\nIf the calculation results in a negative value, return zero. This can occur when prepayment commitments have been partially refunded, leaving the committed amount higher than the actual available balance.\n-----\nTrue COA = Whole COA - Prepayment Amount\nIF result < 0, THEN True COA = 0",
+      "status": "active"
+    },
+    {
+      "fieldId": "8e53d12f-0456-4fc2-97ec-a50463588d25",
+      "label": "Whole Coa Total",
+      "alias": "wholeCOA_Total",
+      "description": "Total payment balances that have not yet been applied to invoices. This represents all cash received from customers that remains unallocated.\n--- AR Cash ---\nSUM of all CHECK_BAL <4> values WHERE CHECK_BAL > 0",
+      "status": "active"
+    },
+    {
+      "fieldId": "4f4815ce-99ac-4d0d-b7fe-56f0504b568f",
+      "label": "Pre Pay Total",
+      "alias": "PrePay_Total",
+      "description": "Total Pre Pay amount calculated on each line and then aggregated to the client\n-----\nPrepayment Amount = Total matched PP Amount - Total matched PP Applied Amount",
+      "status": "active"
+    },
+    {
+      "fieldId": "abecc272-8bf3-4893-a81e-3f728aacdb20",
+      "label": "Whole Coa",
+      "alias": "wholeCOA",
+      "description": "Detail Whole COA see Whole COA Total for details.",
+      "status": "active"
+    },
+    {
+      "fieldId": "78ef2c43-15d5-462a-a26f-11c555451ef9",
+      "label": "Payments Total",
+      "alias": "Payments_Total",
+      "description": "Total of this client's payments",
+      "status": "active"
+    }
+  ]
+}

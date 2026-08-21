@@ -1,0 +1,56 @@
+---
+id: naviga-invoices-with-payments
+title: NAVIGA-Invoices With Payments
+sidebar_label: NAVIGA-Invoices With Payments
+---
+
+import Pasted_image_20260817135933 from './images/Pasted image 20260817135933.png';
+
+# NAVIGA-Invoices With Payments
+
+**Type:** AR and GL
+
+Invoice report showing the payments that have been applied
+
+:::info NAVIGA-Invoices With Payments Downloads
+
+Invoice report showing the payments that have been applied
+
+**Bundle (TGZ):** <a target="_blank" href="/downloads/report-library/naviga-invoices-with-payments.tgz">NAVIGA-Invoices With Payments</a><br />
+**Definition JSON:** <a target="_blank" href="/downloads/report-library/naviga-invoices-with-payments.json">naviga-invoices-with-payments.json</a>
+
+:::
+
+## Summary
+
+This is a simple report that has a base mapping of **AR Invoices** and shows any payments that have been applied to the Invoices.  
+
+It is normalized on the payments.  This means that if there are multiple payments, you will see multiple records of that invoice show up.  This means that the invoice amount and total and balance will be duplicated across each payment line.  Be aware that you should not aggregate on the `amount`, `tax amount`, `total`, or `balance` fields, as those very well could have duplicated value if there were, for example, three payments applied against a single Invoice.
+
+You can see in this example that Invoice **FF589** has had four payments applied to it and thus we see the Invoice amount fields duplicated for each payment.
+
+Depending on your needs, you can stop the duplication by adding the Invoice amount fields to the Normalize step, however, some users prefer to see the invoice information on each row.
+
+<img src={Pasted_image_20260817135933} alt="Pasted image 20260817135933.png" />
+
+## Description
+Shows invoices for selected financial period range along with any payments applied to the invoices.
+
+## Fields
+
+| Label | Alias | Type | Hidden | Description |
+|-------|-------|------|--------|-------------|
+| Invoice ID | id | keyword_text |  | Unique Invoice identifier |
+| Client Id | clientNo | keyword_text |  | Client Identifier.  This is considered the Payer of the Invoice |
+| Client Name | clientName | keyword_text |  |  |
+| Period | period | keyword_text |  | Financial period that this invoice has been assigned to in the format of YYYY-MM |
+| Batch Number | batchNo | keyword_text |  |  |
+| Amount | invAmount | double |  | Amount of the Invoice |
+| Tax Amount | taxAmount | double |  | Tax to be levied against invoice |
+| Total | total | double |  | Invoice Amount + Tax Amount |
+| Balance | invBalance | double |  | Balance left to be paid on the Invoice |
+| Date Invoiced | invoiceDate | date |  |  |
+| Date Entered | entryDate | date |  | Date Invoice was entered |
+| Payment ID | scash_assoc_checkNo | keyword_text |  | Payment Identifier |
+| Payment Amount | chkAmt | double |  | Amount of this payment applied to the invoice |
+| Payment Applied Date | applyDate | date |  | Date payment applied |

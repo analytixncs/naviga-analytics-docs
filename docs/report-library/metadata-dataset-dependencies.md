@@ -21,7 +21,32 @@ Reveal Datasets and Ad Hoc Queries that are dependent on other Datasets or Datas
 
 ## Summary
 
-This report is dependent upon the [METADATA-Reports-Dataset Ids Names](METADATA-Reports-Dataset-Ids-Names)
+This report is dependent upon the [METADATA-Reports-Dataset Ids Names](METADATA-Reports-Dataset-Ids-Names) for the Dependent Dataset name.
+
+This report is very useful in finding all of the report and datasets that use the "Fields from another Dataset" or "Fields from another Datasource".  This information can help you understand the dependencies that your reports and datasets require.
+
+The report creates links to the reports/datasets and the dataset dependencies.  However, to get these links to work properly you will need to update a single link in a Powerscript.  Open the report and edit the **Create hyperlinks** Powerscript and update the 
+
+`baseURL = "https://devbi.navigahub.com/"` 
+to your base url
+`baseURL = "https://xxxbi.navigahub.com/"`
+
+**Full Powerscript**
+```js
+baseURL = "https://devbi.navigahub.com/"
+if ($record['type'] === "Ad Hoc Report") {
+    $record.LinkToReport = `<a target="_blank" href="${baseURL}reports/q/${$record['id']}">${baseURL}reports/q/${$record['id']}</a>`
+} else {
+    $record.LinkToReport = `<a target="_blank" href="${baseURL}datasets/${$record['id']}">${baseURL}datasets/${$record['id']}</a>`
+}
+
+$record.dependentDatasetLink = ""
+
+if ($record['joinedDatasetIds'] && $record['joinedDatasetIds'].length > 0)  {
+	$record.dependentDatasetLink = `<a target="_blank" href="${baseURL}datasets/${$record['joinedDatasetIds']}">${baseURL}datasets/${$record['joinedDatasetIds']}</a>`    
+}
+
+```
 
 ## Description
 Reads the Informer PostgreSQL database for information to reveal Datasets and Ad Hoc Queries that are dependent on other Datasets or Datasources.  These dependencies are in the Flow steps of the source Dataset or Ad Hoc Report.  

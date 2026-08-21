@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-08-14T14:58:25.147Z",
+  "sourceType": "adHocReport",
+  "sourceId": "devdigital:naviga-invoices-with-payments",
+  "sourceName": "NAVIGA-Invoices With Payments",
+  "documentationStatus": "complete",
+  "version": "1.0.0",
+  "completedAt": "2026-07-31T12:32:09.302Z",
+  "vaultReportType": "AR and GL",
+  "vaultSummary": "Shows invoices for selected financial period range along with any payments applied to the invoices.",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SINV:ID",
+      "label": "Invoice ID",
+      "alias": "id",
+      "description": "Unique Invoice identifier",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SINV:INV_AMOUNT",
+      "label": "Amount",
+      "alias": "invAmount",
+      "description": "Amount of the Invoice",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SINV:INV_BALANCE",
+      "label": "Balance",
+      "alias": "invBalance",
+      "description": "Balance left to be paid on the Invoice",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SINV:INVOICE_DATE",
+      "label": "Date Invoiced",
+      "alias": "invoiceDate",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SINV:TAX_AMOUNT",
+      "label": "Tax Amount",
+      "alias": "taxAmount",
+      "description": "Tax to be levied against invoice",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SINV:CLIENT_NO",
+      "label": "Client Id",
+      "alias": "clientNo",
+      "description": "Client Identifier.  This is considered the Payer of the Invoice",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SINV:CLIENT.NAME",
+      "label": "Client Name",
+      "alias": "clientName",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SINV:BATCH_NO",
+      "label": "Batch Number",
+      "alias": "batchNo",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SINV:PERIOD",
+      "label": "Period",
+      "alias": "period",
+      "description": "Financial period that this invoice has been assigned to in the format of YYYY-MM",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SINV:ENTRY_DATE",
+      "label": "Date Entered",
+      "alias": "entryDate",
+      "description": "Date Invoice was entered",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SINV:CHK_AMT",
+      "label": "Payment Amount",
+      "alias": "chkAmt",
+      "description": "Amount of this payment applied to the invoice",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SINV:APPLY_DATE",
+      "label": "Payment Applied Date",
+      "alias": "applyDate",
+      "description": "Date payment applied",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:CHECK.NO",
+      "label": "Payment ID",
+      "alias": "scash_assoc_checkNo",
+      "description": "Payment Identifier",
+      "status": "active"
+    },
+    {
+      "fieldId": "total",
+      "label": "Total",
+      "alias": "total",
+      "description": "Invoice Amount + Tax Amount",
+      "status": "active"
+    }
+  ]
+}

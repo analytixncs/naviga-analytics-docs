@@ -7,9 +7,20 @@ module.exports = {
     "report-library/index",
     {
       "type": "category",
+      "label": "AR and GL",
+      "items": [
+        "report-library/naviga-coa-calculation",
+        "report-library/naviga-invoices-with-payments",
+        "report-library/naviga-simple-aging-summary"
+      ]
+    },
+    {
+      "type": "category",
       "label": "Campaigns",
       "items": [
-        "report-library/naviga-ad-internet-orders-starter"
+        "report-library/naviga-ad-internet-orders-actual-gl-split",
+        "report-library/naviga-ad-internet-orders-starter",
+        "report-library/naviga-ad-internet-orders-starter-w-gl-revenue"
       ]
     },
     {
