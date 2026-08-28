@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-08-26T19:26:19.861Z",
+  "sourceType": "adHocReport",
+  "sourceId": "bb22b480-1a7a-41dc-915b-381947d91b34",
+  "sourceName": "NAVIGA-AR Cash Receipts Register",
+  "documentationStatus": "complete",
+  "version": "1.0.0",
+  "completedAt": "2026-08-26T19:26:16.394Z",
+  "vaultReportType": "AR and GL",
+  "vaultSummary": "Payments report from AR Cash",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:CLIENT.ID",
+      "label": "Client ID",
+      "alias": "clientId",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:CLIENT.NAME",
+      "label": "Client Name",
+      "alias": "clientName",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:CHECK.NO",
+      "label": "Payment ID",
+      "alias": "checkNo",
+      "description": "Payment Identifier.  Called the Check No field in the mapping.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:BANK_CODE",
+      "label": "Bank",
+      "alias": "bankcode",
+      "description": "Bank Code",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:PERIOD",
+      "label": "Financial Period",
+      "alias": "period",
+      "description": "Financial Period",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:CHK_AMT",
+      "label": "Payment Amount",
+      "alias": "chkamt",
+      "description": "Total amount of the Payment.  Since we are also pulling in invoices that this payment was applied to, there could be multiple rows for the same payment.  We only show the payment amount on the first row, so it only shows up once in the output.  If you want to change this and have it show up on every row, remove the Payment Amount field from the Normalize step.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:CHECK_DATE",
+      "label": "Check Date",
+      "alias": "checkdate",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:COMPANY",
+      "label": "Company",
+      "alias": "company",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:INV_NO",
+      "label": "Invoice Number",
+      "alias": "invno",
+      "description": "Invoice Number.  Link to AR Invoices ID field.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:BATCH_NO",
+      "label": "Batch Number",
+      "alias": "batchno",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:INV_DISC_AMT",
+      "label": "Invoice Discount Amount",
+      "alias": "invdiscamt",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:CHECK_BAL",
+      "label": "Payment Balance",
+      "alias": "checkbal",
+      "description": "Unapplied payment.  ",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:FC_CHK_AMT",
+      "label": "FC Payment Amount",
+      "alias": "fcchkamt",
+      "description": "Foreign currency payment amount.  Only populated if payment in a foreign currency.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:FC_CSH_DISC",
+      "label": "FC Cash Disc",
+      "alias": "fccshdisc",
+      "description": "Foreign currency cash discount amount. ",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:FC_PAY_AMT",
+      "label": "FC Applied Amount",
+      "alias": "fcpayamt",
+      "description": "Foreign currency applied amount",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:INV.PAY.DATE",
+      "label": "Invoice Applied Date",
+      "alias": "invPayDate",
+      "description": "Date payment was applied to Invoice",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:INV_PAY_AMT",
+      "label": "Invoice Applied Amount",
+      "alias": "invpayamt",
+      "description": "Amount applied to the Invoice",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SCASH:CUR_CODE",
+      "label": "Currency Code",
+      "alias": "curCode",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SINV:DOC_TYPE",
+      "label": "Invoice Doc Type",
+      "alias": "invoice_id_assoc_docType",
+      "description": "I = Invoice\nC = Credit\nW = Write Off\nD = Debit",
+      "status": "active"
+    }
+  ]
+}

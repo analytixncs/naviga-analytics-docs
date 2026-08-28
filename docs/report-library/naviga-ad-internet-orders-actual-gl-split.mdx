@@ -163,29 +163,29 @@ GL Revenue based report that uses the GL Rev Amount, GL Rev Codes and other fiel
 
 ## Fields
 
-| Label                                        | Alias                                     | Type         | Hidden | Description                                                                                                                                                    |
-| -------------------------------------------- | ----------------------------------------- | ------------ | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Campaign ID                                  | campaignId                                | double       |        | Campaign Identifier                                                                                                                                            |
-| Line ID                                      | id                                        | keyword_text |        | Line Identifier                                                                                                                                                |
-| Month Start Date                             | monthStartDate                            | date         |        | Month start date is the starting date for the sub order on a line.  Lines can have one or more sub orders.  For print ads, this is synonymous with Issue Date. |
-| Product ID                                   | webSiteId                                 | keyword_text |        | Product Id                                                                                                                                                     |
-| Product                                      | web_site_id_assoc_webPubName              | keyword_text |        | Product Name/description                                                                                                                                       |
-| Proportion Gl Amounts                        | proportionGLAmounts                       | double       |        | Sub Order GL Gross Amount.                                                                                                                                     |
-| Proportion Gl Codes                          | proportionGLCodes                         | keyword_text |        | Sub order GL Code                                                                                                                                              |
-| Proportion Gl Comm Codes                     | proportionGLCommCodes                     | keyword_text |        | Sub Order Agency Commission GL Codes                                                                                                                           |
-| Proportion Gl Comm Amounts                   | proportionGLCommAmounts                   | double       |        | Sub Order Agency Commission GL Amounts                                                                                                                         |
-| Proportional Spread                          | proportionalSpread                        | object       |        | (hidden) Used in calculating final GL Rev Amt values                                                                                                           |
-| Proportion Gl Source                         | proportionGLSource                        | keyword_text |        | GL Rev Source rule                                                                                                                                             |
-| Proportion Gl Comm Source                    | proportionGLCommSource                    | keyword_text |        | GL Comm Source rule                                                                                                                                            |
-| Gross Line Local Revenue                     | grossLineLocalRevenue                     | double       |        | (hidden) calculated Gross line local revenue used in calculating the proper split of the GL Rev Amt and the GL Comm Amt for each sub order                     |
-| Proportional Comm Spread                     | proportionalCommSpread                    | object       |        | (hidden) Used in calculating final GL Comm Amt values                                                                                                          |
-| GL Line ID                                   | glLineId                                  | keyword_text |        | Added for testing/debugging, same as Line ID, but different granularity                                                                                        |
-| GL Comm Amt                                  | glCommAmt                                 | double       |        | (hidden) This is a MV/SV field that contains the breakouts of the total agency commission Line amount across the defined GLs.                                  |
-| GL Comm Codes                                | glCommCodes                               | keyword_text |        | (hidden) This is a MV/SV field that aligns with the GL Comm Amt to show the GL Code associated with the agency commission amount                               |
-| GL Rev Codes                                 | glRevCodes                                | keyword_text |        | (hidden) This is a MV/SV field that aligns with the GL RevAmt to show the GL Code associated with the gross amount                                             |
-| GL Rev Amt                                   | glRevAmt                                  | double       |        | (hidden) This is a MV/SV field that contains the breakouts of the total gross Line amount across the defined GLs.                                              |
-| Month Actual Amt                             | monthActualAmt                            | double       |        | (hidden) used in calculating the proper split of the GL Rev Amt and the GL Comm Amt for each sub order                                                         |
-| Month Est Amt                                | monthEstAmt                               | double       |        | (hidden) used in calculating the proper split of the GL Rev Amt and the GL Comm Amt for each sub order                                                         |
-| AD Internet Campaigns Internet Campaign Type | a_d_internet_campaigns_assoc_campaignType | keyword_text |        | Type of campaign <br />M = Performance<br />F = Flexible                                                                                                           |
-| GL Comm Source                               | glCommSource                              | keyword_text |        | (hidden) The rules that the GL Comm Split is using                                                                                                             |
-| GL Rev Source                                | glRevSource                               | keyword_text |        | (hidden) The rules that the GL Split is using                                                                                                                  |
+| Label | Alias | Type | Hidden | Description |
+|-------|-------|------|--------|-------------|
+| Campaign ID | campaignId | double |  | Campaign Identifier |
+| Line ID | id | keyword_text |  | Line Identifier |
+| Month Start Date | monthStartDate | date |  | Month start date is the starting date for the sub order on a line.  Lines can have one or more sub orders.  For print ads, this is synonymous with Issue Date. |
+| Product ID | webSiteId | keyword_text |  | Product Id |
+| Product | web_site_id_assoc_webPubName | keyword_text |  | Product Name/description |
+| Proportion Gl Amounts | proportionGLAmounts | double |  | Sub Order GL Gross Amount. |
+| Proportion Gl Codes | proportionGLCodes | keyword_text |  | Sub order GL Code |
+| Proportion Gl Comm Codes | proportionGLCommCodes | keyword_text |  | Sub Order Agency Commission GL Codes |
+| Proportion Gl Comm Amounts | proportionGLCommAmounts | double |  | Sub Order Agency Commission GL Amounts |
+| Proportional Spread | proportionalSpread | object |  | (hidden) Used in calculating final GL Rev Amt values |
+| Proportion Gl Source | proportionGLSource | keyword_text |  | GL Rev Source rule |
+| Proportion Gl Comm Source | proportionGLCommSource | keyword_text |  | GL Comm Source rule |
+| Gross Line Local Revenue | grossLineLocalRevenue | double |  | (hidden) calculated Gross line local revenue used in calculating the proper split of the GL Rev Amt and the GL Comm Amt for each sub order |
+| Proportional Comm Spread | proportionalCommSpread | object |  | (hidden) Used in calculating final GL Comm Amt values |
+| GL Line ID | glLineId | keyword_text |  | Added for testing/debugging, same as Line ID, but different granularity |
+| GL Comm Amt | glCommAmt | double |  | (hidden) This is a MV/SV field that contains the breakouts of the total agency commission Line amount across the defined GLs. |
+| GL Comm Codes | glCommCodes | keyword_text |  | (hidden) This is a MV/SV field that aligns with the GL Comm Amt to show the GL Code associated with the agency commission amount |
+| GL Rev Codes | glRevCodes | keyword_text |  | (hidden) This is a MV/SV field that aligns with the GL RevAmt to show the GL Code associated with the gross amount |
+| GL Rev Amt | glRevAmt | double |  | (hidden) This is a MV/SV field that contains the breakouts of the total gross Line amount across the defined GLs. |
+| Month Actual Amt | monthActualAmt | double |  | (hidden) used in calculating the proper split of the GL Rev Amt and the GL Comm Amt for each sub order |
+| Month Est Amt | monthEstAmt | double |  | (hidden) used in calculating the proper split of the GL Rev Amt and the GL Comm Amt for each sub order |
+| AD Internet Campaigns Internet Campaign Type | a_d_internet_campaigns_assoc_campaignType | keyword_text |  | Type of campaign <br />M = Performance<br />F = Flexible |
+| GL Comm Source | glCommSource | keyword_text |  | (hidden) The rules that the GL Comm Split is using |
+| GL Rev Source | glRevSource | keyword_text |  | (hidden) The rules that the GL Split is using |

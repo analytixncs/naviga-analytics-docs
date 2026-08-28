@@ -9,6 +9,7 @@ module.exports = {
       "type": "category",
       "label": "AR and GL",
       "items": [
+        "report-library/naviga-ar-cash-receipts-register",
         "report-library/naviga-coa-calculation",
         "report-library/naviga-invoices-with-payments",
         "report-library/naviga-simple-aging-summary"
@@ -40,6 +41,13 @@ module.exports = {
       "items": [
         "report-library/metadata-dataset-dependencies",
         "report-library/metadata-reports-dataset-ids-names"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Other",
+      "items": [
+        "report-library/naviga-rep-budgets-by-format"
       ]
     }
   ]

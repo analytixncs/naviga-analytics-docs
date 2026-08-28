@@ -4,17 +4,37 @@ title: AD Brands
 sidebar_label: AD Brands
 ---
 
-Most of the time you will want to access Brand information in the context of a Campaign. 
+While you will typically access Brand information directly within the context of a **Campaign** (which automatically presents the specific Brand tied to that campaign), there are times you need to view a brand's backend configuration.
 
-However, when going to the **AD Brands** mapping from **GEN Clients** , you will have access to "setup" information about a Brand and its related Client.  Each Client can have multiple Brands associated with it, whereas when coming from a campaign, you will be presented with the Brand appropriate to the campaign.
+To access global "setup" information about a Brand and its related Client, navigate to the **AD Brands** mapping from **GEN Clients**. Because a single Client can have multiple Brands associated with it, this mapping provides a complete overview of the Client's entire brand portfolio.
 
 :::info
 
-If you are wanting Setup Information about Brands, having your base mapping a **AD Brands** will make things a bit easier to understand.
+If your goal is to view or configure Brand setup details, starting your report with a bae mapping of **AD Brands** yis highly recommended.
 
 :::
 
 ## Rep Assignments
+
+Each Brand can have multiple Brand Reps assigned to it. There are three distinct assignment types, which allow you to customize who is assigned based on campaign specifics:
+
+- **Default Brand Reps:** The standard representatives assigned to the brand globally.  
+
+  > Exists in the **AD Internet Brand Product Reps** mapping. 
+
+- **Product Override Brand Reps:** Representatives assigned automatically when a specific *Product* is used on a campaign (overriding the defaults). 
+
+  > Exists in the **AD Internet Brand Product Reps** mapping. 
+
+- **Product Group Override Brand Reps:** Representatives assigned automatically when a specific *Product Group* is used on a campaign (overriding the defaults).  
+
+  > Exists in the **AD Internet Brand Reps** mapping.
+
+### Assignment Rules & Scheduling
+
+- **Capacity:** Each of the three assignment types listed above can support up to **four** assigned reps at a time.
+- **Time-Based Scheduling:** You can schedule rep assignments in advance by defining a future date for them to become active.
+- **Reporting:** All reports listed below will only display the reps that are *currently active* on the exact date the report is run.
 
 :::tip
 
@@ -34,90 +54,91 @@ NOTE that the
 
 ![image-20240626100936453](images/informerMapping_adbrands_defaultrep-001.png)
 
-There is no "Default Rep" field in the **AD Brands** mapping.  The default rep is stored in the **AD Internet Brand Product Reps** mapping with a `Brand Product ID` of 
+## Locating and Joining Default Reps
 
-- Client ID (Name ID)
-- Brand ID
-- `Default`
+The **AD Brands** mapping does not contain a "Default Rep" field, nor is there a direct relationship between **AD Brands** and **AD Internet Brand Product Reps** for default reps.
 
-A default rep for Client 123 with a Brand XX would be `123*XX*Default` and exist only in the **AD Internet Brand Product Reps**.
+Instead, default reps are stored exclusively in the **AD Internet Brand Product Reps** mapping. They are identified by a composite `Brand Product ID` structured exactly like this:
 
-There is NO relationship between **AD Brands** and **AD Internet Brand Product Reps** for the default rep.  To get this information in a report you will need to create a separate **dataset** that only pulls the default reps from **AD Internet Brand Product Reps** and then join that to your report needing the default rep information for a brand.
+```
+[Client ID (Name ID)]*[Brand ID]*Default
+```
 
-Here is a sample template for a dataset that will return the default rep for a Brand Key.  Since there may be multiple groups of default reps based on date (as of date), the dataset has code to only return the most recent one based on Today's date. 
+> **Example:** A default rep for Client `123` with Brand `XX` would have the ID `123*XX*Default`.
 
-#### Download [JOIN]-Default Brand Rep
+### The Solution: Create a Standalone Dataset
 
-[Download JOIN-Default Brand Rep](informer-starter-reports#ad-brand-default-reps) - Latest version 6/2026 Needs latest mappings.
+To include default reps in your reports, you must create a separate **dataset** that exclusively pulls default reps from **AD Internet Brand Product Reps**, and then join that dataset to your main report using the **Brand Key**.
+
+To save time, you can use the pre-built template below. Because there may be multiple groups of default reps scheduled by date, this dataset includes logic to return only the most recent, currently active rep based on today's date.
 
 :::tip Download
 
-**<a  target="_blank"  href="/downloads/join-default-brand-rep.tgz">[JOIN]-Default Brand Rep</a>**
+🔗 **[Download [JOIN\] Default Brand Rep Template](https://www.google.com/search?q=../report-library/join-default-brand-rep)**
 
 :::
 
-Here is an example:
+### How the Date Logic Works
 
-| asOfDate   | asOfRep                 | asOfRepPct         |
-| ---------- | ----------------------- | ------------------ |
-| 2024-01-01 | REP-1, REP-2<br />REP-3 | 50%, 50%<br />100% |
-| 2024-06-15 | REP-2                   | 100%               |
-| 2024-06-25 | REP-3                   | 100%               |
-| 2024-06-30 | REP-2                   | 100%               |
+The dataset evaluates the `asOfDate` to determine which rep is active. Here is an example scenario:
 
-If today was *06/26/2024* The **[JOIN]Default Brand Rep** dataset would return **REP-3** from the asOfDate 2024-06-25.
+| **asOfDate**   | **asOfRep**  | **asOfRepPct** |
+| -------------- | ------------ | -------------- |
+| **2024-01-01** | REP-1, REP-2 | 50%, 50%       |
+| **2024-06-15** | REP-2        | 100%           |
+| **2024-06-25** | REP-3        | 100%           |
+| **2024-06-30** | REP-2        | 100%           |
 
-Also note that the `asOfRep` and `asOfRepPct` fields are not only multivalued but also subvalued, in essence arrays of arrays.
+If today's date is **06/26/2024**, the dataset will return **REP-3** because 2024-06-25 is the most recent past date relative to today.
 
-The last step is to join this data to a report that needs the default brand rep.  The Join will be from the **Brand Key**.  
-For example, if you had an Order report that used the **AD Internet Orders** as the base mapping, you would need to get the **Brand Key** from the **AD Internet Campaigns** mapping and make the join as follows:
+> **Technical Note:** The `asOfRep` and `asOfRepPct` fields are both multivalued and **subvalued** (effectively arrays within arrays). This nested structure exists because the `asOfDate` itself is multivalued: you can schedule multiple activation dates, and within *each* of those dates, you can assign up to four default reps along with their respective split percentages.
+
+### Joining the Dataset to Your Report
+
+The final step is to join this new default rep dataset to any report that requires it. You will make this join using the **Brand Key**.
+
+For example, if you are building an Order report using **AD Internet Orders** as your base mapping, you need to route through the campaign mapping to establish the join:
+
+1. Retrieve the **Brand Key** from the **AD Internet Campaigns** mapping.
+2. Join the **[JOIN] Default Brand Rep** dataset to your report using that Brand Key as follows:
 
 ![image-20250725145823416](images/informerMapping_adbrands_defaultrep-002.png)
 
 ---
 
+## Sales Rep Overrides by Product Group
 
+The details for Rep overrides by Product Group are linked to the **AD Brands** mapping using the `BRAND.REP.KEY`. This key is a virtual field structured as follows:
 
-**Sales Rep Overrides by Product Group**
+```
+[Client ID]*[Brand ID]*[Product Group ID]
+```
 
-The details for the *Rep overrides by Product Group* are linked to **AD Brands** by the **BRAND.REP.KEY**.  This key is a virtual field that is the `Client ID*Brand ID*Product Group ID`.  To get the actual override reps, you will need to use the **AD Internet Brand Reps** mapping.
+To retrieve the actual override reps, you must use this key to pull the data from the **AD Internet Brand Reps** mapping.
 
 ![image-20240626140144506](images/informerMapping_adbrands_productgrouprep-001.png)
 
-[Download JOIN-AD Brand Product Group Reps](informer-starter-reports#ad-brand-product-group-reps) - Latest version 6/2026 Needs latest mappings.
 
-:::danger
+
+:::caution
 
 Given that you have the ability to "schedule" reps, the table structure is a bit complex.  Given that, you will need to create a separate dataset to get Ad Brand Product Group reps.
 
 Here is a template that will return the "Current" rep based on the date the report was run.
 
-**<a  target="_blank"  href="/downloads/join-ad-brand-product-groups.tgz">[JOIN]-Ad Brand Product Groups</a>**
+
 
 :::
 
-:::caution
+:::tip Download
 
-Note that you can have multiple Product Groups in this override area **AND EACH** Product Group can have up to four Reps assigned to it!  
-
-![image-20240626141035592](images/informerMapping_adbrands_productgrouprep-002.png)
-
-Since you know that each Product Group can have only 4 reps, you could create a separate column for each using similar code from below in a Powerscript.
-
-```javascript
-if ($record['GroupReps<replace with actual field>']) {
-	$record['GroupReps<replace with actual field>'].forEach((el, index) => {
-	    $record[`GroupRep${index+1}`] = el
-        $record[`GroupRepPercent${index+1}`] = $record['GroupReps<replace with actual field>'][index]
-	})
-}
-```
+**[Download JOIN-AD Brand Product Group Reps](../report-library/join-ad-brand-product-groups)**
 
 :::
 
 ---
 
-**Sales Rep Overrides by Product**
+## Sales Rep Overrides by Product
 
 In the AD Brands mapping, the **BRAND.PRODUCT.REP.KEY**  will link to the **AD Internet Brand Product Reps** mapping.  This mapping will hold the information about the Product Rep overrides for a brand.
 
@@ -129,11 +150,9 @@ This is what the below dataset does to return just the "active" reps that are ov
 
 :::
 
-#### Download [JOIN]-Ad Brand Product Reps
-
 :::tip Download
 
-**<a  target="_blank"  href="/downloads/join-ad-brand-product-reps.tgz">[JOIN]-Ad Brand Product Reps</a>**
+**[Download JOIN-AD Brand Product Reps](../report-library/join-ad-brand-product-reps)**
 
 :::
 

@@ -16,6 +16,7 @@ You will notice the each report has a download section with the **Bundle** and a
 
 ## AR and GL
 
+- [NAVIGA-AR Cash Receipts Register](./naviga-ar-cash-receipts-register) — Payments report from AR Cash
 - [Naviga-COA Calculation](./naviga-coa-calculation) — Cash On Account (COA) grouped by Client
 - [NAVIGA-Invoices With Payments](./naviga-invoices-with-payments) — Invoice report showing the payments that have been applied
 - [NAVIGA-Simple Aging Summary](./naviga-simple-aging-summary) — Simple Summary by Client Id Aging report.
@@ -38,3 +39,7 @@ You will notice the each report has a download section with the **Bundle** and a
 
 - [METADATA-Dataset Dependencies](./metadata-dataset-dependencies) — Reveal Datasets and Ad Hoc Queries that are dependent on other Datasets or Datasources.
 - [METADATA-Reports-Dataset Ids Names](./metadata-reports-dataset-ids-names) — Lists all of the Dataset and Ad Hoc Queries in the system
+
+## Other
+
+- [NAVIGA-Rep Budgets By Format](./naviga-rep-budgets-by-format) — Rep Budgets by Format

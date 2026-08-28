@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-08-26T12:50:52.997Z",
+  "sourceType": "adHocReport",
+  "sourceId": "54e1f596-b9d6-4891-a9be-dc266967d3ac",
+  "sourceName": "NAVIGA-Rep Budgets By Format",
+  "documentationStatus": "complete",
+  "version": "1.0.0",
+  "completedAt": "2026-08-26T12:50:49.702Z",
+  "vaultReportType": "",
+  "vaultSummary": "",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "ce1497da-2cbf-4d6e-bfd4-fde87dc70c6f:INF_INET.ORDERS:@ID",
+      "label": "ID",
+      "alias": "id",
+      "description": "Budget Identifier\nBudget Year*Format*Rep ID",
+      "status": "active"
+    },
+    {
+      "fieldId": "monthName",
+      "label": "Month Name",
+      "alias": "monthName",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.REP.FORMAT.BUDGETS:BUDGET",
+      "label": "Budget",
+      "alias": "budget",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.REP.FORMAT.BUDGETS:FORECAST2",
+      "label": "Forecast2",
+      "alias": "forecast2",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.REP.FORMAT.BUDGETS:FORECAST1",
+      "label": "Forecast1",
+      "alias": "forecast1",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.REP.FORMAT.BUDGETS:REP.ID",
+      "label": "Rep ID",
+      "alias": "repId",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:ODBC_SALESREPS:REP_NAME",
+      "label": "Rep Name",
+      "alias": "a_d_salesreps_assoc_repName",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "month",
+      "label": "Month",
+      "alias": "month",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "monthString",
+      "label": "Month String",
+      "alias": "monthString",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "budgetYear",
+      "label": "Budget Year",
+      "alias": "budgetYear",
+      "description": "",
+      "status": "active"
+    }
+  ]
+}
