@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-09-17T18:21:06.367Z",
+  "sourceType": "dataset",
+  "sourceId": "d6566258-7bbe-4a8d-bbe8-9be13fe69b6b",
+  "sourceName": "JOIN-UDF Descriptions",
+  "objectDescription": "This dataset contains the needed fields so that you can get the UDF Descriptions for Picklist and Text fields.\nYou will Join this Dataset to your reports that need this information",
+  "documentationStatus": "working",
+  "version": "",
+  "completedAt": "",
+  "vaultReportType": "Other",
+  "vaultSummary": "This dataset contains the needed fields so that you can get the UDF Descriptions for Picklist fields.",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "4013b77c-e469-4862-abb8-89fa8282d236",
+      "label": "UDF Key",
+      "alias": "id",
+      "description": "The UDF Identifier\n<UDF Identifier>*<UDF Type>*<UDF Position>",
+      "status": "active"
+    },
+    {
+      "fieldId": "abbc4013-6064-4035-bde7-e22181045d3f",
+      "label": "Udf Identifier",
+      "alias": "UDFIdentifier",
+      "description": "What data the UDFs are associated with.  Here are the options:\nAR - Client AR UDFs - https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#client-ar-udf\nCRM - CRM UDFs - https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#crm-udf\nINET - Campaign UDFs - https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#campaign-udf\nINET.LINE - Order Line UDFs - https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#order-line-udf\nOPP - Opportunity UDFs - https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#opportunity-udf",
+      "status": "active"
+    },
+    {
+      "fieldId": "40b5d641-ac43-492f-8bb7-04fb2a58edb9",
+      "label": "Udf Type",
+      "alias": "UDFType",
+      "description": "We are only concerned with PICKLIST and TEXT for this dataset. The full list is:\nPICKLIST \nDATE\nNUMERIC\nTEXT",
+      "status": "active"
+    },
+    {
+      "fieldId": "82bdba41-5482-4c0c-a081-af9691347906",
+      "label": "Udf Position",
+      "alias": "UDFPosition",
+      "description": "This will be the position of the UDF.  For example: UDF_PICKLIST_1 where 1 is the position.  ",
+      "status": "active"
+    },
+    {
+      "fieldId": "9f8c3df9-b50e-4953-b1e6-a23def2ecc04",
+      "label": "UDF Code",
+      "alias": "udfCode",
+      "description": "A code identifying the picklist or text value",
+      "status": "active"
+    },
+    {
+      "fieldId": "795db7a4-b7b9-45ec-bd80-e55a173ae243",
+      "label": "UDF Code Desc",
+      "alias": "udfCodeDes",
+      "description": "The description of the UDF Code.  This is what people will want to see.",
+      "status": "active"
+    },
+    {
+      "fieldId": "aec9a6c2-81f5-4ba2-9ccc-e498bda75c03",
+      "label": "Full Udf Join Key",
+      "alias": "fullUDFJoinKey",
+      "description": "",
+      "status": "active"
+    }
+  ]
+}

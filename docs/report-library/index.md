@@ -38,8 +38,10 @@ You will notice the each report has a download section with the **Bundle** and a
 ## Informer Metadata
 
 - [METADATA-Dataset Dependencies](./metadata-dataset-dependencies) — Reveal Datasets and Ad Hoc Queries that are dependent on other Datasets or Datasources.
+- [METADATA-Job Status V2](./metadata-job-status-v2) — Status of Informer metadata refresh jobs.
 - [METADATA-Reports-Dataset Ids Names](./metadata-reports-dataset-ids-names) — Lists all of the Dataset and Ad Hoc Queries in the system
 
 ## Other
 
+- [JOIN-UDF Descriptions](./join-udf-descriptions) — This dataset contains the needed fields so that you can get the UDF Descriptions for Picklist fields.
 - [NAVIGA-Rep Budgets By Format](./naviga-rep-budgets-by-format) — Rep Budgets by Format

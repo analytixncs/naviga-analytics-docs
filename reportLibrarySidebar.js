@@ -40,6 +40,7 @@ module.exports = {
       "label": "Informer Metadata",
       "items": [
         "report-library/metadata-dataset-dependencies",
+        "report-library/metadata-job-status-v2",
         "report-library/metadata-reports-dataset-ids-names"
       ]
     },
@@ -47,6 +48,7 @@ module.exports = {
       "type": "category",
       "label": "Other",
       "items": [
+        "report-library/join-udf-descriptions",
         "report-library/naviga-rep-budgets-by-format"
       ]
     }

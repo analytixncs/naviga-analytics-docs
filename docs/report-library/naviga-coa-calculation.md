@@ -22,7 +22,7 @@ Cash On Account (COA) grouped by Client
 ## Description
 Dataset that can be joined to other dataset to pull in COA information for Advertisers.  Based on AR Cash mapping.
 See this documentation for a clear understanding of how each field is calculated.  COA is tricky and this dataset is not guaranteed to be correct 100% of the time.
-[COA More Info](../informer/informer-sample-reports#coa-report)
+https://naviga-informer-docs.netlify.app/docs/informer/informer-sample-reports#coa-report
 
 ## Fields
 

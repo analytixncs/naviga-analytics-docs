@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-09-15T20:45:08.122Z",
+  "sourceType": "dataset",
+  "sourceId": "50e5d2d4-2bf6-417b-85f5-86503d4b70ea",
+  "sourceName": "METADATA-Job Status V2",
+  "objectDescription": "Report from Informer Metadata Database on Jobs Status.  This can be used in conjunction with a Job to get email alerts when a job fails or runs too long",
+  "documentationStatus": "working",
+  "version": "",
+  "completedAt": "",
+  "vaultReportType": "Informer Metadata",
+  "vaultSummary": "Report from Informer Metadata Database on Jobs Status.",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": true,
+  "fields": [
+    {
+      "fieldId": "e532d0d9-5d5a-460f-bfaa-d34229f84a63",
+      "label": "Enabled",
+      "alias": "enabled",
+      "description": "Indicates if the job is set to run on a schedule.",
+      "status": "active"
+    },
+    {
+      "fieldId": "3206c2ee-8be9-45c8-90c1-243cc9721d5e",
+      "label": "Name",
+      "alias": "name",
+      "description": "Name given to the Job",
+      "status": "active"
+    },
+    {
+      "fieldId": "efbec6e9-c70a-4c38-92d9-577ab6e4e135",
+      "label": "Next Run At",
+      "alias": "nextRunAt",
+      "description": "The Next Run Date and Time of the Job",
+      "status": "active"
+    },
+    {
+      "fieldId": "ec3475b2-81e4-4015-86fa-0ff9241c62dd",
+      "label": "Owner",
+      "alias": "ownerId",
+      "description": "The user who owns the job",
+      "status": "active"
+    },
+    {
+      "fieldId": "0c67fae5-8bb3-4f08-aa9d-c586b3bd642d",
+      "label": "Job History Progress",
+      "alias": "job_history_progress",
+      "description": "A JSON object that holds an array of results of the job.",
+      "status": "active"
+    },
+    {
+      "fieldId": "10d51270-66ef-4de4-8572-c04a7299fa61",
+      "label": "Job History Success",
+      "alias": "job_history_success",
+      "description": "Indicates if the job finished successfully\ntrue/false Boolean field",
+      "status": "active"
+    },
+    {
+      "fieldId": "4062b1aa-af50-41d7-bad3-8b65923a4d33",
+      "label": "Job History Updated At",
+      "alias": "job_history_updatedAt",
+      "description": "Date and Time field indicating when the Job was last updated.  Usually will indicate when the job history run ended",
+      "status": "active"
+    },
+    {
+      "fieldId": "9210d94f-77a6-46f1-ae23-f1ebdc56042d",
+      "label": "Job History Warnings",
+      "alias": "job_history_warnings",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "e98360eb-56a7-4c34-a220-7be3e92ae820",
+      "label": "Heartbeat",
+      "alias": "heartbeat",
+      "description": "Date/Time field that indicates if the job is still running.  If there is a Heartbeat then it is used to calculate duration.  If there is no heartbeat duration is calculated with difference between created and updated date fields",
+      "status": "active"
+    },
+    {
+      "fieldId": "9f68369d-8b2f-4676-9044-f2a41fa1e946",
+      "label": "Job History Created At",
+      "alias": "job_history_createdAt",
+      "description": "Date/Time that the Job History row was created.  Indicates when the Job started",
+      "status": "active"
+    },
+    {
+      "fieldId": "51e79e4b-6166-4294-a9e6-fea209f1cd3b",
+      "label": "Id",
+      "alias": "id",
+      "description": "Job identifier",
+      "status": "active"
+    },
+    {
+      "fieldId": "2ebc599b-f9a0-4d6a-a087-20fb57bea8c5",
+      "label": "Duration",
+      "alias": "duration",
+      "description": "Duration of Job run in Minutes",
+      "status": "active"
+    },
+    {
+      "fieldId": "4c451ab6-b3d9-4508-a2a6-07b97644e340",
+      "label": "Lastupdatedate",
+      "alias": "lastupdatedate",
+      "description": "Date/Time that this job history record was updated",
+      "status": "active"
+    }
+  ]
+}

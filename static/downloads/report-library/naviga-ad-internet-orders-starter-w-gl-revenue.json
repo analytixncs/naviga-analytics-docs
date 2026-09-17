@@ -1,9 +1,10 @@
 {
   "schemaVersion": 1,
-  "exportedAt": "2026-08-14T14:58:22.907Z",
+  "exportedAt": "2026-09-03T21:15:17.667Z",
   "sourceType": "adHocReport",
   "sourceId": "debb9e57-43f2-414b-b993-add92cad098a",
   "sourceName": "NAVIGA-AD Internet Orders Starter W/ GL Revenue",
+  "objectDescription": "Revenue report based on the AD Internet Orders mapping.  It includes a derived GL field called Real GL Code.  It uses the GL Type ID and the Client Type ID on the order to lookup the GL Code(s).  If there is more than one GL Code, it will find the GL Percentage and split the Net Line Local Amount fields into the appropriate percentage breakout for each GL Code returned.\nNOTE: If you are using the G/L Override Settings \"Industry Code\" or \"Sales Territory\" this report will not take those into account.  These setting are found here https://xxx.navigahub.com/EW/xxx/ad/setup/digital_setup",
   "documentationStatus": "complete",
   "version": "1.0.0",
   "completedAt": "2026-08-03T12:59:02.772Z",

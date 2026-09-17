@@ -1,0 +1,53 @@
+---
+id: metadata-job-status-v2
+title: METADATA-Job Status V2
+sidebar_label: METADATA-Job Status V2
+---
+
+import Pasted_image_20260917152413 from './images/Pasted image 20260917152413.png';
+
+# METADATA-Job Status V2
+
+**Type:** Informer Metadata
+
+Status of Informer metadata refresh jobs.
+
+:::info METADATA-Job Status V2 Downloads
+
+Status of Informer metadata refresh jobs.
+
+**Bundle (TGZ):** <a target="_blank" href="/downloads/report-library/metadata-job-status-v2.tgz">METADATA-Job Status V2</a><br />
+**Definition JSON:** <a target="_blank" href="/downloads/report-library/metadata-job-status-v2.json">metadata-job-status-v2.json</a>
+
+:::
+
+## Summary
+
+This report can be used in conjunction with a Job that runs periodically to notify you of any failed or hung jobs.
+
+The key is to create a filter on the dataset that only returns records if there was an explicit failure OR if the duration is longer than an amount of time you deem to be too long.  The duration is in minutes. 
+
+In version 5.8.6 of Informer I found a small bug where the filters were not being saved.  The solution was to merge them together into a single filter.
+
+<img src={Pasted_image_20260917152413} alt="Pasted image 20260917152413.png" width="845" />
+
+## Description
+Report from Informer Metadata Database on Jobs Status.
+
+## Fields
+
+| Label | Alias | Type | Hidden | Description |
+|-------|-------|------|--------|-------------|
+| Enabled | enabled | boolean |  | Indicates if the job is set to run on a schedule. |
+| Name | name | keyword_text |  | Name given to the Job |
+| Next Run At | nextRunAt | date_tz |  | The Next Run Date and Time of the Job |
+| Owner | ownerId | keyword_text |  | The user who owns the job |
+| Job History Progress | job_history_progress | object |  | A JSON object that holds an array of results of the job. |
+| Job History Success | job_history_success | boolean |  | Indicates if the job finished successfully<br />true/false Boolean field |
+| Job History Updated At | job_history_updatedAt | date_tz |  | Date and Time field indicating when the Job was last updated.  Usually will indicate when the job history run ended |
+| Job History Warnings | job_history_warnings | boolean |  |  |
+| Heartbeat | heartbeat | date_tz |  | Date/Time field that indicates if the job is still running.  If there is a Heartbeat then it is used to calculate duration.  If there is no heartbeat duration is calculated with difference between created and updated date fields |
+| Job History Created At | job_history_createdAt | date_tz |  | Date/Time that the Job History row was created.  Indicates when the Job started |
+| Id | id | keyword_text |  | Job identifier |
+| Duration | duration | double |  | Duration of Job run in Minutes |
+| Lastupdatedate | lastupdatedate | date |  | Date/Time that this job history record was updated |
