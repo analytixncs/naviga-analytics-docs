@@ -18,3 +18,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Large media — host outside git (YouTube / blob / Releases)
+*.mp4
+*.mov
+*.webm
+*.avi
+*.mkv
