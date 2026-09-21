@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "exportedAt": "2026-09-15T20:45:08.122Z",
+  "exportedAt": "2026-09-21T22:25:55.474Z",
   "sourceType": "dataset",
   "sourceId": "50e5d2d4-2bf6-417b-85f5-86503d4b70ea",
   "sourceName": "METADATA-Job Status V2",
   "objectDescription": "Report from Informer Metadata Database on Jobs Status.  This can be used in conjunction with a Job to get email alerts when a job fails or runs too long",
-  "documentationStatus": "working",
-  "version": "",
-  "completedAt": "",
+  "documentationStatus": "complete",
+  "version": "1.0.0",
+  "completedAt": "2026-09-21T22:25:51.024Z",
   "vaultReportType": "Informer Metadata",
   "vaultSummary": "Report from Informer Metadata Database on Jobs Status.",
   "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
   "metadataStepExists": true,
-  "hasUnsavedChanges": true,
+  "hasUnsavedChanges": false,
   "fields": [
     {
       "fieldId": "e532d0d9-5d5a-460f-bfaa-d34229f84a63",
