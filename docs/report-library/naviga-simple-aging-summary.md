@@ -43,13 +43,13 @@ NOTE: We are only looking at Invoices that have a balance in this report.
 | 31-60 | a60_Total | double |  | 60 day aging bucket |
 | 61-90 | a90_Total | double |  | 90 day aging bucket |
 | 91-120 | a120_Total | double |  | 120 day aging bucket |
-| 121+ | anext_Total | double |  | >120 day aging bucket |
+| 121+ | anext_Total | double |  | &gt;120 day aging bucket |
 | Invoice Balance Total | ainvoiceBalance_Total | double |  | Client's aggregated Invoice Balance total based on invoices that still have a balance |
 | Difference | invoicedifference | double |  | Dollar difference between total invoice amount and invoice balance |
 | % Difference | invoicePercentdifference | double |  | percentage difference between total invoice amount and invoice balance |
 | COA | aCOA_Total | double |  | Cash On Account for the client, pulled from Naviga-COA Calculation dataset |
-| Inv Del Method | client_id_assoc_digitalInvDelivery | keyword_text |  | Invoice Delivery Method<br />GEN Clients - Digital Inv Delivery <275><br />See docs -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#advertising-setup-for-digital-first-naviga-users |
+| Inv Del Method | client_id_assoc_digitalInvDelivery | keyword_text |  | Invoice Delivery Method<br />GEN Clients - Digital Inv Delivery &lt;275&gt;<br />See docs -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#advertising-setup-for-digital-first-naviga-users |
 | Client Client Type Desc | client_id_assoc_clientTypeDesc | keyword_text |  |  |
 | Misc Inv Salesrep Primary Rep Group ID | salesrep_id_assoc_primaryRepGroupId | keyword_text |  | Primary Rep Group associated with the Misc Inv Salesrep  |
-| Client Statement Ind | client_id_assoc_statementInd | keyword_text |  | Flag on client under A/R Setup "Generate Statements".<br />See docs -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#field-locations-in-naviga |
-| Client Stmt Delivery Method | client_id_assoc_stmtDelMethod | keyword_text |  | GEN Clients STMT.DELIVERY.METHOD <259><br />See docs -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#delivery-methods |
+| Client Statement Ind | client_id_assoc_statementInd | keyword_text |  | Flag on client under A/R Setup "Generate Statements".<br />See docs -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#field-locations-in-naviga |
+| Client Stmt Delivery Method | client_id_assoc_stmtDelMethod | keyword_text |  | GEN Clients STMT.DELIVERY.METHOD &lt;259&gt;<br />See docs -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#delivery-methods |

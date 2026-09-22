@@ -23,7 +23,7 @@ Brand reps by Product group overrides
 
 Loads all the override brand reps defined for Product Groups into a dataset so that it can be joined to other datasets. 
 
-For more information on how Brand Reps work and how to use these datasets see -> [Brand Rep Assignment Docs](../informer/informer-mappings-ad-brands#rep-assignments)
+For more information on how Brand Reps work and how to use these datasets see -&gt; [Brand Rep Assignment Docs](../informer/informer-mappings-ad-brands#rep-assignments)
 
 ## Notes
 

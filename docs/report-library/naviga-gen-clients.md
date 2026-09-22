@@ -27,7 +27,7 @@ For more detail on how the mappings in client reports work see [Basic Client Rep
 
 ## Description
 Basic Client report.  
-View video here -> https://naviga-informer-docs.netlify.app/docs/informer/informer-video-training#basic-client-report
+View video here -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-video-training#basic-client-report
 
 ## Fields
 
@@ -50,11 +50,11 @@ View video here -> https://naviga-informer-docs.netlify.app/docs/informer/inform
 | Client Name Do Not Use Ind | new_name_assoc_doNotUseInd | keyword_text |  | Do Not Use Indicator on the GEN Company/Individual Names mapping<br />Y = Do NOT Use<br />N = Can be Used |
 | Client Name Specific Job Title | new_name_assoc_specificJobTitle | keyword_text |  | Clients Job Title if applicable.  These will only show up on Individual (Name Type = I) records. |
 | Last Pay Amt | lastPayAmt | double |  |  |
-| Confirmation Email Contact ID | confEmailContactId | keyword_text |  | Contact ID for contact email on Contacts Emailed Confirmations.  <br />See docs -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#overview-of-advertising-contacts |
+| Confirmation Email Contact ID | confEmailContactId | keyword_text |  | Contact ID for contact email on Contacts Emailed Confirmations.  <br />See docs -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#overview-of-advertising-contacts |
 | Client Name Type Id | client_name_assoc_nameTypeId | keyword_text |  | C = Advertiser<br />I = Individual / Contact / Employee |
 | Client Name Client Type | client_name_assoc_client_assoc_clientType | keyword_text |  |  |
 | Credit Stop Date | crStopDate | date |  | Date the the credit was stopped |
 | Credit Stop Indicator | creditStop | keyword_text |  | Indicates if this clients credit is stopped<br />Y = This client has credit stopped<br />N = Credit is not stopped |
-| Stmt Email Contact ID | stmtEmailContactId | keyword_text |  | Contact ID for contact email on Statement Details.  See docs -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#advertising-setup-for-digital-first-naviga-users |
+| Stmt Email Contact ID | stmtEmailContactId | keyword_text |  | Contact ID for contact email on Statement Details.  See docs -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#advertising-setup-for-digital-first-naviga-users |
 | AD Invoice Contact ID | adInvoiceContactId | keyword_text |  |  |
-| Inv Email Contact ID | invEmailContactId | keyword_text |  | Contact ID for contact email on Misc. Billing Details.  <br />See docs -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#delivery-methods |
+| Inv Email Contact ID | invEmailContactId | keyword_text |  | Contact ID for contact email on Misc. Billing Details.  <br />See docs -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#delivery-methods |

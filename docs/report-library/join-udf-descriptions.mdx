@@ -30,15 +30,15 @@ To use this dataset as a lookup, you will need to understand how to join to an e
 First, understand that UDFs are associated with certain areas of the system.  Here are the four primary areas for UDFs.  We call these the 
 ### **UDF Identifiers**
 
-- **Client AR UDFs** - Located in **GEN Clients** -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#client-ar-udf
+- **Client AR UDFs** - Located in **GEN Clients** -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#client-ar-udf
 	- UDF Identifier = **AR**
-- **CRM UDFs** - Located in **CM Prospects Control** -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#crm-udf
+- **CRM UDFs** - Located in **CM Prospects Control** -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#crm-udf
 	- UDF Identifier = **CRM**
-- **Campaign UDFs** - Located in **AD Internet Campaigns** -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#campaign-udf
+- **Campaign UDFs** - Located in **AD Internet Campaigns** -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#campaign-udf
 	- UDF Identifier = **INET**
-- **Order Line UDFs** - Located in **AD Internet Orders** -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#order-line-udf
+- **Order Line UDFs** - Located in **AD Internet Orders** -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#order-line-udf
 	- UDF Identifier = **INET.LINE**
-- **Opportunity UDFs** - Located in **CM Opportunities** -> https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#opportunity-udf
+- **Opportunity UDFs** - Located in **CM Opportunities** -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#opportunity-udf
 	- UDF Identifier = **OPP**
 
 ### Joining to Other Reports
@@ -74,7 +74,7 @@ This dataset contains the needed fields so that you can get the UDF Descriptions
 
 | Label | Alias | Type | Hidden | Description |
 |-------|-------|------|--------|-------------|
-| UDF Key | id | keyword_text |  | The UDF Identifier<br /><UDF Identifier>*<UDF Type>*<UDF Position> |
+| UDF Key | id | keyword_text |  | The UDF Identifier<br />&lt;UDF Identifier&gt;*&lt;UDF Type&gt;*&lt;UDF Position&gt; |
 | Udf Identifier | UDFIdentifier | keyword_text |  | What data the UDFs are associated with.  Here are the options:<br />AR - Client AR UDFs - https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#client-ar-udf<br />CRM - CRM UDFs - https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#crm-udf<br />INET - Campaign UDFs - https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#campaign-udf<br />INET.LINE - Order Line UDFs - https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#order-line-udf<br />OPP - Opportunity UDFs - https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-udf-fields#opportunity-udf |
 | Udf Type | UDFType | keyword_text |  | We are only concerned with PICKLIST and TEXT for this dataset. The full list is:<br />PICKLIST <br />DATE<br />NUMERIC<br />TEXT |
 | Udf Position | UDFPosition | keyword_text |  | This will be the position of the UDF.  For example: UDF_PICKLIST_1 where 1 is the position.   |
