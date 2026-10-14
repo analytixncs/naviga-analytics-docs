@@ -12,6 +12,8 @@ You should use these as templates in your system.  Install the bundle on your sy
 
 [More on Bundles](../informer/informer-basics#bundles)
 
+To create a custom bundle with multiple datasets and Ad Hoc Reports from the Report Library go to [Build Your Bundle](/build-your-bundle)
+
 You will notice the each report has a download section with the **Bundle** and a **Definition JSON** file.  The JSON file contains field definitions which can be used with AI agents to help build your reports.  The JSON file is derived from a Powerscript within each template title **"ObjectInspector_FieldMetadata_DoNotModify"**.   You may view this Powerscript when editing a copy of the template report to gain an understanding of each field as well.
 
 ## AR and GL

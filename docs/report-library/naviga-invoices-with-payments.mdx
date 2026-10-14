@@ -40,6 +40,7 @@ Shows invoices for selected financial period range along with any payments appli
 
 | Label | Alias | Type | Hidden | Description |
 |-------|-------|------|--------|-------------|
+| Record Type | recordType | keyword_text |  | Identifies the record as<br />- Invoice<br />- Credit<br />- Debit<br />- Write Off |
 | Invoice ID | id | keyword_text |  | Unique Invoice identifier |
 | Client Id | clientNo | keyword_text |  | Client Identifier.  This is considered the Payer of the Invoice |
 | Client Name | clientName | keyword_text |  |  |
@@ -54,3 +55,4 @@ Shows invoices for selected financial period range along with any payments appli
 | Payment ID | scash_assoc_checkNo | keyword_text |  | Payment Identifier |
 | Payment Amount | chkAmt | double |  | Amount of this payment applied to the invoice |
 | Payment Applied Date | applyDate | date |  | Date payment applied |
+| Is Client Agency | client_id_assoc_agencyInd | keyword_text |  | Y - Client is an Agency<br />N - Client is NOT an Agency |

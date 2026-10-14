@@ -1,0 +1,227 @@
+{
+  "generatedAt": "2026-10-14T19:38:14.651Z",
+  "informerVersion": "5.8.6",
+  "items": [
+    {
+      "slug": "join-ad-brand-product-groups",
+      "title": "JOIN-Ad Brand Product Groups",
+      "description": "Brand reps by Product group overrides",
+      "type": "dataset",
+      "category": "Clients",
+      "version": "5.8.6",
+      "datasources": [
+        "DEVDIGITAL"
+      ],
+      "tgzUrl": "/downloads/report-library/join-ad-brand-product-groups.tgz",
+      "docUrl": "/docs/report-library/join-ad-brand-product-groups"
+    },
+    {
+      "slug": "join-ad-brand-product-reps",
+      "title": "JOIN-Ad Brand Product Reps",
+      "description": "Brand Product Override Reps",
+      "type": "dataset",
+      "category": "Clients",
+      "version": "5.8.6",
+      "datasources": [
+        "DEVDIGITAL"
+      ],
+      "tgzUrl": "/downloads/report-library/join-ad-brand-product-reps.tgz",
+      "docUrl": "/docs/report-library/join-ad-brand-product-reps"
+    },
+    {
+      "slug": "join-default-brand-rep",
+      "title": "JOIN-Default Brand Rep",
+      "description": "Loads all the default brand reps into a dataset so that it can be joined to other datasets.",
+      "type": "dataset",
+      "category": "Clients",
+      "version": "5.8.6",
+      "datasources": [
+        "DEVDIGITAL"
+      ],
+      "tgzUrl": "/downloads/report-library/join-default-brand-rep.tgz",
+      "docUrl": "/docs/report-library/join-default-brand-rep"
+    },
+    {
+      "slug": "join-udf-descriptions",
+      "title": "JOIN-UDF Descriptions",
+      "description": "This dataset contains the needed fields so that you can get the UDF Descriptions for Picklist fields.",
+      "type": "dataset",
+      "category": "Other",
+      "version": "5.8.6",
+      "datasources": [
+        "DEVDIGITAL"
+      ],
+      "tgzUrl": "/downloads/report-library/join-udf-descriptions.tgz",
+      "docUrl": "/docs/report-library/join-udf-descriptions"
+    },
+    {
+      "slug": "metadata-dataset-dependencies",
+      "title": "METADATA-Dataset Dependencies",
+      "description": "Reveal Datasets and Ad Hoc Queries that are dependent on other Datasets or Datasources.",
+      "type": "query",
+      "category": "Informer Metadata",
+      "version": "5.8.6",
+      "datasources": [
+        "Informer Metadata"
+      ],
+      "tgzUrl": "/downloads/report-library/metadata-dataset-dependencies.tgz",
+      "docUrl": "/docs/report-library/metadata-dataset-dependencies"
+    },
+    {
+      "slug": "metadata-job-status-v2",
+      "title": "METADATA-Job Status V2",
+      "description": "Status of Informer metadata refresh jobs.",
+      "type": "dataset",
+      "category": "Informer Metadata",
+      "version": "5.8.6",
+      "datasources": [
+        "Informer Metadata"
+      ],
+      "tgzUrl": "/downloads/report-library/metadata-job-status-v2.tgz",
+      "docUrl": "/docs/report-library/metadata-job-status-v2"
+    },
+    {
+      "slug": "metadata-reports-dataset-ids-names",
+      "title": "METADATA-Reports-Dataset Ids Names",
+      "description": "Lists all of the Dataset and Ad Hoc Queries in the system",
+      "type": "dataset",
+      "category": "Informer Metadata",
+      "version": "5.8.6",
+      "datasources": [
+        "Informer Metadata"
+      ],
+      "tgzUrl": "/downloads/report-library/metadata-reports-dataset-ids-names.tgz",
+      "docUrl": "/docs/report-library/metadata-reports-dataset-ids-names"
+    },
+    {
+      "slug": "naviga-ad-internet-orders-actual-gl-split",
+      "title": "NAVIGA-AD Internet Orders Actual GL Split",
+      "description": "Returns GL Revenue allocation values by Sub Orders",
+      "type": "query",
+      "category": "Campaigns",
+      "version": "5.8.6",
+      "datasources": [
+        "DEVDIGITAL"
+      ],
+      "tgzUrl": "/downloads/report-library/naviga-ad-internet-orders-actual-gl-split.tgz",
+      "docUrl": "/docs/report-library/naviga-ad-internet-orders-actual-gl-split"
+    },
+    {
+      "slug": "naviga-ad-internet-orders-starter-w-gl-revenue",
+      "title": "NAVIGA-AD Internet Orders Starter W/ GL Revenue",
+      "description": "Report splitting revenue into GL buckets based on GL overrides.",
+      "type": "query",
+      "category": "Campaigns",
+      "version": "5.8.6",
+      "datasources": [
+        "DEVDIGITAL"
+      ],
+      "tgzUrl": "/downloads/report-library/naviga-ad-internet-orders-starter-w-gl-revenue.tgz",
+      "docUrl": "/docs/report-library/naviga-ad-internet-orders-starter-w-gl-revenue"
+    },
+    {
+      "slug": "naviga-ad-internet-orders-starter",
+      "title": "NAVIGA-AD Internet Orders Starter",
+      "description": "Basic campaign revenue report with Sales Reps",
+      "type": "query",
+      "category": "Campaigns",
+      "version": "5.8.6",
+      "datasources": [
+        "DEVDIGITAL"
+      ],
+      "tgzUrl": "/downloads/report-library/naviga-ad-internet-orders-starter.tgz",
+      "docUrl": "/docs/report-library/naviga-ad-internet-orders-starter"
+    },
+    {
+      "slug": "naviga-ar-cash-receipts-register",
+      "title": "NAVIGA-AR Cash Receipts Register",
+      "description": "Payments report from AR Cash",
+      "type": "query",
+      "category": "AR and GL",
+      "version": "5.8.6",
+      "datasources": [
+        "DEVDIGITAL"
+      ],
+      "tgzUrl": "/downloads/report-library/naviga-ar-cash-receipts-register.tgz",
+      "docUrl": "/docs/report-library/naviga-ar-cash-receipts-register"
+    },
+    {
+      "slug": "naviga-client-brand-reps",
+      "title": "NAVIGA-Client Brand Reps",
+      "description": "Brand focused client report.",
+      "type": "dataset",
+      "category": "Clients",
+      "version": "5.8.6",
+      "datasources": [
+        "DEVDIGITAL"
+      ],
+      "tgzUrl": "/downloads/report-library/naviga-client-brand-reps.tgz",
+      "docUrl": "/docs/report-library/naviga-client-brand-reps"
+    },
+    {
+      "slug": "naviga-coa-calculation",
+      "title": "Naviga-COA Calculation",
+      "description": "Cash On Account (COA) grouped by Client",
+      "type": "dataset",
+      "category": "AR and GL",
+      "version": "5.8.6",
+      "datasources": [
+        "DEVDIGITAL"
+      ],
+      "tgzUrl": "/downloads/report-library/naviga-coa-calculation.tgz",
+      "docUrl": "/docs/report-library/naviga-coa-calculation"
+    },
+    {
+      "slug": "naviga-gen-clients",
+      "title": "NAVIGA-Gen Clients",
+      "description": "Basic Client report",
+      "type": "query",
+      "category": "Clients",
+      "version": "5.8.6",
+      "datasources": [
+        "DEVDIGITAL"
+      ],
+      "tgzUrl": "/downloads/report-library/naviga-gen-clients.tgz",
+      "docUrl": "/docs/report-library/naviga-gen-clients"
+    },
+    {
+      "slug": "naviga-invoices-with-payments",
+      "title": "NAVIGA-Invoices With Payments",
+      "description": "Invoice report showing the payments that have been applied",
+      "type": "query",
+      "category": "AR and GL",
+      "version": "5.8.6",
+      "datasources": [
+        "DEVDIGITAL"
+      ],
+      "tgzUrl": "/downloads/report-library/naviga-invoices-with-payments.tgz",
+      "docUrl": "/docs/report-library/naviga-invoices-with-payments"
+    },
+    {
+      "slug": "naviga-rep-budgets-by-format",
+      "title": "NAVIGA-Rep Budgets By Format",
+      "description": "Rep Budgets by Format",
+      "type": "query",
+      "category": "Other",
+      "version": "5.8.6",
+      "datasources": [
+        "DEVDIGITAL"
+      ],
+      "tgzUrl": "/downloads/report-library/naviga-rep-budgets-by-format.tgz",
+      "docUrl": "/docs/report-library/naviga-rep-budgets-by-format"
+    },
+    {
+      "slug": "naviga-simple-aging-summary",
+      "title": "NAVIGA-Simple Aging Summary",
+      "description": "Simple Summary by Client Id Aging report.",
+      "type": "query",
+      "category": "AR and GL",
+      "version": "5.8.6",
+      "datasources": [
+        "DEVDIGITAL"
+      ],
+      "tgzUrl": "/downloads/report-library/naviga-simple-aging-summary.tgz",
+      "docUrl": "/docs/report-library/naviga-simple-aging-summary"
+    }
+  ]
+}

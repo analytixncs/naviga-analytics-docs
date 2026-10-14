@@ -1,9 +1,10 @@
 {
   "schemaVersion": 1,
-  "exportedAt": "2026-09-03T18:44:51.434Z",
+  "exportedAt": "2026-09-25T19:34:48.468Z",
   "sourceType": "adHocReport",
-  "sourceId": "devdigital:naviga-invoices-with-payments",
+  "sourceId": "3dc34b21-5e9a-4142-9886-11641651fd37",
   "sourceName": "NAVIGA-Invoices With Payments",
+  "objectDescription": "Shows invoices for selected financial period range along with any payments applied to the invoices. ",
   "documentationStatus": "complete",
   "version": "1.0.0",
   "completedAt": "2026-07-31T12:32:09.302Z",
@@ -109,6 +110,20 @@
       "label": "Total",
       "alias": "total",
       "description": "Invoice Amount + Tax Amount",
+      "status": "active"
+    },
+    {
+      "fieldId": "recordType",
+      "label": "Record Type",
+      "alias": "recordType",
+      "description": "Identifies the record as\n- Invoice\n- Credit\n- Debit\n- Write Off",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_CLIENTS:AGENCY.IND",
+      "label": "Is Client Agency",
+      "alias": "client_id_assoc_agencyInd",
+      "description": "Y - Client is an Agency\nN - Client is NOT an Agency",
       "status": "active"
     }
   ]
