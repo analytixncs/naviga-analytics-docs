@@ -68,3 +68,5 @@ This report is itself dependent upon the "METADATA-Reports-Dataset Ids Names".
 | Dependent Dataset Link | dependentDatasetLink | keyword_text |  | Clickable link to the dependent Dataset. |
 | Dependent Datasource Names | dependentDatasourceNames | keyword_text |  | Dependent Datasource Name |
 | Flow | flow | object |  | Array of Flow steps.  Each flow step in the array is stored as an Object. |
+
+&lt;!-- criteria parsing arrives in a later slice --&gt;

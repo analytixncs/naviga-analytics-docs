@@ -24,8 +24,7 @@ Report splitting revenue into GL buckets based on GL overrides.
 ## Notes
 
 ## Description
-Revenue report based on the AD Internet Orders mapping.  It includes a derived GL field called Real GL Code.  It uses the GL Type ID and the Client Type ID on the order to lookup the GL Code(s).  If there is more than one GL Code, it will find the GL Percentage and split the Net Line Local Amount fields into the appropriate percentage breakout for each GL Code returned.
-NOTE: If you are using the G/L Override Settings "Industry Code" or "Sales Territory" this report will not take those into account.  These setting are found here https://xxx.navigahub.com/EW/xxx/ad/setup/digital_setup
+Report splitting revenue into GL buckets based on GL overrides.
 
 ## Fields
 
@@ -58,3 +57,5 @@ NOTE: If you are using the G/L Override Settings "Industry Code" or "Sales Terri
 | Gl Match Type | GLMatchType | keyword_text |  | GLMatchType indicates how the GL configuration was selected:<br /><br />GL_TYPE_AND_CLIENT_TYPE = Both GL Type and Client Type matched.<br />GL_TYPE_ONLY = GL Type matched and product Client Type was blank.<br />NO_MATCH = No matching GL configuration was found. |
 | No Agy Comm Ind | noAgyCommInd | keyword_text |  | Used to determine if Agency commission is to be applied. |
 | Month Unique ID | monthUniqueId | keyword_text |  | Identifier using the Line Id with an appended .n <br />This is the order details identifier.  However be aware that it is not a record unique identifier as if the GL has a split, it will be duplicated across the splits. |
+
+&lt;!-- criteria parsing arrives in a later slice --&gt;

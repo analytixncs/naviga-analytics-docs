@@ -71,3 +71,5 @@ etc.
 | Default Rep Group 4 | defaultRepGroup 4 | keyword_text |  |  |
 | Default Rep Name 4 | defaultRepName 4 | keyword_text |  |  |
 | Default Inactive Ind | defaultInactiveInd | keyword_text |  |  |
+
+&lt;!-- criteria parsing arrives in a later slice --&gt;

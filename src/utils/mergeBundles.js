@@ -219,5 +219,109 @@ export async function mergeBundles(tgzBuffers, bundleName) {
     entries.push([`tables/public/${f}`, encoder.encode(csvContent)]);
   }
 
-  return await gzip(tar(entries));
+  // Extract all items in the built bundle (datasets, ad hoc queries, reports)
+  const items = [];
+  if (tables.has('dataset')) {
+    const T = tables.get('dataset');
+    const idIdx = T.header.indexOf('id');
+    const nameIdx = T.header.indexOf('name');
+    for (const { raw } of T.rows.values()) {
+      const vals = parseCsv(raw + '\n')[0];
+      if (vals[idIdx]) {
+        items.push({
+          uuid: vals[idIdx],
+          name: vals[nameIdx] || '',
+          type: 'dataset',
+        });
+      }
+    }
+  }
+
+  if (tables.has('query')) {
+    const T = tables.get('query');
+    const idIdx = T.header.indexOf('id');
+    const nameIdx = T.header.indexOf('name');
+    const embIdx = T.header.indexOf('embedded');
+    for (const { raw } of T.rows.values()) {
+      const vals = parseCsv(raw + '\n')[0];
+      const emb = embIdx >= 0 ? vals[embIdx] : '';
+      if (vals[idIdx] && emb !== 't') {
+        items.push({
+          uuid: vals[idIdx],
+          name: vals[nameIdx] || '',
+          type: 'query',
+        });
+      }
+    }
+  }
+
+  if (tables.has('report')) {
+    const T = tables.get('report');
+    const idIdx = T.header.indexOf('id');
+    const nameIdx = T.header.indexOf('name');
+    for (const { raw } of T.rows.values()) {
+      const vals = parseCsv(raw + '\n')[0];
+      if (vals[idIdx]) {
+        items.push({
+          uuid: vals[idIdx],
+          name: vals[nameIdx] || '',
+          type: 'report',
+        });
+      }
+    }
+  }
+
+  // Collect unique UUIDs in bundle order
+  const uniqueUuids = [];
+  const seenUuids = new Set();
+  const addUuid = (id) => {
+    if (id && !seenUuids.has(id)) {
+      seenUuids.add(id);
+      uniqueUuids.push(id);
+    }
+  };
+
+  for (const b of bundles) {
+    if (b.has('tables/public/dataset.csv')) {
+      const text = decoder.decode(b.get('tables/public/dataset.csv'));
+      const rows = parseCsv(text);
+      const h = rows[0];
+      const idIdx = h.indexOf('id');
+      for (let r = 1; r < rows.length; r++) {
+        addUuid(rows[r][idIdx]);
+      }
+    }
+    if (b.has('tables/public/query.csv')) {
+      const text = decoder.decode(b.get('tables/public/query.csv'));
+      const rows = parseCsv(text);
+      const h = rows[0];
+      const idIdx = h.indexOf('id');
+      const embIdx = h.indexOf('embedded');
+      for (let r = 1; r < rows.length; r++) {
+        if (rows[r][embIdx] !== 't') {
+          addUuid(rows[r][idIdx]);
+        }
+      }
+    }
+    if (b.has('tables/public/report.csv')) {
+      const text = decoder.decode(b.get('tables/public/report.csv'));
+      const rows = parseCsv(text);
+      const h = rows[0];
+      const idIdx = h.indexOf('id');
+      for (let r = 1; r < rows.length; r++) {
+        addUuid(rows[r][idIdx]);
+      }
+    }
+  }
+
+  // Format CSV as simple comma-separated IDs with no headers and no other fields
+  const csvText = uniqueUuids.join(', ');
+
+  const mergedBytes = await gzip(tar(entries));
+  mergedBytes.mergedBytes = mergedBytes;
+  mergedBytes.items = items;
+  mergedBytes.uuids = uniqueUuids;
+  mergedBytes.csv = csvText;
+
+  return mergedBytes;
 }

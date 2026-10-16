@@ -635,3 +635,21 @@ html[data-theme='dark'] .typeBadgeQuery {
 .spinAnimation {
   animation: spin 1s linear infinite;
 }
+
+/* Success Notification */
+.successNotification {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-left: 4px solid #10b981;
+  border-radius: 8px;
+  padding: 0.85rem 1.15rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ifm-font-color-base);
+}
+
+html[data-theme='dark'] .successNotification {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.35);
+}
+

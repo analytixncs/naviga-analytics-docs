@@ -89,3 +89,30 @@ Similar output to Order by Product report from Naviga Ad.
 | Currency Code | a_d_internet_campaigns_assoc_currCode | keyword_text |  | What the foreign currency code is. |
 | Currency Exchange Rate | a_d_internet_campaigns_assoc_currRate | double |  | Exchange rate for the foreign currency stored on the AD Internet Campaign mapping. |
 | No Agy Comm Ind | noAgyCommInd | keyword_text |  | Can be considered the Issue date for a Print publication. <br />The starting date of the Order details record. |
+
+## Criteria
+
+- All of
+  - **Line Cancel Status ID** does not match DE
+  - **AD Internet Campaigns → Status Code** exactly matches any of R%, CO, IS
+  - **Month Start Date** is between ***INPUT*** <mark>🧩Run Date Start</mark> and ***INPUT*** <mark>🧩Run Date End</mark>
+  - **AD Internet Campaigns → Advertiser Id** exactly matches ***INPUT*** <mark>🧩Advertiser Id</mark>
+  - **Current Rep ID** exactly matches ***INPUT*** <mark>🧩Rep ID</mark>
+
+## 🧩 Inputs
+
+| Prompt | Type | Detail |
+|--------|------|--------|
+| Run Date Start | date |  |
+| Run Date End | date |  |
+| Advertiser Id | text | Multiple values |
+| Rep ID | text | Multiple values |
+
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Normalize | monthActualAmt, monthEndDate, monthEstAmt, monthStartDate |
+| 2 | Script: Calculate Revenue | BASE REVENUE CALCS<br />This script uses the naviga.calculateLineAmounts saved function to create<br />a full set of Net, Gross and Foriegn revenue fields<br />**Used Saved Functions**<br />naviga.calculateLineAmounts, naviga.returnANumber, naviga.calculateRepAmounts |
+| 3 | Normalize | actualLineLocalAmount, estLineLocalAmount, grossLineLocalAmount, grossLineForeignAmount, netLineForeignAmount, netLineLocalAmount, netRepForeignAmount, netRepLocalAmount, currentRepPcts, currentRepIds, curr_ad_salesreps_assoc_repName |
+| 4 | Remove fields | actualLineLocalAmount, estLineLocalAmount |

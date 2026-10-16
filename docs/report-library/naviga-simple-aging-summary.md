@@ -53,3 +53,22 @@ NOTE: We are only looking at Invoices that have a balance in this report.
 | Misc Inv Salesrep Primary Rep Group ID | salesrep_id_assoc_primaryRepGroupId | keyword_text |  | Primary Rep Group associated with the Misc Inv Salesrep  |
 | Client Statement Ind | client_id_assoc_statementInd | keyword_text |  | Flag on client under A/R Setup "Generate Statements".<br />See docs -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#field-locations-in-naviga |
 | Client Stmt Delivery Method | client_id_assoc_stmtDelMethod | keyword_text |  | GEN Clients STMT.DELIVERY.METHOD &lt;259&gt;<br />See docs -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#delivery-methods |
+
+## Criteria
+
+- All of
+  - **Client → Client Name → Name Type** does not match I
+  - **Invoice Balance** is not equal to 0.00
+  - **Client → Client Name → Do Not Use Ind** does not match Y
+
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Script: Create Aging Columns | Calculates the aging days based on todays date and the invoice date.<br />It then creates the buckets and assigns the invoice balances for the transaction<br />to the appropriate bucket (0-30, 31-60, etc) |
+| 2 | Normalize | id, salesrep_id_assoc_repName, unalApplyPeriod |
+| 3 | Dataset join | COA_Total, coaReason, trueCOA_Total, wholeCOA_Total |
+| 4 | Script: COA and Aggegation | Prepare to calculate Cash On Account amount<br />Also this will be the setup to aggregate the invoice buckets and COA amounts<br />since this is a summary report by Client ID<br />**Used Saved Functions**<br />naviga.calculateAggregatesV2 |
+| 5 | Flush |  |
+| 6 | Script: Post Aggr | Standard post aggregation script.<br />This will aggregate the buckets, balance and coa totals<br />so that we have one row for each Client ID |
+| 7 | Remove fields | period, invAmount, invBalance, id, client_id_assoc_adPrePayInd, invoiceDate, batchNo, 0 to 30, 120+, 31 to 60, 61 to 90, 91 to 120, AgingDays, cashOnAccountCoaTotal, coaTrueCoaTotal, coaWholeCoaTotal, coaCoaReason, coaCoaTotal |

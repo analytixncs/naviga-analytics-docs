@@ -70,3 +70,5 @@ etc.
 | Brand Product Group Rep Pct 4 | brandProductGroupRepPct 4 | double |  |  |
 | Brand Product Group Rep Group 4 | brandProductGroupRepGroup 4 | keyword_text |  |  |
 | Brand Product Group Rep Name 4 | brandProductGroupRepName 4 | keyword_text |  |  |
+
+&lt;!-- criteria parsing arrives in a later slice --&gt;

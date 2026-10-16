@@ -34,3 +34,5 @@ https://naviga-informer-docs.netlify.app/docs/informer/informer-sample-reports#c
 | Pre Pay Total | PrePay_Total | double |  | Total Pre Pay amount calculated on each line and then aggregated to the client<br />-----<br />Prepayment Amount = Total matched PP Amount - Total matched PP Applied Amount |
 | Whole Coa | wholeCOA | double | ✓ | Detail Whole COA see Whole COA Total for details. |
 | Payments Total | Payments_Total | double |  | Total of this client's payments |
+
+&lt;!-- criteria parsing arrives in a later slice --&gt;

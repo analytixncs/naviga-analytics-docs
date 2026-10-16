@@ -1,10 +1,9 @@
 {
   "schemaVersion": 1,
-  "exportedAt": "2026-09-21T22:25:55.474Z",
+  "exportedAt": "2026-10-15T18:43:00.885Z",
   "sourceType": "dataset",
-  "sourceId": "50e5d2d4-2bf6-417b-85f5-86503d4b70ea",
+  "sourceId": "MARK.MCCOID:metadata-job-status-v2",
   "sourceName": "METADATA-Job Status V2",
-  "objectDescription": "Report from Informer Metadata Database on Jobs Status.  This can be used in conjunction with a Job to get email alerts when a job fails or runs too long",
   "documentationStatus": "complete",
   "version": "1.0.0",
   "completedAt": "2026-09-21T22:25:51.024Z",

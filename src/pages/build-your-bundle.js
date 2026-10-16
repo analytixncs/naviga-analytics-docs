@@ -46,6 +46,7 @@ export default function BuildYourBundlePage() {
 
   const [isMerging, setIsMerging] = useState(false);
   const [mergeError, setMergeError] = useState(null);
+  const [downloadSuccess, setDownloadSuccess] = useState(null);
 
   useEffect(() => {
     fetch(indexUrl)
@@ -103,6 +104,7 @@ export default function BuildYourBundlePage() {
 
   const toggleItem = (slug) => {
     setMergeError(null);
+    setDownloadSuccess(null);
     setSelectedSlugs((prev) => {
       const next = new Set(prev);
       if (next.has(slug)) next.delete(slug);
@@ -113,6 +115,7 @@ export default function BuildYourBundlePage() {
 
   const toggleCategory = (items) => {
     setMergeError(null);
+    setDownloadSuccess(null);
     const allSelected = items.every((i) => selectedSlugs.has(i.slug));
     setSelectedSlugs((prev) => {
       const next = new Set(prev);
@@ -126,6 +129,7 @@ export default function BuildYourBundlePage() {
 
   const selectAllVisible = () => {
     setMergeError(null);
+    setDownloadSuccess(null);
     setSelectedSlugs((prev) => {
       const next = new Set(prev);
       for (const item of visibleItems) {
@@ -137,6 +141,7 @@ export default function BuildYourBundlePage() {
 
   const clearSelection = () => {
     setMergeError(null);
+    setDownloadSuccess(null);
     setSelectedSlugs(new Set());
   };
 
@@ -144,6 +149,7 @@ export default function BuildYourBundlePage() {
     if (selectedSlugs.size === 0) return;
     setIsMerging(true);
     setMergeError(null);
+    setDownloadSuccess(null);
 
     try {
       const selectedItems = catalog.filter((i) => selectedSlugs.has(i.slug));
@@ -158,19 +164,52 @@ export default function BuildYourBundlePage() {
       );
 
       const finalName = bundleName.trim() || 'Custom Informer Bundle';
-      const mergedBytes = await mergeBundles(buffers, finalName);
-
-      const blob = new Blob([mergedBytes], { type: 'application/gzip' });
-      const url = URL.createObjectURL(blob);
+      const result = await mergeBundles(buffers, finalName);
+      const mergedBytes = result.mergedBytes || result;
+      const csvContent = result.csv;
+      const itemsList = result.items || [];
       const safeFilename = finalName.replace(/[^a-z0-9_-]/gi, '_');
 
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${safeFilename}.tgz`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
+      // 1. Download .tgz bundle
+      const bundleBlob = new Blob([mergedBytes], { type: 'application/gzip' });
+      const bundleUrl = URL.createObjectURL(bundleBlob);
+
+      const aBundle = document.createElement('a');
+      aBundle.href = bundleUrl;
+      aBundle.download = `${safeFilename}.tgz`;
+      document.body.appendChild(aBundle);
+      aBundle.click();
+      aBundle.remove();
+
+      // 2. Download UUIDs CSV
+      if (csvContent) {
+        const csvBlob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const csvUrl = URL.createObjectURL(csvBlob);
+
+        const aCsv = document.createElement('a');
+        aCsv.href = csvUrl;
+        aCsv.download = `${safeFilename}-uuids.csv`;
+        document.body.appendChild(aCsv);
+
+        setTimeout(() => {
+          aCsv.click();
+          aCsv.remove();
+          setTimeout(() => {
+            URL.revokeObjectURL(bundleUrl);
+            URL.revokeObjectURL(csvUrl);
+          }, 2000);
+        }, 250);
+      } else {
+        setTimeout(() => {
+          URL.revokeObjectURL(bundleUrl);
+        }, 1000);
+      }
+
+      setDownloadSuccess({
+        bundleFilename: `${safeFilename}.tgz`,
+        csvFilename: `${safeFilename}-uuids.csv`,
+        count: itemsList.length,
+      });
     } catch (err) {
       setMergeError(err.message);
     } finally {
@@ -235,7 +274,10 @@ export default function BuildYourBundlePage() {
                   className={styles.textInput}
                   placeholder="e.g. Sales and Finance Bundle"
                   value={bundleName}
-                  onChange={(e) => setBundleName(e.target.value)}
+                  onChange={(e) => {
+                    setBundleName(e.target.value);
+                    setDownloadSuccess(null);
+                  }}
                 />
               </div>
             </div>
@@ -351,6 +393,28 @@ export default function BuildYourBundlePage() {
           {mergeError && (
             <div className="alert alert--danger margin-top--sm" style={{ borderRadius: '8px' }}>
               <strong>Merge Error:</strong> {mergeError}
+            </div>
+          )}
+
+          {downloadSuccess && (
+            <div className={clsx(styles.successNotification, 'margin-top--sm')}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                  <FiCheck size={18} style={{ color: '#10b981', flexShrink: 0 }} />
+                  <span>
+                    Successfully downloaded bundle <strong>{downloadSuccess.bundleFilename}</strong> and UUIDs export <strong>{downloadSuccess.csvFilename}</strong> ({downloadSuccess.count} item UUIDs).
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  className={styles.clearButton}
+                  style={{ position: 'static' }}
+                  onClick={() => setDownloadSuccess(null)}
+                  aria-label="Dismiss message"
+                >
+                  <FiX size={15} />
+                </button>
+              </div>
             </div>
           )}
         </section>

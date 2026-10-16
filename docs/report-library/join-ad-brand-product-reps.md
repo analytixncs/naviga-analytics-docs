@@ -71,3 +71,5 @@ etc.
 | Brand Product Rep Group 4 | brandProductRepGroup 4 | keyword_text |  |  |
 | Brand Product Rep Name 4 | brandProductRepName 4 | keyword_text |  |  |
 | Brand Product Inactive Ind | brandProductInactiveInd | keyword_text |  | 	"Y" = Inactive |
+
+&lt;!-- criteria parsing arrives in a later slice --&gt;

@@ -6,11 +6,6 @@ module.exports = {
   items: [
     "report-library/index",
     {
-      type: "link",
-      label: "Build Your Bundle",
-      href: "/build-your-bundle",
-    },
-    {
       "type": "category",
       "label": "AR and GL",
       "items": [

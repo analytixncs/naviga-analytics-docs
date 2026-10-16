@@ -1,10 +1,9 @@
 {
   "schemaVersion": 1,
-  "exportedAt": "2026-09-21T22:26:53.715Z",
+  "exportedAt": "2026-10-15T18:41:59.267Z",
   "sourceType": "dataset",
   "sourceId": "d6566258-7bbe-4a8d-bbe8-9be13fe69b6b",
   "sourceName": "JOIN-UDF Descriptions",
-  "objectDescription": "This dataset contains the needed fields so that you can get the UDF Descriptions for Picklist and Text fields.\nYou will Join this Dataset to your reports that need this information",
   "documentationStatus": "complete",
   "version": "1.0.0",
   "completedAt": "2026-09-21T22:26:50.406Z",

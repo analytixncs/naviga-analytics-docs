@@ -40,3 +40,5 @@ Lists all of the Dataset and Ad Hoc Queries in the system.  Shows a created at a
 | Definition Updated At | defnUpdatedAt | date_tz |  | Date the query definition was updated last |
 | Data Updated At | dataset_dataUpdatedAt | date_tz |  | Last time the Dataset was refreshed or the last time the Ad Hoc Query was run. |
 | Datasource Name | datasource_name | keyword_text |  | The Datasource the object is using to get data. |
+
+&lt;!-- criteria parsing arrives in a later slice --&gt;

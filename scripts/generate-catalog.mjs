@@ -39,6 +39,26 @@ function untar(buffer) {
   return files;
 }
 
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let f = '';
+  let q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) {
+      if (c === '"') {
+        if (text[i + 1] === '"') { f += '"'; i++; } else q = false;
+      } else f += c;
+    } else if (c === '"') q = true;
+    else if (c === ',') { row.push(f); f = ''; }
+    else if (c === '\n') { row.push(f); rows.push(row); row = []; f = ''; }
+    else f += c;
+  }
+  if (f || row.length) { row.push(f); rows.push(row); }
+  return rows;
+}
+
 function parseMarkdownMetadata(slug) {
   const extensions = ['.md', '.mdx'];
   let content = null;
@@ -232,6 +252,31 @@ export function generateCatalog() {
     else if (objectType.includes('report')) objectType = 'report';
     else objectType = 'dataset';
 
+    // Extract primary item UUID from tarFiles
+    let itemUuid = null;
+    if (objectType === 'dataset' && tarFiles.has('tables/public/dataset.csv')) {
+      const rows = parseCsv(tarFiles.get('tables/public/dataset.csv').toString('utf8'));
+      const h = rows[0];
+      const idIdx = h.indexOf('id');
+      if (rows[1] && rows[1][idIdx]) itemUuid = rows[1][idIdx];
+    } else if (tarFiles.has('tables/public/query.csv')) {
+      const rows = parseCsv(tarFiles.get('tables/public/query.csv').toString('utf8'));
+      const h = rows[0];
+      const idIdx = h.indexOf('id');
+      const embIdx = h.indexOf('embedded');
+      for (let r = 1; r < rows.length; r++) {
+        if (rows[r][idIdx] && rows[r][embIdx] !== 't') {
+          itemUuid = rows[r][idIdx];
+          break;
+        }
+      }
+    } else if (tarFiles.has('tables/public/report.csv')) {
+      const rows = parseCsv(tarFiles.get('tables/public/report.csv').toString('utf8'));
+      const h = rows[0];
+      const idIdx = h.indexOf('id');
+      if (rows[1] && rows[1][idIdx]) itemUuid = rows[1][idIdx];
+    }
+
     // Extract datasources from bundle.json
     const datasources = Array.isArray(bundleJson.datasources)
       ? bundleJson.datasources.map((ds) => (typeof ds === 'string' ? ds : ds.name || ds.id)).filter(Boolean)
@@ -239,6 +284,7 @@ export function generateCatalog() {
 
     const item = {
       slug: docMeta.id || slug,
+      uuid: itemUuid,
       title,
       description,
       type: objectType,

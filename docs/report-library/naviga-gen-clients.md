@@ -58,3 +58,5 @@ View video here -&gt; https://naviga-informer-docs.netlify.app/docs/informer/inf
 | Stmt Email Contact ID | stmtEmailContactId | keyword_text |  | Contact ID for contact email on Statement Details.  See docs -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#advertising-setup-for-digital-first-naviga-users |
 | AD Invoice Contact ID | adInvoiceContactId | keyword_text |  |  |
 | Inv Email Contact ID | invEmailContactId | keyword_text |  | Contact ID for contact email on Misc. Billing Details.  <br />See docs -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#delivery-methods |
+
+&lt;!-- criteria parsing arrives in a later slice --&gt;
