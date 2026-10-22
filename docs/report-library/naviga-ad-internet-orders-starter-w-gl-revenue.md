@@ -58,4 +58,28 @@ Report splitting revenue into GL buckets based on GL overrides.
 | No Agy Comm Ind | noAgyCommInd | keyword_text |  | Used to determine if Agency commission is to be applied. |
 | Month Unique ID | monthUniqueId | keyword_text |  | Identifier using the Line Id with an appended .n <br />This is the order details identifier.  However be aware that it is not a record unique identifier as if the GL has a split, it will be duplicated across the splits. |
 
-&lt;!-- criteria parsing arrives in a later slice --&gt;
+## Criteria
+
+- All of
+  - **Line Cancel Status ID** does not match DE
+  - **AD Internet Campaigns → Status Code** exactly matches any of R%, CO, IS
+  - **Month Start Date** is between ***INPUT*** <mark>🧩Run Date Start</mark> and ***INPUT*** <mark>🧩Run Date End</mark>
+  - **AD Internet Campaigns → Advertiser Id** exactly matches ***INPUT*** <mark>🧩Advertiser Id</mark>
+
+## 🧩 Inputs
+
+| Prompt | Type | Detail |
+|--------|------|--------|
+| Run Date Start | date |  |
+| Run Date End | date |  |
+| Advertiser Id | text | Multiple values |
+
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Normalize | monthActualAmt, monthEndDate, monthEstAmt, monthStartDate, monthUniqueId |
+| 2 | Script: Calculate Revenue | <mark> BASE REVENUE CALCS </mark>====<br />**Used Saved Functions**<br />naviga.calculateLineAmounts, naviga.returnANumber |
+| 3 | Script: Calculate GL |  |
+| 4 | Normalize | glGrossRevenue, glNetRevenue, grossLineLocalAmount, monthActualAmt, monthEstAmt, netLineLocalAmount, RealGLCode, glPercent |
+| 5 | Remove fields | a_d_internet_campaigns_assoc_commissionPct, a_d_internet_campaigns_assoc_currCode, a_d_internet_campaigns_assoc_currRate, web_site_id_assoc_glTypeClientType, web_site_id_assoc_inetRevCode, web_site_id_assoc_glTypeRevenue, web_site_id_assoc_glTypePct, web_site_id_assoc_glTypes |

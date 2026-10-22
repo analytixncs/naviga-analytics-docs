@@ -21,7 +21,8 @@ module.exports = {
       "items": [
         "report-library/naviga-ad-internet-orders-actual-gl-split",
         "report-library/naviga-ad-internet-orders-starter",
-        "report-library/naviga-ad-internet-orders-starter-w-gl-revenue"
+        "report-library/naviga-ad-internet-orders-starter-w-gl-revenue",
+        "report-library/naviga-dimensions-example"
       ]
     },
     {

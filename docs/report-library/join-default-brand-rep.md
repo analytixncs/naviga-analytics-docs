@@ -72,4 +72,13 @@ etc.
 | Default Rep Name 4 | defaultRepName 4 | keyword_text |  |  |
 | Default Inactive Ind | defaultInactiveInd | keyword_text |  |  |
 
-&lt;!-- criteria parsing arrives in a later slice --&gt;
+## Criteria
+
+- **** is
+
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Script: Get Latest Rep | Determines that Active rep based on the date that the report is run |
+| 2 | Remove fields | asOfDate, repIds, repPcts, date_reps_assoc_primaryRepGroupId, date_reps_assoc_repName, reps, assignInOe, inactiveInd |

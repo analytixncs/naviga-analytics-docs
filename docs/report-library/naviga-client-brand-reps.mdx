@@ -62,4 +62,16 @@ Pulls in the Advertiser Brands and the associated Brand Reps -&gt; Default, Prod
 | Brand Product Group Rep Name 1 | brandProductGroupRepName 1 | keyword_text |  |  |
 | Brand Product Group Rep Pct 1 | brandProductGroupRepPct 1 | double |  |  |
 
-&lt;!-- criteria parsing arrives in a later slice --&gt;
+## Criteria
+
+- **** is
+
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Script: Create Brand Key for Join to Default Brand Rep | Create calcedBrandKey.  Used to join to the Default Brand Rep Dataset |
+| 2 | Normalize | brandRepKey, brandProductRepKey |
+| 3 | Dataset join | defaultAssignInOE, defaultInactiveInd, defaultRepGroup 1, defaultRepId 1, defaultRepName 1, defaultRepPct 1 |
+| 4 | Dataset join | brandProductAssignInOE, brandProductInactiveInd, brandProductRepGroup 1, brandProductRepId 1, brandProductRepName 1, brandProductRepPct 1 |
+| 5 | Dataset join | brandProductGroupInactiveInd, brandProductGroupRepGroup 1, brandProductGroupRepId 1, brandProductGroupRepName 1, brandProductGroupRepPct 1 |

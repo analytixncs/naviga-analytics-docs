@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-10-21T18:40:45.038Z",
+  "sourceType": "adHocReport",
+  "sourceId": "9bd60606-4196-4e52-947a-cd8b2ef31972",
+  "sourceName": "NAVIGA-Dimensions Example",
+  "objectDescription": "This report shows how you are able to get the dimensions from different types of campaigns.",
+  "documentationStatus": "complete",
+  "version": "1.0.0",
+  "completedAt": "2026-10-21T18:21:08.906Z",
+  "vaultReportType": "Campaigns",
+  "vaultSummary": "This report shows how you are able to get the dimensions from different types of campaigns.",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "fa08842b-035b-4d66-b8cd-c9f049ad1fc6:INF_INET.ORDERS:X.VALUE",
+      "label": "X Value",
+      "alias": "xValue",
+      "description": "Can be the Width for certain types of campaigns",
+      "status": "active"
+    },
+    {
+      "fieldId": "fa08842b-035b-4d66-b8cd-c9f049ad1fc6:INF_INET.ORDERS:Y.VALUE",
+      "label": "Y Value",
+      "alias": "yValue",
+      "description": "Can be the Height for certain types of campaigns",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:CAMPAIGN.ID",
+      "label": "Campaign ID",
+      "alias": "campaignId",
+      "description": "Campaign Identifier",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:DIMENSIONS",
+      "label": "Dimensions",
+      "alias": "dimensions",
+      "description": "Used in determining where to get the Width and Height values.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.SIZES:SIZE.HEIGHT",
+      "label": "ratecard Size Height",
+      "alias": "a_d_internet_ratecards_detail_assoc_a_d_internet_sizes_assoc_sizeHeight",
+      "description": "Size Height field from AD Internet Ratecards Detail -> AD Internet Sizes",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.SIZES:SIZE.WIDTH",
+      "label": "ratecard Size Width",
+      "alias": "a_d_internet_ratecards_detail_assoc_a_d_internet_sizes_assoc_sizeWidth",
+      "description": "Size Width field from AD Internet Ratecards Detail -> AD Internet Sizes",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.SIZES:DIMENSION.TYPE",
+      "label": "AD Internet Sizes Dimension Type",
+      "alias": "a_d_internet_ratecards_detail_assoc_a_d_internet_sizes_assoc_dimensionType",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.SIZES:SIZE.HEIGHT",
+      "label": "AD Internet Sizes Size Height",
+      "alias": "a_d_internet_sizes_assoc_sizeHeight",
+      "description": "Size Height field from AD Internet Sizes",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.SIZES:SIZE.WIDTH",
+      "label": "AD Internet Sizes Size Width",
+      "alias": "a_d_internet_sizes_assoc_sizeWidth",
+      "description": "Size Width field from AD Internet Sizes",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:@ID",
+      "label": "Line ID",
+      "alias": "id",
+      "description": "Line Identifier",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.RATECARDS.DET:@ID",
+      "label": "AD Internet Ratecards Detail @ID",
+      "alias": "a_d_internet_ratecards_detail_assoc_id",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "finalHeight",
+      "label": "Final Height",
+      "alias": "finalHeight",
+      "description": "Final Height value using the Powerscript to determine which fields to use.",
+      "status": "active"
+    },
+    {
+      "fieldId": "finalWidth",
+      "label": "Final Width",
+      "alias": "finalWidth",
+      "description": "Final Width value using the Powerscript to determine which fields to use",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_INET.ORDERS:CLASS.LAYOUT.ID",
+      "label": "Class Layout ID",
+      "alias": "classLayoutId",
+      "description": "Layout ID linking to AD Internet Layouts",
+      "status": "active"
+    },
+    {
+      "fieldId": "joinField",
+      "label": "Join Field",
+      "alias": "joinField",
+      "description": "AD Internet Layouts has a column width field that is MV.  This join field is construction to join with the NAVIGA-Ad Internet Layouts Dataset if you need to bring in Columns.\nNOTE: See docs for a different way to do this.",
+      "status": "active"
+    },
+    {
+      "fieldId": "538e966c-cbb9-42c6-830a-b228a91dbaaf:INF_PUBS:DFLT.LAYOUT.ID",
+      "label": "Ad Publication Dflt Layout ID",
+      "alias": "web_site_id_assoc_dfltLayoutId",
+      "description": "The AD Publications default Layout ID.  It is used in the Join Field if the Class Layout ID in empty.",
+      "status": "active"
+    }
+  ]
+}

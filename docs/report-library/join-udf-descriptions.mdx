@@ -82,4 +82,10 @@ This dataset contains the needed fields so that you can get the UDF Descriptions
 | UDF Code Desc | udfCodeDes | keyword_text |  | The description of the UDF Code.  This is what people will want to see. |
 | Full Udf Join Key | fullUDFJoinKey | keyword_text |  |  |
 
-&lt;!-- criteria parsing arrives in a later slice --&gt;
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Script: UDF ID Split | Takes the UDF ID and splits it into it's three pieces<br />UDFIdentifier, UDFType and UDFPosition |
+| 2 | Normalize | udfCode, udfCodeDes, uCodesDesc |
+| 3 | Script: Create Join Key | After normalization we create a "fullUDFJoinKey" so other datasets can join to this one.<br />It is `${udfID}-${udfCode}`<br />Report wanting to join to this one will need to create a similar key |

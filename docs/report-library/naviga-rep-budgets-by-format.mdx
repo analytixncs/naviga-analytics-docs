@@ -143,4 +143,11 @@ Shows the budgets by rep, format, year and month
 | Forecast2 | forecast2 | double |  |  |
 | Forecast1 | forecast1 | double |  |  |
 
-&lt;!-- criteria parsing arrives in a later slice --&gt;
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Script: Infer Months |  |
+| 2 | Flush |  |
+| 3 | Normalize | budget, forecast1, forecast2, month, monthString |
+| 4 | Script: Add Month Names |  |

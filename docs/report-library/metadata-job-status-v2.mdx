@@ -52,4 +52,18 @@ Report from Informer Metadata Database on Jobs Status.
 | Duration | duration | double |  | Duration of Job run in Minutes |
 | Lastupdatedate | lastupdatedate | date |  | Date/Time that this job history record was updated |
 
-&lt;!-- criteria parsing arrives in a later slice --&gt;
+## Criteria
+
+- **Job History → Updated At** is on or after ***INPUT*** <mark>🧩Update At Date</mark>
+
+## 🧩 Inputs
+
+| Prompt | Type | Detail |
+|--------|------|--------|
+| Update At Date | date |  |
+
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Script: Heartbeat Duration - Links creation | Caculate duration of Job using the heartbeat field compared against the createAt time of the job |

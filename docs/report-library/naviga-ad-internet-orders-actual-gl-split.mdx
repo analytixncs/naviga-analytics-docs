@@ -190,4 +190,26 @@ GL Revenue based report that uses the GL Rev Amount, GL Rev Codes and other fiel
 | GL Comm Source | glCommSource | keyword_text |  | (hidden) The rules that the GL Comm Split is using |
 | GL Rev Source | glRevSource | keyword_text |  | (hidden) The rules that the GL Split is using |
 
-&lt;!-- criteria parsing arrives in a later slice --&gt;
+## Criteria
+
+- All of
+  - **Campaign ID** equals ***INPUT*** <mark>🧩Campaign ID(s)</mark>
+  - **Line Cancel Status ID** does not match DE
+  - **Month Start Date** is between ***INPUT*** <mark>🧩monthStartDate__start</mark> and ***INPUT*** <mark>🧩monthStartDate__end</mark>
+
+## 🧩 Inputs
+
+| Prompt | Type | Detail |
+|--------|------|--------|
+| Campaign ID(s) |  | Multiple values |
+| Month Start Date | date range |  |
+
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Normalize | monthStartDate, monthActualAmt, monthEstAmt |
+| 2 | Normalize | glCommAmt, glCommCodes, glLineId, glRevAmt, glRevCodes, glCommSource, glRevSource |
+| 3 | Script: Calc Net Revenue | **Used Saved Functions**<br />naviga.calculateLineAmounts, naviga.returnANumber |
+| 4 | Script: Proportional Spread |  |
+| 5 | Normalize | proportionGLCommCodes, proportionGLCommAmounts, proportionGLCodes, proportionGLAmounts, proportionGLCommSource, proportionGLSource |

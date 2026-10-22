@@ -62,4 +62,31 @@ Report showing AR Payments from AR Cash mapping along with the invoices those pa
 | FC Applied Amount | fcpayamt | double |  | Foreign currency applied amount |
 | Currency Code | curCode | keyword_text |  |  |
 
-&lt;!-- criteria parsing arrives in a later slice --&gt;
+## Criteria
+
+- All of
+  - **Company ID** equals ***INPUT*** <mark>🧩Company ID</mark>
+  - **Client Code ** exactly matches ***INPUT*** <mark>🧩Client IDs</mark>
+  - **Batch Number** exactly matches ***INPUT*** <mark>🧩Batch Number(s)</mark>
+  - **Check Date** is between ***INPUT*** <mark>🧩checkDate__start</mark> and ***INPUT*** <mark>🧩checkDate__end</mark>
+  - **** is 
+  - **Bank Code** exactly matches ***INPUT*** <mark>🧩Bank Code</mark>
+  - **Currency Code** exactly matches ***INPUT*** <mark>🧩Enter Currency Code</mark>
+
+## 🧩 Inputs
+
+| Prompt | Type | Detail |
+|--------|------|--------|
+| Company ID | double |  |
+| Client IDs | keyword text |  |
+| Batch Number(s) | keyword text |  |
+| Check Date | date range |  |
+| Period | keyword text |  |
+| Bank Code | keyword text |  |
+| Enter Currency Code | keyword text |  |
+
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Normalize | invPayDate, invno, invdiscamt, fccshdisc, invpayamt, fcpayamt, invoice_id_assoc_docType |

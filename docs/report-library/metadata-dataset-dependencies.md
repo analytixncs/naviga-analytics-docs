@@ -69,4 +69,12 @@ This report is itself dependent upon the "METADATA-Reports-Dataset Ids Names".
 | Dependent Datasource Names | dependentDatasourceNames | keyword_text |  | Dependent Datasource Name |
 | Flow | flow | object |  | Array of Flow steps.  Each flow step in the array is stored as an Object. |
 
-&lt;!-- criteria parsing arrives in a later slice --&gt;
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Script: Pull Joins / Set Type | Reads flow steps to determine if there are any dataset joins<br />or datasource joins.  Omits records WITHOUT any of these joins |
+| 2 | Normalize | joinedDatasetIds, joinedDatasetJoins, joins, dependentDatasourceNames |
+| 3 | Script: Create hyperlinks | Create Hyperlinks to reports and datasets |
+| 4 | Dataset join | name |
+| 5 | Remove fields | joinedDatasetJoins, datasourcejoins, dataset_name, dataset_id, joins |

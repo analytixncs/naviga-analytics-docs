@@ -59,4 +59,18 @@ View video here -&gt; https://naviga-informer-docs.netlify.app/docs/informer/inf
 | AD Invoice Contact ID | adInvoiceContactId | keyword_text |  |  |
 | Inv Email Contact ID | invEmailContactId | keyword_text |  | Contact ID for contact email on Misc. Billing Details.  <br />See docs -&gt; https://naviga-informer-docs.netlify.app/docs/informer/informer-mappings-gen-clients#delivery-methods |
 
-&lt;!-- criteria parsing arrives in a later slice --&gt;
+## Criteria
+
+- **Account Date Opened** is on or after ***INPUT*** <mark>🧩Account Date Opened</mark>
+
+## 🧩 Inputs
+
+| Prompt | Type | Detail |
+|--------|------|--------|
+| Account Date Opened | date |  |
+
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Script: Indicator Fill ins | Calculates "Y"/"N" for various indicator fields |

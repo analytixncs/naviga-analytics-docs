@@ -41,4 +41,10 @@ Lists all of the Dataset and Ad Hoc Queries in the system.  Shows a created at a
 | Data Updated At | dataset_dataUpdatedAt | date_tz |  | Last time the Dataset was refreshed or the last time the Ad Hoc Query was run. |
 | Datasource Name | datasource_name | keyword_text |  | The Datasource the object is using to get data. |
 
-&lt;!-- criteria parsing arrives in a later slice --&gt;
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Script: Field Creation | Determine if the report type: Ad Hoc or Dataset and assign to $record.type field<br />assign the proper Team or User to the $record['principal_id'] |
+| 2 | Remove fields | dataset_name, dataset_id, flow, fields, payload, owner_team_name, owner_user_displayName |
+| 3 | Merge Duplicates | createdAt, dataset_dataUpdatedAt, datasource_name, defnUpdatedAt, description, linkAlias, name, principal_id, type |

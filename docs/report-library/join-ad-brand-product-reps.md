@@ -72,4 +72,13 @@ etc.
 | Brand Product Rep Name 4 | brandProductRepName 4 | keyword_text |  |  |
 | Brand Product Inactive Ind | brandProductInactiveInd | keyword_text |  | 	"Y" = Inactive |
 
-&lt;!-- criteria parsing arrives in a later slice --&gt;
+## Criteria
+
+- **** is
+
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Script: Get Latest Rep | Determines that Active rep based on the date that the report is run |
+| 2 | Remove fields | asOfDate, as_of_salesreps_repName, repIds, repPcts, date_reps_assoc_repName, date_reps_assoc_primaryRepGroupId, assignInOe, inactiveInd |

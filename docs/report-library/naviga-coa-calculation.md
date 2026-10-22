@@ -35,4 +35,18 @@ https://naviga-informer-docs.netlify.app/docs/informer/informer-sample-reports#c
 | Whole Coa | wholeCOA | double | ✓ | Detail Whole COA see Whole COA Total for details. |
 | Payments Total | Payments_Total | double |  | Total of this client's payments |
 
-&lt;!-- criteria parsing arrives in a later slice --&gt;
+## Criteria
+
+- All of
+  - **Check Amount** is more than 0
+  - **Check Balance** is more than 0.00
+
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Script: COA Prep | **Used Saved Functions**<br />naviga.returnANumber |
+| 2 | Script: Calc Aggr | **Used Saved Functions**<br />naviga.calculateAggregates |
+| 3 | Flush |  |
+| 4 | Script: Post |  |
+| 5 | Remove fields | coaReason, campaignMatchPPAmount, campaignMatchPPAppliedAmount, chkAmt, checkBal, groupKey1, isPrePaid, omit, ppAmountFlat, ppAppliedAmountFlat, pptransIdFlat, prepaid_digital_campaign_assoc_ppAppliedAmt, prepaid_digital_campaign_assoc_ppAmount, prepaid_digital_campaign_assoc_ppTransId, prepaymentAmountCalc, id, trueCOA |

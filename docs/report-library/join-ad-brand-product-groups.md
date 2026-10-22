@@ -71,4 +71,13 @@ etc.
 | Brand Product Group Rep Group 4 | brandProductGroupRepGroup 4 | keyword_text |  |  |
 | Brand Product Group Rep Name 4 | brandProductGroupRepName 4 | keyword_text |  |  |
 
-&lt;!-- criteria parsing arrives in a later slice --&gt;
+## Criteria
+
+- **** is
+
+## Flow
+
+| # | Step | Detail |
+|---|------|--------|
+| 1 | Script: Get Latest Rep | Determines that Active rep based on the date that the report is run |
+| 2 | Remove fields | asOfDate, as_of_salesreps_repName, repPcts, as_of_salesreps_primaryRepGroupId, repIds, inactiveInd |
