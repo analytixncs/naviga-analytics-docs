@@ -41,7 +41,9 @@ module.exports = {
       "label": "Informer Metadata",
       "items": [
         "report-library/metadata-dataset-dependencies",
+        "report-library/metadata-job-run-history",
         "report-library/metadata-job-status-v2",
+        "report-library/metadata-jobs-average-run-time",
         "report-library/metadata-reports-dataset-ids-names"
       ]
     },

@@ -46,7 +46,9 @@ You will notice the each report has a download section with the **Bundle** and a
 ## Informer Metadata
 
 - [METADATA-Dataset Dependencies](./metadata-dataset-dependencies) — Reveal Datasets and Ad Hoc Queries that are dependent on other Datasets or Datasources.
+- [METADATA-Job Run History](./metadata-job-run-history) — Historical data for jobs that have run
 - [METADATA-Job Status V2](./metadata-job-status-v2) — Status of Informer metadata refresh jobs.
+- [METADATA-Jobs Average Run Time](./metadata-jobs-average-run-time) — Calculates average Job runtimes
 - [METADATA-Reports-Dataset Ids Names](./metadata-reports-dataset-ids-names) — Lists all of the Dataset and Ad Hoc Queries in the system
 
 ## Other

@@ -4,7 +4,6 @@ title: NAVIGA-Dimensions Example
 sidebar_label: NAVIGA-Dimensions Example
 ---
 
-import Pasted_image_20261021145346 from './images/Pasted image 20261021145346.png';
 import Pasted_image_20261021145433 from './images/Pasted image 20261021145433.png';
 
 # NAVIGA-Dimensions Example
@@ -28,12 +27,12 @@ Depending on the type of campaign and line, the dimensions of the ad could be fo
 
 We are following the logic laid out here -&gt; [Dimensions Docs]((../informer/informer-mappings-ad-internet-orders#digital-size---columns---inches)
 
-Some Campaign Ads will have a Width and a Height, but the column information is stored elsewhere ([AD Internet Layouts](/naviga-ad-internet-layouts)).  There are two ways to get at this information. First, there is a field in this example called `joinField`.  It is creating a join key from the Class Layout ID and the Final Width.  You can then join this to the NAVIGA-AD Internet Layouts dataset to pull in the information.
+Some Campaign Ads will have a Width and a Height, but the column information is stored elsewhere ([AD Internet Layouts](/reports/NAVIGA-Ad%20Internet%20Layouts)).  There are two ways to get at this information. First, there is a field in this example called `joinField`.  It is creating a join key from the Class Layout ID and the Final Width.  You can then join this to the NAVIGA-AD Internet Layouts dataset to pull in the information.
 
 While this works, it does require that you keep another dataset refreshed.  A different way is to link directly to the AD Internet Layouts mapping.  We currently do not have this relationship setup, so you can set it up yourself (or simply put a support ticket in).
 
 This is the link you would add to AD Internet Orders:
-<img src={Pasted_image_20261021145346} alt="Pasted image 20261021145346.png" width="573" />
+*[missing image: Pasted image 20261021145346.png]*
 
 You can then pull data from the related mapping.  However, note that the Columns and Column Widths fields are both multi valued. This means that you will need a Powerscript to loop through the values and make a connection to the line in question to pull the correct Column value.  
 

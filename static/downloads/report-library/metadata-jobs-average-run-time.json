@@ -1,0 +1,263 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-10-29T14:58:34.051Z",
+  "sourceType": "dataset",
+  "sourceId": "5aa43f19-e8f7-4e81-993e-30dfa59b1b3f",
+  "sourceName": "METADATA-Jobs Average Run Time",
+  "objectDescription": "Calculates average Job runtimes",
+  "documentationStatus": "working",
+  "version": "1.0.0",
+  "completedAt": "2026-10-23T19:01:48.795Z",
+  "vaultReportType": "Informer Metadata",
+  "vaultSummary": "Calculates average Job runtimes",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "f9dd283c-a56b-4833-98db-19762b9eb153",
+      "label": "Owner",
+      "alias": "ownerId",
+      "description": "User who owns the Job",
+      "status": "active"
+    },
+    {
+      "fieldId": "ab7417ed-55a4-4773-93ae-42c04ed37b3a",
+      "label": "Id",
+      "alias": "id",
+      "description": "Job Id",
+      "status": "active"
+    },
+    {
+      "fieldId": "abb3b8eb-921d-47f7-a6ef-9351c73bf508",
+      "label": "Name",
+      "alias": "name",
+      "description": "Job Name",
+      "status": "active"
+    },
+    {
+      "fieldId": "d68a7849-f8fa-4112-a8fa-64b3d8125b0c",
+      "label": "Interval",
+      "alias": "interval",
+      "description": "The actual CRON definition using Vixie-style (POSIX).  Even if the user has chosen a predefined Interval Type like Hourly, a CRON definition is still created.",
+      "status": "active"
+    },
+    {
+      "fieldId": "c7268312-733c-434a-84b7-fd8d56ce1644",
+      "label": "Interval Type",
+      "alias": "intervalType",
+      "description": "Informer Interval type:\\nMinutes, Hourly, Daily, Weekly, Monthly, Yearly or Custom",
+      "status": "active"
+    },
+    {
+      "fieldId": "9cb4755c-44e7-49b1-848e-87cc91036e9a",
+      "label": "Total Run Count",
+      "alias": "TotalRunCount",
+      "description": "The total number of times that this Job was run.  This is a field created by our aggregation run and is used to calculate the average runtime values.",
+      "status": "active"
+    },
+    {
+      "fieldId": "aeb1b293-d081-4a5c-bedb-f3295d9778e8",
+      "label": "Total Run Seconds",
+      "alias": "TotalRunSeconds",
+      "description": "The total runtime in seconds of all the job runs.  This is a field created by our aggregation run and is used to calculate the average runtime values",
+      "status": "active"
+    },
+    {
+      "fieldId": "ccd678e8-f647-40be-8196-cc5843155219",
+      "label": "Mean Run Seconds",
+      "alias": "meanRunSeconds",
+      "description": "The mathematical average calculated by dividing the total execution time across all runs by the run count. It offers a quick baseline of overall workload, though it can easily be distorted by extreme outliers such as sudden timeouts or aborted tasks. Use this alongside median to gauge overall skew.",
+      "status": "active"
+    },
+    {
+      "fieldId": "42d3af8f-36d8-4ff6-abf2-f473fdbbc1fc",
+      "label": "Median Run Seconds",
+      "alias": "medianRunSeconds",
+      "description": "The middle execution time when all runs are arranged from fastest to slowest. Exactly half of all jobs complete faster than this mark, making it resistant to rare delays or early failures. It represents what users should expect as a truly typical runtime.",
+      "status": "active"
+    },
+    {
+      "fieldId": "f5cc43e6-bf72-44c7-8e18-a758b3c063de",
+      "label": "Min Run Seconds",
+      "alias": "minRunSeconds",
+      "description": "The fastest run time in seconds",
+      "status": "active"
+    },
+    {
+      "fieldId": "8c868cb8-2c23-4d92-bcb8-809c24d7366c",
+      "label": "Max Run Seconds",
+      "alias": "maxRunSeconds",
+      "description": "The slowest run time in seconds",
+      "status": "active"
+    },
+    {
+      "fieldId": "3727cdc9-c2b6-4ffe-9c72-643f17c9d11c",
+      "label": "Pct25 Run Seconds",
+      "alias": "pct25RunSeconds",
+      "description": "The runtime threshold that 25% of jobs finish within, representing the faster quarter of executions. It marks the lower boundary of normal operational speed. Runs completing faster than this are unusually swift or may have bypassed normal processing steps.",
+      "status": "active"
+    },
+    {
+      "fieldId": "90b72971-1295-464a-bf65-7817c47a0b1e",
+      "label": "Pct75 Run Seconds",
+      "alias": "pct75RunSeconds",
+      "description": "The runtime threshold within which 75% of runs successfully complete. It marks the upper boundary of typical operational behavior. If a job runs longer than this value, it is entering the slower quartile of executions.",
+      "status": "active"
+    },
+    {
+      "fieldId": "624f3300-1751-4424-9d7e-52d7f3864752",
+      "label": "Pct90 Run Seconds",
+      "alias": "pct90RunSeconds",
+      "description": "The threshold under which 90% or 95% of all job runs finish. These metrics represent near-worst-case operational performance while filtering out total system freezes.",
+      "status": "active"
+    },
+    {
+      "fieldId": "25f415a6-303b-42f3-8e49-de923b23839c",
+      "label": "Pct95 Run Seconds",
+      "alias": "pct95RunSeconds",
+      "description": "The threshold under which 90% or 95% of all job runs finish. These metrics represent near-worst-case operational performance while filtering out total system freezes. ",
+      "status": "active"
+    },
+    {
+      "fieldId": "2c33921f-f9b9-47f6-840c-c5ffa0e437ce",
+      "label": "Variance Seconds",
+      "alias": "varianceSeconds",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "2a5df4fe-7a76-4873-84de-7e60a86e7106",
+      "label": "Std Dev Run Seconds",
+      "alias": "stdDevRunSeconds",
+      "description": "The square root of variance, measuring how far run times typically stray from the mean in actual seconds. A low value indicates that execution times are tightly clustered and predictable. A high value indicates erratic runtime behavior across execution cycles.",
+      "status": "active"
+    },
+    {
+      "fieldId": "380bee75-cc08-473e-88ee-058299c273bf",
+      "label": "Iqr Seconds",
+      "alias": "iqrSeconds",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "b3e4e756-86ad-4fea-94c2-891306e9bd7d",
+      "label": "Last Run Date",
+      "alias": "LastRunDate",
+      "description": "Last run date of this Job",
+      "status": "active"
+    },
+    {
+      "fieldId": "bfc33cf6-d35e-4ce9-8149-83a49ae21b8b",
+      "label": "Mean Run Minutes",
+      "alias": "meanRunMinutes",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "6e3e9b9a-b647-44a3-ab91-17e17feb28a3",
+      "label": "Median Run Minutes",
+      "alias": "medianRunMinutes",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "0856788e-a48c-4494-8020-c8bc8b6d776e",
+      "label": "Min Run Minutes",
+      "alias": "minRunMinutes",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "e84559e4-6218-4319-bc64-e516e8f1d944",
+      "label": "Max Run Minutes",
+      "alias": "maxRunMinutes",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "2ec37752-1761-42d3-891c-81b5a5628a93",
+      "label": "Pct25 Run Minutes",
+      "alias": "pct25RunMinutes",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "df31abff-76da-40a9-86ba-8255c2c9f3aa",
+      "label": "Pct75 Run Minutes",
+      "alias": "pct75RunMinutes",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "67c92754-a4e9-4489-a39b-d81c71d0b5a4",
+      "label": "Pct90 Run Minutes",
+      "alias": "pct90RunMinutes",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "86fc6537-aede-4684-9051-4f01087d8353",
+      "label": "Pct95 Run Minutes",
+      "alias": "pct95RunMinutes",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "2ad8362c-570e-4db5-a747-52d125087568",
+      "label": "Variance Minutes",
+      "alias": "varianceMinutes",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "2ea4726f-9a2b-4aac-955d-7e6c05c5ee9d",
+      "label": "Std Dev Run Minutes",
+      "alias": "stdDevRunMinutes",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "ee14559b-5826-4470-843d-04aae1baa9c2",
+      "label": "Iqr Minutes",
+      "alias": "iqrMinutes",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "fieldId": "adf1809f-3434-4a1d-aca8-dacec9c849b6",
+      "label": "Enabled",
+      "alias": "enabled",
+      "description": "Is this job enabled if so, true",
+      "status": "active"
+    },
+    {
+      "fieldId": "6cc9a687-f339-4505-a934-5446d2992192",
+      "label": "Total Successful Runs",
+      "alias": "TotalSuccessfulRuns",
+      "description": "Total number of successful runs",
+      "status": "active"
+    },
+    {
+      "fieldId": "ef7c201a-7de7-4a5c-a1d8-67fdc12cefc9",
+      "label": "Job State",
+      "alias": "jobState",
+      "description": "State of Job\n\"running\"\n\"failed\"\n\"queued\"",
+      "status": "active"
+    },
+    {
+      "fieldId": "be6e373f-03e4-41b5-bcb0-eedea4c84186",
+      "label": "History Success",
+      "alias": "history_success",
+      "description": "Indicating if this job was successful.",
+      "status": "active"
+    },
+    {
+      "fieldId": "3e932fb6-ac24-4da6-b033-f3387f58bf31",
+      "label": "Timezone",
+      "alias": "timezone",
+      "description": "",
+      "status": "active"
+    }
+  ]
+}

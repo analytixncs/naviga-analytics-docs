@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-10-30T15:11:05.095Z",
+  "sourceType": "dataset",
+  "sourceId": "e0af5fc5-f550-4e53-bb7a-750aa5990a73",
+  "sourceName": "METADATA-Job Run History",
+  "documentationStatus": "complete",
+  "version": "1.0.0",
+  "completedAt": "2026-10-30T13:29:38.222Z",
+  "vaultReportType": "Informer Metadata",
+  "vaultSummary": "Historical data for jobs that have run",
+  "metadataStepName": "__ObjectInspector_FieldMetadata_DoNotModify",
+  "metadataStepExists": true,
+  "hasUnsavedChanges": false,
+  "fields": [
+    {
+      "fieldId": "38ec3ead-648a-4d4f-9010-9f9fbdcff572",
+      "label": "Job Id",
+      "alias": "jobId",
+      "description": "Main Job Id",
+      "status": "active"
+    },
+    {
+      "fieldId": "1b44f3fd-b101-42ad-8c82-5f33b79c89df",
+      "label": "Job History Id",
+      "alias": "id",
+      "description": "History Job Id.  Each job run gets a unique Id",
+      "status": "active"
+    },
+    {
+      "fieldId": "6fa9ed9b-e42f-4e45-8fe5-3a93d533410c",
+      "label": "Created At",
+      "alias": "createdAt",
+      "description": "Date the history record was created",
+      "status": "active"
+    },
+    {
+      "fieldId": "71641f70-5fa6-43cb-beae-8593f97c4637",
+      "label": "Updated At",
+      "alias": "updatedAt",
+      "description": "Date the history record was updated.  Each run gets update every minute or so.  Most of these history records will not be for actively running jobs, the updated At will be considered the end time of the job.",
+      "status": "active"
+    },
+    {
+      "fieldId": "6b243b1b-5e7c-4195-9788-fdc072ccacbb",
+      "label": "Success",
+      "alias": "success",
+      "description": "true = job finished successfully",
+      "status": "active"
+    },
+    {
+      "fieldId": "eb1f0534-36ed-4c1c-ab72-099e0c66763b",
+      "label": "Warnings",
+      "alias": "warnings",
+      "description": "Were there any warnings",
+      "status": "active"
+    },
+    {
+      "fieldId": "46665b2a-924b-4830-b245-4245f04eedf9",
+      "label": "Progress",
+      "alias": "progress",
+      "description": "JSON object showing each step of the job and the outcome.  We are using the last entry to pull the error message if the job failed.",
+      "status": "active"
+    },
+    {
+      "fieldId": "4ffba461-9db7-424f-8d52-145fdbea31b3",
+      "label": "Error Message",
+      "alias": "errorMessage",
+      "description": "Text error message if the job failed (Success = false)",
+      "status": "active"
+    }
+  ]
+}
